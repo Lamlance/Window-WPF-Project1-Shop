@@ -20,21 +20,21 @@ namespace WPF_Project1_Shop
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class OrdersWindow : Window
   {
-    ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
-    public MainWindow()
-    {
-      for(int i = 0;i < 40; i++)
-      {
-        orders.Add(new OrderData() { Name = $"Product#{i}" });
-      }
-      InitializeComponent();
-    }
+        ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
+        public OrdersWindow()
+        {
+            for (int i = 0; i < 40; i++)
+            {
+                orders.Add(new OrderData() { Name = $"Product#{i}" });
+            }
+            // InitializeComponent();
+        }
 
-    private void ListOrderLoaded(object sender, RoutedEventArgs e)
-    {
-      this.ListOrder.ItemsSource = orders;
+        private void ListOrderLoaded(object sender, RoutedEventArgs e)
+        {
+            // this.ListOrder.ItemsSource = orders;
+        }
     }
-  }
 }
