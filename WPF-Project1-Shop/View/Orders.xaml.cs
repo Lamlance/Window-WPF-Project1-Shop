@@ -15,26 +15,27 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_Project1_Shop.Model;
 
-namespace WPF_Project1_Shop
+namespace WPF_Project1_Shop.View
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
   public partial class OrdersWindow : Window
   {
-        ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
-        public OrdersWindow()
-        {
-            for (int i = 0; i < 40; i++)
-            {
-                orders.Add(new OrderData() { Name = $"Product#{i}" });
-            }
-            // InitializeComponent();
-        }
+    ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
+    public OrdersWindow()
+    {
+      InitializeComponent();
 
-        private void ListOrderLoaded(object sender, RoutedEventArgs e)
-        {
-            // this.ListOrder.ItemsSource = orders;
-        }
+      for (int i = 0; i < 40; i++)
+      {
+        orders.Add(new OrderData() { Name = $"Product#{i}" });
+      }
     }
+
+    private void ListOrderLoaded(object sender, RoutedEventArgs e)
+    {
+      // this.ListOrder.ItemsSource = orders;
+    }
+  }
 }
