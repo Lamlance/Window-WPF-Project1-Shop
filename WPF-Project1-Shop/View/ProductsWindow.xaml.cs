@@ -26,7 +26,9 @@ namespace WPF_Project1_Shop.View
         public ProductsWindow()
         {
             InitializeComponent();
-            Loaded += ListProductLoaded;
+
+            // Set the DataContext of the view to itself (the Window)
+            DataContext = this;
             Products = new ObservableCollection<Product>
             {
             new Product { Id = 1, ImagePath = "https://hanoicomputercdn.com/media/product/66888_hacom_macbook_pro_13_7.png", Brand = "APPLE", ProductName = "M2 - ABCDYXUS", Price = 99.99m, Quantity = 2500, },
@@ -46,9 +48,7 @@ namespace WPF_Project1_Shop.View
             new Product { Id = 15, ImagePath = "https://hanoicomputercdn.com/media/product/66888_hacom_macbook_pro_13_7.png", Brand = "APPLE", ProductName = "M2 - ABCDYXUS", Price = 99.99m, Quantity = 2500, },
 
             };
-
-            // Set the DataContext of the view to itself (the Window)
-            DataContext = this;
+            ProductListView.ItemsSource = Products;
         }
 
         private void ListProductLoaded(object sender, RoutedEventArgs e)

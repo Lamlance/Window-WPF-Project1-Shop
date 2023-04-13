@@ -26,7 +26,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <ListView Loaded="ListProductLoaded" x:Name="ProductBox" Grid.ColumnSpan="3" Grid.RowSpan="3" d:ItemsSource="{d:SampleData ItemCount=3}">
+            <ListView Loaded="ListProductLoaded" x:Name="ProductListView" Grid.ColumnSpan="3" Grid.RowSpan="3" d:ItemsSource="{d:SampleData ItemCount=3}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid x:Name="ProductGrid">
