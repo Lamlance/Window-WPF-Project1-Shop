@@ -26,11 +26,24 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <ListView Loaded="ListProductLoaded" x:Name="ProductBox" Grid.ColumnSpan="3" Grid.RowSpan="3" d:ItemsSource="{d:SampleData ItemCount=1}">
+            <ListView Loaded="ListProductLoaded" x:Name="ProductBox" Grid.ColumnSpan="3" Grid.RowSpan="3" d:ItemsSource="{d:SampleData ItemCount=3}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
+                        <Grid x:Name="ProductGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <StackPanel x:Name="ProductStackPanel" Width="220" Grid.Row="0" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
                                 <TextBlock Height="18" d:Background="Yellow" Text="{Binding Id}"/>
                                 <Image d:Source="https://lh3.googleusercontent.com/yJCvE-14wXXcu1QfQM-JyYth6m-qxCMNL0hwdxCZQxtTe2F0d0oyCgFTD7DRpysSNR-FdE9I9A0AS4Fk3oGA7eLF4xSx50VQ=w500-h500-rw" 
                                 Width="200" Height="65"/>
@@ -39,6 +52,24 @@
                                 <TextBlock Height="18" Background="Beige" Text="{Binding Price, StringFormat='Price: {0:C2}'}"/>
                                 <TextBlock Height="18" Background="Blue" Text="{Binding Quantity}"/>
                             </StackPanel>
+                            <!--<StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Height="18" d:Background="Yellow" Text="{Binding Id}"/>
+                                <Image d:Source="https://lh3.googleusercontent.com/yJCvE-14wXXcu1QfQM-JyYth6m-qxCMNL0hwdxCZQxtTe2F0d0oyCgFTD7DRpysSNR-FdE9I9A0AS4Fk3oGA7eLF4xSx50VQ=w500-h500-rw" 
+                                Width="200" Height="65"/>
+                                <TextBlock Height="18" Background="Red" Text="{Binding Brand}"/>
+                                <TextBlock Height="47" Background="Orange" Text="{Binding ProductName}"/>
+                                <TextBlock Height="18" Background="Beige" Text="{Binding Price, StringFormat='Price: {0:C2}'}"/>
+                                <TextBlock Height="18" Background="Blue" Text="{Binding Quantity}"/>
+                            </StackPanel>
+                            <StackPanel  Grid.Row="0" Grid.Column="3" Orientation="Vertical" VerticalAlignment="Center">
+                                <TextBlock Height="18" d:Background="Yellow" Text="{Binding Id}"/>
+                                <Image d:Source="https://lh3.googleusercontent.com/yJCvE-14wXXcu1QfQM-JyYth6m-qxCMNL0hwdxCZQxtTe2F0d0oyCgFTD7DRpysSNR-FdE9I9A0AS4Fk3oGA7eLF4xSx50VQ=w500-h500-rw" 
+                                Width="200" Height="65"/>
+                                <TextBlock Height="18" Background="Red" Text="{Binding Brand}"/>
+                                <TextBlock Height="47" Background="Orange" Text="{Binding ProductName}"/>
+                                <TextBlock Height="18" Background="Beige" Text="{Binding Price, StringFormat='Price: {0:C2}'}"/>
+                                <TextBlock Height="18" Background="Blue" Text="{Binding Quantity}"/>
+                            </StackPanel>-->
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
