@@ -1,14 +1,15 @@
 ﻿<Application x:Class="WPF_Project1_Shop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WPF_Project1_Shop"
+             xmlns:local="clr-namespace:WPF_Project1_Shop" 
+             xmlns:ViewModel="clr-namespace:WPF_Project1_Shop.View_Model"
              StartupUri="View/RibbonWindow.xaml">
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-
-    </Application.Resources>
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+    <ViewModel:OrderViewModel x:Key="OrderViewModel" />
+  </Application.Resources>
 </Application>

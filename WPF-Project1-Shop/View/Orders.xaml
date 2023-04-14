@@ -8,9 +8,7 @@
         Title="Orders" Height="720" Width="1280">
   
   <DockPanel>
-    <Ribbon DockPanel.Dock="Top">
-      
-    </Ribbon>
+
     <Grid DockPanel.Dock="Bottom">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*" />
