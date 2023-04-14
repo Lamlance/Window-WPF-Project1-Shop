@@ -11,19 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF_Project1_Shop.ViewModel;
 
 namespace WPF_Project1_Shop.View
 {
     /// <summary>
-    /// Interaction logic for RibbonWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class RibbonWindow : Window
+    public partial class LoginWindow : Window
     {
-        public RibbonWindow()
+        public LoginWindow()
         {
             InitializeComponent();
         }
-
-
     }
 }
