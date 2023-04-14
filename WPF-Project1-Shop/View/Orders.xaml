@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Project1_Shop"
         mc:Ignorable="d"
-        Title="Orders" Height="720" Width="1820">
+        Title="Orders" Height="720" Width="1280">
+  
   <DockPanel>
 
     <Grid DockPanel.Dock="Bottom">
