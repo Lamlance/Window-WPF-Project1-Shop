@@ -110,5 +110,6 @@ namespace WPF_Project1_Shop.ViewModel
         {
             throw new NotImplementedException();
         }
+
     }
 }
