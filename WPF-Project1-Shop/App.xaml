@@ -2,6 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WPF_Project1_Shop"
+             xmlns:local="clr-namespace:WPF_Project1_Shop" 
+             xmlns:ViewModel="clr-namespace:WPF_Project1_Shop.View_Model"
+             StartupUri="View/RibbonWindow.xaml"
              Startup="ApplicationStart">
 <Application.Resources>
         <ResourceDictionary>
@@ -9,6 +12,5 @@
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
-    </Application.Resources>
+    </Application.Resources> 
 </Application>

@@ -22,15 +22,9 @@ namespace WPF_Project1_Shop.View
   /// </summary>
   public partial class OrdersWindow : Window
   {
-    ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
     public OrdersWindow()
     {
       InitializeComponent();
-
-      for (int i = 0; i < 40; i++)
-      {
-        orders.Add(new OrderData() { Name = $"Product#{i}" });
-      }
     }
 
     private void ListOrderLoaded(object sender, RoutedEventArgs e)
