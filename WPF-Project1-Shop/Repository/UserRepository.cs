@@ -12,7 +12,19 @@ namespace WPF_Project1_Shop.Repository
     {
         public bool AuthenticateUser(NetworkCredential credential)
         {
-            throw new NotImplementedException();
+            bool validUser;
+            using (var connection = GetConnection())
+            using (var command = new Npgsql.NpgsqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "select * from users where username=@username and password=@password";
+                command.Parameters.Add("@username", NpgsqlTypes.NpgsqlDbType.Text).Value = credential.UserName;
+                command.Parameters.Add("@password", NpgsqlTypes.NpgsqlDbType.Text).Value = credential.Password;
+                validUser = command.ExecuteScalar() == null ? false : true;
+            }
+
+            return validUser;
         }
 
         public bool Remove(int id)
@@ -27,7 +39,20 @@ namespace WPF_Project1_Shop.Repository
 
         bool IUserRepository.Edit(UserModel userModel)
         {
-            throw new NotImplementedException();
+            bool isQueryCompleted;
+            using (var connection = GetConnection())
+            using (var command = new Npgsql.NpgsqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "update users set password=@password where username=@username";
+                command.Parameters.Add("@username", NpgsqlTypes.NpgsqlDbType.Text).Value = userModel.Username;
+                command.Parameters.Add("@password", NpgsqlTypes.NpgsqlDbType.Text).Value = userModel.Password;
+                
+                isQueryCompleted = command.ExecuteScalar() == null ? false : true;
+            }
+
+            return isQueryCompleted;
         }
 
         IEnumerable<UserModel> IUserRepository.GetByAll()

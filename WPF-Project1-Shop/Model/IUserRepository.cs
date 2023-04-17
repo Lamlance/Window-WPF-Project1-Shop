@@ -16,6 +16,5 @@ namespace WPF_Project1_Shop.Model
         UserModel GetById(int id);
         UserModel GetByUsername(string username);
         IEnumerable<UserModel> GetByAll();
-
     }
 }

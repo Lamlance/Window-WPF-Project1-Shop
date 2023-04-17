@@ -11,6 +11,7 @@ using System.Windows;
 using System.Security;
 using System.Threading;
 using System.Security.Principal;
+using WPF_Project1_Shop.Repository;
 
 namespace WPF_Project1_Shop.ViewModel
 {
@@ -21,6 +22,9 @@ namespace WPF_Project1_Shop.ViewModel
         private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
+        private bool _isRememberPassword = false;
+
+        private IUserRepository _userRepository;
 
         // Properties
         public string UserName
@@ -61,6 +65,17 @@ namespace WPF_Project1_Shop.ViewModel
         }
 
 
+        public bool IsRememberPassword
+        {
+            get => _isRememberPassword;
+            set
+            {
+                _isRememberPassword = value;
+                OnPropertyChanged(nameof(IsRememberPassword));
+            }
+        }
+
+
         // Commands
 
         public ICommand LoginCommand { get; }
@@ -71,8 +86,10 @@ namespace WPF_Project1_Shop.ViewModel
         // Constructor
         public LoginViewModel()
         {
+            _userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
-            RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
+            RememberPasswordCommand = new ViewModelCommand(ExecuteRememberPasswordCommand, CanExcuteRememberPasswordCommand);
+            //RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
             //ShowPasswordCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
             //RecoverPasswordCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
         }
@@ -80,6 +97,7 @@ namespace WPF_Project1_Shop.ViewModel
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
+
             if (string.IsNullOrWhiteSpace(UserName) || UserName.Length < 3 || Password == null || Password.Length < 3)
             {
                 validData = false;
@@ -94,10 +112,10 @@ namespace WPF_Project1_Shop.ViewModel
 
         private void ExecuteLogInCommand(object obj)
         {
-            if (UserName == "admin")
+            bool isValidUser = _userRepository.AuthenticateUser(new System.Net.NetworkCredential(UserName, Password));
+            if (isValidUser)
             {
-                Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(UserName), null);
+                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);
                 IsViewVisible = false;
             } else
             {
@@ -106,7 +124,14 @@ namespace WPF_Project1_Shop.ViewModel
 
         }
 
-        private void ExecuteRecoverPasswordCommand(string username, string email)
+
+        private bool CanExcuteRememberPasswordCommand(object obj)
+        {
+
+            return true;
+        }
+
+        private void ExecuteRememberPasswordCommand(object obj)
         {
             throw new NotImplementedException();
         }
