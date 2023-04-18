@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,8 @@ namespace WPF_Project1_Shop.View
   public partial class OrdersWindow : Window
   {
     //ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
+    private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
+
     public OrdersWindow()
     {
       InitializeComponent();
@@ -36,6 +39,11 @@ namespace WPF_Project1_Shop.View
     private void ListOrderLoaded(object sender, RoutedEventArgs e)
     {
       // this.ListOrder.ItemsSource = orders;
+    }
+
+    private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
+    {
+      e.Handled = _regexNumberOnly.IsMatch(e.Text);
     }
   }
 }
