@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="WPF_Project1_Shop.View.OrdersUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_Project1_Shop.View" xmlns:Fluent="urn:fluent-ribbon" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             Background="Pink"
+             d:DesignHeight="450" d:DesignWidth="800">
+  <Grid DockPanel.Dock="Bottom">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+    </Grid.ColumnDefinitions>
+
+    <ListView 
+      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+      ScrollViewer.VerticalScrollBarVisibility="Visible"
+      ScrollViewer.CanContentScroll="True"
+      VerticalContentAlignment="Top"  
+      x:Name="ListOrder"
+      Grid.ColumnSpan="3">
+      <ListView.ItemsPanel>
+        <ItemsPanelTemplate>
+          <UniformGrid Columns="1" />
+        </ItemsPanelTemplate>
+      </ListView.ItemsPanel>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <Label Content="{Binding Name}" />
+        </DataTemplate>
+      </ListView.ItemTemplate>
+      <ListView.ItemContainerStyle>
+        <Style TargetType="ListViewItem">
+          <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+      </ListView.ItemContainerStyle>
+    </ListView>
+
+    <Grid 
+      Grid.Column="3" 
+      Grid.ColumnSpan="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1.5*" />
+        <ColumnDefinition Width="3*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="1*" />
+        <RowDefinition Height="Auto" />
+
+      </Grid.RowDefinitions>
+
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Column="0" 
+        Content="Date created"/>
+      <DatePicker
+        x:Name="datePickerCreatedOrderForm"
+        VerticalAlignment="Center"
+        Grid.Column="1"/>
+
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Row="1"
+        Grid.Column="0" 
+        Content="Date deliverd"/>
+      <DatePicker
+        x:Name="datePickerDeliveredOrderForm"
+        Grid.Row="1"
+        VerticalAlignment="Center"
+        Grid.Column="1"/>
+
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Row="2"
+        Grid.Column="0" 
+        Content="Ship address"/>
+      <TextBox
+        x:Name="txtBoxAddressOrderForm"
+        Grid.Row="2"
+        VerticalAlignment="Center"
+        Grid.Column="1"/>
+
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Row="3"
+        Grid.Column="0" 
+        Content="Ship Status"/>
+      <ComboBox
+        x:Name="comboOrderForm"
+        Grid.Row="3"
+        VerticalAlignment="Center"
+        SelectedIndex="0"
+        Grid.Column="1">
+        <ComboBoxItem Content="Waiting" />
+        <ComboBoxItem Content="Shipping" />
+        <ComboBoxItem Content="Shipped" />
+        <ComboBoxItem Content="Canceled" />
+      </ComboBox>
+
+      <TabControl
+        SelectedIndex="1"
+        Grid.ColumnSpan="2"
+        Grid.Row="4">
+        <TabItem Header="Customer info">
+          <StackPanel>
+            <Label
+              Content="{Binding FirstName}"
+              d:Content="Customer name: Nguyen Van Hoang"/>
+            <Label
+              Content="{Binding Phone}"
+              d:Content="Phone number: 12345678"/>
+            <Label
+              Content="{Binding Email}"
+              d:Content="Email: Nvhoang@coldmail.com"/>
+            <Label
+              Content="{Binding Address}"
+              d:Content="Address: 420 Huynh Van Banh Q3, P3, HCM"/>
+          </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Ordered products">
+          <DockPanel LastChildFill="True">
+            <DataGrid DockPanel.Dock="Bottom">
+              <DataGrid.Columns>
+                <DataGridTextColumn 
+                Width="1.25*"
+                Header="Name" />
+                <DataGridTextColumn 
+                Width="0.75*"
+                Header="Quantity" />
+              </DataGrid.Columns>
+            </DataGrid>
+          </DockPanel>
+        </TabItem>
+
+      </TabControl>
+
+      <WrapPanel
+        HorizontalAlignment="Right"
+        Grid.ColumnSpan="2"
+        Grid.Row="5">
+        <Button 
+          Click="OrderFormBtnClick"
+          Padding="30,0,30,0"
+          Content="Save" />
+      </WrapPanel>
+    </Grid>
+  </Grid>
+</UserControl>

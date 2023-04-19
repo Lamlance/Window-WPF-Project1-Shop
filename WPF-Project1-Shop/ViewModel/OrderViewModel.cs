@@ -4,13 +4,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.ViewModel
 {
-  public class OrderViewHodel
+  public class OrderViewModel
   {
     ObservableCollection<EFModel.Order> orders;
-    OrderViewHodel()
+    public OrderViewModel()
     {
       orders = new ObservableCollection<EFModel.Order>();
       this.GetOrderAtPage();
@@ -28,7 +29,24 @@ namespace WPF_Project1_Shop.ViewModel
           orders.Add(o);
         });
       }
+    }
+
+    public bool AddOrder(Order order)
+    {
+      try
+      {
+        using (EFCustomRepository.OrderRepository orderRepository = new EFCustomRepository.OrderRepository(new EFModel.RailwayContext()))
+        {
+          orderRepository.AddOrder(order);
+        }
+        orders.Add(order);
+        return true;
+      }catch(Exception e)
+      {
+        return false;
+      };
       
     }
+
   }
 }

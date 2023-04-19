@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_Project1_Shop.Model;
+using WPF_Project1_Shop.ViewModel;
 
 namespace WPF_Project1_Shop.View
 {
@@ -29,21 +30,26 @@ namespace WPF_Project1_Shop.View
     public OrdersWindow()
     {
       InitializeComponent();
-
-      //for (int i = 0; i < 40; i++)
-      //{
-      //  orders.Add(new OrderData() { Name = $"Product#{i}" });
-      //}
     }
 
     private void ListOrderLoaded(object sender, RoutedEventArgs e)
     {
-      // this.ListOrder.ItemsSource = orders;
     }
 
     private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
     {
       e.Handled = _regexNumberOnly.IsMatch(e.Text);
+    }
+
+    private void MainWindowLoaded(object sender, RoutedEventArgs e)
+    {
+      this.datePickerFromOrderFilter.SelectedDate = DateTime.Today;
+      this.datePickerToOrderFilter.SelectedDate = DateTime.Today;
+      var screens = new ObservableCollection<TabItem>()
+        {
+          new TabItem(){Content = new OrdersUserControl() }
+        };
+      this.MainTabControl.ItemsSource = screens;
     }
   }
 }
