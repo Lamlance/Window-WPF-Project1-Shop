@@ -7,25 +7,25 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.EFCustomRepository
 {
-  public class OrderRepository : IDisposable
-  {
-    private RailwayContext dbContext;
-    public OrderRepository(RailwayContext railwayContext)
+    public class OrderRepository : IDisposable
     {
-      dbContext = railwayContext;
-    }
+        private RailwayContext dbContext;
+        public OrderRepository(RailwayContext railwayContext)
+        {
+            dbContext = railwayContext;
+        }
 
-    public void Dispose()
-    {
-      dbContext.Dispose();
-    }
+        public void Dispose()
+        {
+            dbContext.Dispose();
+        }
 
-    public IEnumerable<Order> GetOrderAtPage(int page,int itemPerPage = 15)
-    {
-      return dbContext.Orders
-        .OrderBy(o => o.CreatedAt)
-        .Skip(page > 0 ? page - 1 : 0)
-        .Take(itemPerPage);
+        public IEnumerable<Order> GetOrderAtPage(int page, int itemPerPage = 15)
+        {
+            return dbContext.Orders
+              .OrderBy(o => o.CreatedAt)
+              .Skip(page > 0 ? page - 1 : 0)
+              .Take(itemPerPage);
+        }
     }
-  }
 }
