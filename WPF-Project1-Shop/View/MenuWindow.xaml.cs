@@ -23,5 +23,39 @@ namespace WPF_Project1_Shop.View
         {
             InitializeComponent();
         }
+
+        private void txtUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the window associated with the button
+            Window window = Window.GetWindow(this);
+
+            // Close the window
+            window.Close();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BindablePasswordBox_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+
+        //}
     }
 }
