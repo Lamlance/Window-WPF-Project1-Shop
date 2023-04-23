@@ -16,17 +16,6 @@ namespace WPF_Project1_Shop
     {
         protected void ApplicationStart(object sender, EventArgs e)
         {
-            var loginView = new LoginWindow();
-            loginView.Show();
-            loginView.IsVisibleChanged += (s, ev) =>
-            {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
-                {
-                    var mainView = new RibbonWindow();
-                    mainView.Show();
-                    loginView.Close();
-                }
-            };
         }
     }
 }

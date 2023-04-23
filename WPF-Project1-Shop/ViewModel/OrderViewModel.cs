@@ -14,7 +14,7 @@ namespace WPF_Project1_Shop.ViewModel
     public OrderViewModel()
     {
       orders = new ObservableCollection<EFModel.Order>();
-      this.GetOrderAtPage();
+      //this.GetOrderAtPage();
     }
     private int _curPage = 1;
     private int _itemPerPage = 15;

@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WPF_Project1_Shop.Model;
 using WPF_Project1_Shop.ViewModel;
 
 namespace WPF_Project1_Shop.View
