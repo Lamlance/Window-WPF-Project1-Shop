@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WPF_Project1_Shop.Model;
 using System.Windows;
 using System.Security;
 using System.Threading;
 using System.Security.Principal;
-using WPF_Project1_Shop.Repository;
+using WPF_Project1_Shop.EFModel;
+using WPF_Project1_Shop.EFCustomRepository;
 
 namespace WPF_Project1_Shop.ViewModel
 {
@@ -19,12 +19,13 @@ namespace WPF_Project1_Shop.ViewModel
     {
         //Fields
         private string _userName;
-        private SecureString _password;
+        // private SecureString _password;
+        private string _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
         private bool _isRememberPassword = false;
 
-        private IUserRepository _userRepository;
+        AccountRepository accountRepository = new AccountRepository(new RailwayContext());
 
         // Properties
         public string UserName
@@ -36,7 +37,16 @@ namespace WPF_Project1_Shop.ViewModel
                 OnPropertyChanged(nameof(UserName));
             }
         }
-        public SecureString Password
+        //public SecureString Password
+        //{
+        //    get => _password; set
+        //    {
+        //        _password = value;
+        //        OnPropertyChanged(nameof(Password));
+        //    }
+        //}
+
+        public string Password
         {
             get => _password; set
             {
@@ -77,21 +87,17 @@ namespace WPF_Project1_Shop.ViewModel
 
 
         // Commands
-
         public ICommand LoginCommand { get; }
-        public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
 
         // Constructor
         public LoginViewModel()
         {
-            _userRepository = new UserRepository();
+            
             LoginCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
             RememberPasswordCommand = new ViewModelCommand(ExecuteRememberPasswordCommand, CanExcuteRememberPasswordCommand);
-            //RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
             //ShowPasswordCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
-            //RecoverPasswordCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
         }
 
         private bool CanExecuteLoginCommand(object obj)
@@ -112,10 +118,11 @@ namespace WPF_Project1_Shop.ViewModel
 
         private void ExecuteLogInCommand(object obj)
         {
-            bool isValidUser = _userRepository.AuthenticateUser(new System.Net.NetworkCredential(UserName, Password));
-            if (isValidUser)
+            
+            Account? account = accountRepository.GetAccount(UserName, Password);
+            if (account != null)
             {
-                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName), null);
+                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName, Password), null);
                 IsViewVisible = false;
             } else
             {
@@ -123,7 +130,6 @@ namespace WPF_Project1_Shop.ViewModel
             }
 
         }
-
 
         private bool CanExcuteRememberPasswordCommand(object obj)
         {

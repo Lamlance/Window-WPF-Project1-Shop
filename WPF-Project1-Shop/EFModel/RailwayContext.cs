@@ -15,6 +15,8 @@ public partial class RailwayContext : DbContext
     {
     }
 
+    public virtual DbSet<Account> Accounts { get; set; }
+
     public virtual DbSet<Category> Categories { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
@@ -25,13 +27,25 @@ public partial class RailwayContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
-    #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("Host=containers-us-west-181.railway.app;Port=5457;Database=railway;Username=postgres;Password=8hW9GLBvcosfIKxTNVB3");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasPostgresExtension("timescaledb");
+
+
+        modelBuilder.Entity<Account>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("accounts_pkey");
+
+            entity.ToTable("accounts");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.UserName).HasColumnName("username");
+            entity.Property(e => e.Password).HasColumnName("password");
+        });
 
         modelBuilder.Entity<Category>(entity =>
         {
@@ -148,11 +162,11 @@ public partial class RailwayContext : DbContext
                         .HasConstraintName("fk_pc_product"),
                     j =>
                     {
-                          j.HasKey("ProductId", "CategoryId").HasName("product_category_pkey");
-                          j.ToTable("product_category");
-                          j.IndexerProperty<long>("ProductId").HasColumnName("product_id");
-                          j.IndexerProperty<long>("CategoryId").HasColumnName("category_id");
-                      });
+                        j.HasKey("ProductId", "CategoryId").HasName("product_category_pkey");
+                        j.ToTable("product_category");
+                        j.IndexerProperty<long>("ProductId").HasColumnName("product_id");
+                        j.IndexerProperty<long>("CategoryId").HasColumnName("category_id");
+                    });
         });
         modelBuilder.HasSequence("chunk_constraint_name", "_timescaledb_catalog");
 

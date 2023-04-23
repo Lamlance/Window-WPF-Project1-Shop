@@ -16,13 +16,15 @@ using System.Windows.Shapes;
 namespace WPF_Project1_Shop.View
 {
     /// <summary>
-    /// Interaction logic for CustomerUserControlView.xaml
+    /// Interaction logic for CustomerUserControl.xaml
     /// </summary>
-    public partial class CustomerUserControlView : UserControl
+    public partial class CustomerUserControl : UserControl
     {
-        public CustomerUserControlView()
+        public CustomerUserControl()
         {
             InitializeComponent();
         }
+
+
     }
 }
