@@ -4,19 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_Project1_Shop.View"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
 
 
         <ListView Grid.Row="0"
                   Grid.Column="0"
-                  Margin="15, 15, 15, 15">
+                  Margin="10, 10, 10, 10">
             <ListView ItemsSource="{Binding Customers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -36,19 +36,82 @@
         </ListView>
 
 
-        <StackPanel Grid.Row="0"
-                    Grid.Column="1"
-                    Orientation="Vertical"
-                    Margin="15, 15, 15, 15">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Search" />
-                <TextBox Width="200" />
-            </StackPanel>
+        <Grid Grid.Column="1" Margin="10, 10, 10, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto" />
 
-            <StackPanel>
-                <TextBlock Text="" />
+            </Grid.RowDefinitions>
 
-            </StackPanel>
-        </StackPanel>
+            <Label VerticalAlignment="Center"
+                   Grid.Column="0"
+                   Content="Name" />
+            <TextBox x:Name="Name"
+                     Grid.Row="0"
+                     VerticalAlignment="Center"
+                     Grid.Column="1" />
+
+            <Label VerticalAlignment="Center"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Content="Email" />
+            <TextBox x:Name="Email"
+                     Grid.Row="1"
+                     VerticalAlignment="Center"
+                     Grid.Column="1" />
+
+            <Label VerticalAlignment="Center"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Content="Phone" />
+            <TextBox x:Name="Phone"
+                     Grid.Row="2"
+                     VerticalAlignment="Center"
+                     Grid.Column="1" />
+
+            <Label VerticalAlignment="Center"
+                   Grid.Row="3"
+                   Grid.Column="0"
+                   Content="Address" />
+            <TextBox x:Name="Address"
+                     Grid.Row="3"
+                     VerticalAlignment="Center"
+                     Grid.Column="1" />
+
+            <TabControl SelectedIndex="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="4">
+                <TabItem Header="Customer info">
+                    <StackPanel>
+                        <Label Content="{Binding FirstName}"
+                               d:Content="Customer name: Nguyen Van Hoang" />
+                        <Label Content="{Binding Phone}"
+                               d:Content="Phone number: 12345678" />
+                        <Label Content="{Binding Email}"
+                               d:Content="Email: Nvhoang@coldmail.com" />
+                        <Label Content="{Binding Address}"
+                               d:Content="Address: 420 Huynh Van Banh Q3, P3, HCM" />
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+            <WrapPanel HorizontalAlignment="Right"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="5">
+                <Button 
+                        Padding="20,0,20,0"
+                        Content="Save" />
+            </WrapPanel>
+        </Grid>
+
+
     </Grid>
 </UserControl>
