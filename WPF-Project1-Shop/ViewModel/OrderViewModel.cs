@@ -10,24 +10,40 @@ namespace WPF_Project1_Shop.ViewModel
 {
   public class OrderViewModel
   {
-    ObservableCollection<EFModel.Order> orders;
+    ObservableCollection<EFModel.Order> ordersInPage;
+    IEnumerable<EFModel.Order>? ordersSet;
     public OrderViewModel()
     {
-      orders = new ObservableCollection<EFModel.Order>();
-      //this.GetOrderAtPage();
+      ordersInPage = new ObservableCollection<EFModel.Order>();
+       
     }
     private int _curPage = 1;
     private int _itemPerPage = 15;
 
-    public void GetOrderAtPage()
+    public void SetPage(int page)
+    {
+      if(ordersSet == null)
+      {
+        return;
+      }
+
+      _curPage = page > 0 ? page : 1;
+      ordersInPage.Clear();
+
+      //var numberOfPages = Math.Floor( (double)((ordersSet.Count() + _itemPerPage - 1) / _itemPerPage));
+      int start = (page * _itemPerPage) - _itemPerPage;
+      int end = Math.Min(start + _itemPerPage, ordersSet.Count());
+      for (int i = start; i < end; i++)
+      {
+        ordersInPage.Add(ordersSet.ElementAt(i));
+      }
+    }
+
+    public void GetManyOrder()
     {
       using(EFCustomRepository.OrderRepository orderRepository = new EFCustomRepository.OrderRepository(new EFModel.RailwayContext()))
       {
-        orders.Clear();
-        orderRepository.GetOrderAtPage(_curPage, _itemPerPage).ToList().ForEach(o =>
-        {
-          orders.Add(o);
-        });
+        ordersSet = orderRepository.GetManyOrders();
       }
     }
 
@@ -39,7 +55,7 @@ namespace WPF_Project1_Shop.ViewModel
         {
           orderRepository.AddOrder(order);
         }
-        orders.Add(order);
+        ordersInPage.Insert(0,order);
         return true;
       }catch(Exception e)
       {

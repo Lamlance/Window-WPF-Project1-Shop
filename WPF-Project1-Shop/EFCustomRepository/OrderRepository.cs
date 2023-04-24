@@ -22,19 +22,20 @@ namespace WPF_Project1_Shop.EFCustomRepository
       dbContext.Dispose();
     }
 
-    public IEnumerable<Order> GetOrderAtPage(int page,int itemPerPage = 15)
+    public IEnumerable<Order> GetManyOrders(int page = 1)
     {
       var orders = dbContext.Orders
         .Include(o => o.OrderItems)
         .ThenInclude(oi => oi.Product)
         .OrderBy(o => o.CreatedAt)
         .Skip(page > 0 ? page - 1 : 0)
-        .Take(itemPerPage);
+        .Take(500);
       return orders;
     }
-    public void AddOrder(Order data)
+    public Order AddOrder(Order data)
     {
       dbContext.Add(data);
+      return data;
     }
   }
 }

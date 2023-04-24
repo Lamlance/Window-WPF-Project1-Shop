@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,7 @@ namespace WPF_Project1_Shop.View
   /// </summary>
   public partial class OrdersUserControl : UserControl
   {
+    private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
     private OrderViewModel _orderViewModel = new OrderViewModel();
     public OrdersUserControl()
     {
@@ -31,7 +33,10 @@ namespace WPF_Project1_Shop.View
     {
       return _orderViewModel.AddOrder(order);
     }
-
+    private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
+    {
+      e.Handled = _regexNumberOnly.IsMatch(e.Text);
+    }
     private void OrderFormBtnClick(object sender, RoutedEventArgs e)
     {
 

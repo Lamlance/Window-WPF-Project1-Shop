@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace WPF_Project1_Shop.Model
+namespace WPF_Project1_Shop.Helper
 {
     public class RelativeToAbsoluteConverter : IValueConverter
     {

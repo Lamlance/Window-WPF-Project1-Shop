@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace WPF_Project1_Shop.EFModel;
 
-public partial class Product
+public partial class Product: INotifyPropertyChanged
 {
-    public long Id { get; set; }
+  public event PropertyChangedEventHandler? PropertyChanged;
+
+  public long Id { get; set; }
 
     public string ProductName { get; set; } = null!;
 

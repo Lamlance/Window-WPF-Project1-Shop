@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:WPF_Project1_Shop" 
         xmlns:Fluent="urn:fluent-ribbon" 
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-        xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox"
+        xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox" 
         mc:Ignorable="d"
         Loaded="MainWindowLoaded"
+        WindowState="Maximized" 
         Title="Orders" Height="720" Width="1280">
 
   <DockPanel>
@@ -26,12 +27,7 @@
           </Fluent:BackstageTabControl>
         </Fluent:Backstage>
       </Fluent:Ribbon.Menu>
-
-      <!-- SearchTab -->
-
-      <!-- /SearchTab -->
-
-      <!-- DataTab -->
+      <!-- Order tab -->
       <Fluent:RibbonTabItem 
         Header="Orders"
         x:Name="OrderDataTab">
@@ -252,7 +248,15 @@
         </Fluent:RibbonGroupBox>
 
       </Fluent:RibbonTabItem>
-      <!-- /DataTab -->
+      <!-- /Order ta -->
+      
+      <!-- Product Tab -->
+      <Fluent:RibbonTabItem 
+        Header="Products"
+        x:Name="ProductDataTab">
+      </Fluent:RibbonTabItem>
+      <!-- /Product Tab -->
+
     </Fluent:Ribbon>
 
 

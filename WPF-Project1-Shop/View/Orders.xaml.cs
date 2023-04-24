@@ -46,7 +46,8 @@ namespace WPF_Project1_Shop.View
       this.datePickerToOrderFilter.SelectedDate = DateTime.Today;
       var screens = new ObservableCollection<TabItem>()
         {
-          new TabItem(){Content = new OrdersUserControl() }
+          new TabItem(){Content = new OrdersUserControl() },
+          new TabItem(){Content = new ProductsUserControl() }
         };
       this.MainTabControl.ItemsSource = screens;
     }
