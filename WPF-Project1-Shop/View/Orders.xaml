@@ -419,6 +419,11 @@
       </Fluent:RibbonTabItem>
       <!-- /Product Tab -->
 
+      <Fluent:RibbonTabItem
+        Header="Customer">
+        
+      </Fluent:RibbonTabItem>
+      
     </Fluent:Ribbon>
 
     <Grid DockPanel.Dock="Bottom">

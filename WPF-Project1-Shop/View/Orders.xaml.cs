@@ -27,6 +27,8 @@ namespace WPF_Project1_Shop.View
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
     private static OrdersUserControl ordersUserControl = new OrdersUserControl();
     private static ProductsUserControl productsUserControl = new ProductsUserControl();
+    private static CustomerUserControl customerUserControl = new CustomerUserControl();
+
     CategoryViewModel _categoryViewModel;
 
     public OrdersWindow()
@@ -47,7 +49,8 @@ namespace WPF_Project1_Shop.View
       var screens = new ObservableCollection<TabItem>()
         {
           new TabItem(){Content = ordersUserControl },
-          new TabItem(){Content = productsUserControl }
+          new TabItem(){Content = productsUserControl },
+          new TabItem(){Content = customerUserControl}
         };
       this.MainTabControl.ItemsSource = screens;
     }
