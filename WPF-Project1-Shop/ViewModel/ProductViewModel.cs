@@ -25,7 +25,7 @@ namespace WPF_Project1_Shop.ViewModel
     {
       productsInPage = new ObservableCollection<EFModel.Product>();
       selectedProduct = new Product();
-      Initialize();
+      //Initialize();
     }
 
     private async Task Initialize()

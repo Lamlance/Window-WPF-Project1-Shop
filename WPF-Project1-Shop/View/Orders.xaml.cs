@@ -25,14 +25,12 @@ namespace WPF_Project1_Shop.View
   {
     //ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
+    CategoryViewModel _categoryViewModel;
 
     public OrdersWindow()
     {
       InitializeComponent();
-    }
-
-    private void ListOrderLoaded(object sender, RoutedEventArgs e)
-    {
+      _categoryViewModel = new CategoryViewModel();
     }
 
     private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
@@ -50,6 +48,11 @@ namespace WPF_Project1_Shop.View
           new TabItem(){Content = new ProductsUserControl() }
         };
       this.MainTabControl.ItemsSource = screens;
+    }
+
+    private void CategoriesListLoaded(object sender, RoutedEventArgs e)
+    {
+      this.ListRibbonCategoriesList.ItemsSource = _categoryViewModel.Categories;
     }
   }
 }
