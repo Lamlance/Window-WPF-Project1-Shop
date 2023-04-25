@@ -8,13 +8,13 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.EFCustomRepository
 {
-  public class OrderRepository : IDisposable
-  {
-    private RailwayContext dbContext;
-    public OrderRepository(RailwayContext railwayContext)
+    public class OrderRepository : IDisposable
     {
-      dbContext = railwayContext;
-    }
+        private RailwayContext dbContext;
+        public OrderRepository(RailwayContext railwayContext)
+        {
+            dbContext = railwayContext;
+        }
 
     public void Dispose()
     {

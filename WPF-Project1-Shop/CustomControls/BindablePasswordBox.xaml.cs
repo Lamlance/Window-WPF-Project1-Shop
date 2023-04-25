@@ -22,13 +22,13 @@ namespace WPF_Project1_Shop.CustomControls
     public partial class BindablePasswordBox : UserControl
     {
         public static readonly DependencyProperty PasswordProperty = 
-            DependencyProperty.Register("Password", typeof(SecureString), typeof(BindablePasswordBox));
+            DependencyProperty.Register("Password", typeof(string), typeof(BindablePasswordBox));
 
-        public SecureString Password
+        public string Password
         {
             get
             {
-                return (SecureString)GetValue(PasswordProperty);
+                return (string)GetValue(PasswordProperty);
             }
             set
             {
@@ -46,7 +46,7 @@ namespace WPF_Project1_Shop.CustomControls
 
         private void OnPasswordChanged(object sender, EventArgs e)
         {
-            Password = txtPassword.SecurePassword;
+            Password = txtPassword.Password;
         }
     }
 }
