@@ -25,6 +25,8 @@ namespace WPF_Project1_Shop.View
   {
     //ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
+    private static OrdersUserControl ordersUserControl = new OrdersUserControl();
+    private static ProductsUserControl productsUserControl = new ProductsUserControl();
     CategoryViewModel _categoryViewModel;
 
     public OrdersWindow()
@@ -44,8 +46,8 @@ namespace WPF_Project1_Shop.View
       this.datePickerToOrderFilter.SelectedDate = DateTime.Today;
       var screens = new ObservableCollection<TabItem>()
         {
-          new TabItem(){Content = new OrdersUserControl() },
-          new TabItem(){Content = new ProductsUserControl() }
+          new TabItem(){Content = ordersUserControl },
+          new TabItem(){Content = productsUserControl }
         };
       this.MainTabControl.ItemsSource = screens;
     }
@@ -53,6 +55,21 @@ namespace WPF_Project1_Shop.View
     private void CategoriesListLoaded(object sender, RoutedEventArgs e)
     {
       this.ListRibbonCategoriesList.ItemsSource = _categoryViewModel.Categories;
+    }
+
+    private void OrderEditModeChecked(object sender, RoutedEventArgs e)
+    {
+      ordersUserControl.ModifyMode = OrdersUserControl.MODIFY_MODE.EDIT;
+    }
+
+    private void OrderAddModeChecked(object sender, RoutedEventArgs e)
+    {
+      ordersUserControl.ModifyMode = OrdersUserControl.MODIFY_MODE.ADD;
+    }
+
+    private void OrderDeleteModeChecked(object sender, RoutedEventArgs e)
+    {
+      ordersUserControl.ModifyMode = OrdersUserControl.MODIFY_MODE.DELETE;
     }
   }
 }

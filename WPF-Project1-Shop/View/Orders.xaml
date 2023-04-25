@@ -12,7 +12,7 @@
         WindowState="Maximized" 
         Title="Orders" Height="720" Width="1280">
 
-  <DockPanel>
+  <DockPanel LastChildFill="True">
     <Fluent:Ribbon
       x:Name="Ribbon"
       DockPanel.Dock="Top"
@@ -167,7 +167,7 @@
           <MenuItem 
             x:Name="menuApplyCustomerFilterOrder"
             IsCheckable="True"
-            Header="Appy seaches">
+            Header="Appy seaches" >
             <MenuItem.Icon>
               <iconPacks:FontAwesome
                 Kind="UserSlashSolid" />
@@ -190,6 +190,7 @@
           Header="Manual modify">
           
           <Fluent:ToggleButton
+            Checked="OrderEditModeChecked"
             Header="Edit order"
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
@@ -201,6 +202,7 @@
           </Fluent:ToggleButton>
 
           <Fluent:ToggleButton
+            Checked="OrderAddModeChecked"
             Header="Add order"
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
@@ -212,6 +214,7 @@
           </Fluent:ToggleButton>
 
           <Fluent:ToggleButton
+            Checked="OrderDeleteModeChecked"
             Header="Delete order"
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
@@ -238,7 +241,7 @@
             Header="Filter categories">
             <Fluent:DropDownButton.Icon>
               <iconPacks:PackIconUnicons
-                Kind="ListOl"
+                Kind="LayerGroup"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"/>
             </Fluent:DropDownButton.Icon>
@@ -259,6 +262,97 @@
               </ListView.ItemTemplate>
             </ListView>
           </Fluent:DropDownButton>
+        </Fluent:RibbonGroupBox>
+
+        <Fluent:RibbonGroupBox
+          Header="Price search">
+          <Grid MinWidth="200">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="1*" />
+              <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="1*" />
+              <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Label 
+              Content="Start Price" />
+            <currency:CurrencyTextBox
+              VerticalContentAlignment="Center"
+              TextAlignment="Left"
+              StringFormat="C0"
+              Culture="vi-VN"
+              Grid.Column="1" />
+
+            <Label 
+              Grid.Row="1"
+              Content="End Price" />
+            <currency:CurrencyTextBox
+              VerticalContentAlignment="Center"
+              TextAlignment="Left"
+              Grid.Row="1"
+              StringFormat="C0"
+              Culture="vi-VN"
+              Grid.Column="1" />
+          </Grid>
+        </Fluent:RibbonGroupBox>
+
+        <Fluent:RibbonGroupBox
+          Header="Name search">
+          <Grid
+            MinWidth="300">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="1*" />
+              <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Label 
+              Grid.Column="0"
+              Content="Product name" />
+            <TextBox
+              VerticalContentAlignment="Center"
+              Grid.Column="1" />
+          </Grid>
+        </Fluent:RibbonGroupBox>
+
+        <Fluent:RibbonGroupBox
+          Header="Apply search">
+          
+          <MenuItem
+            IsCheckable="true"
+            Header="Apply categories">
+            <MenuItem.Icon>
+              <iconPacks:PackIconUnicons 
+                Kind="LayerGroupSlash"/>
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem
+            IsCheckable="true"
+            Header="Apply price">
+            <MenuItem.Icon>
+              <iconPacks:PackIconUnicons 
+                Kind="MoneyBillSlash"/>
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem
+            IsCheckable="true"
+            Header="Apply name">
+            <MenuItem.Icon>
+              <iconPacks:FontAwesome 
+                Kind="UserSlashSolid"/>
+            </MenuItem.Icon>
+          </MenuItem>
+
+          <Fluent:Button
+            Header="Seach">
+            <Fluent:Button.Icon>
+              <iconPacks:PackIconUnicons
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Kind="Search" />
+            </Fluent:Button.Icon>
+          </Fluent:Button>
+
         </Fluent:RibbonGroupBox>
         
         <Fluent:RibbonGroupBox
@@ -327,15 +421,12 @@
 
     </Fluent:Ribbon>
 
-
     <Grid DockPanel.Dock="Bottom">
       <TabControl 
         SelectedIndex="{Binding ElementName=Ribbon,Path=SelectedTabIndex}"
-        x:Name="MainTabControl" >
-        
+        x:Name="MainTabControl">
       </TabControl>
     </Grid>
-
 
   </DockPanel>
 </Window>

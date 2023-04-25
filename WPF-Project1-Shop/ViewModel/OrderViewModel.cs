@@ -15,10 +15,18 @@ namespace WPF_Project1_Shop.ViewModel
     public OrderViewModel()
     {
       ordersInPage = new ObservableCollection<EFModel.Order>();
-       
+      //Initialize();
     }
     private int _curPage = 1;
     private int _itemPerPage = 15;
+
+    public ObservableCollection<Order> OrdersInPage { get => ordersInPage; }
+
+    public async Task Initialize()
+    {
+      await GetManyOrder();
+      SetPage(1);
+    }
 
     public void SetPage(int page)
     {
@@ -39,12 +47,16 @@ namespace WPF_Project1_Shop.ViewModel
       }
     }
 
-    public void GetManyOrder()
+    public async Task GetManyOrder()
     {
-      using(EFCustomRepository.OrderRepository orderRepository = new EFCustomRepository.OrderRepository(new EFModel.RailwayContext()))
+      var result = await Task<List<Order>>.Run(() =>
       {
-        ordersSet = orderRepository.GetManyOrders();
-      }
+        using (EFCustomRepository.OrderRepository orderRepository = new EFCustomRepository.OrderRepository(new EFModel.RailwayContext()))
+        {
+          return orderRepository.GetManyOrders().ToList();
+        }
+      });
+      ordersSet = result;
     }
 
     public bool AddOrder(Order order)

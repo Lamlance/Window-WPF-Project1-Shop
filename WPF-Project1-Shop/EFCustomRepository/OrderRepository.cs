@@ -25,8 +25,8 @@ namespace WPF_Project1_Shop.EFCustomRepository
     public IEnumerable<Order> GetManyOrders(int page = 1)
     {
       var orders = dbContext.Orders
-        .Include(o => o.OrderItems)
-        .ThenInclude(oi => oi.Product)
+        .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+        .Include(o => o.Customer)
         .OrderBy(o => o.CreatedAt)
         .Skip(page > 0 ? page - 1 : 0)
         .Take(500);

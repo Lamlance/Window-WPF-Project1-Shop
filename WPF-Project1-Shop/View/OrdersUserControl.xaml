@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Background="Pink"
              d:DesignHeight="450" d:DesignWidth="800">
-  <Grid DockPanel.Dock="Bottom">
+  <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="1*" />
       <ColumnDefinition Width="1*" />
@@ -16,29 +16,50 @@
       <ColumnDefinition Width="1*" />
     </Grid.ColumnDefinitions>
 
-    <ListView 
-      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-      ScrollViewer.VerticalScrollBarVisibility="Visible"
-      ScrollViewer.CanContentScroll="True"
-      VerticalContentAlignment="Top"  
-      x:Name="ListOrder"
+    <Grid
       Grid.ColumnSpan="3">
-      <ListView.ItemsPanel>
-        <ItemsPanelTemplate>
-          <UniformGrid Columns="1" />
-        </ItemsPanelTemplate>
-      </ListView.ItemsPanel>
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <Label Content="{Binding Name}" />
-        </DataTemplate>
-      </ListView.ItemTemplate>
-      <ListView.ItemContainerStyle>
-        <Style TargetType="ListViewItem">
-          <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        </Style>
-      </ListView.ItemContainerStyle>
-    </ListView>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="1*" />
+      </Grid.RowDefinitions>
+      <Label 
+        Name="labelStatusText"
+        HorizontalContentAlignment="Center"
+        Padding="0,2,0,2"
+        FontSize="11"
+        Content="Status"/>
+
+      <ListView 
+        Loaded="ListOrderLoaded"
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        ScrollViewer.VerticalScrollBarVisibility="Visible"
+        ScrollViewer.CanContentScroll="True"
+        VerticalContentAlignment="Top"  
+        x:Name="ListOrder"
+        Grid.Row="1">
+        <ListView.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Vertical" />
+          </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Horizontal">
+              <Label Content="{Binding Id}"/>
+              <Label Content="{Binding Customer.FullName}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.ItemContainerStyle>
+          <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+          </Style>
+        </ListView.ItemContainerStyle>
+      </ListView>
+
+    </Grid>
+
+
 
     <Grid 
       Grid.Column="3" 
@@ -109,21 +130,20 @@
         SelectedIndex="1"
         Grid.ColumnSpan="2"
         Grid.Row="4">
-        <TabItem Header="Customer info">
-          <StackPanel>
-            <Label
-              Content="{Binding FirstName}"
-              d:Content="Customer name: Nguyen Van Hoang"/>
-            <Label
-              Content="{Binding Phone}"
-              d:Content="Phone number: 12345678"/>
-            <Label
-              Content="{Binding Email}"
-              d:Content="Email: Nvhoang@coldmail.com"/>
-            <Label
-              Content="{Binding Address}"
-              d:Content="Address: 420 Huynh Van Banh Q3, P3, HCM"/>
-          </StackPanel>
+        <TabItem
+          x:Name="tabItemCustomerInfoOrderForm"
+          Header="Customer info">
+          <TextBox>
+            <TextBox.Text>
+              <MultiBinding 
+                StringFormat="{}{0}/n{1}/n{2}/n{3}">
+                <Binding Path="FirstName" />
+                <Binding Path="Phone" />
+                <Binding Path="Email" />
+                <Binding Path="Address" />
+              </MultiBinding>
+            </TextBox.Text>
+          </TextBox>
         </TabItem>
 
         <TabItem Header="Ordered products">
@@ -131,11 +151,13 @@
             <DataGrid DockPanel.Dock="Bottom">
               <DataGrid.Columns>
                 <DataGridTextColumn 
-                Width="1.25*"
-                Header="Name" />
+                  Binding="{Binding Product.ProductName}"
+                  Width="1.25*"
+                  Header="ProductName" />
                 <DataGridTextColumn 
-                Width="0.75*"
-                Header="Quantity" />
+                  Binding="{Binding Quantity}"
+                  Width="0.75*"
+                  Header="Quantity" />
               </DataGrid.Columns>
             </DataGrid>
           </DockPanel>

@@ -29,9 +29,11 @@ namespace WPF_Project1_Shop.View
       NONE,ADD,EDIT,DELETE
     }
 
-    MODIFY_MODE currentMode = MODIFY_MODE.ADD;
+    MODIFY_MODE _modifyMode = MODIFY_MODE.ADD;
 
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
+
+    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
 
     public ProductsUserControl()
     {
@@ -65,7 +67,7 @@ namespace WPF_Project1_Shop.View
 
     private void SaveProductBtnClick(object sender, RoutedEventArgs e)
     {
-      if(currentMode == MODIFY_MODE.ADD)
+      if(_modifyMode == MODIFY_MODE.ADD)
       {
         Product product = new Product()
         {

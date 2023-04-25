@@ -25,6 +25,16 @@ namespace WPF_Project1_Shop.View
   {
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
     private OrderViewModel _orderViewModel = new OrderViewModel();
+
+    public enum MODIFY_MODE
+    {
+      NONE, ADD, EDIT, DELETE
+    }
+
+    MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
+
+    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+
     public OrdersUserControl()
     {
       InitializeComponent();
@@ -39,17 +49,25 @@ namespace WPF_Project1_Shop.View
     }
     private void OrderFormBtnClick(object sender, RoutedEventArgs e)
     {
-
-      Order order = new Order()
+      if(ModifyMode == MODIFY_MODE.ADD)
       {
-        CreatedAt = DateOnly.FromDateTime(datePickerCreatedOrderForm.SelectedDate ?? DateTime.Today),
-        UpdatedAt = (datePickerDeliveredOrderForm.SelectedDate == null) ? null : DateOnly.FromDateTime(datePickerDeliveredOrderForm.SelectedDate ?? DateTime.Today),
-        CustomerId = 1,
-        ShipAddress = txtBoxAddressOrderForm.Text,
-        Status = ((ComboBoxItem)comboOrderForm.SelectedItem).Content.ToString(),
-        Subtotal = 10000
-      };
-      AddOrder(order);
+        Order order = new Order()
+        {
+          CreatedAt = DateOnly.FromDateTime(datePickerCreatedOrderForm.SelectedDate ?? DateTime.Today),
+          UpdatedAt = (datePickerDeliveredOrderForm.SelectedDate == null) ? null : DateOnly.FromDateTime(datePickerDeliveredOrderForm.SelectedDate ?? DateTime.Today),
+          CustomerId = 1,
+          ShipAddress = txtBoxAddressOrderForm.Text,
+          Status = ((ComboBoxItem)comboOrderForm.SelectedItem).Content.ToString(),
+          Subtotal = 10000
+        };
+        AddOrder(order);
+      }
+      
+    }
+
+    private void ListOrderLoaded(object sender, RoutedEventArgs e)
+    {
+      this.ListOrder.ItemsSource = _orderViewModel.OrdersInPage;
     }
   }
 }
