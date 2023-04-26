@@ -175,6 +175,7 @@
           </MenuItem>
 
           <Fluent:Button
+            Click="SearchOrderBtnClick"
             Header="Search!">
             <Fluent:Button.Icon>
               <iconPacks:PackIconUnicons 

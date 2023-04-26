@@ -62,17 +62,32 @@ namespace WPF_Project1_Shop.View
 
     private void OrderEditModeChecked(object sender, RoutedEventArgs e)
     {
-      ordersUserControl.ModifyMode = OrdersUserControl.MODIFY_MODE.EDIT;
+      ordersUserControl.ModifyMode = OrderViewModel.MODIFY_MODE.EDIT;
     }
 
     private void OrderAddModeChecked(object sender, RoutedEventArgs e)
     {
-      ordersUserControl.ModifyMode = OrdersUserControl.MODIFY_MODE.ADD;
+      ordersUserControl.ModifyMode = OrderViewModel.MODIFY_MODE.ADD;
     }
 
     private void OrderDeleteModeChecked(object sender, RoutedEventArgs e)
     {
-      ordersUserControl.ModifyMode = OrdersUserControl.MODIFY_MODE.DELETE;
+      ordersUserControl.ModifyMode = OrderViewModel.MODIFY_MODE.DELETE;
+    }
+
+    private void SearchOrderBtnClick(object sender, RoutedEventArgs e)
+    {
+      DateTime? from = menuApplyDateFilterOrder.IsChecked ? this.datePickerFromOrderFilter.SelectedDate : null;
+      DateTime? to = menuApplyDateFilterOrder.IsChecked ?  this.datePickerToOrderFilter.SelectedDate : null;
+      
+      double? fromSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyFromOderFilter.Number) : null;
+      double? toSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyToOrderFilter.Number) : null;
+      
+      string? address = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxAddressOrderFilter.Text : null;
+      string? email = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxEmailOrderFilter.Text : null;
+      string? phone = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxPhoneOrderFilter.Text : null;
+
+      ordersUserControl.SearchOrder(from, to, address, email, phone, fromSub, toSub);
     }
   }
 }

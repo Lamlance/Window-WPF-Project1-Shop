@@ -3,10 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPF_Project1_Shop.View" xmlns:Fluent="urn:fluent-ribbon" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:WPF_Project1_Shop.View" 
+             xmlns:Fluent="urn:fluent-ribbon" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:helper="clr-namespace:WPF_Project1_Shop.Helper"
              mc:Ignorable="d" 
              Background="Pink"
+             Loaded="OrderUserControlLoaded"
              d:DesignHeight="450" d:DesignWidth="800">
+  <UserControl.Resources>
+    <helper:CustomerFullNameConverter 
+      x:Key="CustomerFullNameConverter" />
+    <helper:StringToDateTimerConverter
+      x:Key="StringToDateConverter" />
+  </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="1*" />
@@ -30,12 +41,13 @@
         Content="Status"/>
 
       <ListView 
-        Loaded="ListOrderLoaded"
+        ItemsSource="{Binding OrdersInPage}"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         ScrollViewer.VerticalScrollBarVisibility="Visible"
         ScrollViewer.CanContentScroll="True"
         VerticalContentAlignment="Top"  
         x:Name="ListOrder"
+        PreviewMouseLeftButtonDown="OrderListClick"
         Grid.Row="1">
         <ListView.ItemsPanel>
           <ItemsPanelTemplate>
@@ -44,15 +56,19 @@
         </ListView.ItemsPanel>
         <ListView.ItemTemplate>
           <DataTemplate>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel 
+              Orientation="Horizontal">
               <Label Content="{Binding Id}"/>
-              <Label Content="{Binding Customer.FullName}"/>
+              <Label Content="{Binding Customer,
+                Converter={StaticResource CustomerFullNameConverter}}"/>
             </StackPanel>
           </DataTemplate>
         </ListView.ItemTemplate>
         <ListView.ItemContainerStyle>
           <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter 
+              Property="HorizontalContentAlignment" 
+              Value="Stretch"/>
           </Style>
         </ListView.ItemContainerStyle>
       </ListView>
@@ -62,6 +78,7 @@
 
 
     <Grid 
+      x:Name="OrderModifyForm"
       Grid.Column="3" 
       Grid.ColumnSpan="2">
       <Grid.ColumnDefinitions>
@@ -83,6 +100,8 @@
         Grid.Column="0" 
         Content="Date created"/>
       <DatePicker
+        SelectedDate="{Binding CreatedAt,
+        Converter={StaticResource StringToDateConverter}}"
         x:Name="datePickerCreatedOrderForm"
         VerticalAlignment="Center"
         Grid.Column="1"/>
@@ -93,6 +112,8 @@
         Grid.Column="0" 
         Content="Date deliverd"/>
       <DatePicker
+        SelectedDate="{Binding UpdatedAt,
+        Converter={StaticResource StringToDateConverter}}"
         x:Name="datePickerDeliveredOrderForm"
         Grid.Row="1"
         VerticalAlignment="Center"
@@ -104,6 +125,7 @@
         Grid.Column="0" 
         Content="Ship address"/>
       <TextBox
+        Text="{Binding ShipAddress}"
         x:Name="txtBoxAddressOrderForm"
         Grid.Row="2"
         VerticalAlignment="Center"
@@ -133,14 +155,20 @@
         <TabItem
           x:Name="tabItemCustomerInfoOrderForm"
           Header="Customer info">
-          <TextBox>
+          <TextBox
+            TextWrapping="Wrap">
             <TextBox.Text>
               <MultiBinding 
-                StringFormat="{}{0}/n{1}/n{2}/n{3}">
-                <Binding Path="FirstName" />
-                <Binding Path="Phone" />
-                <Binding Path="Email" />
-                <Binding Path="Address" />
+                StringFormat="{}{0}
+                {1}
+                {2}
+                {3}">
+                <Binding 
+                  Path="Customer" 
+                  Converter="{StaticResource CustomerFullNameConverter}" />
+                <Binding Path="Customer.Phone" />
+                <Binding Path="Customer.Email" />
+                <Binding Path="Customer.Address" />
               </MultiBinding>
             </TextBox.Text>
           </TextBox>
@@ -148,7 +176,10 @@
 
         <TabItem Header="Ordered products">
           <DockPanel LastChildFill="True">
-            <DataGrid DockPanel.Dock="Bottom">
+            <DataGrid 
+              AutoGenerateColumns="False"
+              ItemsSource="{Binding OrderItems}"
+              DockPanel.Dock="Bottom">
               <DataGrid.Columns>
                 <DataGridTextColumn 
                   Binding="{Binding Product.ProductName}"

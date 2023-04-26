@@ -5,13 +5,7 @@ namespace WPF_Project1_Shop.EFModel;
 
 public partial class Customer
 {
-  public string FullName
-  {
-    get
-    {
-      return $"{FirstName} {MiddleName ?? ""} {LastName}";
-    }
-  }
+
   public long Id { get; set; }
 
   public string Phone { get; set; } = null!;

@@ -26,14 +26,10 @@ namespace WPF_Project1_Shop.View
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
     private OrderViewModel _orderViewModel = new OrderViewModel();
 
-    public enum MODIFY_MODE
-    {
-      NONE, ADD, EDIT, DELETE
-    }
 
-    MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
 
-    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+
+    public OrderViewModel.MODIFY_MODE ModifyMode { get => _orderViewModel.ModifyMode; set => _orderViewModel.ModifyMode = value; }
 
     public OrdersUserControl()
     {
@@ -43,13 +39,19 @@ namespace WPF_Project1_Shop.View
     {
       return _orderViewModel.AddOrder(order);
     }
+
+    public void SearchOrder(DateTime? from, DateTime? to, string? address, string? email, string? phone, double? fromTotal, double? toTotal)
+    {
+      _orderViewModel.SearchOrders(from,to,address,email,phone,fromTotal,toTotal);
+    }
+
     private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
     {
       e.Handled = _regexNumberOnly.IsMatch(e.Text);
     }
     private void OrderFormBtnClick(object sender, RoutedEventArgs e)
     {
-      if(ModifyMode == MODIFY_MODE.ADD)
+      if(ModifyMode == OrderViewModel.MODIFY_MODE.ADD)
       {
         Order order = new Order()
         {
@@ -65,9 +67,17 @@ namespace WPF_Project1_Shop.View
       
     }
 
-    private void ListOrderLoaded(object sender, RoutedEventArgs e)
+    private void OrderUserControlLoaded(object sender, RoutedEventArgs e)
     {
-      this.ListOrder.ItemsSource = _orderViewModel.OrdersInPage;
+      this.DataContext = _orderViewModel;
+      this.labelStatusText.Content = _orderViewModel.ModifyMode;
+    }
+
+    private void OrderListClick(object sender, MouseButtonEventArgs e)
+    {
+      if(this.ListOrder.SelectedItem is Order){
+        this.OrderModifyForm.DataContext = (Order)ListOrder.SelectedItem;
+      }
     }
   }
 }
