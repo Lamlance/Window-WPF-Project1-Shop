@@ -12,13 +12,19 @@ namespace WPF_Project1_Shop.ViewModel
   public class CategoryViewModel
   {
     private ObservableCollection<Category> categories;
+    private HashSet<Category> selectedCategories;
+
+
     public CategoryViewModel()
     {
+      selectedCategories = new HashSet<Category>();
       categories = new ObservableCollection<Category>();
-      //GetManyCategories();
+
+      GetManyCategories();
     }
 
     public ObservableCollection<Category> Categories { get => categories; }
+    public HashSet<Category> SelectedCategories { get => selectedCategories; }
 
     public async Task GetManyCategories()
     {

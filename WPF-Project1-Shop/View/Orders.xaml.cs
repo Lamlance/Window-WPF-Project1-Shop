@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_Project1_Shop.EFModel;
 using WPF_Project1_Shop.ViewModel;
 
 namespace WPF_Project1_Shop.View
@@ -30,6 +31,7 @@ namespace WPF_Project1_Shop.View
     private static CustomerUserControl customerUserControl = new CustomerUserControl();
 
     CategoryViewModel _categoryViewModel;
+
 
     public OrdersWindow()
     {
@@ -88,6 +90,36 @@ namespace WPF_Project1_Shop.View
       string? phone = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxPhoneOrderFilter.Text : null;
 
       ordersUserControl.SearchOrder(from, to, address, email, phone, fromSub, toSub);
+    }
+
+    private void CategoryChecked(object sender, RoutedEventArgs e)
+    {
+      if(sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category )
+      {
+        Category category = (Category)((Fluent.CheckBox)sender).Content;
+        _categoryViewModel.SelectedCategories.Add(category);
+        return;
+      }
+    }
+
+    private void CategoryUnchecked(object sender, RoutedEventArgs e)
+    {
+      if (sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
+      {
+        Category category = (Category)((Fluent.CheckBox)sender).Content;
+        _categoryViewModel.SelectedCategories.Remove(category);
+        return;
+      }
+    }
+
+    private void SearchProductBtnClick(object sender, RoutedEventArgs e)
+    {
+      IEnumerable<Category>? categories = this.menuApplyCategoriesProductFilter.IsChecked ? _categoryViewModel.SelectedCategories : null;
+      string? name = this.menuApplyNameProductFilter.IsChecked ? this.txtBoxNameProductFilter.Text : null;
+      double? fromPrice = this.menuApplyPriceProductFilter.IsChecked ? decimal.ToDouble(this.txtMoneyFromProductFilter.Number) : null;
+      double? toPrice = this.menuApplyPriceProductFilter.IsChecked ? decimal.ToDouble(this.txtMoneyToProductFilter.Number) : null;
+
+      productsUserControl.SearchProduct(categories, fromPrice, toPrice, name);
     }
   }
 }

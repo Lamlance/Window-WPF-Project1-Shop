@@ -24,7 +24,7 @@ namespace WPF_Project1_Shop.ViewModel
     public OrderViewModel()
     {
       ordersInPage = new ObservableCollection<EFModel.Order>();
-      Initialize();
+      //Initialize();
     }
     private int _curPage = 1;
     private int _itemPerPage = 15;
@@ -79,6 +79,11 @@ namespace WPF_Project1_Shop.ViewModel
 
     public async Task SearchOrders(DateTime? from, DateTime? to, string? address, string? email, string? phone, double? fromTotal, double? toTotal)
     {
+      if (_isSearching)
+      {
+        return;
+      }
+      _isSearching = true;
       var result = await Task<List<Order>?>.Run(() =>
       {
         using (OrderRepository repository = new OrderRepository(new RailwayContext()))
@@ -88,6 +93,7 @@ namespace WPF_Project1_Shop.ViewModel
       });
       ordersSet = result;
       SetPage(1);
+      _isSearching = false;
     }
 
     public bool AddOrder(Order order)

@@ -43,15 +43,15 @@ namespace WPF_Project1_Shop.EFCustomRepository
       var result = dbContext.Orders
         .Where(o => 
           (from == null || to == null) ? true : 
-          o.CreatedAt >= DateOnly.FromDateTime((DateTime)from) && ( o.CreatedAt <= DateOnly.FromDateTime((DateTime)to)) &&
-          (o.UpdatedAt == null || (o.UpdatedAt >= DateOnly.FromDateTime((DateTime)from) && o.UpdatedAt <= DateOnly.FromDateTime((DateTime)to)))
+          o.CreatedAt >= DateOnly.FromDateTime((DateTime)from) && ( o.CreatedAt <= DateOnly.FromDateTime((DateTime)to)) ||
+          (o.UpdatedAt != null && o.UpdatedAt >= DateOnly.FromDateTime((DateTime)from) && o.UpdatedAt <= DateOnly.FromDateTime((DateTime)to) )
         )
         .Where( o =>
           (address == null || email == null || phone == null) ? true :
           ( 
-            ( !(string.IsNullOrWhiteSpace(address) || o.ShipAddress == null) && o.ShipAddress.Contains(address) ) ||
-            ( !(string.IsNullOrWhiteSpace(email) || o.Customer == null || o.Customer.Email == null ) && o.Customer.Email.Equals(email) ) || 
-            ( !(string.IsNullOrEmpty(phone) || o.Customer == null ) && o.Customer.Phone.Equals(phone) )
+            ( !(string.IsNullOrWhiteSpace(address) || o.ShipAddress == null) && EF.Functions.ILike(o.ShipAddress,$"%{address}%") ) ||
+            ( !(string.IsNullOrWhiteSpace(email) || o.Customer == null || o.Customer.Email == null ) && EF.Functions.ILike(o.Customer.Email,email) ) || 
+            ( !(string.IsNullOrEmpty(phone) || o.Customer == null ) && EF.Functions.ILike(o.Customer.Phone,phone) )
           )
         )
         .Where( o => (fromTotal == null || toTotal == null) ? true : o.Subtotal >= fromTotal && o.Subtotal <= toTotal)

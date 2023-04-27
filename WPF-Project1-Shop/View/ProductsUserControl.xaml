@@ -6,9 +6,15 @@
              xmlns:local="clr-namespace:WPF_Project1_Shop.View" 
              xmlns:helper="clr-namespace:WPF_Project1_Shop.Helper" xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox"
              mc:Ignorable="d" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             Loaded="UserControlLoaded"
+             xmlns:Fluent="urn:fluent-ribbon" 
              d:DesignHeight="450" d:DesignWidth="800">
   <UserControl.Resources>
-    <helper:RelativeToAbsoluteConverter x:Key="ImagePathConverter" />
+    <helper:RelativeToAbsoluteConverter 
+      x:Key="ImagePathConverter" />
+    <helper:DoubleToDecimal 
+      x:Key="DoubleToDecimalConverter"/>
   </UserControl.Resources>
   <DockPanel
     Background="AliceBlue">
@@ -34,13 +40,15 @@
           Content="Status"/>
 
         <ListView 
-          Loaded="ProductListViewLoaded"
+          PreviewMouseLeftButtonDown="ProductListClick"
+          ItemsSource="{Binding ProductsInPage}"
           x:Name="ProductListView" 
           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
           DockPanel.Dock="Bottom" >
           <ListView.ItemsPanel>
             <ItemsPanelTemplate>
-              <UniformGrid />
+              <UniformGrid
+                Columns="3"/>
             </ItemsPanelTemplate>
           </ListView.ItemsPanel>
           <ListView.ItemTemplate>
@@ -84,6 +92,8 @@
           <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+
           <RowDefinition Height="1*" />
           <RowDefinition Height="1*" />
           <RowDefinition Height="Auto" />
@@ -94,7 +104,6 @@
           Content="Product Name"/>
         <TextBox
           x:Name="txtBoxNameProductFrom"
-          Text="{Binding ProductName}"
           VerticalAlignment="Center"
           Grid.Column="1" />
 
@@ -103,7 +112,6 @@
           VerticalAlignment="Center"
           Content="Product Price"/>
         <currency:CurrencyTextBox
-          Text="{Binding Price}"
           x:Name="txtCurrencyProductFrom"
           VerticalAlignment="Center"
           Grid.Row="1"
@@ -118,7 +126,6 @@
           VerticalAlignment="Center"
           Content="Amount"/>
         <TextBox
-          Text="{Binding Numbers}"
           PreviewTextInput="PreviewTxtInputNumberOnly"
           x:Name="txtBoxAmountProductFrom"
           Grid.Row="2"
@@ -127,31 +134,71 @@
 
         <Label 
           Grid.Row="3" 
-          VerticalAlignment="Top"
-          Content="Image path"/>
-        <StackPanel
-          Orientation="Vertical"
+          Content="Categories"/>
+        <Fluent:MenuItem
+          Margin="0,0,0,2"
+          Header="Categories"
           Grid.Row="3"
           Grid.Column="1">
-          <Image 
-            x:Name="imageProductForm" />
+          <Fluent:MenuItem.Icon>
+            <iconPacks:PackIconUnicons
+              Kind="LayerGroup" />
+          </Fluent:MenuItem.Icon>
+          <ListView 
+              Loaded="CategoriesListLoaded"
+              x:Name="CategoriesListProductForm"
+              MinWidth="300">
+            <ListView.ItemsPanel>
+              <ItemsPanelTemplate>
+                <Fluent:UniformGridWithItemSize />
+              </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <Fluent:CheckBox
+                    Content="{Binding}"
+                    Unchecked="CategoryUnchecked"
+                    Checked="CategoryChecked"
+                    Header="{Binding CategoryName}"/>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </Fluent:MenuItem>
+
+        <Label 
+          Margin="0,0,0,5"
+          Grid.Row="4" 
+          VerticalAlignment="Top"
+          Content="Image path"/>
+        <DockPanel
+          Margin="0,5,0,0"
+          VerticalAlignment="Center"
+          LastChildFill="True"
+          Grid.Row="4"
+          Grid.Column="1">
+          
           <DockPanel 
+            DockPanel.Dock="Top"
             LastChildFill="True">
             <Button 
               Click="BrowseImageBtnClick"
               Content="Browse" />
             <TextBox
+              x:Name="txtBoxImgPath"
               IsReadOnly="True"
               MaxLength="100" 
-              d:Text="C://:///://////////////"
-              Text="{Binding ImagePath}"/>
+              d:Text="C://:///://////////////" />
           </DockPanel>
           <Image 
-            Source="{Binding ImagePath}"/>
-        </StackPanel>
+            DockPanel.Dock="Bottom"
+            x:Name="imageProductForm"
+            Source="{Binding
+            Converter=
+            {StaticResource ImagePathConverter}}"/>
+        </DockPanel>
 
         <Label 
-          Grid.Row="4"
+          Grid.Row="5"
           VerticalAlignment="Top"
           Content="Description"/>
         <TextBox
@@ -159,13 +206,13 @@
           AcceptsReturn="True"
           x:Name="txtBoxDescProductFrom"
           Margin="0,5,0,10"
-          Grid.Row="4"
+          Grid.Row="5"
           VerticalAlignment="Stretch"
           Grid.Column="1" />
 
         <WrapPanel
           HorizontalAlignment="Right"
-          Grid.Row="5"
+          Grid.Row="6"
           Grid.ColumnSpan="2">
           <Button 
             Click="SaveProductBtnClick"

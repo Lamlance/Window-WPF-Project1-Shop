@@ -258,6 +258,9 @@
               <ListView.ItemTemplate>
                 <DataTemplate>
                   <Fluent:CheckBox
+                    Content="{Binding}"
+                    Unchecked="CategoryUnchecked"
+                    Checked="CategoryChecked"
                     Header="{Binding CategoryName}"/>
                 </DataTemplate>
               </ListView.ItemTemplate>
@@ -280,6 +283,7 @@
             <Label 
               Content="Start Price" />
             <currency:CurrencyTextBox
+              x:Name="txtMoneyFromProductFilter"
               VerticalContentAlignment="Center"
               TextAlignment="Left"
               StringFormat="C0"
@@ -290,6 +294,7 @@
               Grid.Row="1"
               Content="End Price" />
             <currency:CurrencyTextBox
+              x:Name="txtMoneyToProductFilter"
               VerticalContentAlignment="Center"
               TextAlignment="Left"
               Grid.Row="1"
@@ -311,6 +316,7 @@
               Grid.Column="0"
               Content="Product name" />
             <TextBox
+              x:Name="txtBoxNameProductFilter"
               VerticalContentAlignment="Center"
               Grid.Column="1" />
           </Grid>
@@ -320,6 +326,7 @@
           Header="Apply search">
           
           <MenuItem
+            x:Name="menuApplyCategoriesProductFilter"
             IsCheckable="true"
             Header="Apply categories">
             <MenuItem.Icon>
@@ -328,6 +335,7 @@
             </MenuItem.Icon>
           </MenuItem>
           <MenuItem
+            x:Name="menuApplyPriceProductFilter"
             IsCheckable="true"
             Header="Apply price">
             <MenuItem.Icon>
@@ -336,6 +344,7 @@
             </MenuItem.Icon>
           </MenuItem>
           <MenuItem
+            x:Name="menuApplyNameProductFilter"
             IsCheckable="true"
             Header="Apply name">
             <MenuItem.Icon>
@@ -345,6 +354,7 @@
           </MenuItem>
 
           <Fluent:Button
+            Click="SearchProductBtnClick"
             Header="Seach">
             <Fluent:Button.Icon>
               <iconPacks:PackIconUnicons

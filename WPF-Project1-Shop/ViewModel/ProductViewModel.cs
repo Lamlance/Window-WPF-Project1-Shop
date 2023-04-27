@@ -15,17 +15,15 @@ namespace WPF_Project1_Shop.ViewModel
     ObservableCollection<Product> productsInPage;
     List<Product>? productsSet;
 
-    Product selectedProduct;
 
     private int _curPage = 1;
     private int _itemPerPage = 15;
 
-
+    public ObservableCollection<Product> ProductsInPage { get => productsInPage; set => productsInPage = value; }
     public ProductViewModel()
     {
       productsInPage = new ObservableCollection<EFModel.Product>();
-      selectedProduct = new Product();
-      //Initialize();
+      Initialize();
     }
 
     private async Task Initialize()
@@ -72,7 +70,6 @@ namespace WPF_Project1_Shop.ViewModel
           repository.AddProduct(data);
         }
         productsInPage.Insert(0, data);
-        SelectedProduct = data;
       }
       catch(Exception e)
       {
@@ -80,7 +77,23 @@ namespace WPF_Project1_Shop.ViewModel
       }
     }
 
-    public ObservableCollection<Product> Products { get => productsInPage; }
-    public Product SelectedProduct { get => selectedProduct; set => selectedProduct = value; }
+    public async Task SearchProduct(IEnumerable<Category>? categories, double? from, double? to, string? name)
+    {
+      var result = await Task<List<Product>?>.Run(() =>
+      {
+        using (ProductRepository repository = new ProductRepository(new RailwayContext()))
+        {
+          var products = repository.SearchProduct(categories, from, to, name);
+          return products!.ToList();
+        }
+      });
+      if(productsSet != null)
+      {
+        productsSet.Clear();
+      }
+      productsSet = result!.ToList();
+      setPage(1);
+    }
+
   }
 }

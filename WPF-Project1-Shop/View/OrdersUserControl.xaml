@@ -189,6 +189,10 @@
                   Binding="{Binding Quantity}"
                   Width="0.75*"
                   Header="Quantity" />
+                <DataGridTextColumn 
+                  Binding="{Binding Price}"
+                  Width="0.75*"
+                  Header="Unit price" />
               </DataGrid.Columns>
             </DataGrid>
           </DockPanel>
