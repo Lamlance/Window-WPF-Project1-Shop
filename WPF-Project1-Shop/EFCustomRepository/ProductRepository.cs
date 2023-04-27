@@ -37,22 +37,14 @@ namespace WPF_Project1_Shop.EFCustomRepository
       return product;
     }
 
+    public Product UpdateProduct(Product product)
+    {
+      dbContext.Products.Update(product);
+      return product;
+    }
+
     public IEnumerable<Product>? SearchProduct(IEnumerable<Category>? categories, double? from, double? to, string? name)
     {
-      /*
-      foreach (Category c in categories)
-      {
-
-        longs.Add(c.Id);
-
-      }
-
-      var cates = dbContext.Categories
-        .Where(c => longs.Contains(c.Id))
-        .Where(c => c.Products.Count > 0)
-        .Where(c => c.Products.Any(p => p.ProductName.Contains("Season") ) )
-        .Include(c => c.Products).ToList();
-      */
       HashSet<long> longs = new HashSet<long>();
       if(categories != null)
       {

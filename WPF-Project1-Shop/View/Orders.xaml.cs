@@ -121,5 +121,20 @@ namespace WPF_Project1_Shop.View
 
       productsUserControl.SearchProduct(categories, fromPrice, toPrice, name);
     }
+
+    private void ProductEditModeChecked(object sender, RoutedEventArgs e)
+    {
+      productsUserControl.ModifyMode = ProductViewModel.MODIFY_MODE.EDIT;
+    }
+
+    private void ProductAddModeChecked(object sender, RoutedEventArgs e)
+    {
+      productsUserControl.ModifyMode = ProductViewModel.MODIFY_MODE.ADD;
+    }
+
+    private void ProductDeleteModeChecked(object sender, RoutedEventArgs e)
+    {
+      productsUserControl.ModifyMode = ProductViewModel.MODIFY_MODE.DELETE;
+    }
   }
 }

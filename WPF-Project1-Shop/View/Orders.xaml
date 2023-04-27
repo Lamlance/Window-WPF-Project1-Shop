@@ -370,7 +370,8 @@
           Header="Manual modify">
 
           <Fluent:ToggleButton
-            Header="Edit order"
+            Checked="ProductEditModeChecked"
+            Header="Edit product"
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
               <iconPacks:PackIconUnicons
@@ -381,7 +382,8 @@
           </Fluent:ToggleButton>
 
           <Fluent:ToggleButton
-            Header="Add order"
+            Checked="ProductAddModeChecked"
+            Header="Add product"
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
               <iconPacks:PackIconUnicons
@@ -392,7 +394,8 @@
           </Fluent:ToggleButton>
 
           <Fluent:ToggleButton
-            Header="Delete order"
+            Checked="ProductDeleteModeChecked"
+            Header="Delete product"
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
               <iconPacks:PackIconUnicons

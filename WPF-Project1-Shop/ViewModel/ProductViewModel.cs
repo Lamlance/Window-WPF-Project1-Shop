@@ -12,17 +12,32 @@ namespace WPF_Project1_Shop.ViewModel
 {
   public class ProductViewModel
   {
+    public delegate void ModifyProductCallBackType(Product product);
+    public event ModifyProductCallBackType OnDataAdd;
+    public event ModifyProductCallBackType OnDataRemove;
+    public event ModifyProductCallBackType OnDataUpdate;
+
     ObservableCollection<Product> productsInPage;
+    Dictionary<long, int> idToPagePos;
     List<Product>? productsSet;
+
+    public enum MODIFY_MODE
+    {
+      NONE, ADD, EDIT, DELETE
+    }
+    MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
 
 
     private int _curPage = 1;
     private int _itemPerPage = 15;
 
     public ObservableCollection<Product> ProductsInPage { get => productsInPage; set => productsInPage = value; }
+    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+
     public ProductViewModel()
     {
       productsInPage = new ObservableCollection<EFModel.Product>();
+      idToPagePos = new Dictionary<long, int>();
       Initialize();
     }
 
@@ -34,7 +49,7 @@ namespace WPF_Project1_Shop.ViewModel
 
     public void setPage(int page = 1)
     {
-      if(productsSet == null)
+      if (productsSet == null)
       {
         return;
       }
@@ -42,9 +57,11 @@ namespace WPF_Project1_Shop.ViewModel
       int start = (page * _itemPerPage) - _itemPerPage;
       int end = Math.Min(start + _itemPerPage, productsSet.Count());
       productsInPage.Clear();
+      idToPagePos.Clear();
       for (int i = start; i < end; i++)
       {
         productsInPage.Add(productsSet.ElementAt(i));
+        idToPagePos.Add(productsSet.ElementAt(i).Id, i);
       }
     }
 
@@ -58,7 +75,7 @@ namespace WPF_Project1_Shop.ViewModel
         }
       });
       productsSet = result;
-      
+
     }
 
     public void AddProduct(Product data)
@@ -70,10 +87,39 @@ namespace WPF_Project1_Shop.ViewModel
           repository.AddProduct(data);
         }
         productsInPage.Insert(0, data);
+        OnDataAdd?.Invoke(data);
       }
-      catch(Exception e)
+      catch (Exception)
       {
-        return ;
+        return;
+      }
+    }
+
+    public async Task UpdateProduct(Product data)
+    {
+      var result = await Task<Product?>.Run(() =>
+      {
+        try
+        {
+          using (ProductRepository repository = new ProductRepository(new RailwayContext()))
+          {
+            return repository.UpdateProduct(data);
+          }
+        }
+        catch (Exception)
+        {
+          return null;
+        }
+      });
+
+      if(result != null)
+      {
+        if (idToPagePos.ContainsKey(data.Id))
+        {
+          int pos = idToPagePos[data.Id];
+          productsInPage[pos] = data;
+        }
+        OnDataUpdate?.Invoke(data);
       }
     }
 
@@ -87,7 +133,7 @@ namespace WPF_Project1_Shop.ViewModel
           return products!.ToList();
         }
       });
-      if(productsSet != null)
+      if (productsSet != null)
       {
         productsSet.Clear();
       }

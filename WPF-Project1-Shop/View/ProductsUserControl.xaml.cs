@@ -26,22 +26,34 @@ namespace WPF_Project1_Shop.View
   {
     ProductViewModel viewModel;
     CategoryViewModel categoryViewModel;
-    public enum MODIFY_MODE
-    {
-      NONE, ADD, EDIT, DELETE
-    }
 
-    MODIFY_MODE _modifyMode = MODIFY_MODE.ADD;
+
 
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
 
-    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+    public ProductViewModel.MODIFY_MODE ModifyMode { get => viewModel.ModifyMode; set => viewModel.ModifyMode = value; }
 
     public ProductsUserControl()
     {
       InitializeComponent();
       this.viewModel = new ProductViewModel();
       this.categoryViewModel = new CategoryViewModel();
+
+      viewModel.OnDataAdd += (p) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show($"Added {p.ProductName}");
+        });
+      };
+      viewModel.OnDataUpdate += (p) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show($"Update {p.ProductName}");
+        });
+      };
+
     }
 
     private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
@@ -57,6 +69,8 @@ namespace WPF_Project1_Shop.View
         var res = dialog.ShowDialog();
         if (res == System.Windows.Forms.DialogResult.OK)
         {
+          this.txtBoxImgPath.Text = dialog.FileName;
+          this.imageProductForm.Source = new BitmapImage(new Uri(dialog.FileName));
           //viewModel.SelectedProduct.ImagePath = dialog.FileName;
         }
       }
@@ -64,19 +78,37 @@ namespace WPF_Project1_Shop.View
 
     private void SaveProductBtnClick(object sender, RoutedEventArgs e)
     {
-      if (_modifyMode == MODIFY_MODE.ADD)
+      if(ModifyMode == ProductViewModel.MODIFY_MODE.NONE)
+      {
+        MessageBox.Show("Select a modify mode");
+        return;
+      }
+
+      if (ModifyMode == ProductViewModel.MODIFY_MODE.ADD)
       {
         Product product = new Product()
         {
           ProductName = txtBoxNameProductFrom.Text,
           Descriptions = txtBoxDescProductFrom.Text,
-          ImagePath = "Image/user.png",
+          ImagePath = Helper.CopyFileToApp.CopyImageToApp(this.txtBoxImgPath.Text),
           Price = decimal.ToDouble(txtCurrencyProductFrom.Number),
           Numbers = int.Parse(txtBoxAmountProductFrom.Text),
           CreatedAt = DateOnly.FromDateTime(DateTime.Now)
         };
-
         viewModel.AddProduct(product);
+        return;
+      }
+
+      if(ModifyMode == ProductViewModel.MODIFY_MODE.EDIT && this.ProductListView.SelectedItem is Product)
+      {
+        Product p = (Product)this.ProductListView.SelectedItem;
+        p.ProductName = txtBoxNameProductFrom.Text;
+        p.Descriptions = txtBoxDescProductFrom.Text;
+        p.Price = decimal.ToDouble(txtCurrencyProductFrom.Number);
+        p.ImagePath = this.txtBoxImgPath.Text;
+        p.Numbers = int.Parse(txtBoxAmountProductFrom.Text);
+        viewModel.UpdateProduct(p);
+        return;
       }
     }
 

@@ -48,7 +48,7 @@
           <ListView.ItemsPanel>
             <ItemsPanelTemplate>
               <UniformGrid
-                Columns="3"/>
+                Columns="4"/>
             </ItemsPanelTemplate>
           </ListView.ItemsPanel>
           <ListView.ItemTemplate>
