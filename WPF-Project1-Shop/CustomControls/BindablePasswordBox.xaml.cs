@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,32 +20,9 @@ namespace WPF_Project1_Shop.CustomControls
     /// </summary>
     public partial class BindablePasswordBox : UserControl
     {
-        public static readonly DependencyProperty PasswordProperty = 
-            DependencyProperty.Register("Password", typeof(string), typeof(BindablePasswordBox));
-
-        public string Password
-        {
-            get
-            {
-                return (string)GetValue(PasswordProperty);
-            }
-            set
-            {
-                SetValue(PasswordProperty, value);
-            }
-        }
-
         public BindablePasswordBox()
         {
             InitializeComponent();
-
-            txtPassword.PasswordChanged += OnPasswordChanged;
-        }
-
-
-        private void OnPasswordChanged(object sender, EventArgs e)
-        {
-            Password = txtPassword.Password;
         }
     }
 }
