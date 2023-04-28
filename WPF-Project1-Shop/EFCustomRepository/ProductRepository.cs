@@ -35,7 +35,28 @@ namespace WPF_Project1_Shop.EFCustomRepository
 
     public Product AddProduct(Product product)
     {
+      List<Category> needAddingCategories = new List<Category>(product.Categories.ToList());
+      product.Categories.Clear();
       dbContext.Products.Add(product);
+      
+      if(needAddingCategories.Count > 0)
+      {
+        dbContext.SaveChanges();
+        var updatedProduct = dbContext.Products.SingleOrDefault(p => p.Id == product.Id);
+        if(updatedProduct != null)
+        {
+          var categories = dbContext.Categories
+            .Include(c => c.Products)
+            .Where(c => needAddingCategories.Contains(c));
+          foreach (Category category in categories)
+          {
+            category.Products.Add(updatedProduct);
+          }
+          dbContext.Categories.UpdateRange(categories);
+        }
+        
+      }
+      
       return product;
     }
     public List<Product> AddManyProduct(List<Product> products)
@@ -76,6 +97,33 @@ namespace WPF_Project1_Shop.EFCustomRepository
         dbContext.Products.Update(queryProduct);
       }
       return product;
+    }
+
+    public Product? RemoveProduct(Product product)
+    {
+      var deletingProduct = dbContext.Products
+        .Include(p => p.OrderItems)
+        .Include(p => p.Categories)
+        .SingleOrDefault(p => product.Id == p.Id);
+
+      if (deletingProduct != null)
+      {
+        foreach (var category in deletingProduct.Categories.ToList())
+        {
+          deletingProduct.Categories.Remove(category);
+        }
+
+        foreach (var oi in deletingProduct.OrderItems.ToList())
+        {
+          deletingProduct.OrderItems.Remove(oi);
+        }
+
+        dbContext.SaveChanges();
+
+        dbContext.Products.Remove(deletingProduct);
+        return deletingProduct;
+      }
+      return null;
     }
 
     public IEnumerable<Product>? SearchProduct(IEnumerable<Category>? categories, double? from, double? to, string? name)

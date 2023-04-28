@@ -95,8 +95,9 @@ namespace WPF_Project1_Shop.View
           ImagePath = Helper.CopyFileToApp.CopyImageToApp(this.txtBoxImgPath.Text),
           Price = decimal.ToDouble(txtCurrencyProductFrom.Number),
           Numbers = int.Parse(txtBoxAmountProductFrom.Text),
-          CreatedAt = DateOnly.FromDateTime(DateTime.Now)
-        };
+          CreatedAt = DateOnly.FromDateTime(DateTime.Now),
+          Categories = categoryViewModel.SelectedCategories.ToList()
+      };
         viewModel.AddProduct(product);
         return;
       }
@@ -111,6 +112,12 @@ namespace WPF_Project1_Shop.View
         p.Numbers = int.Parse(txtBoxAmountProductFrom.Text);
         viewModel.UpdateProduct(p);
         return;
+      }
+
+      if(ModifyMode == ProductViewModel.MODIFY_MODE.DELETE)
+      {
+        Product p = (Product)this.ProductListView.SelectedItem;
+        viewModel.RemoveProduct(p);
       }
     }
     
@@ -138,10 +145,17 @@ namespace WPF_Project1_Shop.View
         string imageAbsolutePath = Helper.RelativeToAbsoluteConverter.ReletiveImagePathToAbsoule(p.ImagePath);
         this.imageProductForm.Source = new BitmapImage(new Uri(imageAbsolutePath));
 
-        for(int i = 0; i < categoryViewModel.Categories.Count; i++)
+        categoryViewModel.SelectedCategories.Clear();
+        foreach (var c in p.Categories)
         {
-          categoryViewModel.Categories[i].IsChecked = p.Categories.Any(c => categoryViewModel.Categories[i].Id == c.Id);
+          categoryViewModel.SelectedCategories.Add(c);
         }
+
+        for (int i = 0; i < categoryViewModel.Categories.Count; i++)
+        {
+          categoryViewModel.Categories[i].IsChecked = categoryViewModel.SelectedCategories.Contains(categoryViewModel.Categories[i]);
+        }
+
         
       }
     }
@@ -161,10 +175,7 @@ namespace WPF_Project1_Shop.View
       if(sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
       {
         Category c = (Category)((Fluent.CheckBox)sender).Content;
-        if(ProductListView.SelectedItem is Product)
-        {
-          ((Product)ProductListView.SelectedItem).Categories.Add(c);
-        }
+        categoryViewModel.SelectedCategories.Add(c);
       }
     }
 
@@ -173,10 +184,7 @@ namespace WPF_Project1_Shop.View
       if (sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
       {
         Category c = (Category)((Fluent.CheckBox)sender).Content;
-        if (ProductListView.SelectedItem is Product)
-        {
-          ((Product)ProductListView.SelectedItem).Categories.Remove(c);
-        }
+        categoryViewModel.SelectedCategories.Remove(c);
       }
     }
 

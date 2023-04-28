@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Markup;
 using WPF_Project1_Shop.EFCustomRepository;
 using WPF_Project1_Shop.EFModel;
 
@@ -100,8 +101,9 @@ namespace WPF_Project1_Shop.ViewModel
         productsInPage.Insert(0, data);
         OnDataAdd?.Invoke(data);
       }
-      catch (Exception)
+      catch (Exception e)
       {
+        string msg = e.Message;
         return;
       }
     }
@@ -148,6 +150,26 @@ namespace WPF_Project1_Shop.ViewModel
           productsInPage[pos] = data;
         }
         OnDataUpdate?.Invoke(data);
+      }
+    }
+
+    public async Task RemoveProduct(Product p)
+    {
+      var result = await Task<Product?>.Run(() =>
+      {
+        using (ProductRepository repository = new ProductRepository(new RailwayContext()))
+        {
+          return repository.RemoveProduct(p);
+        }
+      });
+      if(result != null)
+      {
+        if (idToPagePos.ContainsKey(p.Id))
+        {
+          int pos = idToPagePos[p.Id];
+          productsInPage.Remove(p);
+          productsSet!.Remove(result);
+        }
       }
     }
 

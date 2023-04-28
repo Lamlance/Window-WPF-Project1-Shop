@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,11 @@ namespace WPF_Project1_Shop.ViewModel
 {
   public class CategoryViewModel
   {
-    public class CheckableCategory : Category
+    public class CheckableCategory : Category,INotifyPropertyChanged
     {
       public bool IsChecked { get; set; } = true;
+
+      public event PropertyChangedEventHandler? PropertyChanged;
     }
 
     private ObservableCollection<CheckableCategory> categories;

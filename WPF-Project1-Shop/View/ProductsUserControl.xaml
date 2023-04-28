@@ -173,10 +173,10 @@
               <DataTemplate>
                 <Fluent:CheckBox
                   IsChecked="{Binding IsChecked}"
-                    Content="{Binding}"
-                    Unchecked="CategoryUnchecked"
-                    Checked="CategoryChecked"
-                    Header="{Binding CategoryName}"/>
+                  Content="{Binding}"
+                  Unchecked="CategoryUnchecked"
+                  Checked="CategoryChecked"
+                  Header="{Binding CategoryName}"/>
               </DataTemplate>
             </ListView.ItemTemplate>
           </ListView>
