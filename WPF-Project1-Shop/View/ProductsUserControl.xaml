@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_Project1_Shop.View" 
-             xmlns:helper="clr-namespace:WPF_Project1_Shop.Helper" xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox"
+             xmlns:helper="clr-namespace:WPF_Project1_Shop.Helper" 
+             xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox"
              mc:Ignorable="d" 
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              Loaded="UserControlLoaded"
@@ -156,6 +157,7 @@
             <ListView.ItemTemplate>
               <DataTemplate>
                 <Fluent:CheckBox
+                  IsChecked="{Binding IsChecked}"
                     Content="{Binding}"
                     Unchecked="CategoryUnchecked"
                     Checked="CategoryChecked"
@@ -176,7 +178,7 @@
           LastChildFill="True"
           Grid.Row="4"
           Grid.Column="1">
-          
+
           <DockPanel 
             DockPanel.Dock="Top"
             LastChildFill="True">

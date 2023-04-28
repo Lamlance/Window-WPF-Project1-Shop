@@ -63,6 +63,17 @@ namespace WPF_Project1_Shop.View
           Subtotal = 10000
         };
         AddOrder(order);
+        return;
+      }
+      if(ModifyMode == OrderViewModel.MODIFY_MODE.EDIT && this.ListOrder.SelectedItem is Order)
+      {
+        Order order = (Order)this.ListOrder.SelectedItem;
+        order.CreatedAt = DateOnly.FromDateTime(datePickerCreatedOrderForm.SelectedDate ?? DateTime.Today);
+        order.UpdatedAt = (datePickerDeliveredOrderForm.SelectedDate == null) ? null : DateOnly.FromDateTime(datePickerDeliveredOrderForm.SelectedDate ?? DateTime.Today);
+        order.ShipAddress = txtBoxAddressOrderForm.Text;
+        order.Subtotal = decimal.ToDouble(txtBoxTotalOrderForm.Number);
+        _orderViewModel.UpdateOrder(order);
+        return;
       }
       
     }

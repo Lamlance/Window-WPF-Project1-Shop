@@ -38,6 +38,12 @@ namespace WPF_Project1_Shop.EFCustomRepository
       return data;
     }
 
+    public Order UpdateOrder(Order order)
+    {
+      dbContext.Orders.Update(order);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+      return order;
+    }
+
     public IEnumerable<Order>? SearchOrders(DateTime? from, DateTime? to, string? address,string? email,string? phone, double? fromTotal, double? toTotal)
     {
       var result = dbContext.Orders

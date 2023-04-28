@@ -24,7 +24,7 @@ namespace WPF_Project1_Shop.ViewModel
     public OrderViewModel()
     {
       ordersInPage = new ObservableCollection<EFModel.Order>();
-      //Initialize();
+      Initialize();
     }
     private int _curPage = 1;
     private int _itemPerPage = 15;
@@ -33,11 +33,7 @@ namespace WPF_Project1_Shop.ViewModel
 
     public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
     
-    public string GetStatusString()
-    {
-      return $"IS {_modifyMode}" ;
-    }
-
+ 
     public async Task Initialize()
     {
       await GetManyOrder();
@@ -113,5 +109,15 @@ namespace WPF_Project1_Shop.ViewModel
       
     }
 
+    public async Task UpdateOrder(Order data)
+    {
+      var result = await Task<Order>.Run(() =>
+      {
+        using (OrderRepository repository = new OrderRepository(new RailwayContext()))
+        {
+          return repository.UpdateOrder(data);
+        }
+      });
+    }
   }
 }

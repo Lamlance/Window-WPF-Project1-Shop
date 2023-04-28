@@ -10,6 +10,7 @@
              xmlns:helper="clr-namespace:WPF_Project1_Shop.Helper"
              mc:Ignorable="d" 
              Background="Pink"
+             xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox"
              Loaded="OrderUserControlLoaded"
              d:DesignHeight="450" d:DesignWidth="800">
   <UserControl.Resources>
@@ -17,6 +18,8 @@
       x:Key="CustomerFullNameConverter" />
     <helper:StringToDateTimerConverter
       x:Key="StringToDateConverter" />
+    <helper:DoubleToDecimal
+      x:Key="DoubleToDecimal" />
   </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
@@ -90,6 +93,8 @@
         <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+
         <RowDefinition Height="1*" />
         <RowDefinition Height="Auto" />
 
@@ -100,7 +105,7 @@
         Grid.Column="0" 
         Content="Date created"/>
       <DatePicker
-        SelectedDate="{Binding CreatedAt,
+        SelectedDate="{Binding CreatedAt,Mode=OneWay,
         Converter={StaticResource StringToDateConverter}}"
         x:Name="datePickerCreatedOrderForm"
         VerticalAlignment="Center"
@@ -112,7 +117,7 @@
         Grid.Column="0" 
         Content="Date deliverd"/>
       <DatePicker
-        SelectedDate="{Binding UpdatedAt,
+        SelectedDate="{Binding UpdatedAt,Mode=OneWay,
         Converter={StaticResource StringToDateConverter}}"
         x:Name="datePickerDeliveredOrderForm"
         Grid.Row="1"
@@ -125,7 +130,7 @@
         Grid.Column="0" 
         Content="Ship address"/>
       <TextBox
-        Text="{Binding ShipAddress}"
+        Text="{Binding ShipAddress,Mode=OneWay}"
         x:Name="txtBoxAddressOrderForm"
         Grid.Row="2"
         VerticalAlignment="Center"
@@ -135,10 +140,27 @@
         VerticalAlignment="Center"
         Grid.Row="3"
         Grid.Column="0" 
+        Content="Total"/>
+      <currency:CurrencyTextBox
+        StringFormat="C0"
+        Culture="vi-VN"
+        TextAlignment="Left"
+        Number="{Binding Subtotal,Mode=OneWay,
+        Converter={StaticResource DoubleToDecimal}}"
+        x:Name="txtBoxTotalOrderForm"
+        Grid.Row="3"
+        VerticalAlignment="Center"
+        Grid.Column="1"/>
+      
+
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Row="4"
+        Grid.Column="0" 
         Content="Ship Status"/>
       <ComboBox
         x:Name="comboOrderForm"
-        Grid.Row="3"
+        Grid.Row="4"
         VerticalAlignment="Center"
         SelectedIndex="0"
         Grid.Column="1">
@@ -151,7 +173,7 @@
       <TabControl
         SelectedIndex="1"
         Grid.ColumnSpan="2"
-        Grid.Row="4">
+        Grid.Row="5">
         <TabItem
           x:Name="tabItemCustomerInfoOrderForm"
           Header="Customer info">
@@ -181,16 +203,17 @@
               ItemsSource="{Binding OrderItems}"
               DockPanel.Dock="Bottom">
               <DataGrid.Columns>
-                <DataGridTextColumn 
+                <DataGridTextColumn
+                  IsReadOnly="True"
                   Binding="{Binding Product.ProductName}"
                   Width="1.25*"
                   Header="ProductName" />
                 <DataGridTextColumn 
-                  Binding="{Binding Quantity}"
+                  Binding="{Binding Quantity,Mode=TwoWay}"
                   Width="0.75*"
                   Header="Quantity" />
                 <DataGridTextColumn 
-                  Binding="{Binding Price}"
+                  Binding="{Binding Price,Mode=TwoWay}"
                   Width="0.75*"
                   Header="Unit price" />
               </DataGrid.Columns>
@@ -203,7 +226,7 @@
       <WrapPanel
         HorizontalAlignment="Right"
         Grid.ColumnSpan="2"
-        Grid.Row="5">
+        Grid.Row="6">
         <Button 
           Click="OrderFormBtnClick"
           Padding="30,0,30,0"

@@ -5,11 +5,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WPF_Project1_Shop.EFCustomRepository;
 using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.ViewModel
 {
+
   public class ProductViewModel
   {
     public delegate void ModifyProductCallBackType(Product product);
@@ -18,6 +20,8 @@ namespace WPF_Project1_Shop.ViewModel
     public event ModifyProductCallBackType OnDataUpdate;
 
     ObservableCollection<Product> productsInPage;
+    ObservableCollection<Category> selectedProductCategories;
+
     Dictionary<long, int> idToPagePos;
     List<Product>? productsSet;
 
@@ -33,10 +37,12 @@ namespace WPF_Project1_Shop.ViewModel
 
     public ObservableCollection<Product> ProductsInPage { get => productsInPage; set => productsInPage = value; }
     public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+    public ObservableCollection<Category> SelectedProductCategories { get => selectedProductCategories; set => selectedProductCategories = value; }
 
     public ProductViewModel()
     {
       productsInPage = new ObservableCollection<EFModel.Product>();
+      selectedProductCategories = new ObservableCollection<Category>();
       idToPagePos = new Dictionary<long, int>();
       Initialize();
     }

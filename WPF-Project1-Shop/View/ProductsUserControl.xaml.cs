@@ -129,6 +129,12 @@ namespace WPF_Project1_Shop.View
         this.txtBoxDescProductFrom.Text = p.Descriptions;
         string imageAbsolutePath = Helper.RelativeToAbsoluteConverter.ReletiveImagePathToAbsoule(p.ImagePath);
         this.imageProductForm.Source = new BitmapImage(new Uri(imageAbsolutePath));
+
+        for(int i = 0; i < categoryViewModel.Categories.Count; i++)
+        {
+          categoryViewModel.Categories[i].IsChecked = p.Categories.Any(c => categoryViewModel.Categories[i].Id == c.Id);
+        }
+        
       }
     }
 
@@ -144,12 +150,26 @@ namespace WPF_Project1_Shop.View
 
     private void CategoryChecked(object sender, RoutedEventArgs e)
     {
-
+      if(sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
+      {
+        Category c = (Category)((Fluent.CheckBox)sender).Content;
+        if(ProductListView.SelectedItem is Product)
+        {
+          ((Product)ProductListView.SelectedItem).Categories.Add(c);
+        }
+      }
     }
 
     private void CategoryUnchecked(object sender, RoutedEventArgs e)
     {
-
+      if (sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
+      {
+        Category c = (Category)((Fluent.CheckBox)sender).Content;
+        if (ProductListView.SelectedItem is Product)
+        {
+          ((Product)ProductListView.SelectedItem).Categories.Remove(c);
+        }
+      }
     }
   }
 }
