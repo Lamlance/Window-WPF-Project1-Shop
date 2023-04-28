@@ -56,7 +56,7 @@ namespace WPF_Project1_Shop.ViewModel
         }
         public string ErrorMessage
         {
-            get => _errorMessage; 
+            get => _errorMessage;
             set
             {
                 _errorMessage = value;
@@ -66,11 +66,11 @@ namespace WPF_Project1_Shop.ViewModel
         }
         public bool IsViewVisible
         {
-            get => _isViewVisible; 
+            get => _isViewVisible;
             set
             {
                 _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible)); 
+                OnPropertyChanged(nameof(IsViewVisible));
             }
         }
 
@@ -94,7 +94,7 @@ namespace WPF_Project1_Shop.ViewModel
         // Constructor
         public LoginViewModel()
         {
-            
+
             LoginCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
             RememberPasswordCommand = new ViewModelCommand(ExecuteRememberPasswordCommand, CanExcuteRememberPasswordCommand);
             //ShowPasswordCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
@@ -118,13 +118,14 @@ namespace WPF_Project1_Shop.ViewModel
 
         private void ExecuteLogInCommand(object obj)
         {
-            
+
             Account? account = accountRepository.GetAccount(UserName, Password);
             if (account != null)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName, Password), null);
                 IsViewVisible = false;
-            } else
+            }
+            else
             {
                 ErrorMessage = "* Invalid username or password";
             }

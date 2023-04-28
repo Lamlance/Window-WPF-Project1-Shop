@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,15 +17,40 @@ namespace WPF_Project1_Shop.EFCustomRepository
         }
         public void Dispose()
         {
+            dbContext.SaveChanges();
             dbContext.Dispose();
         }
 
-        public IEnumerable<Customer> GetCustomerAtPage(int page, int itemPerPage = 15)
+        public Customer AddCustomer(Customer data)
         {
+            dbContext.Add(data);
+            return data;
+        }
+
+        public IEnumerable<Customer> GetManyCustomers(int page = 1)
+        {
+            const int itemPerPage = 500;
             return dbContext.Customers
               .Skip(page > 0 ? page - 1 : 0)
               .Take(itemPerPage);
         }
 
+        public IEnumerable<Customer>? SearchCustomers(string? firstname, string? middlename,  string? lastname, string? email, string? phone)
+        {
+            var result = dbContext.Customers
+              .Where(o =>
+                (email == null || phone == null) ? true :
+                (
+                  (!(string.IsNullOrWhiteSpace(email) || o.Email == null) && EF.Functions.ILike(o.Email, email)) ||
+                  (!(string.IsNullOrEmpty(phone) || o.Phone == null) && EF.Functions.ILike(o.Phone, phone)) ||
+                  (!(string.IsNullOrEmpty(firstname) || o.FirstName == null) && EF.Functions.ILike(o.FirstName, firstname)) ||
+                  (!(string.IsNullOrEmpty(middlename) || o.MiddleName == null) && EF.Functions.ILike(o.MiddleName, middlename)) ||
+                  (!(string.IsNullOrEmpty(lastname) || o.LastName == null) && EF.Functions.ILike(o.LastName, lastname))
+                )
+              )
+              .Take(500);
+
+            return result;
+        }
     }
 }

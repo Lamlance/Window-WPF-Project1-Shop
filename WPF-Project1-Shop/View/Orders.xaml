@@ -3,14 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_Project1_Shop" 
-        xmlns:Fluent="urn:fluent-ribbon" 
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-        xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox" 
+        xmlns:local="clr-namespace:WPF_Project1_Shop"
+        xmlns:Fluent="urn:fluent-ribbon"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox"
         mc:Ignorable="d"
         Loaded="MainWindowLoaded"
-        WindowState="Maximized" 
-        Title="Orders" Height="720" Width="1280">
+        WindowState="Maximized"
+        Title="Orders"
+        Height="720"
+        Width="1280">
 
   <DockPanel LastChildFill="True">
     <Fluent:Ribbon
@@ -59,24 +61,21 @@
         Header="Orders"
         x:Name="OrderDataTab">
 
-        <!-- Filter  Group -->
-        <Fluent:RibbonGroupBox
-          Header="Filter Date">
-          <Grid MinWidth="200">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*"/>
-              <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Label 
-                Content="From" />
-            <DatePicker 
-                x:Name="datePickerFromOrderFilter"
-                Grid.Column="1"
-                IsTodayHighlighted="True" />
+                <!-- Filter  Group -->
+                <Fluent:RibbonGroupBox Header="Filter Date">
+                    <Grid MinWidth="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="From" />
+                        <DatePicker x:Name="datePickerFromOrderFilter"
+                                    Grid.Column="1"
+                                    IsTodayHighlighted="True" />
 
             <Label 
                 Grid.Row="1"
@@ -124,93 +123,77 @@
 
         <!-- /Filter Group -->
 
-        <!-- Search Customer Group -->
-        <Fluent:RibbonGroupBox
-          Header="Filter Customer">
-          <Grid MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*"/>
-              <RowDefinition Height="1*"/>
-              <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
+                <!-- Search Customer Group -->
+                <Fluent:RibbonGroupBox Header="Filter Customer">
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
 
-            <Label 
-              Content="Address" />
-            <Fluent:TextBox 
-              x:Name="txtBoxAddressOrderFilter"
-              Grid.Column="1" />
+                        <Label Content="Address" />
+                        <Fluent:TextBox x:Name="txtBoxAddressOrderFilter"
+                                        Grid.Column="1" />
 
-            <Label 
-              Grid.Row="1"
-              Content="Email" />
-            <Fluent:TextBox 
-              x:Name="txtBoxEmailOrderFilter"
-              Grid.Row="1"
-              Grid.Column="1" />
-            <Label 
-              Grid.Row="2"
-              Content="Phone" />
-            <Fluent:TextBox 
-              x:Name="txtBoxPhoneOrderFilter"
-              PreviewTextInput="PreviewTxtInputNumberOnly"
-              Grid.Row="2"
-              Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
-        <!-- /SearchTab -->
+                        <Label Grid.Row="1"
+                               Content="Email" />
+                        <Fluent:TextBox x:Name="txtBoxEmailOrderFilter"
+                                        Grid.Row="1"
+                                        Grid.Column="1" />
+                        <Label Grid.Row="2"
+                               Content="Phone" />
+                        <Fluent:TextBox x:Name="txtBoxPhoneOrderFilter"
+                                        PreviewTextInput="PreviewTxtInputNumberOnly"
+                                        Grid.Row="2"
+                                        Grid.Column="1" />
+                    </Grid>
+                </Fluent:RibbonGroupBox>
+                <!-- /SearchTab -->
 
-        <Fluent:RibbonGroupBox
-          Header="Apply filter">
-          <MenuItem 
-            x:Name="menuApplyDateFilterOrder"
-            IsCheckable="True"
-            Header="Appy date">
-            <MenuItem.Icon>
-              <iconPacks:PackIconUnicons
-                Kind="CalendarSlash"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                <Fluent:RibbonGroupBox Header="Apply filter">
+                    <MenuItem x:Name="menuApplyDateFilterOrder"
+                              IsCheckable="True"
+                              Header="Appy date">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconUnicons Kind="CalendarSlash"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center" />
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <MenuItem 
-            x:Name="menuApplySumFilterOrder"
-            IsCheckable="True"
-            Header="Appy sum">
-            <MenuItem.Icon>
-              <iconPacks:PackIconUnicons
-                Kind="MoneyBillSlash"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                    <MenuItem x:Name="menuApplySumFilterOrder"
+                              IsCheckable="True"
+                              Header="Appy sum">
+                        <MenuItem.Icon>
+                            <iconPacks:PackIconUnicons Kind="MoneyBillSlash"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center" />
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <MenuItem 
-            x:Name="menuApplyCustomerFilterOrder"
-            IsCheckable="True"
-            Header="Appy seaches" >
-            <MenuItem.Icon>
-              <iconPacks:FontAwesome
-                Kind="UserSlashSolid" />
-            </MenuItem.Icon>
-          </MenuItem>
+                    <MenuItem x:Name="menuApplyCustomerFilterOrder"
+                              IsCheckable="True"
+                              Header="Appy seaches">
+                        <MenuItem.Icon>
+                            <iconPacks:FontAwesome Kind="UserSlashSolid" />
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <Fluent:Button
-            Click="SearchOrderBtnClick"
-            Header="Search!">
-            <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons 
-                HorizontalAlignment="Center"
-                VerticalAlignment="Stretch"
-                Kind="Search" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
+                    <Fluent:Button Click="SearchOrderBtnClick"
+                                   Header="Search!">
+                        <Fluent:Button.Icon>
+                            <iconPacks:PackIconUnicons HorizontalAlignment="Center"
+                                                       VerticalAlignment="Stretch"
+                                                       Kind="Search" />
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
         <Fluent:RibbonGroupBox
           Header="Manual modify">
@@ -227,31 +210,27 @@
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton
-            Checked="OrderAddModeChecked"
-            Header="Add order"
-            GroupName="OderDataMode">
-            <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons
-                Kind="FilePlusAlt"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                    <Fluent:ToggleButton Checked="OrderAddModeChecked"
+                                         Header="Add order"
+                                         GroupName="OderDataMode">
+                        <Fluent:ToggleButton.Icon>
+                            <iconPacks:PackIconUnicons Kind="FilePlusAlt"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center" />
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton
-            Checked="OrderDeleteModeChecked"
-            Header="Delete order"
-            GroupName="OderDataMode">
-            <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons
-                Kind="FilePlusAlt"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                    <Fluent:ToggleButton Checked="OrderDeleteModeChecked"
+                                         Header="Delete order"
+                                         GroupName="OderDataMode">
+                        <Fluent:ToggleButton.Icon>
+                            <iconPacks:PackIconUnicons Kind="FilePlusAlt"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center" />
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
       </Fluent:RibbonTabItem>
       <!-- /Order ta -->
@@ -261,91 +240,77 @@
         Header="Products"
         x:Name="ProductDataTab">
 
-        <Fluent:RibbonGroupBox
-          Header="Categories">
-          <Fluent:DropDownButton
-            Header="Filter categories">
-            <Fluent:DropDownButton.Icon>
-              <iconPacks:PackIconUnicons
-                Kind="LayerGroup"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"/>
-            </Fluent:DropDownButton.Icon>
-            <ListView 
-              Loaded="CategoriesListLoaded"
-              x:Name="ListRibbonCategoriesList"
-              MinWidth="300">
-              <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <Fluent:UniformGridWithItemSize />
-                </ItemsPanelTemplate>
-              </ListView.ItemsPanel>
-              <ListView.ItemTemplate>
-                <DataTemplate>
-                  <Fluent:CheckBox
-                    Content="{Binding}"
-                    Unchecked="CategoryUnchecked"
-                    Checked="CategoryChecked"
-                    Header="{Binding CategoryName}"/>
-                </DataTemplate>
-              </ListView.ItemTemplate>
-            </ListView>
-          </Fluent:DropDownButton>
-        </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Categories">
+                    <Fluent:DropDownButton Header="Filter categories">
+                        <Fluent:DropDownButton.Icon>
+                            <iconPacks:PackIconUnicons Kind="LayerGroup"
+                                                       VerticalAlignment="Stretch"
+                                                       HorizontalAlignment="Stretch" />
+                        </Fluent:DropDownButton.Icon>
+                        <ListView Loaded="CategoriesListLoaded"
+                                  x:Name="ListRibbonCategoriesList"
+                                  MinWidth="300">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Fluent:UniformGridWithItemSize />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Fluent:CheckBox Content="{Binding}"
+                                                     Unchecked="CategoryUnchecked"
+                                                     Checked="CategoryChecked"
+                                                     Header="{Binding CategoryName}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Fluent:DropDownButton>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox
-          Header="Price search">
-          <Grid MinWidth="200">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+                <Fluent:RibbonGroupBox Header="Price search">
+                    <Grid MinWidth="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
 
-            <Label 
-              Content="Start Price" />
-            <currency:CurrencyTextBox
-              x:Name="txtMoneyFromProductFilter"
-              VerticalContentAlignment="Center"
-              TextAlignment="Left"
-              StringFormat="C0"
-              Culture="vi-VN"
-              Grid.Column="1" />
+                        <Label Content="Start Price" />
+                        <currency:CurrencyTextBox x:Name="txtMoneyFromProductFilter"
+                                                  VerticalContentAlignment="Center"
+                                                  TextAlignment="Left"
+                                                  StringFormat="C0"
+                                                  Culture="vi-VN"
+                                                  Grid.Column="1" />
 
-            <Label 
-              Grid.Row="1"
-              Content="End Price" />
-            <currency:CurrencyTextBox
-              x:Name="txtMoneyToProductFilter"
-              VerticalContentAlignment="Center"
-              TextAlignment="Left"
-              Grid.Row="1"
-              StringFormat="C0"
-              Culture="vi-VN"
-              Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
+                        <Label Grid.Row="1"
+                               Content="End Price" />
+                        <currency:CurrencyTextBox x:Name="txtMoneyToProductFilter"
+                                                  VerticalContentAlignment="Center"
+                                                  TextAlignment="Left"
+                                                  Grid.Row="1"
+                                                  StringFormat="C0"
+                                                  Culture="vi-VN"
+                                                  Grid.Column="1" />
+                    </Grid>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox
-          Header="Name search">
-          <Grid
-            MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Label 
-              Grid.Column="0"
-              Content="Product name" />
-            <TextBox
-              x:Name="txtBoxNameProductFilter"
-              VerticalContentAlignment="Center"
-              Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Name search">
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                               Content="Product name" />
+                        <TextBox x:Name="txtBoxNameProductFilter"
+                                 VerticalContentAlignment="Center"
+                                 Grid.Column="1" />
+                    </Grid>
+                </Fluent:RibbonGroupBox>
 
         <Fluent:RibbonGroupBox
           Header="Apply search">
@@ -378,16 +343,14 @@
             </MenuItem.Icon>
           </MenuItem>
 
-          <Fluent:Button
-            Click="SearchProductBtnClick"
-            Header="Seach">
-            <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Kind="Search" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
+                    <Fluent:Button Click="SearchProductBtnClick"
+                                   Header="Seach">
+                        <Fluent:Button.Icon>
+                            <iconPacks:PackIconUnicons VerticalAlignment="Stretch"
+                                                       HorizontalAlignment="Stretch"
+                                                       Kind="Search" />
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
 
         </Fluent:RibbonGroupBox>
 
@@ -430,7 +393,7 @@
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
         <Fluent:RibbonGroupBox
           Header="Data Import">
@@ -456,13 +419,18 @@
       </Fluent:RibbonTabItem>
 
     </Fluent:Ribbon>
+            <Fluent:RibbonTabItem Header="Customer">
 
-    <Grid DockPanel.Dock="Bottom">
-      <TabControl 
-        SelectedIndex="{Binding ElementName=Ribbon,Path=SelectedTabIndex}"
-        x:Name="MainTabControl">
-      </TabControl>
-    </Grid>
+            </Fluent:RibbonTabItem>
 
-  </DockPanel>
+        </Fluent:Ribbon>
+
+        <Grid DockPanel.Dock="Bottom">
+            <TabControl SelectedIndex="{Binding ElementName=Ribbon,Path=SelectedTabIndex}"
+                        BorderThickness="0"
+                        x:Name="MainTabControl">
+            </TabControl>
+        </Grid>
+
+    </DockPanel>
 </Window>
