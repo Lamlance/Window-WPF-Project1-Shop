@@ -32,6 +32,7 @@
       </Grid.RowDefinitions>
 
       <DockPanel
+        x:Name="DockPanelProductList"
         LastChildFill="True"
         Grid.ColumnSpan="3">
         <Label 

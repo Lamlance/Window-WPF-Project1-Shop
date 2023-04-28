@@ -1,0 +1,182 @@
+﻿<UserControl x:Class="WPF_Project1_Shop.View.QuickAddProdct"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_Project1_Shop.View"
+             mc:Ignorable="d" 
+             xmlns:Fluent="urn:fluent-ribbon"
+             xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             d:DesignHeight="720" d:DesignWidth="1280">
+
+  <DockPanel>
+    <Fluent:Ribbon
+      x:Name="Ribbon"
+      DockPanel.Dock="Top"
+      d:SelectedTabIndex="1">
+      <Fluent:RibbonTabItem 
+        Header="Products"
+        x:Name="ProductDataTab">
+
+        <Fluent:RibbonGroupBox
+          Header="Categories">
+          <Fluent:DropDownButton
+            Header="Filter categories">
+            <Fluent:DropDownButton.Icon>
+              <iconPacks:PackIconUnicons
+                Kind="LayerGroup"
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"/>
+            </Fluent:DropDownButton.Icon>
+            <ListView 
+              Loaded="CategoriesListLoaded"
+              x:Name="ListRibbonCategoriesList"
+              MinWidth="300">
+              <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <Fluent:UniformGridWithItemSize />
+                </ItemsPanelTemplate>
+              </ListView.ItemsPanel>
+              <ListView.ItemTemplate>
+                <DataTemplate>
+                  <Fluent:CheckBox
+                    Content="{Binding}"
+                    Unchecked="CategoryUnchecked"
+                    Checked="CategoryChecked"
+                    Header="{Binding CategoryName}"/>
+                </DataTemplate>
+              </ListView.ItemTemplate>
+            </ListView>
+          </Fluent:DropDownButton>
+        </Fluent:RibbonGroupBox>
+
+        <Fluent:RibbonGroupBox
+          Header="Price search">
+          <Grid MinWidth="200">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="1*" />
+              <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="1*" />
+              <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Label 
+              Content="Start Price" />
+            <currency:CurrencyTextBox
+              x:Name="txtMoneyFromProductFilter"
+              VerticalContentAlignment="Center"
+              TextAlignment="Left"
+              StringFormat="C0"
+              Culture="vi-VN"
+              Grid.Column="1" />
+
+            <Label 
+              Grid.Row="1"
+              Content="End Price" />
+            <currency:CurrencyTextBox
+              x:Name="txtMoneyToProductFilter"
+              VerticalContentAlignment="Center"
+              TextAlignment="Left"
+              Grid.Row="1"
+              StringFormat="C0"
+              Culture="vi-VN"
+              Grid.Column="1" />
+          </Grid>
+        </Fluent:RibbonGroupBox>
+
+        <Fluent:RibbonGroupBox
+          Header="Name search">
+          <Grid
+            MinWidth="300">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="1*" />
+              <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Label 
+              Grid.Column="0"
+              Content="Product name" />
+            <TextBox
+              x:Name="txtBoxNameProductFilter"
+              VerticalContentAlignment="Center"
+              Grid.Column="1" />
+          </Grid>
+        </Fluent:RibbonGroupBox>
+
+        <Fluent:RibbonGroupBox
+          Header="Apply search">
+
+          <MenuItem
+            x:Name="menuApplyCategoriesProductFilter"
+            IsCheckable="true"
+            Header="Apply categories">
+            <MenuItem.Icon>
+              <iconPacks:PackIconUnicons 
+                Kind="LayerGroupSlash"/>
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem
+            x:Name="menuApplyPriceProductFilter"
+            IsCheckable="true"
+            Header="Apply price">
+            <MenuItem.Icon>
+              <iconPacks:PackIconUnicons 
+                Kind="MoneyBillSlash"/>
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem
+            x:Name="menuApplyNameProductFilter"
+            IsCheckable="true"
+            Header="Apply name">
+            <MenuItem.Icon>
+              <iconPacks:FontAwesome 
+                Kind="UserSlashSolid"/>
+            </MenuItem.Icon>
+          </MenuItem>
+
+          <Fluent:Button
+            Click="SearchProductBtnClick"
+            Header="Seach">
+            <Fluent:Button.Icon>
+              <iconPacks:PackIconUnicons
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Kind="Search" />
+            </Fluent:Button.Icon>
+          </Fluent:Button>
+        </Fluent:RibbonGroupBox>
+      </Fluent:RibbonTabItem>
+    </Fluent:Ribbon>
+
+    <DataGrid 
+      AutoGenerateColumns="False"
+      Loaded="DataGridLoaded"
+      x:Name="ProductDataGrid">
+      <DataGrid.Columns>
+        <DataGridTextColumn
+          IsReadOnly="True"
+          Binding="{Binding ProductName }"
+          Width="1*"
+          Header="Product Name"/>
+        <DataGridTextColumn
+          IsReadOnly="True"
+          Binding="{Binding Numbers}"
+          Width="1*"
+          Header="Amount available" />
+        <DataGridTextColumn
+          IsReadOnly="True"
+          Binding="{Binding Price}"
+          Width="1*"
+          Header="Price per unit" />
+        <DataGridTextColumn 
+          Width="1*"
+          Header="Amount taken" />
+        <DataGridCheckBoxColumn
+          Width="1*"
+          Header="Get product" />
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
+</UserControl>

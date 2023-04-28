@@ -43,6 +43,7 @@ namespace WPF_Project1_Shop.ViewModel
     public ObservableCollection<Product> ProductsInPage { get => productsInPage; set => productsInPage = value; }
     public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
     public ObservableCollection<Category> SelectedProductCategories { get => selectedProductCategories; set => selectedProductCategories = value; }
+    public int ItemPerPage { get => _itemPerPage; set => _itemPerPage = value; }
 
     public ProductViewModel()
     {

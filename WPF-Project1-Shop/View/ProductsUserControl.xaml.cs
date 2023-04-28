@@ -80,7 +80,13 @@ namespace WPF_Project1_Shop.View
 
     private void SaveProductBtnClick(object sender, RoutedEventArgs e)
     {
-      if(ModifyMode == ProductViewModel.MODIFY_MODE.NONE)
+      new Window()
+      {
+        Title = "Quick Add Product",
+        Content = new QuickAddProdct()
+      }.Show();
+      return;
+      if (ModifyMode == ProductViewModel.MODIFY_MODE.NONE)
       {
         MessageBox.Show("Select a modify mode");
         return;
@@ -155,8 +161,19 @@ namespace WPF_Project1_Shop.View
         {
           categoryViewModel.Categories[i].IsChecked = categoryViewModel.SelectedCategories.Contains(categoryViewModel.Categories[i]);
         }
+      }
+    }
 
-        
+    public void SetFormVisibility(Visibility vs)
+    {
+      this.ProductDataForm.Visibility = vs;
+      if(this.ProductDataForm.Visibility == Visibility.Collapsed)
+      {
+        this.DockPanelProductList.SetValue(Grid.ColumnSpanProperty, 5);
+      }
+      else
+      {
+        this.DockPanelProductList.SetValue(Grid.ColumnSpanProperty, 3);
       }
     }
 
