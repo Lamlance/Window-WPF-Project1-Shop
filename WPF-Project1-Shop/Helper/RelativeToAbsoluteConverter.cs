@@ -30,7 +30,7 @@ namespace WPF_Project1_Shop.Helper
       if (value is string)
       {
         string relative = (string)value;
-        ReletiveImagePathToAbsoule(relative);
+        return ReletiveImagePathToAbsoule(relative);
       }
       
 

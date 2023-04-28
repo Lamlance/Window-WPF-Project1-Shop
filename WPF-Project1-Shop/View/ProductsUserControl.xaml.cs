@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace WPF_Project1_Shop.View
     ProductViewModel viewModel;
     CategoryViewModel categoryViewModel;
 
-
+    ObservableCollection<string> pageDisplay = new ObservableCollection<string>();
 
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
 
@@ -53,6 +54,7 @@ namespace WPF_Project1_Shop.View
           MessageBox.Show($"Update {p.ProductName}");
         });
       };
+      viewModel.OnDataSetReset += ResetComboPageBox;
 
     }
 
@@ -111,10 +113,16 @@ namespace WPF_Project1_Shop.View
         return;
       }
     }
+    
+    public void AddManyProduct(List<Product> products)
+    {
+      viewModel.AddManyProduct(products);
+    }
 
     private void UserControlLoaded(object sender, RoutedEventArgs e)
     {
       this.DataContext = viewModel;
+      this.ProductPageComboBox.ItemsSource = pageDisplay;
     }
 
     private void ProductListClick(object sender, MouseButtonEventArgs e)
@@ -170,6 +178,20 @@ namespace WPF_Project1_Shop.View
           ((Product)ProductListView.SelectedItem).Categories.Remove(c);
         }
       }
+    }
+
+    public void ResetComboPageBox(int totalPage)
+    {
+      pageDisplay.Clear();
+      for (int i = 0; i < totalPage; i++)
+      {
+        pageDisplay.Add($"Page{i + 1} / {totalPage}");
+      }
+    }
+
+    private void PageComboBoxChange(object sender, SelectionChangedEventArgs e)
+    {
+      viewModel.setPage(this.ProductPageComboBox.SelectedIndex+1);
     }
   }
 }

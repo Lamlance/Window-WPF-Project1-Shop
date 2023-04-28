@@ -80,11 +80,11 @@ namespace WPF_Project1_Shop.View
     private void SearchOrderBtnClick(object sender, RoutedEventArgs e)
     {
       DateTime? from = menuApplyDateFilterOrder.IsChecked ? this.datePickerFromOrderFilter.SelectedDate : null;
-      DateTime? to = menuApplyDateFilterOrder.IsChecked ?  this.datePickerToOrderFilter.SelectedDate : null;
-      
+      DateTime? to = menuApplyDateFilterOrder.IsChecked ? this.datePickerToOrderFilter.SelectedDate : null;
+
       double? fromSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyFromOderFilter.Number) : null;
       double? toSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyToOrderFilter.Number) : null;
-      
+
       string? address = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxAddressOrderFilter.Text : null;
       string? email = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxEmailOrderFilter.Text : null;
       string? phone = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxPhoneOrderFilter.Text : null;
@@ -94,7 +94,7 @@ namespace WPF_Project1_Shop.View
 
     private void CategoryChecked(object sender, RoutedEventArgs e)
     {
-      if(sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category )
+      if (sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
       {
         Category category = (Category)((Fluent.CheckBox)sender).Content;
         _categoryViewModel.SelectedCategories.Add(category);
@@ -135,6 +135,21 @@ namespace WPF_Project1_Shop.View
     private void ProductDeleteModeChecked(object sender, RoutedEventArgs e)
     {
       productsUserControl.ModifyMode = ProductViewModel.MODIFY_MODE.DELETE;
+    }
+
+    private void ImportProductFromAccessBtnClick(object sender, RoutedEventArgs e)
+    {
+      var userControl = new ImportProductFromAccess();
+      userControl.OnDataImported += (p) =>
+      {
+        productsUserControl.AddManyProduct(p);
+      };
+      var window = new Window()
+      {
+        Title = "Import access data",
+        Content = userControl
+      };
+      window.ShowDialog();
     }
   }
 }

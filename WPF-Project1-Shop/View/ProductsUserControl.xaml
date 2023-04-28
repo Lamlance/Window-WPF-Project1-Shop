@@ -40,42 +40,57 @@
           DockPanel.Dock="Top"
           Content="Status"/>
 
-        <ListView 
+        <Grid
+          DockPanel.Dock="Bottom">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <ListView 
           PreviewMouseLeftButtonDown="ProductListClick"
           ItemsSource="{Binding ProductsInPage}"
           x:Name="ProductListView" 
           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-          DockPanel.Dock="Bottom" >
-          <ListView.ItemsPanel>
-            <ItemsPanelTemplate>
-              <UniformGrid
+          Grid.Row="0" >
+            <ListView.ItemsPanel>
+              <ItemsPanelTemplate>
+                <UniformGrid
                 Columns="4"/>
-            </ItemsPanelTemplate>
-          </ListView.ItemsPanel>
-          <ListView.ItemTemplate>
-            <DataTemplate>
-              <StackPanel
+              </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <StackPanel
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
               Background="Beige">
-                <Image 
+                  <Image 
                 Stretch="Uniform"  
                 Source="{Binding ImagePath, 
                 Converter={StaticResource ImagePathConverter}}"/>
-                <TextBlock>
-                  <TextBlock.Text>
-                    <MultiBinding StringFormat="{}{0} - {1}">
-                      <Binding Path="Id" />
-                      <Binding Path="ProductName" />
-                    </MultiBinding>
-                  </TextBlock.Text>
-                </TextBlock>
+                  <TextBlock>
+                    <TextBlock.Text>
+                      <MultiBinding StringFormat="{}{0} - {1}">
+                        <Binding Path="Id" />
+                        <Binding Path="ProductName" />
+                      </MultiBinding>
+                    </TextBlock.Text>
+                  </TextBlock>
+                </StackPanel>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
 
-              </StackPanel>
+          <WrapPanel
+            HorizontalAlignment="Center"
+            Grid.Row="1">
+            <ComboBox 
+              SelectionChanged="PageComboBoxChange"
+              Name="ProductPageComboBox"
+              Padding="30,0,30,0"/>
+          </WrapPanel>
+        </Grid>
 
-            </DataTemplate>
-          </ListView.ItemTemplate>
-        </ListView>
       </DockPanel>
 
 

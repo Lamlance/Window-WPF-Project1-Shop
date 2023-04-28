@@ -38,6 +38,11 @@ namespace WPF_Project1_Shop.EFCustomRepository
       dbContext.Products.Add(product);
       return product;
     }
+    public List<Product> AddManyProduct(List<Product> products)
+    {
+      dbContext.Products.AddRange(products);
+      return products;
+    }
 
     public Product UpdateProduct(Product product)
     {

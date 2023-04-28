@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,13 @@ namespace WPF_Project1_Shop.ViewModel
   public class ProductViewModel
   {
     public delegate void ModifyProductCallBackType(Product product);
+    public delegate void ProductDataSetChanged(int totalPage);
+
     public event ModifyProductCallBackType OnDataAdd;
     public event ModifyProductCallBackType OnDataRemove;
     public event ModifyProductCallBackType OnDataUpdate;
+
+    public event ProductDataSetChanged OnDataSetReset;
 
     ObservableCollection<Product> productsInPage;
     ObservableCollection<Category> selectedProductCategories;
@@ -51,6 +56,7 @@ namespace WPF_Project1_Shop.ViewModel
     {
       await GetManyProducts();
       setPage();
+      OnDataSetReset?.Invoke((int)Math.Ceiling((double)(productsSet != null ? productsSet.Count() : 0) / _itemPerPage));
     }
 
     public void setPage(int page = 1)
@@ -98,6 +104,22 @@ namespace WPF_Project1_Shop.ViewModel
       catch (Exception)
       {
         return;
+      }
+    }
+
+    public async Task AddManyProduct(List<Product> products)
+    {
+      var reslut = await Task<List<Product>>.Run(() =>
+      {
+        using (ProductRepository repository = new ProductRepository(new RailwayContext()))
+        {
+          return repository.AddManyProduct(products);
+        }
+      });
+      if(productsSet != null)
+      {
+        productsSet.AddRange(reslut);
+        OnDataAdd.Invoke(reslut[0]);
       }
     }
 

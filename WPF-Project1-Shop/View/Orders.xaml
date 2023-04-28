@@ -419,6 +419,7 @@
             </Fluent:Button.Icon>
           </Fluent:Button>
           <Fluent:Button
+            Click="ImportProductFromAccessBtnClick"
             Header="Access">
             <Fluent:Button.Icon>
               <iconPacks:PackIconUnicons 
