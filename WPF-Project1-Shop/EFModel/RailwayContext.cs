@@ -137,7 +137,7 @@ public partial class RailwayContext : DbContext
             entity.ToTable("products");
 
             entity.HasIndex(e => e.ProductName, "products_product_name_key").IsUnique();
-
+            
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt).HasColumnName("created_at");
             entity.Property(e => e.Descriptions).HasColumnName("descriptions");

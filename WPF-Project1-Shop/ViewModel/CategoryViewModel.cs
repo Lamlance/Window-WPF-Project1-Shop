@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,19 +12,26 @@ namespace WPF_Project1_Shop.ViewModel
 {
   public class CategoryViewModel
   {
-    private ObservableCollection<Category> categories;
+    public class CheckableCategory : Category,INotifyPropertyChanged
+    {
+      public bool IsChecked { get; set; } = true;
+
+      public event PropertyChangedEventHandler? PropertyChanged;
+    }
+
+    private ObservableCollection<CheckableCategory> categories;
     private HashSet<Category> selectedCategories;
 
 
     public CategoryViewModel()
     {
       selectedCategories = new HashSet<Category>();
-      categories = new ObservableCollection<Category>();
+      categories = new ObservableCollection<CheckableCategory>();
 
       GetManyCategories();
     }
 
-    public ObservableCollection<Category> Categories { get => categories; }
+    public ObservableCollection<CheckableCategory> Categories { get => categories; }
     public HashSet<Category> SelectedCategories { get => selectedCategories; }
 
     public async Task GetManyCategories()
@@ -39,7 +47,12 @@ namespace WPF_Project1_Shop.ViewModel
       categories.Clear();
       result.ForEach((c) =>
       {
-        categories.Add(c);
+        categories.Add(new CheckableCategory() { 
+          CategoryName = c.CategoryName,
+          Id = c.Id,
+          Products = c.Products,
+          IsChecked = false
+        });
       });
     }
   }

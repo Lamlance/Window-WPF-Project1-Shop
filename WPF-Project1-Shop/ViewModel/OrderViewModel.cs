@@ -16,6 +16,9 @@ namespace WPF_Project1_Shop.ViewModel
       NONE, ADD, EDIT, DELETE
     }
 
+    public event ProductDataSetChanged? OnDataSetReset;
+
+
     ObservableCollection<EFModel.Order> ordersInPage;
     IEnumerable<EFModel.Order>? ordersSet;
     MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
@@ -24,7 +27,7 @@ namespace WPF_Project1_Shop.ViewModel
     public OrderViewModel()
     {
       ordersInPage = new ObservableCollection<EFModel.Order>();
-      //Initialize();
+      Initialize();
     }
     private int _curPage = 1;
     private int _itemPerPage = 15;
@@ -33,15 +36,12 @@ namespace WPF_Project1_Shop.ViewModel
 
     public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
     
-    public string GetStatusString()
-    {
-      return $"IS {_modifyMode}" ;
-    }
-
+ 
     public async Task Initialize()
     {
       await GetManyOrder();
       SetPage(1);
+      OnDataSetReset?.Invoke((int)Math.Ceiling((double)(ordersSet != null ? ordersSet.Count() : 0) / _itemPerPage));
     }
 
     public void SetPage(int page)
@@ -56,7 +56,7 @@ namespace WPF_Project1_Shop.ViewModel
       idToPos.Clear();
 
       //var numberOfPages = Math.Floor( (double)((ordersSet.Count() + _itemPerPage - 1) / _itemPerPage));
-      int start = (page * _itemPerPage) - _itemPerPage;
+      int start = (_curPage * _itemPerPage) - _itemPerPage;
       int end = Math.Min(start + _itemPerPage, ordersSet.Count());
       for (int i = start; i < end; i++)
       {
@@ -94,6 +94,8 @@ namespace WPF_Project1_Shop.ViewModel
       ordersSet = result;
       SetPage(1);
       _isSearching = false;
+      OnDataSetReset?.Invoke((int)Math.Ceiling((double)(ordersSet != null ? ordersSet.Count() : 0) / _itemPerPage));
+
     }
 
     public bool AddOrder(Order order)
@@ -113,5 +115,15 @@ namespace WPF_Project1_Shop.ViewModel
       
     }
 
+    public async Task UpdateOrder(Order data)
+    {
+      var result = await Task<Order>.Run(() =>
+      {
+        using (OrderRepository repository = new OrderRepository(new RailwayContext()))
+        {
+          return repository.UpdateOrder(data);
+        }
+      });
+    }
   }
 }

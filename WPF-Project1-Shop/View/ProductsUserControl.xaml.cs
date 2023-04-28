@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,22 +27,35 @@ namespace WPF_Project1_Shop.View
   {
     ProductViewModel viewModel;
     CategoryViewModel categoryViewModel;
-    public enum MODIFY_MODE
-    {
-      NONE, ADD, EDIT, DELETE
-    }
 
-    MODIFY_MODE _modifyMode = MODIFY_MODE.ADD;
+    ObservableCollection<string> pageDisplay = new ObservableCollection<string>();
 
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
 
-    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+    public ProductViewModel.MODIFY_MODE ModifyMode { get => viewModel.ModifyMode; set => viewModel.ModifyMode = value; }
 
     public ProductsUserControl()
     {
       InitializeComponent();
       this.viewModel = new ProductViewModel();
       this.categoryViewModel = new CategoryViewModel();
+
+      viewModel.OnDataAdd += (p) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show($"Added {p.ProductName}");
+        });
+      };
+      viewModel.OnDataUpdate += (p) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show($"Update {p.ProductName}");
+        });
+      };
+      viewModel.OnDataSetReset += ResetComboPageBox;
+
     }
 
     private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
@@ -57,6 +71,8 @@ namespace WPF_Project1_Shop.View
         var res = dialog.ShowDialog();
         if (res == System.Windows.Forms.DialogResult.OK)
         {
+          this.txtBoxImgPath.Text = dialog.FileName;
+          this.imageProductForm.Source = new BitmapImage(new Uri(dialog.FileName));
           //viewModel.SelectedProduct.ImagePath = dialog.FileName;
         }
       }
@@ -64,25 +80,56 @@ namespace WPF_Project1_Shop.View
 
     private void SaveProductBtnClick(object sender, RoutedEventArgs e)
     {
-      if (_modifyMode == MODIFY_MODE.ADD)
+      if(ModifyMode == ProductViewModel.MODIFY_MODE.NONE)
+      {
+        MessageBox.Show("Select a modify mode");
+        return;
+      }
+
+      if (ModifyMode == ProductViewModel.MODIFY_MODE.ADD)
       {
         Product product = new Product()
         {
           ProductName = txtBoxNameProductFrom.Text,
           Descriptions = txtBoxDescProductFrom.Text,
-          ImagePath = "Image/user.png",
+          ImagePath = Helper.CopyFileToApp.CopyImageToApp(this.txtBoxImgPath.Text),
           Price = decimal.ToDouble(txtCurrencyProductFrom.Number),
           Numbers = int.Parse(txtBoxAmountProductFrom.Text),
-          CreatedAt = DateOnly.FromDateTime(DateTime.Now)
-        };
-
+          CreatedAt = DateOnly.FromDateTime(DateTime.Now),
+          Categories = categoryViewModel.SelectedCategories.ToList()
+      };
         viewModel.AddProduct(product);
+        return;
       }
+
+      if(ModifyMode == ProductViewModel.MODIFY_MODE.EDIT && this.ProductListView.SelectedItem is Product)
+      {
+        Product p = (Product)this.ProductListView.SelectedItem;
+        p.ProductName = txtBoxNameProductFrom.Text;
+        p.Descriptions = txtBoxDescProductFrom.Text;
+        p.Price = decimal.ToDouble(txtCurrencyProductFrom.Number);
+        p.ImagePath = this.txtBoxImgPath.Text;
+        p.Numbers = int.Parse(txtBoxAmountProductFrom.Text);
+        viewModel.UpdateProduct(p);
+        return;
+      }
+
+      if(ModifyMode == ProductViewModel.MODIFY_MODE.DELETE)
+      {
+        Product p = (Product)this.ProductListView.SelectedItem;
+        viewModel.RemoveProduct(p);
+      }
+    }
+    
+    public void AddManyProduct(List<Product> products)
+    {
+      viewModel.AddManyProduct(products);
     }
 
     private void UserControlLoaded(object sender, RoutedEventArgs e)
     {
       this.DataContext = viewModel;
+      this.ProductPageComboBox.ItemsSource = pageDisplay;
     }
 
     private void ProductListClick(object sender, MouseButtonEventArgs e)
@@ -97,6 +144,19 @@ namespace WPF_Project1_Shop.View
         this.txtBoxDescProductFrom.Text = p.Descriptions;
         string imageAbsolutePath = Helper.RelativeToAbsoluteConverter.ReletiveImagePathToAbsoule(p.ImagePath);
         this.imageProductForm.Source = new BitmapImage(new Uri(imageAbsolutePath));
+
+        categoryViewModel.SelectedCategories.Clear();
+        foreach (var c in p.Categories)
+        {
+          categoryViewModel.SelectedCategories.Add(c);
+        }
+
+        for (int i = 0; i < categoryViewModel.Categories.Count; i++)
+        {
+          categoryViewModel.Categories[i].IsChecked = categoryViewModel.SelectedCategories.Contains(categoryViewModel.Categories[i]);
+        }
+
+        
       }
     }
 
@@ -112,12 +172,34 @@ namespace WPF_Project1_Shop.View
 
     private void CategoryChecked(object sender, RoutedEventArgs e)
     {
-
+      if(sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
+      {
+        Category c = (Category)((Fluent.CheckBox)sender).Content;
+        categoryViewModel.SelectedCategories.Add(c);
+      }
     }
 
     private void CategoryUnchecked(object sender, RoutedEventArgs e)
     {
+      if (sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
+      {
+        Category c = (Category)((Fluent.CheckBox)sender).Content;
+        categoryViewModel.SelectedCategories.Remove(c);
+      }
+    }
 
+    public void ResetComboPageBox(int totalPage)
+    {
+      pageDisplay.Clear();
+      for (int i = 0; i < totalPage; i++)
+      {
+        pageDisplay.Add($"Page{i + 1} / {totalPage}");
+      }
+    }
+
+    private void PageComboBoxChange(object sender, SelectionChangedEventArgs e)
+    {
+      viewModel.setPage(this.ProductPageComboBox.SelectedIndex+1);
     }
   }
 }

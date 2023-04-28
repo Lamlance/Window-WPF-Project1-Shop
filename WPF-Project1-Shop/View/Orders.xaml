@@ -311,55 +311,70 @@
 
                 <Fluent:RibbonGroupBox Header="Manual modify">
 
-                    <Fluent:ToggleButton Header="Edit order"
-                                         GroupName="ProductDataMode">
-                        <Fluent:ToggleButton.Icon>
-                            <iconPacks:PackIconUnicons Kind="Edit"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center" />
-                        </Fluent:ToggleButton.Icon>
-                    </Fluent:ToggleButton>
+          <Fluent:ToggleButton
+            Checked="ProductEditModeChecked"
+            Header="Edit product"
+            GroupName="ProductDataMode">
+            <Fluent:ToggleButton.Icon>
+              <iconPacks:PackIconUnicons
+                Kind="Edit"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" />
+            </Fluent:ToggleButton.Icon>
+          </Fluent:ToggleButton>
 
-                    <Fluent:ToggleButton Header="Add order"
-                                         GroupName="ProductDataMode">
-                        <Fluent:ToggleButton.Icon>
-                            <iconPacks:PackIconUnicons Kind="FilePlusAlt"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center" />
-                        </Fluent:ToggleButton.Icon>
-                    </Fluent:ToggleButton>
+          <Fluent:ToggleButton
+            Checked="ProductAddModeChecked"
+            Header="Add product"
+            GroupName="ProductDataMode">
+            <Fluent:ToggleButton.Icon>
+              <iconPacks:PackIconUnicons
+                Kind="FilePlusAlt"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" />
+            </Fluent:ToggleButton.Icon>
+          </Fluent:ToggleButton>
 
-                    <Fluent:ToggleButton Header="Delete order"
-                                         GroupName="ProductDataMode">
-                        <Fluent:ToggleButton.Icon>
-                            <iconPacks:PackIconUnicons Kind="FilePlusAlt"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center" />
-                        </Fluent:ToggleButton.Icon>
-                    </Fluent:ToggleButton>
-
-                </Fluent:RibbonGroupBox>
-
-                <Fluent:RibbonGroupBox Header="Data Import">
-                    <Fluent:Button Header="Excel">
-                        <Fluent:Button.Icon>
-                            <iconPacks:PackIconUnicons VerticalAlignment="Stretch"
-                                                       HorizontalAlignment="Stretch"
-                                                       Kind="Table" />
-                        </Fluent:Button.Icon>
-                    </Fluent:Button>
-                    <Fluent:Button Header="Access">
-                        <Fluent:Button.Icon>
-                            <iconPacks:PackIconUnicons VerticalAlignment="Stretch"
-                                                       HorizontalAlignment="Stretch"
-                                                       Kind="Database" />
-                        </Fluent:Button.Icon>
-                    </Fluent:Button>
+          <Fluent:ToggleButton
+            Checked="ProductDeleteModeChecked"
+            Header="Delete product"
+            GroupName="ProductDataMode">
+            <Fluent:ToggleButton.Icon>
+              <iconPacks:PackIconUnicons
+                Kind="FilePlusAlt"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" />
+            </Fluent:ToggleButton.Icon>
+          </Fluent:ToggleButton>
 
                 </Fluent:RibbonGroupBox>
 
-            </Fluent:RibbonTabItem>
-            <!-- /Product Tab -->
+        <Fluent:RibbonGroupBox
+          Header="Data Import">
+          <Fluent:Button
+            Header="Excel">
+            <Fluent:Button.Icon>
+              <iconPacks:PackIconUnicons
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Kind="Table"/>
+            </Fluent:Button.Icon>
+          </Fluent:Button>
+          <Fluent:Button
+            Click="ImportProductFromAccessBtnClick"
+            Header="Access">
+            <Fluent:Button.Icon>
+              <iconPacks:PackIconUnicons 
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Kind="Database"/>
+            </Fluent:Button.Icon>
+          </Fluent:Button>
+          
+        </Fluent:RibbonGroupBox>
+                
+      </Fluent:RibbonTabItem>
+      <!-- /Product Tab -->
 
             <Fluent:RibbonTabItem Header="Customer">
 
