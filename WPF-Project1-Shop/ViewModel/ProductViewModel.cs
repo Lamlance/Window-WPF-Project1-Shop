@@ -12,17 +12,16 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.ViewModel
 {
-
+  public delegate void ProductDataSetChanged(int totalPage);
   public class ProductViewModel
   {
     public delegate void ModifyProductCallBackType(Product product);
-    public delegate void ProductDataSetChanged(int totalPage);
 
     public event ModifyProductCallBackType OnDataAdd;
     public event ModifyProductCallBackType OnDataRemove;
     public event ModifyProductCallBackType OnDataUpdate;
 
-    public event ProductDataSetChanged OnDataSetReset;
+    public event ProductDataSetChanged? OnDataSetReset;
 
     ObservableCollection<Product> productsInPage;
     ObservableCollection<Category> selectedProductCategories;
@@ -66,7 +65,7 @@ namespace WPF_Project1_Shop.ViewModel
         return;
       }
       _curPage = page > 0 ? page : 1;
-      int start = (page * _itemPerPage) - _itemPerPage;
+      int start = (_curPage * _itemPerPage) - _itemPerPage;
       int end = Math.Min(start + _itemPerPage, productsSet.Count());
       productsInPage.Clear();
       idToPagePos.Clear();
@@ -120,6 +119,7 @@ namespace WPF_Project1_Shop.ViewModel
       {
         productsSet.AddRange(reslut);
         OnDataAdd.Invoke(reslut[0]);
+        OnDataSetReset?.Invoke((int)Math.Ceiling((double)(productsSet != null ? productsSet.Count() : 0) / _itemPerPage));
       }
     }
 
@@ -167,6 +167,7 @@ namespace WPF_Project1_Shop.ViewModel
       }
       productsSet = result!.ToList();
       setPage(1);
+      OnDataSetReset?.Invoke((int)Math.Ceiling((double)(productsSet != null ? productsSet.Count() : 0) / _itemPerPage));
     }
 
   }

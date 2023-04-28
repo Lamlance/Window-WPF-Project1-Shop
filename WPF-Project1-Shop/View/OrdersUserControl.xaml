@@ -43,7 +43,13 @@
         FontSize="11"
         Content="Status"/>
 
-      <ListView 
+      <Grid
+        Grid.Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="1*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView 
         ItemsSource="{Binding OrdersInPage}"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -51,30 +57,42 @@
         VerticalContentAlignment="Top"  
         x:Name="ListOrder"
         PreviewMouseLeftButtonDown="OrderListClick"
-        Grid.Row="1">
-        <ListView.ItemsPanel>
-          <ItemsPanelTemplate>
-            <StackPanel Orientation="Vertical" />
-          </ItemsPanelTemplate>
-        </ListView.ItemsPanel>
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <StackPanel 
+        Grid.Row="0">
+          <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Vertical" />
+            </ItemsPanelTemplate>
+          </ListView.ItemsPanel>
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <StackPanel 
               Orientation="Horizontal">
-              <Label Content="{Binding Id}"/>
-              <Label Content="{Binding Customer,
+                <Label Content="{Binding Id}"/>
+                <Label Content="{Binding Customer,
                 Converter={StaticResource CustomerFullNameConverter}}"/>
-            </StackPanel>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-        <ListView.ItemContainerStyle>
-          <Style TargetType="ListViewItem">
-            <Setter 
+              </StackPanel>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+          <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+              <Setter 
               Property="HorizontalContentAlignment" 
               Value="Stretch"/>
-          </Style>
-        </ListView.ItemContainerStyle>
-      </ListView>
+            </Style>
+          </ListView.ItemContainerStyle>
+        </ListView>
+
+        <WrapPanel
+          HorizontalAlignment="Center"
+          Grid.Row="1">
+          <ComboBox
+            SelectionChanged="PageComboBoxChange"
+            x:Name="OrderPageComboBox"
+            Padding="30,0,30,0"/>
+        </WrapPanel>
+      </Grid>
+      
+      
 
     </Grid>
 
