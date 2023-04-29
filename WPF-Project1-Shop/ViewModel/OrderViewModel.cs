@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using WPF_Project1_Shop.EFCustomRepository;
 using WPF_Project1_Shop.EFModel;
 
@@ -117,12 +118,20 @@ namespace WPF_Project1_Shop.ViewModel
 
     public async Task UpdateOrder(Order data)
     {
-      var result = await Task<Order>.Run(() =>
+      var result = await Task<Order?>.Run(() =>
       {
-        using (OrderRepository repository = new OrderRepository(new RailwayContext()))
+        try
         {
-          return repository.UpdateOrder(data);
+          using (OrderRepository repository = new OrderRepository(new RailwayContext()))
+          {
+            return repository.UpdateOrder(data);
+          }
+        }catch(Exception e)
+        {
+          var emsg = e;
+          return null;
         }
+        
       });
     }
   }

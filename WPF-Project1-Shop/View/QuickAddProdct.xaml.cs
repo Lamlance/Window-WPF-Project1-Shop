@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,14 +24,44 @@ namespace WPF_Project1_Shop.View
   /// </summary>
   public partial class QuickAddProdct : UserControl
   {
+    public delegate void  OrderItemListCallback (List<OrderItem> ordersItem);
+    public event OrderItemListCallback? OnOrderListConfrim;
+
     CategoryViewModel _categoryViewModel = new CategoryViewModel();
     static ProductViewModel productViewModel = new ProductViewModel()
     {
       ItemPerPage = 100,
     };
-    public QuickAddProdct()
+
+    ObservableCollection<OrderItem> orderItems = new ObservableCollection<OrderItem>();
+    Order parentOrder;
+
+    public QuickAddProdct(Order order, List<OrderItem>? prevItem = null)
     {
       InitializeComponent();
+      parentOrder = order;
+      if (order.OrderItems != null)
+      {
+        foreach (var oi in order.OrderItems)
+        {
+          orderItems.Add(oi);
+        }
+      }
+      else if (prevItem != null)
+      {
+        foreach (var oi in prevItem)
+        {
+          orderItems.Add(oi);
+        }
+      }
+      productViewModel.ClearSkipProduct();
+      foreach(var oi in orderItems)
+      {
+        if(oi.Product != null)
+        {
+          productViewModel.AddSkipProduct(oi.Product);
+        }
+      }
     }
 
     private void CategoriesListLoaded(object sender, RoutedEventArgs e)
@@ -67,6 +99,63 @@ namespace WPF_Project1_Shop.View
     private void DataGridLoaded(object sender, RoutedEventArgs e)
     {
       this.ProductDataGrid.ItemsSource = productViewModel.ProductsInPage;
+      this.OrderItemDataGrid.ItemsSource = orderItems;
+    }
+
+    private void AddToOrderBtnClick(object sender, RoutedEventArgs e)
+    {
+      var selectedItems = this.ProductDataGrid.SelectedItems;
+      if(selectedItems.Count > 0 && selectedItems[0] is Product)
+      {
+        var selectedProduct = new List<Product>();
+        foreach (var item in selectedItems)
+        {
+          selectedProduct.Add((Product)item);
+        }
+
+        foreach(var p in selectedProduct)
+        {
+          Product product = (Product)p;
+          productViewModel.AddSkipProduct(product);
+          orderItems.Add(new OrderItem()
+          {
+            ProductId = product.Id,
+            Product = product,
+            OrderId = parentOrder.Id,
+            Price = product.Price,
+            Quantity = 1,
+            CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+          }); ;
+        }
+      }
+    }
+
+    private void RemoveFromOrderGtnClick(object sender, RoutedEventArgs e)
+    {
+      var selectdItem = this.OrderItemDataGrid.SelectedItems;
+      if(selectdItem.Count > 0 && selectdItem[0] is OrderItem)
+      {
+        var selectedOrderItems = new List<OrderItem>();
+        foreach(var oi in selectdItem)
+        {
+          selectedOrderItems.Add((OrderItem)oi);
+        }
+
+        foreach(var oi in selectedOrderItems)
+        {
+          orderItems.Remove(oi);
+          if(oi.Product != null)
+          {
+            productViewModel.RemoveSkipProduct(oi.Product);
+          }
+          
+        }
+      }
+    }
+
+    private void ConfirmOrderItemClick(object sender, RoutedEventArgs e)
+    {
+      OnOrderListConfrim?.Invoke(orderItems.ToList());
     }
   }
 }

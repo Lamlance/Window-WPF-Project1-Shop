@@ -76,7 +76,14 @@ namespace WPF_Project1_Shop.View
         _orderViewModel.UpdateOrder(order);
         return;
       }
+    }
 
+    public void ApplyNewOrderItem(List<OrderItem> orderItems)
+    {
+      if(this.ListOrder.SelectedItem is Order)
+      {
+        ((Order)this.ListOrder.SelectedItem).OrderItems = orderItems;
+      }
     }
 
     private void OrderUserControlLoaded(object sender, RoutedEventArgs e)
@@ -106,6 +113,22 @@ namespace WPF_Project1_Shop.View
     private void PageComboBoxChange(object sender, SelectionChangedEventArgs e)
     {
       _orderViewModel.SetPage(this.OrderPageComboBox.SelectedIndex);
+    }
+
+    private void EditOrderItemBtnClick(object sender, RoutedEventArgs e)
+    {
+      if (this.ListOrder.SelectedItem is Order)
+      {
+        var qaP = new QuickAddProdct((Order)this.ListOrder.SelectedItem);
+        qaP.OnOrderListConfrim += ApplyNewOrderItem;
+        new Window()
+        {
+          Title = "Quick add product",
+          Content = qaP
+        }.ShowDialog();
+
+      }
+      return;
     }
   }
 }

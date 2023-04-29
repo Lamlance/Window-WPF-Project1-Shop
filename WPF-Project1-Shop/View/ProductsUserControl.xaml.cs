@@ -80,11 +80,6 @@ namespace WPF_Project1_Shop.View
 
     private void SaveProductBtnClick(object sender, RoutedEventArgs e)
     {
-      new Window()
-      {
-        Title = "Quick Add Product",
-        Content = new QuickAddProdct()
-      }.Show();
       return;
       if (ModifyMode == ProductViewModel.MODIFY_MODE.NONE)
       {

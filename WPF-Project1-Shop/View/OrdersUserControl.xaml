@@ -216,6 +216,13 @@
 
         <TabItem Header="Ordered products">
           <DockPanel LastChildFill="True">
+            <WrapPanel
+              Margin="10,0,0,0"
+              DockPanel.Dock="Top">
+              <Button 
+                Click="EditOrderItemBtnClick"
+                Content="Edit order items" />
+            </WrapPanel>
             <DataGrid 
               AutoGenerateColumns="False"
               ItemsSource="{Binding OrderItems}"

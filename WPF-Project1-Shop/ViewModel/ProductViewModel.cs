@@ -25,7 +25,7 @@ namespace WPF_Project1_Shop.ViewModel
     public event ProductDataSetChanged? OnDataSetReset;
 
     ObservableCollection<Product> productsInPage;
-    ObservableCollection<Category> selectedProductCategories;
+    HashSet<Product> skipProducts;
 
     Dictionary<long, int> idToPagePos;
     List<Product>? productsSet;
@@ -42,17 +42,32 @@ namespace WPF_Project1_Shop.ViewModel
 
     public ObservableCollection<Product> ProductsInPage { get => productsInPage; set => productsInPage = value; }
     public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
-    public ObservableCollection<Category> SelectedProductCategories { get => selectedProductCategories; set => selectedProductCategories = value; }
     public int ItemPerPage { get => _itemPerPage; set => _itemPerPage = value; }
 
     public ProductViewModel()
     {
+      skipProducts = new HashSet<Product>();
       productsInPage = new ObservableCollection<EFModel.Product>();
-      selectedProductCategories = new ObservableCollection<Category>();
       idToPagePos = new Dictionary<long, int>();
       Initialize();
     }
 
+    public void AddSkipProduct(Product p)
+    {
+      skipProducts.Add(p);
+      productsInPage.Remove(p);
+    }
+
+    public void RemoveSkipProduct(Product p)
+    {
+      skipProducts.Remove(p);
+      productsInPage.Add(p);
+    }
+    public void ClearSkipProduct()
+    {
+      skipProducts.Clear();
+      setPage(1);
+    }
     private async Task Initialize()
     {
       await GetManyProducts();
@@ -73,8 +88,16 @@ namespace WPF_Project1_Shop.ViewModel
       idToPagePos.Clear();
       for (int i = start; i < end; i++)
       {
-        productsInPage.Add(productsSet.ElementAt(i));
-        idToPagePos.Add(productsSet.ElementAt(i).Id, i);
+        if (!skipProducts.Contains(productsSet.ElementAt(i)))
+        {
+          productsInPage.Add(productsSet.ElementAt(i));
+          idToPagePos.Add(productsSet.ElementAt(i).Id, i);
+        }
+        else
+        {
+          end += end < productsSet.Count ? 1 : 0;
+        }
+        
       }
     }
 

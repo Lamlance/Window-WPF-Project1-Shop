@@ -40,7 +40,85 @@ namespace WPF_Project1_Shop.EFCustomRepository
 
     public Order UpdateOrder(Order order)
     {
-      dbContext.Orders.Update(order);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+      
+      var curOrder = dbContext.Orders.Include(o => o.OrderItems).FirstOrDefault(o => o.Id == order.Id);
+      if (curOrder != null && !curOrder.OrderItems.Equals(order.OrderItems.ToList())) 
+      {
+        var orderItemOldInOrder =  new HashSet<OrderItem>(dbContext.OrderItems.Include(oi => oi.Product).Where(oi => oi.OrderId == order.Id).ToList());
+        var orderItemNewInOrder = new List<OrderItem>(order.OrderItems.ToList());
+
+        List<OrderItem> updateOrder = orderItemNewInOrder.Intersect(orderItemOldInOrder).ToList();
+
+        //Remove
+        foreach (var oldOderItem in orderItemOldInOrder)
+        {
+          if (!order.OrderItems.Contains(oldOderItem))
+          {
+            orderItemOldInOrder.Remove(oldOderItem);
+          }
+          else
+          {
+            var newOi = updateOrder.Find(o => o.Id == oldOderItem.Id);
+            if (newOi != null && newOi.Quantity == oldOderItem.Quantity && newOi.Price == oldOderItem.Price && newOi.CreatedAt == oldOderItem.CreatedAt)
+            {
+              updateOrder.Remove(newOi);
+            }
+            else if(newOi != null)
+            {
+              orderItemOldInOrder.Add(newOi);
+            }
+          }
+        }
+        //Add
+
+        foreach (var newOrderItem in orderItemNewInOrder)
+        {
+          if (newOrderItem.Id == 0)
+          {
+            newOrderItem.Product = null;
+            dbContext.OrderItems.Add(newOrderItem);
+          }
+          
+        }
+
+        //Edit
+        
+
+        //Edit
+        dbContext.UpdateRange(orderItemOldInOrder);
+
+        dbContext.SaveChanges();
+      }
+
+      if(curOrder != null )
+      {
+        bool isDif = false;
+        if(curOrder.Status != order.Status)
+        {
+          isDif = true;
+          curOrder.Status = order.Status;
+        }
+        if( curOrder.Subtotal != order.Subtotal)
+        {
+          isDif = true;
+          curOrder.Subtotal = curOrder.Subtotal;
+        }
+        if(curOrder.CreatedAt != order.CreatedAt)
+        {
+          isDif = true;
+          curOrder.CreatedAt = order.CreatedAt;
+        }
+        if(curOrder.UpdatedAt != order.UpdatedAt)
+        {
+          isDif = true;
+          curOrder.UpdatedAt = order.UpdatedAt;
+        }
+        if (isDif)
+        {
+          dbContext.Orders.Update(curOrder);
+        }
+      }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
       return order;
     }
 

@@ -147,36 +147,120 @@
             </Fluent:Button.Icon>
           </Fluent:Button>
         </Fluent:RibbonGroupBox>
+
+        <Fluent:RibbonGroupBox
+          Header="Order items">
+          <Fluent:Button
+            Click="ConfirmOrderItemClick"
+            Header="Confirm order item">
+            <Fluent:Button.Icon>
+              <iconPacks:PackIconUnicons
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Kind="CheckCircle"/>
+            </Fluent:Button.Icon>
+          </Fluent:Button>
+        </Fluent:RibbonGroupBox>
+        
       </Fluent:RibbonTabItem>
     </Fluent:Ribbon>
 
-    <DataGrid 
-      AutoGenerateColumns="False"
-      Loaded="DataGridLoaded"
-      x:Name="ProductDataGrid">
-      <DataGrid.Columns>
-        <DataGridTextColumn
-          IsReadOnly="True"
-          Binding="{Binding ProductName }"
-          Width="1*"
-          Header="Product Name"/>
-        <DataGridTextColumn
-          IsReadOnly="True"
-          Binding="{Binding Numbers}"
-          Width="1*"
-          Header="Amount available" />
-        <DataGridTextColumn
-          IsReadOnly="True"
-          Binding="{Binding Price}"
-          Width="1*"
-          Header="Price per unit" />
-        <DataGridTextColumn 
-          Width="1*"
-          Header="Amount taken" />
-        <DataGridCheckBoxColumn
-          Width="1*"
-          Header="Get product" />
-      </DataGrid.Columns>
-    </DataGrid>
+    <Grid
+      DockPanel.Dock="Bottom">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0.9*" />
+        <ColumnDefinition Width="0.2*" />
+        <ColumnDefinition Width="0.9*" />
+      </Grid.ColumnDefinitions>
+
+      <DataGrid 
+        AutoGenerateColumns="False"
+        Loaded="DataGridLoaded"
+        x:Name="ProductDataGrid">
+        <DataGrid.Columns>
+          <DataGridTextColumn 
+            Header="ID"
+            IsReadOnly="True"
+            Width="Auto"
+            Binding="{Binding Id}"/>
+          <DataGridTextColumn
+            IsReadOnly="True"
+            Binding="{Binding ProductName}"
+            Width="1*"
+            Header="Product Name"/>
+          <DataGridTextColumn
+            IsReadOnly="True"
+            Binding="{Binding Numbers}"
+            Width="1*"
+            Header="Amount available" />
+          <DataGridTextColumn
+            IsReadOnly="True"
+            Binding="{Binding Price}"
+            Width="1*"
+            Header="Price per unit" />
+        </DataGrid.Columns>
+      </DataGrid>
+        
+      <DataGrid
+        AutoGenerateColumns="False"
+        x:Name="OrderItemDataGrid"
+        Loaded="DataGridLoaded"
+        Grid.Column="2">
+        <DataGrid.Columns>
+          <DataGridTextColumn
+            Binding="{Binding Product.ProductName}"
+            Width="1*"
+            Header="Product name"/>
+          <DataGridTextColumn
+            Binding="{Binding Quantity}"
+            Width="1*"
+            Header="Quantity"/>
+          <DataGridTextColumn
+            Binding="{Binding Price}"
+            Width="1*"
+            Header="PricePerUnit"/>
+        </DataGrid.Columns>
+      </DataGrid>
+
+      <StackPanel
+        VerticalAlignment="Center"
+        Grid.Column="1"
+        Orientation="Vertical">
+
+        <Fluent:Button
+          Click="AddToOrderBtnClick"
+          Margin="0,20,0,20"
+          VerticalContentAlignment="Center"
+          HorizontalContentAlignment="Center"
+          Background="AliceBlue"
+          Header="Add to order"
+          SizeDefinition="Large">
+          <Fluent:Button.Icon>
+            <iconPacks:PackIconUnicons
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Kind="ArrowRight"/>
+          </Fluent:Button.Icon>
+        </Fluent:Button>
+
+        <Fluent:Button
+          Click="RemoveFromOrderGtnClick"
+          Margin="0,20,0,20"
+          VerticalContentAlignment="Center"
+          HorizontalContentAlignment="Center"
+          Background="AliceBlue"
+          Header="Remove from order"
+          SizeDefinition="Large">
+          <Fluent:Button.Icon>
+            <iconPacks:PackIconUnicons
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Kind="ArrowLeft"/>
+          </Fluent:Button.Icon>
+        </Fluent:Button>  
+        
+      </StackPanel>
+      
+    </Grid>
   </DockPanel>
 </UserControl>
