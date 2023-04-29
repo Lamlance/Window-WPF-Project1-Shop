@@ -10,7 +10,7 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.ViewModel
 {
-    class CustomerViewModel
+    public class CustomerViewModel
     {
         public enum MODIFY_MODE
         {
@@ -121,6 +121,18 @@ namespace WPF_Project1_Shop.ViewModel
                 Console.WriteLine(e.Message);
                 return false;
             };
+        }
+
+
+        public async Task UpdateOrder(Customer newCustomer)
+        {
+            var result = await Task<Order>.Run(() =>
+            {
+                using (CustomerRepository repository = new CustomerRepository(new RailwayContext()))
+                {
+                    return repository.UpdateCustomer(newCustomer);
+                }
+            });
         }
     }
 }

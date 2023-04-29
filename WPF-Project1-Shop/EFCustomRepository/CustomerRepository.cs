@@ -23,7 +23,14 @@ namespace WPF_Project1_Shop.EFCustomRepository
 
         public Customer AddCustomer(Customer data)
         {
-            dbContext.Add(data);
+            dbContext.Customers.Add(data);
+            return data;
+        }
+
+
+        public Customer UpdateCustomer(Customer data)
+        {
+            dbContext.Customers.Update(data);
             return data;
         }
 
