@@ -168,16 +168,15 @@ namespace WPF_Project1_Shop.View
 
         private void SearchCustomerBtnClick(object sender, RoutedEventArgs e)
         {
-            //double? fromSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyFromOderFilter.Number) : null;
-            //double? toSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyToOrderFilter.Number) : null;
 
-            //string? address = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxAddressOrderFilter.Text : null;
-            //string? email = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxEmailOrderFilter.Text : null;
-            //string? phone = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxPhoneOrderFilter.Text : null;
+            string? firstname = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxFirstNameCustomerFilter.Text : null;
+            string? middlename = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxMiddleNameCustomerFilter.Text : null;
+            string? lastname = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxLastNameCustomerFilter.Text : null;
 
-            //customerUserControl.SearchCustomer();
+            string? phone = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxPhoneCustomer.Text : null;
+            string? email = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxEmailCustomer.Text : null;
 
-            throw new NotImplementedException();
+            customerUserControl.SearchCustomer(firstname, middlename, lastname, phone, email);
         }
     }
 }

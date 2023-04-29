@@ -17,28 +17,24 @@ namespace WPF_Project1_Shop.ViewModel
             NONE, ADD, EDIT, DELETE
         }
 
-
         private ObservableCollection<Customer> customersInPage;
         IEnumerable<Customer>? customersSet;
         MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
         Dictionary<long, int> idToPos = new Dictionary<long, int>();
 
-
         public CustomerViewModel()
         {
             customersInPage = new ObservableCollection<Customer>();
+            Initialize();
         }
 
         private int _curPage = 1;
         private int _itemPerPage = 15;
         private bool _isSearching = false;
 
-
         public ObservableCollection<Customer> CustomersInPage { get => customersInPage; }
 
-
         public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
-
 
         public string GetStatusString()
         {

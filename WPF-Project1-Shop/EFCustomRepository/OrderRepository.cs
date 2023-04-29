@@ -27,7 +27,8 @@ namespace WPF_Project1_Shop.EFCustomRepository
       var orders = dbContext.Orders
         .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
         .Include(o => o.Customer)
-        .OrderBy(o => o.CreatedAt)
+        //.OrderBy(o => o.CreatedAt)
+        .OrderBy(o => o.Id)
         .Skip(page > 0 ? page - 1 : 0)
         .Take(500);
       return orders;

@@ -32,11 +32,11 @@ namespace WPF_Project1_Shop.View
 
         public CustomerViewModel.MODIFY_MODE ModifyMode { get => _customerViewModel.ModifyMode; set => _customerViewModel.ModifyMode = value; }
 
-
-
         public CustomerUserControl()
         {
             InitializeComponent();
+            this.ListCustomer.ItemsSource = _customerViewModel.CustomersInPage;
+            //_customerViewModel.OnDataSetReset += ResetComboPageBox;
         }
 
 

@@ -39,6 +39,7 @@ namespace WPF_Project1_Shop.EFCustomRepository
             const int itemPerPage = 500;
             return dbContext.Customers
               .Skip(page > 0 ? page - 1 : 0)
+              .OrderBy(x => x.Id)
               .Take(itemPerPage);
         }
 

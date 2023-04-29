@@ -30,26 +30,32 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <ListView x:Name="ListCustomer"
-                          Margin="10, 0, 10, 0">
-                    <ListView ItemsSource="{Binding Customers}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Name}"
-                                               Margin="5,0,0,0" />
-
-                                    <TextBlock Text="{Binding Phone}"
-                                               Margin="5,0,0,0" />
-
-                                    <TextBlock Text="{Binding Email}"
-                                               Margin="5,0,0,0" />
-
-                                    <TextBlock Text="{Binding Address}"
-                                               Margin="5,0,0,0" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                          Margin="10, 0, 10, 0"
+                          PreviewMouseLeftButtonDown="CustomerListClick">
+                    
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id"
+                                            Width="Auto"
+                                            DisplayMemberBinding="{Binding Id}" />
+                            <GridViewColumn Header="First Name" Width="Auto" DisplayMemberBinding="{Binding FirstName}"/>
+                            <GridViewColumn Header="Middle Name"
+                                            Width="Auto"
+                                            DisplayMemberBinding="{Binding MiddleName}" />
+                            <GridViewColumn Header="Last Name"
+                                            Width="Auto"
+                                            DisplayMemberBinding="{Binding LastName}" />
+                            <GridViewColumn Header="Phone"
+                                            Width="Auto"
+                                            DisplayMemberBinding="{Binding Phone}" />
+                            <GridViewColumn Header="Email"
+                                            Width="Auto"
+                                            DisplayMemberBinding="{Binding Email}" />
+                            <GridViewColumn Header="Address"
+                                            Width="Auto"
+                                            DisplayMemberBinding="{Binding Address}" />
+                        </GridView>
+                    </ListView.View>
                 </ListView>
 
                 <WrapPanel HorizontalAlignment="Center"
@@ -84,29 +90,32 @@
 
             <Label VerticalAlignment="Center"
                    Grid.Column="0"
-                   Content="FirstName" />
+                   Content="First Name" />
             <TextBox x:Name="FirstName"
                      Grid.Row="0"
                      VerticalAlignment="Center"
-                     Grid.Column="1" />
+                     Grid.Column="1"
+                     Text="{Binding FirstName}"/>
 
             <Label VerticalAlignment="Center"
                    Grid.Row="1"
                    Grid.Column="0"
-                   Content="MiddleName" />
+                   Content="Middle Name" />
             <TextBox x:Name="MiddleName"
                      Grid.Row="1"
                      VerticalAlignment="Center"
-                     Grid.Column="1" />
+                     Grid.Column="1"
+                     Text="{Binding MiddleName}"/>
 
             <Label VerticalAlignment="Center"
                    Grid.Row="2"
                    Grid.Column="0"
-                   Content="LastName" />
+                   Content="Last Name" />
             <TextBox x:Name="LastName"
                      Grid.Row="2"
                      VerticalAlignment="Center"
-                     Grid.Column="1" />
+                     Grid.Column="1"
+                     Text="{Binding LastName}"/>
 
             <Label VerticalAlignment="Center"
                    Grid.Row="3"
@@ -115,7 +124,8 @@
             <TextBox x:Name="Email"
                      Grid.Row="3"
                      VerticalAlignment="Center"
-                     Grid.Column="1" />
+                     Grid.Column="1"
+                     Text="{Binding Email}"/>
 
             <Label VerticalAlignment="Center"
                    Grid.Row="4"
@@ -124,7 +134,8 @@
             <TextBox x:Name="Phone"
                      Grid.Row="4"
                      VerticalAlignment="Center"
-                     Grid.Column="1" />
+                     Grid.Column="1"
+                     Text="{Binding Phone}"/>
 
             <Label VerticalAlignment="Center"
                    Grid.Row="5"
@@ -133,7 +144,8 @@
             <TextBox x:Name="Address"
                      Grid.Row="5"
                      VerticalAlignment="Center"
-                     Grid.Column="1" />
+                     Grid.Column="1"
+                     Text="{Binding Address}"/>
 
             <TabControl SelectedIndex="1"
                         Grid.ColumnSpan="2"
