@@ -34,13 +34,13 @@ namespace WPF_Project1_Shop.View
     };
 
     ObservableCollection<OrderItem> orderItems = new ObservableCollection<OrderItem>();
-    Order parentOrder;
+    Order? parentOrder;
 
-    public QuickAddProdct(Order order, List<OrderItem>? prevItem = null)
+    public QuickAddProdct(Order? order, List<OrderItem>? prevItem = null)
     {
       InitializeComponent();
       parentOrder = order;
-      if (order.OrderItems != null)
+      if (order != null && order.OrderItems != null)
       {
         foreach (var oi in order.OrderItems)
         {
@@ -121,7 +121,7 @@ namespace WPF_Project1_Shop.View
           {
             ProductId = product.Id,
             Product = product,
-            OrderId = parentOrder.Id,
+            OrderId = parentOrder == null ? 0 : parentOrder.Id,
             Price = product.Price,
             Quantity = 1,
             CreatedAt = DateOnly.FromDateTime(DateTime.Now)

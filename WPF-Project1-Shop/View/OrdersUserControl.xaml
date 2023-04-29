@@ -194,38 +194,58 @@
         Grid.Row="5">
         <TabItem
           x:Name="tabItemCustomerInfoOrderForm"
-          Header="Customer info">
-          <TextBox
+          Header="Customer info" VerticalAlignment="Top">
+
+          <StackPanel
+            Orientation="Vertical">
+            <TextBlock
             TextWrapping="Wrap">
-            <TextBox.Text>
-              <MultiBinding 
-                StringFormat="{}{0}
-                {1}
-                {2}
-                {3}">
-                <Binding 
+              <TextBlock.Text>
+                <MultiBinding 
+                StringFormat="Name: {0}">
+                  <Binding 
                   Path="Customer" 
                   Converter="{StaticResource CustomerFullNameConverter}" />
-                <Binding Path="Customer.Phone" />
-                <Binding Path="Customer.Email" />
-                <Binding Path="Customer.Address" />
-              </MultiBinding>
-            </TextBox.Text>
-          </TextBox>
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock
+            TextWrapping="Wrap">
+              <TextBlock.Text>
+                <MultiBinding 
+                StringFormat="Phone: {0}">
+                  <Binding Path="Customer.Phone" />
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock
+            TextWrapping="Wrap">
+              <TextBlock.Text>
+                <MultiBinding 
+                StringFormat="Email: {0}">
+                  <Binding Path="Customer.Email" />
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+
+          </StackPanel>
+          
         </TabItem>
 
         <TabItem Header="Ordered products">
           <DockPanel LastChildFill="True">
             <WrapPanel
-              Margin="10,0,0,0"
+              Margin="0,0,0,0"
               DockPanel.Dock="Top">
-              <Button 
+              <Button
                 Click="EditOrderItemBtnClick"
                 Content="Edit order items" />
             </WrapPanel>
             <DataGrid 
+              x:Name="SelectedOrderItemDataGrid"
               AutoGenerateColumns="False"
-              ItemsSource="{Binding OrderItems}"
               DockPanel.Dock="Bottom">
               <DataGrid.Columns>
                 <DataGridTextColumn

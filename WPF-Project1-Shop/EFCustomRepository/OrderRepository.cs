@@ -32,10 +32,22 @@ namespace WPF_Project1_Shop.EFCustomRepository
         .Take(500);
       return orders;
     }
-    public Order AddOrder(Order data)
+    public Order? AddOrder(Order data)
     {
+      for (int i = 0; i < data.OrderItems.Count; i++)
+      {
+        data.OrderItems.ElementAt(i).Product = null;
+      }
+
       dbContext.Add(data);
-      return data;
+      dbContext.SaveChanges();
+
+      var newOrder = dbContext.Orders
+        .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
+        .Include(o => o.Customer)
+        .FirstOrDefault(o => o.Id == data.Id);
+
+      return newOrder;
     }
 
     public Order UpdateOrder(Order order)
@@ -119,6 +131,18 @@ namespace WPF_Project1_Shop.EFCustomRepository
         }
       }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      return order;
+    }
+
+    public Order DeleteOrder(Order order)
+    {
+      var orderItem = dbContext.OrderItems.Where(oi => oi.OrderId == order.Id).ToList();
+      if(orderItem != null && orderItem.Count > 0)
+      {
+        dbContext.OrderItems.RemoveRange(orderItem);
+        dbContext.SaveChanges();
+      }
+      dbContext.Orders.Remove(order);
       return order;
     }
 

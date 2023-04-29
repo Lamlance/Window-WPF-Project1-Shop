@@ -36,9 +36,9 @@ namespace WPF_Project1_Shop.View
       InitializeComponent();
       _orderViewModel.OnDataSetReset += ResetComboPageBox;
     }
-    public bool AddOrder(Order order)
+    public void AddOrder(Order order)
     {
-      return _orderViewModel.AddOrder(order);
+      _orderViewModel.AddOrder(order);
     }
 
     public void SearchOrder(DateTime? from, DateTime? to, string? address, string? email, string? phone, double? fromTotal, double? toTotal)
@@ -61,7 +61,8 @@ namespace WPF_Project1_Shop.View
           CustomerId = 1,
           ShipAddress = txtBoxAddressOrderForm.Text,
           Status = ((ComboBoxItem)comboOrderForm.SelectedItem).Content.ToString(),
-          Subtotal = 10000
+          Subtotal = 10000,
+          OrderItems = _orderViewModel.SelectedOrderItems.ToList()
         };
         AddOrder(order);
         return;
@@ -76,6 +77,10 @@ namespace WPF_Project1_Shop.View
         _orderViewModel.UpdateOrder(order);
         return;
       }
+      if(ModifyMode == OrderViewModel.MODIFY_MODE.DELETE && this.ListOrder.SelectedItem is Order)
+      {
+        _orderViewModel.DeleteOrder((Order)this.ListOrder.SelectedItem);
+      }
     }
 
     public void ApplyNewOrderItem(List<OrderItem> orderItems)
@@ -84,6 +89,11 @@ namespace WPF_Project1_Shop.View
       {
         ((Order)this.ListOrder.SelectedItem).OrderItems = orderItems;
       }
+      _orderViewModel.SelectedOrderItems.Clear();
+      foreach (var oi in orderItems)
+      {
+        _orderViewModel.SelectedOrderItems.Add(oi);
+      }
     }
 
     private void OrderUserControlLoaded(object sender, RoutedEventArgs e)
@@ -91,13 +101,20 @@ namespace WPF_Project1_Shop.View
       this.DataContext = _orderViewModel;
       this.labelStatusText.Content = _orderViewModel.ModifyMode;
       this.OrderPageComboBox.ItemsSource = pageDisplay;
+      this.SelectedOrderItemDataGrid.ItemsSource = _orderViewModel.SelectedOrderItems;
     }
 
     private void OrderListClick(object sender, MouseButtonEventArgs e)
     {
+      _orderViewModel.SelectedOrderItems.Clear();
       if (this.ListOrder.SelectedItem is Order)
       {
-        this.OrderModifyForm.DataContext = (Order)ListOrder.SelectedItem;
+        this.OrderModifyForm.DataContext = ListOrder.SelectedItem;
+
+        foreach (var oi in ((Order)ListOrder.SelectedItem).OrderItems)
+        {
+          _orderViewModel.SelectedOrderItems.Add(oi);
+        }
       }
     }
 
@@ -127,6 +144,16 @@ namespace WPF_Project1_Shop.View
           Content = qaP
         }.ShowDialog();
 
+      }
+      else
+      {
+        var qaP = new QuickAddProdct(null,_orderViewModel.SelectedOrderItems.ToList());
+        qaP.OnOrderListConfrim += ApplyNewOrderItem;
+        new Window()
+        {
+          Title = "Quick add product",
+          Content = qaP
+        }.ShowDialog();
       }
       return;
     }

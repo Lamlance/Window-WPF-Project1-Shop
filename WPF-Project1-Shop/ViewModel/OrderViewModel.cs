@@ -21,13 +21,16 @@ namespace WPF_Project1_Shop.ViewModel
 
 
     ObservableCollection<EFModel.Order> ordersInPage;
-    IEnumerable<EFModel.Order>? ordersSet;
+    ObservableCollection<OrderItem> selectedOrderItems;
+
+    List<EFModel.Order>? ordersSet;
     MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
     Dictionary<long, int> idToPos = new Dictionary<long, int>();
 
     public OrderViewModel()
     {
       ordersInPage = new ObservableCollection<EFModel.Order>();
+      selectedOrderItems = new ObservableCollection<OrderItem>();
       Initialize();
     }
     private int _curPage = 1;
@@ -36,8 +39,8 @@ namespace WPF_Project1_Shop.ViewModel
     public ObservableCollection<Order> OrdersInPage { get => ordersInPage; }
 
     public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
-    
- 
+    public ObservableCollection<OrderItem> SelectedOrderItems { get => selectedOrderItems; }
+
     public async Task Initialize()
     {
       await GetManyOrder();
@@ -89,7 +92,7 @@ namespace WPF_Project1_Shop.ViewModel
       {
         using (OrderRepository repository = new OrderRepository(new RailwayContext()))
         {
-          return repository.SearchOrders(from, to, address, email, phone, fromTotal, toTotal)!.ToList();
+          return repository.SearchOrders(from, to, address, email, phone, fromTotal, toTotal)?.ToList();
         }
       });
       ordersSet = result;
@@ -99,21 +102,28 @@ namespace WPF_Project1_Shop.ViewModel
 
     }
 
-    public bool AddOrder(Order order)
+    public async Task AddOrder(Order order)
     {
-      try
+      var result = await Task<Order?>.Run(() =>
       {
-        using (EFCustomRepository.OrderRepository orderRepository = new EFCustomRepository.OrderRepository(new EFModel.RailwayContext()))
+        try
         {
-          orderRepository.AddOrder(order);
+
+          using (EFCustomRepository.OrderRepository orderRepository = new EFCustomRepository.OrderRepository(new EFModel.RailwayContext()))
+          {
+            return orderRepository.AddOrder(order);
+          }
         }
-        ordersInPage.Insert(0,order);
-        return true;
-      }catch(Exception e)
+        catch (Exception e)
+        {
+          return null;
+        };
+      });
+      if(result != null)
       {
-        return false;
-      };
-      
+        ordersInPage.Insert(0, result);
+      }
+
     }
 
     public async Task UpdateOrder(Order data)
@@ -133,6 +143,31 @@ namespace WPF_Project1_Shop.ViewModel
         }
         
       });
+    }
+
+    public async Task DeleteOrder(Order order)
+    {
+      var result = await Task<Order?>.Run(() =>
+      {
+        try
+        {
+          using (OrderRepository repository = new OrderRepository(new RailwayContext()))
+          {
+            return repository.DeleteOrder(order);
+          }
+        }
+        catch (Exception)
+        {
+          return null;
+        }
+      });
+
+      if(result != null)
+      {
+        ordersInPage.Remove(result);
+        ordersSet?.Remove(result);
+      }
+
     }
   }
 }
