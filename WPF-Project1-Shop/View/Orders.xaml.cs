@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_Project1_Shop.Auth0Model;
 using WPF_Project1_Shop.EFModel;
 using WPF_Project1_Shop.ViewModel;
 
@@ -31,10 +32,19 @@ namespace WPF_Project1_Shop.View
     private static CustomerUserControl customerUserControl = new CustomerUserControl();
 
     CategoryViewModel _categoryViewModel;
+    UserInformation? user;
 
+    public UserInformation User { get => user; set => user = value; }
 
-    public OrdersWindow()
+    public OrdersWindow(UserInformation userInformation)
     {
+      this.User = new UserInformation()
+      {
+        Nickname = userInformation.Nickname,
+        Name = userInformation.Name,
+        Email = userInformation.Email,
+        PricturePath = userInformation.PricturePath
+      };
       InitializeComponent();
       _categoryViewModel = new CategoryViewModel();
     }
@@ -55,6 +65,8 @@ namespace WPF_Project1_Shop.View
           new TabItem(){Content = customerUserControl}
         };
       this.MainTabControl.ItemsSource = screens;
+      this.UserInfoContentControl.Content = new LoginUserControl(this.User);
+
     }
 
     private void CategoriesListLoaded(object sender, RoutedEventArgs e)

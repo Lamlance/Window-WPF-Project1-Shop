@@ -20,10 +20,13 @@ namespace WPF_Project1_Shop
   {
     protected void ApplicationStart(object sender, EventArgs e)
     {
-      new Window()
+      Window window = new Window();
+      LoginUserControl loginUserControl = new LoginUserControl(() =>
       {
-        Content = new LoginUserControl()
-      }.Show();
+        window.Close();
+      });
+      window.Content = loginUserControl;
+      window.Show();
     }
     
   }

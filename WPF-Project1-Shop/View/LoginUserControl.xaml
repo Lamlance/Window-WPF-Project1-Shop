@@ -7,9 +7,55 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
   <DockPanel
+    LastChildFill="True"
     Background="White">
+    <DockPanel
+      Loaded="DockPanelUserInfoLoaded"
+      x:Name="DockPanelUserInfo"
+      Visibility="Collapsed"
+      VerticalAlignment="Center"
+      HorizontalAlignment="Center"
+      DockPanel.Dock="Top">
+      <Image
+        Margin="10,10,50,10"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center"
+        MaxHeight="100"
+        MaxWidth="100"
+        x:Name="imgUserAvatar"
+        DockPanel.Dock="Left"/>
+      <StackPanel 
+        Orientation="Vertical">
+        <TextBlock
+          d:Text="AAAAAAAAA"
+          FontSize="26"
+          VerticalAlignment="Top"
+          TextWrapping="Wrap"
+          x:Name="txtBlockUserInfo"
+          DockPanel.Dock="Right"/>
+        <UniformGrid>
+          <Button 
+            x:Name="btnLogin"
+            Padding="10,0,10,0"
+            Content="Login" />
+          <Button 
+            Visibility="Collapsed"
+            Padding="10,0,10,0"
+            x:Name="btnLogout"
+            Click="LogOutBtnClicked"
+            Content="Logout" />
+        </UniformGrid>
+      </StackPanel>
+    </DockPanel>
+
     <TextBlock
-      x:Name="LoginInfoTextBlock"
-      TextWrapping="Wrap" />
+      x:Name="txtBlockLog"
+      VerticalAlignment="Center"
+      TextAlignment="Center"
+      FontSize="40"
+      Text="Logging you in">
+      
+    </TextBlock>
+
   </DockPanel>
 </UserControl>

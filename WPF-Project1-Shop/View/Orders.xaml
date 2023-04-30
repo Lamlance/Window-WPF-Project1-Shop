@@ -17,9 +17,43 @@
       x:Name="Ribbon"
       DockPanel.Dock="Top"
       d:SelectedTabIndex="1">
-      
-      
-      
+
+      <Fluent:Ribbon.Menu>
+        <Fluent:Backstage>
+          <Fluent:BackstageTabControl>
+            <Fluent:BackstageTabItem
+              Header="User">
+              <DockPanel LastChildFill="True">
+                <ContentControl
+                  VerticalAlignment="Center"
+                  DockPanel.Dock="Left"
+                  x:Name="UserInfoContentControl">
+                </ContentControl>
+                <StackPanel 
+                  Margin="30,0,0,0"
+                  VerticalAlignment="Center"
+                  Orientation="Vertical"
+                  DockPanel.Dock="Right">
+                  <TextBlock 
+                    FontSize="26"
+                    Text="Window - WPF Shop Project" />
+                  <TextBlock 
+                    FontSize="26"
+                    Text="20127047 - Nguyen Xuan Hoang Lam" />
+                  <TextBlock 
+                    FontSize="26"
+                    Text="20127591 - Han Tho Nhat Phu" />
+                  <TextBlock 
+                    FontSize="26"
+                    Text="20127435 - Tran Van An" />
+                </StackPanel>
+              </DockPanel>
+
+            </Fluent:BackstageTabItem>
+          </Fluent:BackstageTabControl>
+        </Fluent:Backstage>
+      </Fluent:Ribbon.Menu>
+
       <!-- Order tab -->
       <Fluent:RibbonTabItem 
         Header="Orders"
@@ -87,7 +121,7 @@
                 Grid.Column="1" />
           </Grid>
         </Fluent:RibbonGroupBox>
-        
+
         <!-- /Filter Group -->
 
         <!-- Search Customer Group -->
@@ -180,7 +214,7 @@
 
         <Fluent:RibbonGroupBox
           Header="Manual modify">
-          
+
           <Fluent:ToggleButton
             Checked="OrderEditModeChecked"
             Header="Edit order"
@@ -221,7 +255,7 @@
 
       </Fluent:RibbonTabItem>
       <!-- /Order ta -->
-      
+
       <!-- Product Tab -->
       <Fluent:RibbonTabItem 
         Header="Products"
@@ -315,7 +349,7 @@
 
         <Fluent:RibbonGroupBox
           Header="Apply search">
-          
+
           <MenuItem
             x:Name="menuApplyCategoriesProductFilter"
             IsCheckable="true"
@@ -356,7 +390,7 @@
           </Fluent:Button>
 
         </Fluent:RibbonGroupBox>
-        
+
         <Fluent:RibbonGroupBox
           Header="Manual modify">
 
@@ -410,17 +444,17 @@
                 Kind="Database"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
-          
+
         </Fluent:RibbonGroupBox>
-                
+
       </Fluent:RibbonTabItem>
       <!-- /Product Tab -->
 
       <Fluent:RibbonTabItem
         Header="Customer">
-        
+
       </Fluent:RibbonTabItem>
-      
+
     </Fluent:Ribbon>
 
     <Grid DockPanel.Dock="Bottom">
