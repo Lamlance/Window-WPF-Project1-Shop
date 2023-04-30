@@ -214,6 +214,11 @@
 
           <StackPanel
             Orientation="Vertical">
+            <Button
+              Click="CustomerAddOrderBtnClick"
+              x:Name="btnCustomerAddOrderForm"
+              Visibility="Hidden"
+              Content="Add Customer"/>
             <TextBlock
             TextWrapping="Wrap">
               <TextBlock.Text>

@@ -601,20 +601,9 @@
     </Fluent:Ribbon>
 
     <Grid DockPanel.Dock="Bottom">
-      <TabControl SelectedIndex="{Binding ElementName=Ribbon,Path=SelectedTabIndex}"
-                        BorderThickness="0"
-                        x:Name="MainTabControl">
-        <TabControl.Resources>
-          <Style TargetType="TabItem">
-            <Setter Property="Template">
-              <Setter.Value>
-                <ControlTemplate TargetType="TabItem">
-                </ControlTemplate>
-              </Setter.Value>
-            </Setter>
-          </Style>
-        </TabControl.Resources>
-
+      <TabControl 
+        SelectedIndex="{Binding ElementName=Ribbon,Path=SelectedTabIndex}"
+        x:Name="MainTabControl">
       </TabControl>
     </Grid>
 

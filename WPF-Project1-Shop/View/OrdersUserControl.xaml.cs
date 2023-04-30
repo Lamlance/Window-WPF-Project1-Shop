@@ -29,7 +29,13 @@ namespace WPF_Project1_Shop.View
 
     ObservableCollection<string> pageDisplay = new ObservableCollection<string>();
 
-    public OrderViewModel.MODIFY_MODE ModifyMode { get => _orderViewModel.ModifyMode; set => _orderViewModel.ModifyMode = value; }
+    public OrderViewModel.MODIFY_MODE ModifyMode { get => _orderViewModel.ModifyMode; 
+      set 
+      {
+        _orderViewModel.ModifyMode = value;
+        this.btnCustomerAddOrderForm.Visibility = (value == OrderViewModel.MODIFY_MODE.ADD) ? Visibility.Visible : Visibility.Collapsed;
+      }  
+    }
 
     public OrdersUserControl()
     {
@@ -187,6 +193,14 @@ namespace WPF_Project1_Shop.View
         }.ShowDialog();
       }
       return;
+    }
+
+    private void CustomerAddOrderBtnClick(object sender, RoutedEventArgs e)
+    {
+      new Window()
+      {
+        Content = new QuickAddCustomer()
+      }.ShowDialog();
     }
   }
 }
