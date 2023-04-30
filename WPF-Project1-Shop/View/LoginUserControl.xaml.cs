@@ -27,9 +27,11 @@ namespace WPF_Project1_Shop.View
   /// </summary>
   public partial class LoginUserControl : UserControl
   {
-    public delegate void OnLoginSuccess();
-    public event OnLoginSuccess LoginSuccessed;
-    public LoginUserControl(OnLoginSuccess loginSuccess)
+    public delegate void OnLogAction();
+    public event OnLogAction LoginSuccessed;
+    public event OnLogAction LogoutSuccssed;
+
+    public LoginUserControl(OnLogAction loginSuccess)
     {
       this.LoginSuccessed += loginSuccess;
       InitializeComponent();
@@ -37,7 +39,7 @@ namespace WPF_Project1_Shop.View
     }
 
     UserInformation? User;
-    public LoginUserControl(UserInformation user)
+    public LoginUserControl(UserInformation user, OnLogAction logout)
     {
       User = user;
       InitializeComponent();
@@ -47,6 +49,7 @@ namespace WPF_Project1_Shop.View
       }
       else
       {
+        LogoutSuccssed += logout;
         this.txtBlockLog.Visibility = Visibility.Collapsed;
         this.DockPanelUserInfo.Visibility = Visibility.Visible;
         this.btnLogin.Visibility = Visibility.Collapsed;
@@ -83,7 +86,7 @@ namespace WPF_Project1_Shop.View
 
     public async Task Logout()
     {
-      if(client != null)
+      if(client == null)
       {
         client = new MyAuth0Client(new Auth0ClientOptions
         {
@@ -93,7 +96,7 @@ namespace WPF_Project1_Shop.View
         });
       }
 
-      BrowserResultType browserResult = await client!.LogoutAsync();
+      BrowserResultType browserResult = await client.LogoutAsync();
       if (browserResult != BrowserResultType.Success)
       {
         Task.Run(() =>
@@ -104,6 +107,7 @@ namespace WPF_Project1_Shop.View
       }
       btnLogin.Visibility = Visibility.Visible;
       btnLogout.Visibility = Visibility.Collapsed;
+      LogoutSuccssed?.Invoke();
     }
 
     private void DisplayResult(LoginResult loginResult)

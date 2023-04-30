@@ -65,7 +65,10 @@ namespace WPF_Project1_Shop.View
           new TabItem(){Content = customerUserControl}
         };
       this.MainTabControl.ItemsSource = screens;
-      this.UserInfoContentControl.Content = new LoginUserControl(this.User);
+      this.UserInfoContentControl.Content = new LoginUserControl(this.User, () =>
+      {
+        this.Close();
+      });
 
     }
 
