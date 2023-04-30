@@ -46,13 +46,13 @@ namespace WPF_Project1_Shop.EFCustomRepository
         {
             var result = dbContext.Customers
               .Where(o =>
-                (email == null || phone == null) ? true :
+                (email == null && phone == null && firstname == null && middlename == null && lastname == null) ? true :
                 (
-                  (!(string.IsNullOrWhiteSpace(email) || o.Email == null) && EF.Functions.ILike(o.Email, email)) ||
-                  (!(string.IsNullOrEmpty(phone) || o.Phone == null) && EF.Functions.ILike(o.Phone, phone)) ||
-                  (!(string.IsNullOrEmpty(firstname) || o.FirstName == null) && EF.Functions.ILike(o.FirstName, firstname)) ||
-                  (!(string.IsNullOrEmpty(middlename) || o.MiddleName == null) && EF.Functions.ILike(o.MiddleName, middlename)) ||
-                  (!(string.IsNullOrEmpty(lastname) || o.LastName == null) && EF.Functions.ILike(o.LastName, lastname))
+                  ( !(string.IsNullOrWhiteSpace(email) || o.Email == null) && EF.Functions.ILike(o.Email, email)) ||
+                  ( !(string.IsNullOrEmpty(phone) || o.Phone == null) && EF.Functions.ILike(o.Phone, phone)) ||
+                  ( !(string.IsNullOrEmpty(firstname) || o.FirstName == null) && EF.Functions.ILike(o.FirstName, firstname)) ||
+                  ( !(string.IsNullOrEmpty(middlename) || o.MiddleName == null) && EF.Functions.ILike(o.MiddleName, middlename)) ||
+                  ( !(string.IsNullOrEmpty(lastname) || o.LastName == null) && EF.Functions.ILike(o.LastName, lastname))
                 )
               )
               .Take(500);
