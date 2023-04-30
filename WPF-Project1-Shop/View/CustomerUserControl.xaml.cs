@@ -36,7 +36,7 @@ namespace WPF_Project1_Shop.View
         {
             InitializeComponent();
             this.ListCustomer.ItemsSource = _customerViewModel.CustomersInPage;
-            //_customerViewModel.OnDataSetReset += ResetComboPageBox;
+            _customerViewModel.OnDataSetReset += ResetComboPageBox;
         }
 
 
@@ -58,7 +58,7 @@ namespace WPF_Project1_Shop.View
             {
                 Customer customer = new Customer()
                 {
-
+                    // TODO: need to add new customer in here
                 };
                 AddCustomer(customer);
                 return;
@@ -66,7 +66,7 @@ namespace WPF_Project1_Shop.View
             if (ModifyMode == CustomerViewModel.MODIFY_MODE.EDIT && this.ListCustomer.SelectedItem is Customer)
             {
                 Customer customer = (Customer) this.ListCustomer.SelectedItem;
-                _customerViewModel.UpdateOrder(customer);
+                _customerViewModel.UpdateCustomer(customer);
                 return;
             }
 
@@ -92,7 +92,7 @@ namespace WPF_Project1_Shop.View
             pageDisplay.Clear();
             for (int i = 0; i < totalPage; i++)
             {
-                pageDisplay.Add($"Page{i + 1} / {totalPage}");
+                pageDisplay.Add($"Page: {i + 1} / {totalPage}");
             }
         }
 

@@ -10,6 +10,7 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.ViewModel
 {
+    public delegate void CustomerDataSetChanged(int totalPage);
     public class CustomerViewModel
     {
         public enum MODIFY_MODE
@@ -21,6 +22,8 @@ namespace WPF_Project1_Shop.ViewModel
         IEnumerable<Customer>? customersSet;
         MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
         Dictionary<long, int> idToPos = new Dictionary<long, int>();
+
+        public event CustomerDataSetChanged? OnDataSetReset;
 
         public CustomerViewModel()
         {
@@ -45,6 +48,7 @@ namespace WPF_Project1_Shop.ViewModel
         {
             await GetManyCustomers();
             SetPage(1);
+            OnDataSetReset?.Invoke((int)Math.Ceiling((double)(customersSet != null ? customersSet.Count() : 0) / _itemPerPage));
         }
 
 
@@ -59,7 +63,6 @@ namespace WPF_Project1_Shop.ViewModel
             customersInPage.Clear();
             idToPos.Clear();
 
-            //var numberOfPages = Math.Floor( (double)((ordersSet.Count() + _itemPerPage - 1) / _itemPerPage));
             int start = (page * _itemPerPage) - _itemPerPage;
             int end = Math.Min(start + _itemPerPage, customersSet.Count());
             for (int i = start; i < end; i++)
@@ -98,6 +101,7 @@ namespace WPF_Project1_Shop.ViewModel
             customersSet = result;
             SetPage(1);
             _isSearching = false;
+            OnDataSetReset?.Invoke((int)Math.Ceiling((double)(customersSet != null ? customersSet.Count() : 0) / _itemPerPage));
         }
 
 
@@ -120,7 +124,7 @@ namespace WPF_Project1_Shop.ViewModel
         }
 
 
-        public async Task UpdateOrder(Customer newCustomer)
+        public async Task UpdateCustomer(Customer newCustomer)
         {
             var result = await Task<Order>.Run(() =>
             {
