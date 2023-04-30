@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using WPF_Project1_Shop.EFCustomRepository;
 using WPF_Project1_Shop.EFModel;
+using static WPF_Project1_Shop.ViewModel.ProductViewModel;
 
 namespace WPF_Project1_Shop.ViewModel
 {
@@ -19,9 +21,15 @@ namespace WPF_Project1_Shop.ViewModel
         }
 
         private ObservableCollection<Customer> customersInPage;
-        IEnumerable<Customer>? customersSet;
+        List<Customer>? customersSet;
         MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
         Dictionary<long, int> idToPos = new Dictionary<long, int>();
+
+        public delegate void ModifyCustomerCallBackType(Customer customer);
+
+        public event ModifyCustomerCallBackType OnDataAdd;
+        public event ModifyCustomerCallBackType OnDataRemove;
+        public event ModifyCustomerCallBackType OnDataUpdate;
 
         public event CustomerDataSetChanged? OnDataSetReset;
 
@@ -114,6 +122,7 @@ namespace WPF_Project1_Shop.ViewModel
                     customerRepository.AddCustomer(customer);
                 }
                 customersInPage.Insert(0, customer);
+                OnDataAdd?.Invoke(customer);
                 return true;
             }
             catch (Exception e)
@@ -128,11 +137,53 @@ namespace WPF_Project1_Shop.ViewModel
         {
             var result = await Task<Order>.Run(() =>
             {
-                using (CustomerRepository repository = new CustomerRepository(new RailwayContext()))
+                try
                 {
-                    return repository.UpdateCustomer(newCustomer);
+                    using (CustomerRepository repository = new CustomerRepository(new RailwayContext()))
+                    {
+                        return repository.UpdateCustomer(newCustomer);
+                    }
+                } catch (Exception e)
+                {
+                    return null;
                 }
             });
+
+            if (result != null) {
+                if (idToPos.ContainsKey(newCustomer.Id))
+                {
+                    int pos = idToPos[newCustomer.Id];
+                    customersInPage[pos] = newCustomer;
+                }
+                OnDataUpdate?.Invoke(newCustomer);
+            }
+        }
+
+        public async Task RemoveCustomer(Customer customer)
+        {
+            var result = await Task<Customer?>.Run(() =>
+            {
+                try
+                {
+                    using (CustomerRepository repository = new CustomerRepository(new RailwayContext()))
+                    {
+                        return repository.RemoveCustomer(customer);
+                    }
+                } catch (Exception e)
+                {
+                    return null;
+                }
+            });
+            if (result != null)
+            {
+                if (idToPos.ContainsKey(customer.Id))
+                {
+                    int pos = idToPos[customer.Id];
+                    customersInPage.Remove(customer);
+                    customersSet!.Remove(result);
+                    OnDataRemove?.Invoke(customer);
+                }
+            }
         }
     }
 }

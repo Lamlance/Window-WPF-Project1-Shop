@@ -452,9 +452,10 @@
 
                 <Fluent:RibbonGroupBox Header="Manual modify">
 
-                    <Fluent:ToggleButton Checked="CustomerEditModeChecked"
-                                         Header="Edit customer"
-                                         GroupName="CustomerDataMode">
+                    <Fluent:ToggleButton x:Name="toggleBtnEditCustomer"
+                                         Checked="CustomerEditModeChecked"
+                                         Unchecked="CustomerModeUnchecked"
+                                         Header="Edit customer">
                         <Fluent:ToggleButton.Icon>
                             <iconPacks:PackIconUnicons Kind="Edit"
                                                        HorizontalAlignment="Center"
@@ -462,9 +463,10 @@
                         </Fluent:ToggleButton.Icon>
                     </Fluent:ToggleButton>
 
-                    <Fluent:ToggleButton Checked="CustomerAddModeChecked"
-                                         Header="Add customer"
-                                         GroupName="CustomerDataMode">
+                    <Fluent:ToggleButton x:Name="toggleBtnAddCustomer"
+                                         Checked="CustomerAddModeChecked"
+                                         Unchecked="CustomerModeUnchecked"
+                                         Header="Add customer">
                         <Fluent:ToggleButton.Icon>
                             <iconPacks:PackIconUnicons Kind="FilePlusAlt"
                                                        HorizontalAlignment="Center"
@@ -472,9 +474,10 @@
                         </Fluent:ToggleButton.Icon>
                     </Fluent:ToggleButton>
 
-                    <Fluent:ToggleButton Checked="CustomerDeleteModeChecked"
-                                         Header="Delete customer"
-                                         GroupName="CustomerDataMode">
+                    <Fluent:ToggleButton x:Name="toggleBtnDeleteCustomer"
+                                         Checked="CustomerDeleteModeChecked"
+                                         Unchecked="CustomerModeUnchecked"
+                                         Header="Delete customer">
                         <Fluent:ToggleButton.Icon>
                             <iconPacks:PackIconUnicons Kind="FileExclamationAlt"
                                                        HorizontalAlignment="Center"

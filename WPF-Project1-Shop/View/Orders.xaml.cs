@@ -155,15 +155,26 @@ namespace WPF_Project1_Shop.View
 
         private void CustomerEditModeChecked(object sender, RoutedEventArgs e)
         {
+            this.toggleBtnAddCustomer.IsChecked = false;
+            this.toggleBtnDeleteCustomer.IsChecked = false;
             customerUserControl.ModifyMode = CustomerViewModel.MODIFY_MODE.EDIT;
         }
         private void CustomerAddModeChecked(object sender, RoutedEventArgs e)
         {
+            this.toggleBtnEditCustomer.IsChecked = false;
+            this.toggleBtnDeleteCustomer.IsChecked = false;
             customerUserControl.ModifyMode = CustomerViewModel.MODIFY_MODE.ADD;
         }
         private void CustomerDeleteModeChecked(object sender, RoutedEventArgs e)
         {
+            this.toggleBtnAddCustomer.IsChecked = false;
+            this.toggleBtnEditCustomer.IsChecked = false;
             customerUserControl.ModifyMode = CustomerViewModel.MODIFY_MODE.DELETE;
+        }
+
+        private void CustomerModeUnchecked(object sender, RoutedEventArgs e)
+        {
+            customerUserControl.ModifyMode = CustomerViewModel.MODIFY_MODE.NONE;
         }
 
         private void SearchCustomerBtnClick(object sender, RoutedEventArgs e)
@@ -175,7 +186,6 @@ namespace WPF_Project1_Shop.View
 
             string? phone = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxPhoneCustomer.Text : null;
             string? email = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxEmailCustomer.Text : null;
-
             customerUserControl.SearchCustomer(firstname, middlename, lastname, phone, email);
         }
     }

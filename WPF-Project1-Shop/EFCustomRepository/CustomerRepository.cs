@@ -34,6 +34,22 @@ namespace WPF_Project1_Shop.EFCustomRepository
             return data;
         }
 
+        public Customer? RemoveCustomer(Customer data)
+        {
+            var deletingCustomer = dbContext.Customers
+                .SingleOrDefault(c => data.Id == c.Id);
+
+            if (deletingCustomer != null)
+            {
+                // TODO: Remove dependency
+                dbContext.SaveChanges();
+
+                dbContext.Customers.Remove(deletingCustomer);
+                return deletingCustomer;
+            }
+            return null;
+        }
+
         public IEnumerable<Customer> GetManyCustomers(int page = 1)
         {
             const int itemPerPage = 500;
@@ -43,17 +59,17 @@ namespace WPF_Project1_Shop.EFCustomRepository
               .Take(itemPerPage);
         }
 
-        public IEnumerable<Customer>? SearchCustomers(string? firstname, string? middlename,  string? lastname, string? email, string? phone)
+        public IEnumerable<Customer>? SearchCustomers(string? firstname, string? middlename, string? lastname, string? email, string? phone)
         {
             var result = dbContext.Customers
               .Where(o =>
                 (email == null && phone == null && firstname == null && middlename == null && lastname == null) ? true :
                 (
-                  ( !(string.IsNullOrWhiteSpace(email) || o.Email == null) && EF.Functions.ILike(o.Email, email)) ||
-                  ( !(string.IsNullOrEmpty(phone) || o.Phone == null) && EF.Functions.ILike(o.Phone, phone)) ||
-                  ( !(string.IsNullOrEmpty(firstname) || o.FirstName == null) && EF.Functions.ILike(o.FirstName, firstname)) ||
-                  ( !(string.IsNullOrEmpty(middlename) || o.MiddleName == null) && EF.Functions.ILike(o.MiddleName, middlename)) ||
-                  ( !(string.IsNullOrEmpty(lastname) || o.LastName == null) && EF.Functions.ILike(o.LastName, lastname))
+                  (!(string.IsNullOrWhiteSpace(email) || o.Email == null) && EF.Functions.ILike(o.Email, email)) ||
+                  (!(string.IsNullOrEmpty(phone) || o.Phone == null) && EF.Functions.ILike(o.Phone, phone)) ||
+                  (!(string.IsNullOrEmpty(firstname) || o.FirstName == null) && EF.Functions.ILike(o.FirstName, firstname)) ||
+                  (!(string.IsNullOrEmpty(middlename) || o.MiddleName == null) && EF.Functions.ILike(o.MiddleName, middlename)) ||
+                  (!(string.IsNullOrEmpty(lastname) || o.LastName == null) && EF.Functions.ILike(o.LastName, lastname))
                 )
               )
               .Take(500);

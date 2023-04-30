@@ -91,7 +91,7 @@
             <Label VerticalAlignment="Center"
                    Grid.Column="0"
                    Content="First Name" />
-            <TextBox x:Name="FirstName"
+            <TextBox x:Name="txtBoxFirstNameCustomer"
                      Grid.Row="0"
                      VerticalAlignment="Center"
                      Grid.Column="1"
@@ -101,7 +101,7 @@
                    Grid.Row="1"
                    Grid.Column="0"
                    Content="Middle Name" />
-            <TextBox x:Name="MiddleName"
+            <TextBox x:Name="txtBoxMiddleNameCustomer"
                      Grid.Row="1"
                      VerticalAlignment="Center"
                      Grid.Column="1"
@@ -111,7 +111,7 @@
                    Grid.Row="2"
                    Grid.Column="0"
                    Content="Last Name" />
-            <TextBox x:Name="LastName"
+            <TextBox x:Name="txtBoxLastNameCustomer"
                      Grid.Row="2"
                      VerticalAlignment="Center"
                      Grid.Column="1"
@@ -121,7 +121,7 @@
                    Grid.Row="3"
                    Grid.Column="0"
                    Content="Email" />
-            <TextBox x:Name="Email"
+            <TextBox x:Name="txtBoxEmail"
                      Grid.Row="3"
                      VerticalAlignment="Center"
                      Grid.Column="1"
@@ -131,7 +131,7 @@
                    Grid.Row="4"
                    Grid.Column="0"
                    Content="Phone" />
-            <TextBox x:Name="Phone"
+            <TextBox x:Name="txtBoxPhone"
                      Grid.Row="4"
                      VerticalAlignment="Center"
                      Grid.Column="1"
@@ -141,7 +141,7 @@
                    Grid.Row="5"
                    Grid.Column="0"
                    Content="Address" />
-            <TextBox x:Name="Address"
+            <TextBox x:Name="txtBoxAddress"
                      Grid.Row="5"
                      VerticalAlignment="Center"
                      Grid.Column="1"
@@ -174,7 +174,7 @@
                 <Button Click="CustomerFormBtnClick"
                         Margin="0,8,0,0"
                         Padding="20,0,20,0"
-                        Content="Save" />
+                        Content="Submit" />
             </WrapPanel>
         </Grid>
     </Grid>

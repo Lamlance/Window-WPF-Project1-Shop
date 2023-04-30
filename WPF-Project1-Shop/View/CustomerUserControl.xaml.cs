@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_Project1_Shop.EFModel;
 using WPF_Project1_Shop.ViewModel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WPF_Project1_Shop.View
 {
@@ -37,14 +38,29 @@ namespace WPF_Project1_Shop.View
             InitializeComponent();
             this.ListCustomer.ItemsSource = _customerViewModel.CustomersInPage;
             _customerViewModel.OnDataSetReset += ResetComboPageBox;
+
+            _customerViewModel.OnDataAdd += (customer) =>
+            {
+                Task.Run(() =>
+                {
+                    MessageBox.Show($"Added customer {customer.Id}: {customer.LastName} {customer.MiddleName} {customer.FirstName}");
+                });
+            };
+            _customerViewModel.OnDataUpdate += (customer) =>
+            {
+                Task.Run(() =>
+                {
+                    MessageBox.Show($"Updated customer {customer.Id}: {customer.LastName} {customer.MiddleName} {customer.FirstName}");
+                });
+            };
+            _customerViewModel.OnDataRemove += (customer) =>
+            {
+                Task.Run(() =>
+                {
+                    MessageBox.Show($"Removed customer {customer.Id}: {customer.LastName} {customer.MiddleName} {customer.FirstName}");
+                });
+            };
         }
-
-
-        public bool AddCustomer(Customer customer)
-        {
-            return _customerViewModel.AddCustomer(customer);
-        }
-
 
         public void SearchCustomer(string? firstname, string? middlename, string? lastname, string? phone, string? email)
         {
@@ -54,29 +70,56 @@ namespace WPF_Project1_Shop.View
 
         public void CustomerFormBtnClick(object sender, RoutedEventArgs e)
         {
+            if (ModifyMode == CustomerViewModel.MODIFY_MODE.NONE)
+            {
+                MessageBox.Show("Select a modify mode");
+                return;
+            }
             if (ModifyMode == CustomerViewModel.MODIFY_MODE.ADD)
             {
                 Customer customer = new Customer()
                 {
-                    // TODO: need to add new customer in here
+                    FirstName = this.txtBoxFirstNameCustomer.Text,
+                    MiddleName = this.txtBoxMiddleNameCustomer.Text,
+                    LastName = this.txtBoxLastNameCustomer.Text,
+                    Phone = this.txtBoxPhone.Text,
+                    Email = this.txtBoxEmail.Text,
+                    Address = this.txtBoxAddress.Text
                 };
-                AddCustomer(customer);
+                _customerViewModel.AddCustomer(customer);
                 return;
             }
             if (ModifyMode == CustomerViewModel.MODIFY_MODE.EDIT && this.ListCustomer.SelectedItem is Customer)
             {
-                Customer customer = (Customer) this.ListCustomer.SelectedItem;
+                Customer customer = (Customer)this.ListCustomer.SelectedItem;
+                customer.FirstName = this.txtBoxFirstNameCustomer.Text;
+                customer.MiddleName = this.txtBoxMiddleNameCustomer.Text;
+                customer.LastName = this.txtBoxLastNameCustomer.Text;
+                customer.Phone = this.txtBoxPhone.Text;
+                customer.Email = this.txtBoxEmail.Text;
+                customer.Address = this.txtBoxAddress.Text;
                 _customerViewModel.UpdateCustomer(customer);
                 return;
             }
-
+            if (ModifyMode == CustomerViewModel.MODIFY_MODE.DELETE && this.ListCustomer.SelectedItem is Customer)
+            {
+                Customer customer = (Customer)this.ListCustomer.SelectedItem;
+                customer.FirstName = this.txtBoxFirstNameCustomer.Text;
+                customer.MiddleName = this.txtBoxMiddleNameCustomer.Text;
+                customer.LastName = this.txtBoxLastNameCustomer.Text;
+                customer.Phone = this.txtBoxPhone.Text;
+                customer.Email = this.txtBoxEmail.Text;
+                customer.Address = this.txtBoxAddress.Text;
+                _customerViewModel.RemoveCustomer(customer);
+                return;
+            }
         }
 
         private void CustomerListClick(object sender, MouseButtonEventArgs e)
         {
             if (this.ListCustomer.SelectedItem is Customer)
             {
-                this.CustomerModifyForm.DataContext = (Customer) ListCustomer.SelectedItem;
+                this.CustomerModifyForm.DataContext = (Customer)ListCustomer.SelectedItem;
             }
         }
 
