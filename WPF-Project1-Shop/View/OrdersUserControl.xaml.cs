@@ -35,6 +35,28 @@ namespace WPF_Project1_Shop.View
     {
       InitializeComponent();
       _orderViewModel.OnDataSetReset += ResetComboPageBox;
+      _orderViewModel.OrderAdded += (p) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show($"Added order");
+        });
+      };
+      _orderViewModel.OrderUpdated += (p) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show($"Updated order");
+        });
+      };
+      _orderViewModel.OrderDeleted += (p) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show("Deleted order");
+        });
+      };
+
     }
     public void AddOrder(Order order)
     {
@@ -52,7 +74,16 @@ namespace WPF_Project1_Shop.View
     }
     private void OrderFormBtnClick(object sender, RoutedEventArgs e)
     {
-      if (ModifyMode == OrderViewModel.MODIFY_MODE.ADD)
+      if (ModifyMode == OrderViewModel.MODIFY_MODE.NONE)
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show("Please select a modify mode");
+        });
+        return;
+      }
+
+        if (ModifyMode == OrderViewModel.MODIFY_MODE.ADD)
       {
         Order order = new Order()
         {

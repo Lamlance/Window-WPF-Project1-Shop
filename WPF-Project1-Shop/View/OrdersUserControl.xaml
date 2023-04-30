@@ -66,10 +66,26 @@
           <ListView.ItemTemplate>
             <DataTemplate>
               <StackPanel 
-              Orientation="Horizontal">
-                <Label Content="{Binding Id}"/>
-                <Label Content="{Binding Customer,
-                Converter={StaticResource CustomerFullNameConverter}}"/>
+              Orientation="Vertical">
+                <TextBlock>
+                  <TextBlock.Text>
+                    <MultiBinding 
+                      StringFormat="{}Create At: {0} - Status: {1}">
+                      <Binding Path="CreatedAt" />
+                      <Binding Path="Status" />
+                    </MultiBinding>
+                  </TextBlock.Text>
+                </TextBlock>
+                
+                <TextBlock>
+                  <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Customer: {0}">
+                      <Binding 
+                        Path="Customer" 
+                        Converter="{StaticResource CustomerFullNameConverter}" />
+                    </MultiBinding>
+                  </TextBlock.Text>
+                </TextBlock>
               </StackPanel>
             </DataTemplate>
           </ListView.ItemTemplate>

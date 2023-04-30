@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,12 @@ namespace WPF_Project1_Shop.ViewModel
 {
   public class OrderViewModel
   {
+    public delegate void OnOrderDataModify(Order order);
+    public event OnOrderDataModify OrderUpdated;
+    public event OnOrderDataModify OrderAdded;
+    public event OnOrderDataModify OrderDeleted;
+
+
     public enum MODIFY_MODE
     {
       NONE, ADD, EDIT, DELETE
@@ -122,6 +129,7 @@ namespace WPF_Project1_Shop.ViewModel
       if(result != null)
       {
         ordersInPage.Insert(0, result);
+        OrderAdded?.Invoke(result);
       }
 
     }
@@ -138,11 +146,13 @@ namespace WPF_Project1_Shop.ViewModel
           }
         }catch(Exception e)
         {
-          var emsg = e;
           return null;
         }
-        
       });
+      if(result != null)
+      {
+        OrderUpdated?.Invoke(data);
+      }
     }
 
     public async Task DeleteOrder(Order order)
@@ -166,6 +176,7 @@ namespace WPF_Project1_Shop.ViewModel
       {
         ordersInPage.Remove(result);
         ordersSet?.Remove(result);
+        OrderDeleted?.Invoke(result);
       }
 
     }

@@ -17,16 +17,7 @@
       x:Name="Ribbon"
       DockPanel.Dock="Top"
       d:SelectedTabIndex="1">
-      <Fluent:Ribbon.Menu>
-        <Fluent:Backstage>
-          <Fluent:BackstageTabControl>
-            <Fluent:BackstageTabItem Header="Search" />
-            <Fluent:BackstageTabItem Header="Add" />
-            <Fluent:BackstageTabItem Header="Edit" />
-            <Fluent:BackstageTabItem Header="Data" />
-          </Fluent:BackstageTabControl>
-        </Fluent:Backstage>
-      </Fluent:Ribbon.Menu>
+      
       
       
       <!-- Order tab -->
@@ -409,15 +400,6 @@
 
         <Fluent:RibbonGroupBox
           Header="Data Import">
-          <Fluent:Button
-            Header="Excel">
-            <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Kind="Table"/>
-            </Fluent:Button.Icon>
-          </Fluent:Button>
           <Fluent:Button
             Click="ImportProductFromAccessBtnClick"
             Header="Access">

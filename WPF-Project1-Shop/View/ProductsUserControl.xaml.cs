@@ -80,10 +80,12 @@ namespace WPF_Project1_Shop.View
 
     private void SaveProductBtnClick(object sender, RoutedEventArgs e)
     {
-      return;
       if (ModifyMode == ProductViewModel.MODIFY_MODE.NONE)
       {
-        MessageBox.Show("Select a modify mode");
+        Task.Run(() =>
+        {
+          MessageBox.Show("Select a modify mode");
+        });
         return;
       }
 
