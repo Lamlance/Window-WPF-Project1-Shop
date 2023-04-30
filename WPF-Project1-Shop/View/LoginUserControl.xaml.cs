@@ -39,15 +39,11 @@ namespace WPF_Project1_Shop.View
     }
 
     UserInformation? User;
-    public LoginUserControl(UserInformation user, OnLogAction logout)
+    public LoginUserControl(UserInformation? user, OnLogAction logout)
     {
       User = user;
       InitializeComponent();
-      if(user == null)
-      {
-        Login();
-      }
-      else
+      if(user != null)
       {
         LogoutSuccssed += logout;
         this.txtBlockLog.Visibility = Visibility.Collapsed;

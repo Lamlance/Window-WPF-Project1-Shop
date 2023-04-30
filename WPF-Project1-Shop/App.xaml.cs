@@ -1,5 +1,6 @@
 ﻿using Auth0.OidcClient;
 using IdentityModel.OidcClient;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,16 +19,28 @@ namespace WPF_Project1_Shop
   /// </summary>
   public partial class App : Application
   {
+    static readonly bool IS_DEV = true;
     protected void ApplicationStart(object sender, EventArgs e)
     {
-      Window window = new Window();
-      LoginUserControl loginUserControl = new LoginUserControl(() =>
+      if(IS_DEV == true)
       {
-        window.Close();
-      });
-      window.Content = loginUserControl;
-      window.Show();
+        OpenMainWindowWithoutLogin();
+      }
+      else
+      {
+        Window window = new Window();
+        LoginUserControl loginUserControl = new LoginUserControl(() =>
+        {
+          window.Close();
+        });
+        window.Content = loginUserControl;
+        window.Show();
+      }
+      
     }
-    
+    private void OpenMainWindowWithoutLogin()
+    {
+      new OrdersWindow(null).Show();
+    }
   }
 }

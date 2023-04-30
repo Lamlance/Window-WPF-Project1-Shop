@@ -34,17 +34,21 @@ namespace WPF_Project1_Shop.View
     CategoryViewModel _categoryViewModel;
     UserInformation? user;
 
-    public UserInformation User { get => user; set => user = value; }
+    public UserInformation? User { get => user; set => user = value; }
 
-    public OrdersWindow(UserInformation userInformation)
+    public OrdersWindow(UserInformation? userInformation)
     {
-      this.User = new UserInformation()
+      if(userInformation != null)
       {
-        Nickname = userInformation.Nickname,
-        Name = userInformation.Name,
-        Email = userInformation.Email,
-        PricturePath = userInformation.PricturePath
-      };
+        this.User = new UserInformation()
+        {
+          Nickname = userInformation.Nickname,
+          Name = userInformation.Name,
+          Email = userInformation.Email,
+          PricturePath = userInformation.PricturePath
+        };
+      }
+      
       InitializeComponent();
       _categoryViewModel = new CategoryViewModel();
     }
