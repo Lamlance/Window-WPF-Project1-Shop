@@ -49,55 +49,45 @@
           <RowDefinition Height="1*" />
           <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView 
-        ItemsSource="{Binding OrdersInPage}"
-        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-        ScrollViewer.VerticalScrollBarVisibility="Visible"
-        ScrollViewer.CanContentScroll="True"
-        VerticalContentAlignment="Top"  
-        x:Name="ListOrder"
-        PreviewMouseLeftButtonDown="OrderListClick"
-        Grid.Row="0">
-          <ListView.ItemsPanel>
-            <ItemsPanelTemplate>
-              <StackPanel Orientation="Vertical" />
-            </ItemsPanelTemplate>
-          </ListView.ItemsPanel>
-          <ListView.ItemTemplate>
-            <DataTemplate>
-              <StackPanel 
-              Orientation="Vertical">
-                <TextBlock>
-                  <TextBlock.Text>
-                    <MultiBinding 
-                      StringFormat="{}Create At: {0} - Status: {1}">
-                      <Binding Path="CreatedAt" />
-                      <Binding Path="Status" />
-                    </MultiBinding>
-                  </TextBlock.Text>
-                </TextBlock>
-                
-                <TextBlock>
-                  <TextBlock.Text>
-                    <MultiBinding StringFormat="{}Customer: {0}">
-                      <Binding 
-                        Path="Customer" 
-                        Converter="{StaticResource CustomerFullNameConverter}" />
-                    </MultiBinding>
-                  </TextBlock.Text>
-                </TextBlock>
-              </StackPanel>
-            </DataTemplate>
-          </ListView.ItemTemplate>
-          <ListView.ItemContainerStyle>
-            <Style TargetType="ListViewItem">
-              <Setter 
-              Property="HorizontalContentAlignment" 
-              Value="Stretch"/>
-            </Style>
-          </ListView.ItemContainerStyle>
-        </ListView>
-
+        <DataGrid 
+          IsReadOnly="True"
+          SelectionMode="Single"
+          AutoGenerateColumns="False"
+          ItemsSource="{Binding OrdersInPage}"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          ScrollViewer.VerticalScrollBarVisibility="Visible"
+          ScrollViewer.CanContentScroll="True"
+          x:Name="ListOrder"
+          PreviewMouseLeftButtonDown="OrderListClick"
+          Grid.Row="0">
+          <DataGrid.Columns>
+            <DataGridTextColumn
+              Width="Auto"
+              Header="Id"
+              Binding="{Binding Id}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Customer"
+              Binding="{Binding Customer,
+              Converter={StaticResource CustomerFullNameConverter}}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Shipping address"
+              Binding="{Binding ShipAddress}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Status"
+              Binding="{Binding Status}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Created at"
+              Binding="{Binding CreatedAt}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Delivered at"
+              Binding="{Binding UpdatedAt}"/>
+          </DataGrid.Columns>
+        </DataGrid>
         <WrapPanel
           HorizontalAlignment="Center"
           Grid.Row="1">
@@ -107,8 +97,8 @@
             Padding="30,0,30,0"/>
         </WrapPanel>
       </Grid>
-      
-      
+
+
 
     </Grid>
 
@@ -185,7 +175,7 @@
         Grid.Row="3"
         VerticalAlignment="Center"
         Grid.Column="1"/>
-      
+
 
       <Label 
         VerticalAlignment="Center"
@@ -205,22 +195,23 @@
       </ComboBox>
 
       <TabControl
-        SelectedIndex="1"
+        SelectedIndex="0"
         Grid.ColumnSpan="2"
         Grid.Row="5">
         <TabItem
           x:Name="tabItemCustomerInfoOrderForm"
-          Header="Customer info" VerticalAlignment="Top">
-
+          Header="Customer info" 
+          VerticalAlignment="Top">
           <StackPanel
             Orientation="Vertical">
             <Button
               Click="CustomerAddOrderBtnClick"
               x:Name="btnCustomerAddOrderForm"
-              Visibility="Hidden"
+              Visibility="Collapsed"
               Content="Add Customer"/>
             <TextBlock
-            TextWrapping="Wrap">
+              FontSize="16"
+              TextWrapping="Wrap">
               <TextBlock.Text>
                 <MultiBinding 
                 StringFormat="Name: {0} {1} {2}">
@@ -235,7 +226,8 @@
             </TextBlock>
 
             <TextBlock
-            TextWrapping="Wrap">
+              FontSize="16"
+              TextWrapping="Wrap">
               <TextBlock.Text>
                 <MultiBinding 
                 StringFormat="Phone: {0}">
@@ -245,7 +237,8 @@
             </TextBlock>
 
             <TextBlock
-            TextWrapping="Wrap">
+              FontSize="16"
+              TextWrapping="Wrap">
               <TextBlock.Text>
                 <MultiBinding 
                 StringFormat="Email: {0}">
@@ -255,7 +248,7 @@
             </TextBlock>
 
           </StackPanel>
-          
+
         </TabItem>
 
         <TabItem Header="Ordered products">
