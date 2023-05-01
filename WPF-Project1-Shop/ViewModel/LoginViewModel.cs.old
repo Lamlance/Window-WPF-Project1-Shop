@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WPF_Project1_Shop.Model;
 using System.Windows;
 using System.Security;
 using System.Threading;
 using System.Security.Principal;
+using WPF_Project1_Shop.EFModel;
+using WPF_Project1_Shop.EFCustomRepository;
 
 namespace WPF_Project1_Shop.ViewModel
 {
@@ -18,9 +19,13 @@ namespace WPF_Project1_Shop.ViewModel
     {
         //Fields
         private string _userName;
-        private SecureString _password;
+        // private SecureString _password;
+        private string _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
+        private bool _isRememberPassword = false;
+
+        AccountRepository accountRepository = new AccountRepository(new RailwayContext());
 
         // Properties
         public string UserName
@@ -32,7 +37,16 @@ namespace WPF_Project1_Shop.ViewModel
                 OnPropertyChanged(nameof(UserName));
             }
         }
-        public SecureString Password
+        //public SecureString Password
+        //{
+        //    get => _password; set
+        //    {
+        //        _password = value;
+        //        OnPropertyChanged(nameof(Password));
+        //    }
+        //}
+
+        public string Password
         {
             get => _password; set
             {
@@ -42,7 +56,7 @@ namespace WPF_Project1_Shop.ViewModel
         }
         public string ErrorMessage
         {
-            get => _errorMessage; 
+            get => _errorMessage;
             set
             {
                 _errorMessage = value;
@@ -52,34 +66,44 @@ namespace WPF_Project1_Shop.ViewModel
         }
         public bool IsViewVisible
         {
-            get => _isViewVisible; 
+            get => _isViewVisible;
             set
             {
                 _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible)); 
+                OnPropertyChanged(nameof(IsViewVisible));
+            }
+        }
+
+
+        public bool IsRememberPassword
+        {
+            get => _isRememberPassword;
+            set
+            {
+                _isRememberPassword = value;
+                OnPropertyChanged(nameof(IsRememberPassword));
             }
         }
 
 
         // Commands
-
         public ICommand LoginCommand { get; }
-        public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
 
         // Constructor
         public LoginViewModel()
         {
+
             LoginCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
-            RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPasswordCommand("", ""));
+            RememberPasswordCommand = new ViewModelCommand(ExecuteRememberPasswordCommand, CanExcuteRememberPasswordCommand);
             //ShowPasswordCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
-            //RecoverPasswordCommand = new ViewModelCommand(ExecuteLogInCommand, CanExecuteLoginCommand);
         }
 
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
+
             if (string.IsNullOrWhiteSpace(UserName) || UserName.Length < 3 || Password == null || Password.Length < 3)
             {
                 validData = false;
@@ -94,19 +118,27 @@ namespace WPF_Project1_Shop.ViewModel
 
         private void ExecuteLogInCommand(object obj)
         {
-            if (UserName == "admin")
+
+            Account? account = accountRepository.GetAccount(UserName, Password);
+            if (account != null)
             {
-                Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(UserName), null);
+                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserName, Password), null);
                 IsViewVisible = false;
-            } else
+            }
+            else
             {
                 ErrorMessage = "* Invalid username or password";
             }
 
         }
 
-        private void ExecuteRecoverPasswordCommand(string username, string email)
+        private bool CanExcuteRememberPasswordCommand(object obj)
+        {
+
+            return true;
+        }
+
+        private void ExecuteRememberPasswordCommand(object obj)
         {
             throw new NotImplementedException();
         }
