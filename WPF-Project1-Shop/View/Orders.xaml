@@ -600,7 +600,8 @@
 
     </Fluent:Ribbon>
 
-    <Grid DockPanel.Dock="Bottom">
+    <Grid 
+      DockPanel.Dock="Bottom">
       <TabControl 
         SelectedIndex="{Binding ElementName=Ribbon,Path=SelectedTabIndex}"
         x:Name="MainTabControl">

@@ -19,7 +19,7 @@ namespace WPF_Project1_Shop
   /// </summary>
   public partial class App : Application
   {
-    static readonly bool IS_DEV = true;
+    static readonly bool IS_DEV = false;
     protected void ApplicationStart(object sender, EventArgs e)
     {
       if(IS_DEV == true)

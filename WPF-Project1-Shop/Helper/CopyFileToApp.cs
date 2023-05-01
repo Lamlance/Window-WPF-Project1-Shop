@@ -23,10 +23,12 @@ namespace WPF_Project1_Shop.Helper
       {
         return reletivePath;
       }
+
       try
       {
         File.Copy(absoluteSrcPath, absoluteDesPath);
-      }catch(Exception)
+      }
+      catch (Exception)
       {
         return string.Empty;
       }

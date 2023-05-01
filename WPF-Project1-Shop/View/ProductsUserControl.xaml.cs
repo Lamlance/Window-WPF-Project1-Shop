@@ -115,7 +115,7 @@ namespace WPF_Project1_Shop.View
         p.ProductName = txtBoxNameProductFrom.Text;
         p.Descriptions = txtBoxDescProductFrom.Text;
         p.Price = decimal.ToDouble(txtCurrencyProductFrom.Number);
-        p.ImagePath = this.txtBoxImgPath.Text;
+        p.ImagePath = Helper.CopyFileToApp.CopyImageToApp(this.txtBoxImgPath.Text);
         p.Numbers = int.Parse(txtBoxAmountProductFrom.Text);
         viewModel.UpdateProduct(p);
         return;
