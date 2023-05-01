@@ -29,6 +29,7 @@ namespace WPF_Project1_Shop.ViewModel
 
     ObservableCollection<EFModel.Order> ordersInPage;
     ObservableCollection<OrderItem> selectedOrderItems;
+    Customer selectedOrderCustomer;
 
     List<EFModel.Order>? ordersSet;
     MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
@@ -38,6 +39,11 @@ namespace WPF_Project1_Shop.ViewModel
     {
       ordersInPage = new ObservableCollection<EFModel.Order>();
       selectedOrderItems = new ObservableCollection<OrderItem>();
+      selectedOrderCustomer = new Customer()
+      {
+        Id = 0,
+        LastName = "NONE"
+      };
       Initialize();
     }
     private int _curPage = 1;
@@ -47,6 +53,7 @@ namespace WPF_Project1_Shop.ViewModel
 
     public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
     public ObservableCollection<OrderItem> SelectedOrderItems { get => selectedOrderItems; }
+    public Customer SelectedOrderCustomer { get => selectedOrderCustomer; set => selectedOrderCustomer = value; }
 
     public async Task Initialize()
     {

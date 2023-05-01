@@ -223,10 +223,13 @@
             TextWrapping="Wrap">
               <TextBlock.Text>
                 <MultiBinding 
-                StringFormat="Name: {0}">
+                StringFormat="Name: {0} {1} {2}">
                   <Binding 
-                  Path="Customer" 
-                  Converter="{StaticResource CustomerFullNameConverter}" />
+                    Path="FirstName" />
+                  <Binding 
+                    Path="MiddleName" />
+                  <Binding 
+                    Path="LastName"/>
                 </MultiBinding>
               </TextBlock.Text>
             </TextBlock>
@@ -236,7 +239,7 @@
               <TextBlock.Text>
                 <MultiBinding 
                 StringFormat="Phone: {0}">
-                  <Binding Path="Customer.Phone" />
+                  <Binding Path="Phone" />
                 </MultiBinding>
               </TextBlock.Text>
             </TextBlock>
@@ -246,7 +249,7 @@
               <TextBlock.Text>
                 <MultiBinding 
                 StringFormat="Email: {0}">
-                  <Binding Path="Customer.Email" />
+                  <Binding Path="Email" />
                 </MultiBinding>
               </TextBlock.Text>
             </TextBlock>

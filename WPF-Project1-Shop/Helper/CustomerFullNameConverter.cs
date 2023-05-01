@@ -16,7 +16,7 @@ namespace WPF_Project1_Shop.Helper
       if(value is Customer)
       {
         Customer customer = (Customer)value;
-        return $"{customer.FirstName} {customer.MiddleName ?? ""} {customer.LastName}";
+        return $"{customer.FirstName ?? ""} {customer.MiddleName ?? ""} {customer.LastName ?? ""}";
       }
       return string.Empty;
     }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_Project1_Shop.EFModel;
 using WPF_Project1_Shop.ViewModel;
 
 namespace WPF_Project1_Shop.View
@@ -22,6 +23,9 @@ namespace WPF_Project1_Shop.View
   /// </summary>
   public partial class QuickAddCustomer : UserControl
   {
+    public delegate void OnConfirmCustomer(Customer customer);
+    public event OnConfirmCustomer CustomerConfirmed;
+
     private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
     static CustomerViewModel customerViewModel = new CustomerViewModel();
     public QuickAddCustomer()
@@ -47,6 +51,14 @@ namespace WPF_Project1_Shop.View
     private void CustomerDataGridLoaded(object sender, RoutedEventArgs e)
     {
       this.DataGridCustomer.ItemsSource = customerViewModel.CustomersInPage;
+    }
+
+    private void AddCustomerClick(object sender, RoutedEventArgs e)
+    {
+      if(this.DataGridCustomer.SelectedItem is Customer)
+      {
+        CustomerConfirmed?.Invoke((Customer)this.DataGridCustomer.SelectedItem);
+      }
     }
   }
 }

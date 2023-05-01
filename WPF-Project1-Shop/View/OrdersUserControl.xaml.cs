@@ -95,7 +95,7 @@ namespace WPF_Project1_Shop.View
         {
           CreatedAt = DateOnly.FromDateTime(datePickerCreatedOrderForm.SelectedDate ?? DateTime.Today),
           UpdatedAt = (datePickerDeliveredOrderForm.SelectedDate == null) ? null : DateOnly.FromDateTime(datePickerDeliveredOrderForm.SelectedDate ?? DateTime.Today),
-          CustomerId = 1,
+          CustomerId = _orderViewModel.SelectedOrderCustomer.Id == 0 ? null : _orderViewModel.SelectedOrderCustomer.Id,
           ShipAddress = txtBoxAddressOrderForm.Text,
           Status = ((ComboBoxItem)comboOrderForm.SelectedItem).Content.ToString(),
           Subtotal = 10000,
@@ -139,6 +139,7 @@ namespace WPF_Project1_Shop.View
       this.labelStatusText.Content = _orderViewModel.ModifyMode;
       this.OrderPageComboBox.ItemsSource = pageDisplay;
       this.SelectedOrderItemDataGrid.ItemsSource = _orderViewModel.SelectedOrderItems;
+      this.tabItemCustomerInfoOrderForm.DataContext = _orderViewModel.SelectedOrderCustomer;
     }
 
     private void OrderListClick(object sender, MouseButtonEventArgs e)
@@ -146,13 +147,29 @@ namespace WPF_Project1_Shop.View
       _orderViewModel.SelectedOrderItems.Clear();
       if (this.ListOrder.SelectedItem is Order)
       {
+        Order order = (Order)this.ListOrder.SelectedItem;
         this.OrderModifyForm.DataContext = ListOrder.SelectedItem;
 
-        foreach (var oi in ((Order)ListOrder.SelectedItem).OrderItems)
+        foreach (var oi in order.OrderItems)
         {
           _orderViewModel.SelectedOrderItems.Add(oi);
         }
+        SetSelectedCustomer(order.Customer);
       }
+    }
+
+    private void SetSelectedCustomer(Customer? customer)
+    {
+      _orderViewModel.SelectedOrderCustomer.Id = customer == null ? 0 : customer.Id;
+
+      _orderViewModel.SelectedOrderCustomer.FirstName = customer == null ? "NONE" : customer.FirstName;
+      _orderViewModel.SelectedOrderCustomer.LastName = customer == null ? "NONE" : customer.LastName;
+      _orderViewModel.SelectedOrderCustomer.MiddleName = customer == null ? "NONE" : customer.MiddleName;
+
+      _orderViewModel.SelectedOrderCustomer.Phone = customer == null ? "NONE" : customer.Phone;
+      _orderViewModel.SelectedOrderCustomer.Email = customer == null ? "NONE" : customer.Email;
+      _orderViewModel.SelectedOrderCustomer.Address = customer == null ? "NONE" : customer.Address;
+
     }
 
     public void ResetComboPageBox(int totalPage)
@@ -197,9 +214,11 @@ namespace WPF_Project1_Shop.View
 
     private void CustomerAddOrderBtnClick(object sender, RoutedEventArgs e)
     {
+      var quickAddCustomer = new QuickAddCustomer();
+      quickAddCustomer.CustomerConfirmed += SetSelectedCustomer;
       new Window()
       {
-        Content = new QuickAddCustomer()
+        Content = quickAddCustomer
       }.ShowDialog();
     }
   }

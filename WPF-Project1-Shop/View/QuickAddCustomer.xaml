@@ -119,9 +119,21 @@
                 Kind="Search" />
             </Fluent:Button.Icon>
           </Fluent:Button>
-
         </Fluent:RibbonGroupBox>
 
+        <Fluent:RibbonGroupBox>
+          <Fluent:Button
+            Click="AddCustomerClick"
+            Header="Add customer to order">
+            <Fluent:Button.Icon>
+              <iconPacks:PackIconUnicons
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Kind="CheckCircle" />
+            </Fluent:Button.Icon>
+          </Fluent:Button>
+        </Fluent:RibbonGroupBox>
+        
       </Fluent:RibbonTabItem>
 
     </Fluent:Ribbon>
