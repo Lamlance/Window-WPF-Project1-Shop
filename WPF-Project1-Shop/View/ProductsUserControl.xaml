@@ -56,20 +56,21 @@
             <ListView.ItemsPanel>
               <ItemsPanelTemplate>
                 <UniformGrid
-                Columns="4"/>
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  Columns="4"/>
               </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
               <DataTemplate>
-                <StackPanel
-              VerticalAlignment="Center"
-              HorizontalAlignment="Center"
-              Background="Beige">
-                  <Image 
-                Stretch="Uniform"  
-                Source="{Binding ImagePath, 
-                Converter={StaticResource ImagePathConverter}}"/>
+                <DockPanel
+                  MinWidth="300"
+                  LastChildFill="True"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Center">
                   <TextBlock
+                    DockPanel.Dock="Bottom"
+                    TextWrapping="Wrap"
                     TextAlignment="Center"
                     FontSize="16">
                     <TextBlock.Text>
@@ -78,7 +79,16 @@
                       </MultiBinding>
                     </TextBlock.Text>
                   </TextBlock>
-                </StackPanel>
+
+                  <Image 
+                    DockPanel.Dock="Top"
+                    Width="100"
+                    Height="100"
+                    Stretch="UniformToFill"  
+                    Source="{Binding ImagePath, 
+                    Converter={StaticResource ImagePathConverter}}"/>
+
+                </DockPanel>
               </DataTemplate>
             </ListView.ItemTemplate>
           </ListView>
