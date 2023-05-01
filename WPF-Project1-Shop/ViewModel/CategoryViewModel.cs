@@ -12,25 +12,59 @@ namespace WPF_Project1_Shop.ViewModel
 {
   public class CategoryViewModel
   {
-    public class CheckableCategory : Category,INotifyPropertyChanged
+    public class CheckableCategory : Category, INotifyPropertyChanged
     {
       public bool IsChecked { get; set; } = true;
 
       public event PropertyChangedEventHandler? PropertyChanged;
     }
 
+
+    private readonly static Dictionary<int,CategoryViewModel> createdInstance = new Dictionary<int, CategoryViewModel>();
+    private static int idCount = 0;
+    public static CategoryViewModel NewInstance()
+    {
+      idCount++;
+      var category = new CategoryViewModel(idCount);
+      createdInstance.Add(idCount, category);
+      return category;
+    }
+
+    public delegate void OnCatogryDataction(Category? category);
+    public event OnCatogryDataction OnNewCategoryAdded;
+
+    private static void RemoveInstanceFromDict(int id)
+    {
+      createdInstance.Remove(id);
+    }
+    private static void NotifyNewCateogryAdded(Category newCategory)
+    {
+      foreach(var key in createdInstance.Keys)
+      {
+        createdInstance[key].Categories.Add(new CheckableCategory
+        {
+          IsChecked = false,
+          CategoryName = newCategory.CategoryName,
+          Id = newCategory.Id
+        });
+      }
+    }
+    
     private ObservableCollection<CheckableCategory> categories;
     private HashSet<Category> selectedCategories;
+    private readonly int myId;
 
-
-    public CategoryViewModel()
+    private CategoryViewModel(int id)
     {
       selectedCategories = new HashSet<Category>();
       categories = new ObservableCollection<CheckableCategory>();
-
+      myId = id;
       GetManyCategories();
     }
-
+    ~CategoryViewModel()
+    {
+      RemoveInstanceFromDict(myId);
+    }
     public ObservableCollection<CheckableCategory> Categories { get => categories; }
     public HashSet<Category> SelectedCategories { get => selectedCategories; }
 
@@ -54,6 +88,31 @@ namespace WPF_Project1_Shop.ViewModel
           IsChecked = false
         });
       });
+    }
+
+    public async Task AddCategory(Category category)
+    {
+      var result = await Task<Category?>.Run(() =>
+      {
+        try
+        {
+          using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+          {
+            return repository.AddCategory(category);
+          }
+        }
+        catch (Exception)
+        {
+          return null;
+        }
+      });
+
+      if(result != null)
+      {
+        NotifyNewCateogryAdded(result);
+      }
+      OnNewCategoryAdded?.Invoke(result);
+
     }
   }
 }

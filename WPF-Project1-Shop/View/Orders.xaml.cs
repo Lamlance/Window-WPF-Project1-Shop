@@ -51,7 +51,7 @@ namespace WPF_Project1_Shop.View
       }
 
       InitializeComponent();
-      _categoryViewModel = new CategoryViewModel();
+      _categoryViewModel = CategoryViewModel.NewInstance();
     }
 
     private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)

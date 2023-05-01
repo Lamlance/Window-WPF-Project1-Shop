@@ -27,7 +27,7 @@ namespace WPF_Project1_Shop.View
     public delegate void  OrderItemListCallback (List<OrderItem> ordersItem);
     public event OrderItemListCallback? OnOrderListConfrim;
 
-    CategoryViewModel _categoryViewModel = new CategoryViewModel();
+    CategoryViewModel _categoryViewModel = CategoryViewModel.NewInstance();
     static ProductViewModel productViewModel = new ProductViewModel()
     {
       ItemPerPage = 100,

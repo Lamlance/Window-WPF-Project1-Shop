@@ -26,5 +26,11 @@ namespace WPF_Project1_Shop.EFCustomRepository
       return dbContext.Categories.Take(500);
     }
 
+    public Category? AddCategory(Category category)
+    {
+      dbContext.Categories.Add(category);
+      return category;
+    }
+
   }
 }

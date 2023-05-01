@@ -39,6 +39,6 @@ public partial class Product : INotifyPropertyChanged
 
   public override int GetHashCode()
   {
-    return decimal.ToInt32(this.Id);
+    return this.Id.GetHashCode();
   }
 }

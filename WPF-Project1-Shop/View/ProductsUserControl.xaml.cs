@@ -38,7 +38,7 @@ namespace WPF_Project1_Shop.View
     {
       InitializeComponent();
       this.viewModel = new ProductViewModel();
-      this.categoryViewModel = new CategoryViewModel();
+      this.categoryViewModel = CategoryViewModel.NewInstance();
 
       viewModel.OnDataAdd += (p) =>
       {
@@ -56,6 +56,10 @@ namespace WPF_Project1_Shop.View
       };
       viewModel.OnDataSetReset += ResetComboPageBox;
 
+      categoryViewModel.OnNewCategoryAdded += (c) =>
+      {
+        this.btnAddNewCategory.IsEnabled = true;
+      };
     }
 
     private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
@@ -100,12 +104,12 @@ namespace WPF_Project1_Shop.View
           Numbers = int.Parse(txtBoxAmountProductFrom.Text),
           CreatedAt = DateOnly.FromDateTime(DateTime.Now),
           Categories = categoryViewModel.SelectedCategories.ToList()
-      };
+        };
         viewModel.AddProduct(product);
         return;
       }
 
-      if(ModifyMode == ProductViewModel.MODIFY_MODE.EDIT && this.ProductListView.SelectedItem is Product)
+      if (ModifyMode == ProductViewModel.MODIFY_MODE.EDIT && this.ProductListView.SelectedItem is Product)
       {
         Product p = (Product)this.ProductListView.SelectedItem;
         p.ProductName = txtBoxNameProductFrom.Text;
@@ -117,13 +121,13 @@ namespace WPF_Project1_Shop.View
         return;
       }
 
-      if(ModifyMode == ProductViewModel.MODIFY_MODE.DELETE)
+      if (ModifyMode == ProductViewModel.MODIFY_MODE.DELETE)
       {
         Product p = (Product)this.ProductListView.SelectedItem;
         viewModel.RemoveProduct(p);
       }
     }
-    
+
     public void AddManyProduct(List<Product> products)
     {
       viewModel.AddManyProduct(products);
@@ -164,7 +168,7 @@ namespace WPF_Project1_Shop.View
     public void SetFormVisibility(Visibility vs)
     {
       this.ProductDataForm.Visibility = vs;
-      if(this.ProductDataForm.Visibility == Visibility.Collapsed)
+      if (this.ProductDataForm.Visibility == Visibility.Collapsed)
       {
         this.DockPanelProductList.SetValue(Grid.ColumnSpanProperty, 5);
       }
@@ -186,7 +190,7 @@ namespace WPF_Project1_Shop.View
 
     private void CategoryChecked(object sender, RoutedEventArgs e)
     {
-      if(sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
+      if (sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
       {
         Category c = (Category)((Fluent.CheckBox)sender).Content;
         categoryViewModel.SelectedCategories.Add(c);
@@ -213,7 +217,23 @@ namespace WPF_Project1_Shop.View
 
     private void PageComboBoxChange(object sender, SelectionChangedEventArgs e)
     {
-      viewModel.setPage(this.ProductPageComboBox.SelectedIndex+1);
+      viewModel.setPage(this.ProductPageComboBox.SelectedIndex + 1);
     }
+
+    private void AddNewCategoryBtnClick(object sender, RoutedEventArgs e)
+    {
+      if (!string.IsNullOrWhiteSpace(this.txtBoxNewCategoryName.Text))
+      {
+        Category category = new Category()
+        {
+          CategoryName = this.txtBoxNewCategoryName.Text
+        };
+        categoryViewModel.AddCategory(category);
+        this.btnAddNewCategory.IsEnabled = false;
+      }
+
+    }
+
   }
 }
+

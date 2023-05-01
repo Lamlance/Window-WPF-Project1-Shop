@@ -22,6 +22,6 @@ public partial class Category
 
   public override int GetHashCode()
   {
-    return decimal.ToInt32(this.Id);
+    return this.Id.GetHashCode();
   }
 }

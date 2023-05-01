@@ -34,6 +34,6 @@ public partial class OrderItem
 
   public override int GetHashCode()
   {
-    return Convert.ToInt32(this.Id);
+    return this.Id.GetHashCode();
   }
 }

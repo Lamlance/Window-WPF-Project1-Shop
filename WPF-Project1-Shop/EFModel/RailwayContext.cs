@@ -29,7 +29,8 @@ public partial class RailwayContext : DbContext
 
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=containers-us-west-181.railway.app;Port=5457;Database=railway;Username=postgres;Password=8hW9GLBvcosfIKxTNVB3");
+        //postgresql://wpfshop-admin:NEy2ryGJfEl-ea51bGoY4w@sweet-otter-3743.8nk.cockroachlabs.cloud:26257/WPF-Shop?sslmode=verify-full
+        => optionsBuilder.UseNpgsql("Host=sweet-otter-3743.8nk.cockroachlabs.cloud;Port=26257;Database=WPF-Shop;Username=wpfshop-admin;Password=NEy2ryGJfEl-ea51bGoY4w");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

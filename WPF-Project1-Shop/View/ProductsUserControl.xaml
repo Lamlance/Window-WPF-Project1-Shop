@@ -69,10 +69,11 @@
                 Stretch="Uniform"  
                 Source="{Binding ImagePath, 
                 Converter={StaticResource ImagePathConverter}}"/>
-                  <TextBlock>
+                  <TextBlock
+                    TextAlignment="Center"
+                    FontSize="16">
                     <TextBlock.Text>
-                      <MultiBinding StringFormat="{}{0} - {1}">
-                        <Binding Path="Id" />
+                      <MultiBinding StringFormat="{}{0}">
                         <Binding Path="ProductName" />
                       </MultiBinding>
                     </TextBlock.Text>
@@ -161,26 +162,40 @@
             <iconPacks:PackIconUnicons
               Kind="LayerGroup" />
           </Fluent:MenuItem.Icon>
-          <ListView 
+          <StackPanel
+            Orientation="Vertical">
+            <DockPanel LastChildFill="True">
+              <Button 
+                x:Name="btnAddNewCategory"
+                Click="AddNewCategoryBtnClick"
+                DockPanel.Dock="Right"
+                Content="Add new category" />
+              <TextBox
+                x:Name="txtBoxNewCategoryName"
+                DockPanel.Dock="Left"/>
+            </DockPanel>
+            <ListView 
               Loaded="CategoriesListLoaded"
               x:Name="CategoriesListProductForm"
               MinWidth="300">
-            <ListView.ItemsPanel>
-              <ItemsPanelTemplate>
-                <Fluent:UniformGridWithItemSize />
-              </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-              <DataTemplate>
-                <Fluent:CheckBox
+              <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <Fluent:UniformGridWithItemSize />
+                </ItemsPanelTemplate>
+              </ListView.ItemsPanel>
+              <ListView.ItemTemplate>
+                <DataTemplate>
+                  <Fluent:CheckBox
                   IsChecked="{Binding IsChecked}"
                   Content="{Binding}"
                   Unchecked="CategoryUnchecked"
                   Checked="CategoryChecked"
                   Header="{Binding CategoryName}"/>
-              </DataTemplate>
-            </ListView.ItemTemplate>
-          </ListView>
+                </DataTemplate>
+              </ListView.ItemTemplate>
+            </ListView>
+          </StackPanel>
+
         </Fluent:MenuItem>
 
         <Label 

@@ -51,7 +51,7 @@
             Grid.Column="0"
             Content="Product table name"/>
         <TextBox 
-            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
             Grid.Column="1"
             x:Name="txtBoxTableName"/>
 
@@ -59,6 +59,7 @@
           Grid.Column="2"
           Content="Column name of product name"/>
         <TextBox
+          VerticalContentAlignment="Center"
           Grid.Column="3"
           x:Name="txtBoxProductNameCol"/>
 
@@ -67,6 +68,7 @@
           Grid.Column="0"
             Content="Column name of product price"/>
         <TextBox
+          VerticalContentAlignment="Center"
           Grid.Row="1"
           Grid.Column="1"
           x:Name="txtBoxProductPriceCol"/>
@@ -76,6 +78,7 @@
           Grid.Column="2"
           Content="Column name of product quantity"/>
         <TextBox
+          VerticalContentAlignment="Center"
           Grid.Row="1"
           Grid.Column="3"
           x:Name="txtBoxProductQuantityCol"/>
@@ -84,6 +87,7 @@
           Grid.Row="2"
           Content="Column name of product description"/>
         <TextBox
+          VerticalContentAlignment="Center"
           Grid.Row="2"
           Grid.Column="1"
           x:Name="txtBoxProductDescCol"/>
@@ -93,6 +97,7 @@
           Grid.Column="2"
             Content="Column name of product image"/>
         <TextBox
+          VerticalContentAlignment="Center"
           Grid.Row="2"
           Grid.Column="3"
           x:Name="txtBoxProductImageCol"/>
