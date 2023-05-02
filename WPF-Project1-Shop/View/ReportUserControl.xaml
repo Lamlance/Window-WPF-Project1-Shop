@@ -43,7 +43,6 @@
         <TabItem
           Header="Graph">
           <lvc:CartesianChart
-            
             DockPanel.Dock="Bottom"
             XAxes="{Binding OrderCountGroupByTimeLabelAxis}"
             Series="{Binding ProductCountGroupByTime}"
