@@ -254,6 +254,7 @@
       </Fluent:RibbonTabItem>
       <!-- /Order ta -->
 
+      
       <!-- Product Tab -->
       <Fluent:RibbonTabItem 
         Header="Products"
@@ -449,8 +450,7 @@
       </Fluent:RibbonTabItem>
       <!-- /Product Tab -->
 
-
-      <!-- Customer tab -->
+      
       <!-- Customer tab -->
       <Fluent:RibbonTabItem 
         Header="Customers">
@@ -598,6 +598,13 @@
       </Fluent:RibbonTabItem>
       <!-- Customer tab -->
 
+      
+      <!-- Report tab -->
+      <Fluent:RibbonTabItem
+        Header="Report">
+        
+      </Fluent:RibbonTabItem>
+      <!-- /Report tab -->
     </Fluent:Ribbon>
 
     <Grid 

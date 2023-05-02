@@ -10,13 +10,13 @@
   
   <ItemGroup>
     <PackageReference Include="Auth0.OidcClient.Core" Version="3.2.7" />
-    <PackageReference Include="CurrencyTextBox" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CurrencyTextBox" Version="2.0.2" />
     <PackageReference Include="Fluent.Ribbon" Version="9.0.4" />
     <PackageReference Include="IdentityModel.OidcClient" Version="5.2.1" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.701" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>

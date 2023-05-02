@@ -62,7 +62,7 @@
           Grid.Row="0">
           <DataGrid.Columns>
             <DataGridTextColumn
-              Width="Auto"
+              Width="0.5*"
               Header="Id"
               Binding="{Binding Id}"/>
             <DataGridTextColumn
@@ -81,11 +81,13 @@
             <DataGridTextColumn
               Width="1*"
               Header="Created at"
-              Binding="{Binding CreatedAt}"/>
+              Binding="{Binding CreatedAt,
+              ConverterCulture='vi-VN'}"/>
             <DataGridTextColumn
               Width="1*"
               Header="Delivered at"
-              Binding="{Binding UpdatedAt}"/>
+              Binding="{Binding UpdatedAt,
+              ConverterCulture='vi-VN'}"/>
           </DataGrid.Columns>
         </DataGrid>
         <WrapPanel
