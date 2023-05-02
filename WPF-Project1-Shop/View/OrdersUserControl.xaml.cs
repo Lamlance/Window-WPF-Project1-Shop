@@ -136,7 +136,6 @@ namespace WPF_Project1_Shop.View
     private void OrderUserControlLoaded(object sender, RoutedEventArgs e)
     {
       this.DataContext = _orderViewModel;
-      this.labelStatusText.Content = _orderViewModel.ModifyMode;
       this.OrderPageComboBox.ItemsSource = pageDisplay;
       this.SelectedOrderItemDataGrid.ItemsSource = _orderViewModel.SelectedOrderItems;
       this.tabItemCustomerInfoOrderForm.DataContext = _orderViewModel.SelectedOrderCustomer;
@@ -177,7 +176,7 @@ namespace WPF_Project1_Shop.View
       pageDisplay.Clear();
       for (int i = 0; i < totalPage; i++)
       {
-        pageDisplay.Add($"Page{i + 1} / {totalPage}");
+        pageDisplay.Add($"Page {i + 1} / {totalPage}");
       }
     }
 

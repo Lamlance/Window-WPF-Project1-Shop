@@ -17,14 +17,6 @@
 
 
     <DockPanel>
-      <Label 
-        DockPanel.Dock="Top"
-        Name="labelStatusText"
-        HorizontalContentAlignment="Center"
-        Padding="0,2,0,2"
-        FontSize="11"
-        Content="Status" />
-
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="*" />
@@ -32,7 +24,7 @@
         </Grid.RowDefinitions>
         <ListView 
           x:Name="ListCustomer"
-          Margin="10, 0, 10, 0"
+          Margin="10, 10, 10, 0"
           PreviewMouseLeftButtonDown="CustomerListClick">
 
           <ListView.View>

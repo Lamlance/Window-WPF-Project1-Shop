@@ -211,7 +211,7 @@ namespace WPF_Project1_Shop.View
       pageDisplay.Clear();
       for (int i = 0; i < totalPage; i++)
       {
-        pageDisplay.Add($"Page{i + 1} / {totalPage}");
+        pageDisplay.Add($"Page {i + 1} / {totalPage}");
       }
     }
 

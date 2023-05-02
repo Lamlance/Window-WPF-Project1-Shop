@@ -126,7 +126,6 @@ namespace WPF_Project1_Shop.View
     private void CustomerUserControlLoaded(object sender, RoutedEventArgs e)
     {
       this.DataContext = _customerViewModel;
-      this.labelStatusText.Content = _customerViewModel.ModifyMode;
       this.CustomerPageComboBox.ItemsSource = pageDisplay;
     }
 
