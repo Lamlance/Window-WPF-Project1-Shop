@@ -22,14 +22,14 @@ namespace WPF_Project1_Shop.EFCustomRepository
       dbContext.Dispose();
     }
 
-    public IEnumerable<Order> GetManyOrders(int page = 1)
+    public IEnumerable<Order> GetManyOrders(int page = 1, int limit = 500)
     {
       var orders = dbContext.Orders
         .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
         .Include(o => o.Customer)
         .OrderByDescending(o => o.CreatedAt)
         .Skip(page > 0 ? page - 1 : 0)
-        .Take(500);
+        .Take(limit);
       return orders;
     }
     public Order? AddOrder(Order data)
@@ -52,7 +52,6 @@ namespace WPF_Project1_Shop.EFCustomRepository
 
     public Order UpdateOrder(Order order)
     {
-      
       var curOrder = dbContext.Orders.Include(o => o.OrderItems).FirstOrDefault(o => o.Id == order.Id);
       if (curOrder != null && !curOrder.OrderItems.Equals(order.OrderItems.ToList())) 
       {

@@ -21,9 +21,7 @@ using WPF_Project1_Shop.ViewModel;
 
 namespace WPF_Project1_Shop.View
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
+
   public partial class OrdersWindow : Window
   {
     //ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
@@ -40,26 +38,81 @@ namespace WPF_Project1_Shop.View
 
     public OrdersWindow(UserInformation? userInformation)
     {
-      if (userInformation != null)
-      {
-        this.User = new UserInformation()
+        //ObservableCollection<OrderData> orders = new ObservableCollection<OrderData>();
+        private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
+        private static DashboardUserControl dashboardUserControl = new DashboardUserControl();
+        private static OrdersUserControl ordersUserControl = new OrdersUserControl();
+        private static ProductsUserControl productsUserControl = new ProductsUserControl();
+        private static CustomerUserControl customerUserControl = new CustomerUserControl();
+
+        CategoryViewModel _categoryViewModel;
+        UserInformation? user;
+
+        public UserInformation? User { get => user; set => user = value; }
+
+        public OrdersWindow(UserInformation? userInformation)
         {
-          Nickname = userInformation.Nickname,
-          Name = userInformation.Name,
-          Email = userInformation.Email,
-          PricturePath = userInformation.PricturePath
+            if (userInformation != null)
+            {
+                this.User = new UserInformation()
+                {
+                    Nickname = userInformation.Nickname,
+                    Name = userInformation.Name,
+                    Email = userInformation.Email,
+                    PricturePath = userInformation.PricturePath
+                };
+            }
+
+            InitializeComponent();
+            _categoryViewModel = CategoryViewModel.NewInstance();
+            InitializeComponent();
+
+            ReportViewModel.OnFinishChangesInDB += () =>
+            {
+              this.btnApplyIncomeProfit.IsEnabled = true;
+            };
+
+            
+        }
+
+        private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = _regexNumberOnly.IsMatch(e.Text);
+        }
+
+        private void MainWindowLoaded(object sender, RoutedEventArgs e)
+        {
+            this.datePickerFromOrderFilter.SelectedDate = DateTime.Today;
+            this.datePickerToOrderFilter.SelectedDate = DateTime.Today;
+            var screens = new ObservableCollection<TabItem>()
+        {
+            new TabItem() {Content = dashboardUserControl},
+            new TabItem(){Content = ordersUserControl },
+            new TabItem(){Content = productsUserControl },
+            new TabItem(){Content = customerUserControl}
         };
-      }
+            this.MainTabControl.ItemsSource = screens;
+            this.UserInfoContentControl.Content = new LoginUserControl(this.User, () =>
+            {
+                this.Close();
+            });
 
-      InitializeComponent();
-      _categoryViewModel = CategoryViewModel.NewInstance();
+        }
 
-      ReportViewModel.OnFinishChangesInDB += () =>
-      {
-        this.btnApplyIncomeProfit.IsEnabled = true;
-      };
+        private void CategoriesListLoaded(object sender, RoutedEventArgs e)
+        {
+            this.ListRibbonCategoriesList.ItemsSource = _categoryViewModel.Categories;
+        }
 
-    }
+        private void OrderEditModeChecked(object sender, RoutedEventArgs e)
+        {
+            ordersUserControl.ModifyMode = OrderViewModel.MODIFY_MODE.EDIT;
+        }
+
+        private void OrderAddModeChecked(object sender, RoutedEventArgs e)
+        {
+            ordersUserControl.ModifyMode = OrderViewModel.MODIFY_MODE.ADD;
+        }
 
     private void PreviewTxtInputNumberOnly(object sender, TextCompositionEventArgs e)
     {
@@ -100,39 +153,27 @@ namespace WPF_Project1_Shop.View
     {
       ordersUserControl.ModifyMode = OrderViewModel.MODIFY_MODE.DELETE;
     }
-    private void SearchOrderBtnClick(object sender, RoutedEventArgs e)
-    {
-      DateTime? from = menuApplyDateFilterOrder.IsChecked ? this.datePickerFromOrderFilter.SelectedDate : null;
-      DateTime? to = menuApplyDateFilterOrder.IsChecked ? this.datePickerToOrderFilter.SelectedDate : null;
+    
+        private void OrderDeleteModeChecked(object sender, RoutedEventArgs e)
+        {
+            ordersUserControl.ModifyMode = OrderViewModel.MODIFY_MODE.DELETE;
+        }
 
-      double? fromSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyFromOderFilter.Number) : null;
-      double? toSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyToOrderFilter.Number) : null;
+        private void SearchOrderBtnClick(object sender, RoutedEventArgs e)
+        {
+            DateTime? from = menuApplyDateFilterOrder.IsChecked ? this.datePickerFromOrderFilter.SelectedDate : null;
+            DateTime? to = menuApplyDateFilterOrder.IsChecked ? this.datePickerToOrderFilter.SelectedDate : null;
 
-      string? address = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxAddressOrderFilter.Text : null;
-      string? email = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxEmailOrderFilter.Text : null;
-      string? phone = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxPhoneOrderFilter.Text : null;
+            double? fromSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyFromOderFilter.Number) : null;
+            double? toSub = this.menuApplySumFilterOrder.IsChecked ? decimal.ToDouble(this.txtMoneyToOrderFilter.Number) : null;
 
-      ordersUserControl.SearchOrder(from, to, address, email, phone, fromSub, toSub);
-    }
+            string? address = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxAddressOrderFilter.Text : null;
+            string? email = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxEmailOrderFilter.Text : null;
+            string? phone = this.menuApplyCustomerFilterOrder.IsChecked ? this.txtBoxPhoneOrderFilter.Text : null;
 
-    private void CategoryChecked(object sender, RoutedEventArgs e)
-    {
-      if (sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
-      {
-        Category category = (Category)((Fluent.CheckBox)sender).Content;
-        _categoryViewModel.SelectedCategories.Add(category);
-        return;
-      }
-    }
-    private void CategoryUnchecked(object sender, RoutedEventArgs e)
-    {
-      if (sender is Fluent.CheckBox && ((Fluent.CheckBox)sender).Content is Category)
-      {
-        Category category = (Category)((Fluent.CheckBox)sender).Content;
-        _categoryViewModel.SelectedCategories.Remove(category);
-        return;
-      }
-    }
+            ordersUserControl.SearchOrder(from, to, address, email, phone, fromSub, toSub);
+        }
+
 
     private void SearchProductBtnClick(object sender, RoutedEventArgs e)
     {
@@ -195,14 +236,16 @@ namespace WPF_Project1_Shop.View
     private void SearchCustomerBtnClick(object sender, RoutedEventArgs e)
     {
 
-      string? firstname = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxFirstNameCustomerFilter.Text : null;
-      string? middlename = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxMiddleNameCustomerFilter.Text : null;
-      string? lastname = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxLastNameCustomerFilter.Text : null;
+            string? firstname = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxFirstNameCustomerFilter.Text : null;
+            string? middlename = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxMiddleNameCustomerFilter.Text : null;
+            string? lastname = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxLastNameCustomerFilter.Text : null;
 
-      string? phone = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxPhoneCustomer.Text : null;
-      string? email = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxEmailCustomer.Text : null;
-      customerUserControl.SearchCustomer(firstname, middlename, lastname, phone, email);
+            string? phone = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxPhoneCustomer.Text : null;
+            string? email = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxEmailCustomer.Text : null;
+            customerUserControl.SearchCustomer(firstname, middlename, lastname, phone, email);
+        }
     }
+
 
     static ReportViewModel.REPORT_GROUP_MODE[] modes = new ReportViewModel.REPORT_GROUP_MODE[3]
       {

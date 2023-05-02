@@ -13,7 +13,6 @@
         Title="Orders"
         Height="720"
         Width="1280">
-
   <DockPanel LastChildFill="True">
     <Fluent:Ribbon
       x:Name="Ribbon"
@@ -55,7 +54,17 @@
           </Fluent:BackstageTabControl>
         </Fluent:Backstage>
       </Fluent:Ribbon.Menu>
-
+      
+      <Fluent:RibbonTabItem 
+        Header="Dashboard"
+        x:Name="DashboardDataTab">
+        <Fluent:RibbonGroupBox 
+          Header="GroupBox"
+          Height="0"
+          Width="0"
+          Visibility="Collapsed"/>
+        </Fluent:RibbonTabItem>
+      
       <!-- Order tab -->
       <Fluent:RibbonTabItem 
         Header="Orders"
