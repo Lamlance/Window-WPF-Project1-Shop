@@ -34,5 +34,13 @@ namespace WPF_Project1_Shop.View
       this.DataContext = reportViewModel;
     }
 
+    public void GetIncomeAndProfit(DateOnly fromDate, DateOnly toDate, ReportViewModel.REPORT_GROUP_MODE mode)
+    {
+      reportViewModel.GetOrderSumGroupByTime(fromDate,toDate,mode);
+    }
+    public void GetProductCount(DateOnly fromDate, DateOnly toDate, ReportViewModel.REPORT_GROUP_MODE mode)
+    {
+      reportViewModel.GetOrderItemProductGroupByTime(fromDate,toDate,mode);
+    }
   }
 }

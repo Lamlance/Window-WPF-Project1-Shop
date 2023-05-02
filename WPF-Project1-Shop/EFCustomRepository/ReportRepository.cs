@@ -29,19 +29,6 @@ namespace WPF_Project1_Shop.EFCustomRepository
       public double Sum { get => sum; set => sum = value; }
     }
 
-    public class OrderCountGroupByTime
-    {
-      int date = 0;
-      int month = 0;
-      int year = 0;
-      int count = 0;
-
-      public int Date { get => date; set => date = value; }
-      public int Month { get => month; set => month = value; }
-      public int Year { get => year; set => year = value; }
-      public int Count { get => count; set => count = value; }
-    }
-
     public class OrderItemProductCountGroupByTime
     {
       int date = 0;
@@ -126,70 +113,6 @@ namespace WPF_Project1_Shop.EFCustomRepository
       return orderGrpByYear;
     }
 
-
-    public List<OrderCountGroupByTime>? OrderCountTotalByDate(DateOnly fromDate, DateOnly toDate)
-    {
-      var orderGrpByDate = dbContext.Orders
-        .Select(o => new
-        {
-          o.CreatedAt
-        })
-        .Where(o => o.CreatedAt >= fromDate && o.CreatedAt <= toDate)
-        .GroupBy(o => o.CreatedAt)
-        .Select(o => new OrderCountGroupByTime
-        {
-          Date = o.Key.Day,
-          Month = o.Key.Month,
-          Year = o.Key.Year,
-          Count = o.Count()
-        }).ToList();
-      return orderGrpByDate;
-    }
-    public List<OrderCountGroupByTime>? OrderCountTotalByMonth(DateOnly fromDate, DateOnly toDate)
-    {
-      var orderGrpByMonth = dbContext.Orders
-        .Select(o => new
-        {
-          o.CreatedAt
-        })
-        .Where(o => o.CreatedAt >= fromDate && o.CreatedAt <= toDate)
-        .GroupBy(o => new
-        {
-          MONTH = o.CreatedAt.Month,
-          YEAR = o.CreatedAt.Year
-        })
-        .Select(o => new OrderCountGroupByTime
-        {
-          Month = o.Key.MONTH,
-          Year = o.Key.YEAR,
-          Count = o.Count()
-        }).ToList();
-      return orderGrpByMonth;
-    }
-    public List<OrderCountGroupByTime>? OrderCountTotalByYear(DateOnly fromDate, DateOnly toDate)
-    {
-      var orderGrpByYear = dbContext.Orders
-        .Select(o => new
-        {
-          o.CreatedAt
-        })
-        .Where(o => o.CreatedAt >= fromDate && o.CreatedAt <= toDate)
-        .GroupBy(o => new
-        {
-          MONTH = o.CreatedAt.Month,
-          YEAR = o.CreatedAt.Year
-        })
-        .Select(o => new OrderCountGroupByTime
-        {
-          Month = o.Key.MONTH,
-          Year = o.Key.YEAR,
-          Count = o.Count()
-        }).ToList();
-      return orderGrpByYear;
-
-    }
-
-
     public List<OrderItemProductCountGroupByTime>? OrderItemProductCountGroupByDate(DateOnly fromDate, DateOnly toDate)
     {
       var result = dbContext.OrderItems
@@ -211,6 +134,54 @@ namespace WPF_Project1_Shop.EFCustomRepository
         {
           Date = oi.Key.DATE,
           Month = oi.Key.MONTH,
+          Year = oi.Key.YEAR,
+          Count = oi.Select(oi => oi.Quantity).Sum() ?? 0,
+          ProductName = oi.Key.ProductName
+        }).ToList();
+      return result;
+    }
+    public List<OrderItemProductCountGroupByTime>? OrderItemProductCountGroupByMonth(DateOnly fromDate, DateOnly toDate)
+    {
+      var result = dbContext.OrderItems
+        .Select(oi => new
+        {
+          oi.Quantity,
+          oi.Product.ProductName,
+          oi.Order.CreatedAt
+        })
+        .Where(oi => oi.CreatedAt >= fromDate && oi.CreatedAt <= toDate)
+        .GroupBy(oi => new
+        {
+          oi.ProductName,
+          MONTH = oi.CreatedAt.Month,
+          YEAR = oi.CreatedAt.Year
+        })
+        .Select(oi => new OrderItemProductCountGroupByTime
+        {
+          Month = oi.Key.MONTH,
+          Year = oi.Key.YEAR,
+          Count = oi.Select(oi => oi.Quantity).Sum() ?? 0,
+          ProductName = oi.Key.ProductName
+        }).ToList();
+      return result;
+    }
+    public List<OrderItemProductCountGroupByTime>? OrderItemProductCountGroupByYear(DateOnly fromDate, DateOnly toDate)
+    {
+      var result = dbContext.OrderItems
+        .Select(oi => new
+        {
+          oi.Quantity,
+          oi.Product.ProductName,
+          oi.Order.CreatedAt
+        })
+        .Where(oi => oi.CreatedAt >= fromDate && oi.CreatedAt <= toDate)
+        .GroupBy(oi => new
+        {
+          oi.ProductName,
+          YEAR = oi.CreatedAt.Year
+        })
+        .Select(oi => new OrderItemProductCountGroupByTime
+        {
           Year = oi.Key.YEAR,
           Count = oi.Select(oi => oi.Quantity).Sum() ?? 0,
           ProductName = oi.Key.ProductName

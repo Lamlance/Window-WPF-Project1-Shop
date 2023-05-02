@@ -38,12 +38,20 @@
         FontSize="16"
         Text="Products sold"
         DockPanel.Dock="Top"/>
-      <lvc:CartesianChart
-        DockPanel.Dock="Bottom"
-        XAxes="{Binding OrderCountGroupByTimeLabelAxis}"
-        Series="{Binding ProductCountGroupByTime}"
-        LegendPosition="Bottom"
-        ZoomMode="Both"/>
+      <TabControl
+        DockPanel.Dock="Bottom">
+        <TabItem
+          Header="Graph">
+          <lvc:CartesianChart
+            
+            DockPanel.Dock="Bottom"
+            XAxes="{Binding OrderCountGroupByTimeLabelAxis}"
+            Series="{Binding ProductCountGroupByTime}"
+            LegendPosition="Hidden"
+            ZoomMode="Both"/>
+        </TabItem>
+      </TabControl>
+      
     </DockPanel>
     
   </Grid>

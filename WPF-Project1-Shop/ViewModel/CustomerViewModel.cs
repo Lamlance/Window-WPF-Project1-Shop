@@ -12,7 +12,6 @@ using static WPF_Project1_Shop.ViewModel.ProductViewModel;
 
 namespace WPF_Project1_Shop.ViewModel
 {
-  public delegate void CustomerDataSetChanged(int totalPage);
   public class CustomerViewModel
   {
     public enum MODIFY_MODE
