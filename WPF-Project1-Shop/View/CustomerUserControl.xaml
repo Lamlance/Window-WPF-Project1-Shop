@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPF_Project1_Shop.View"
              mc:Ignorable="d"
-             Background="Pink"
+             Background="White"
              Loaded="CustomerUserControlLoaded"
              d:DesignHeight="450"
              d:DesignWidth="800">

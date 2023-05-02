@@ -11,7 +11,7 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.ViewModel
 {
-    public class DashboardViewModel
+    public class DashboardViewModel : ViewModelBase
     {
 
         public List<Order>? RecentOrders { get; set; }
@@ -21,10 +21,45 @@ namespace WPF_Project1_Shop.ViewModel
         public List<Product>? TopRunningOutProducts { get; set; }
         public ObservableCollection<Product> TopRunningOutProductsCollection { get; set; }
 
-        public double TotalEarnings { get; set; }
-        public int TotalOrders { get; set; }
-        public int TotalProducts { get; set; }
-        public int TotalCategories { get; set; }
+        private double _totalEarnings;
+        private int _totalOrders;
+        private int _totalProducts;
+
+
+        public double TotalEarnings {
+            get
+            {
+                return _totalEarnings;
+            }
+            set {
+                _totalEarnings = value;
+                OnPropertyChanged(nameof(TotalEarnings));
+            } 
+        }
+        public int TotalOrders
+        {
+            get
+            {
+                return _totalOrders;
+            }
+            set
+            {
+                _totalOrders = value;
+                OnPropertyChanged(nameof(TotalOrders));
+            }
+        }
+        public int TotalProducts
+        {
+            get
+            {
+                return _totalProducts;
+            }
+            set
+            {
+                _totalProducts = value;
+                OnPropertyChanged(nameof(TotalProducts));
+            }
+        }
 
         //public class SaleReport
         //{

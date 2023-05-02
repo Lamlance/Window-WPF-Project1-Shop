@@ -38,8 +38,28 @@
                 <RowDefinition Height="7*" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Total Earnings"
+            <TextBlock Text="General information"
+                       FontSize="17"
+                       FontWeight="DemiBold"
                        Padding="10, 0, 0, 0" />
+
+            <StackPanel Grid.Row="1">
+                <Label Content="Total number of Products: " FontSize="15"/>
+                <TextBlock x:Name="TotalProducts" Text="{Binding TotalProducts}"  Margin="10, 0, 0, 0"/>
+
+                <Label Content="Total number of Orders: "
+                       FontSize="15" />
+                <TextBlock x:Name="TotalOrders"
+                           Text="{Binding TotalOrders}"
+                           Margin="10, 0, 0, 0"/>
+
+                <Label Content="Total Earnings: "
+                       FontSize="15" />
+                <TextBlock x:Name="TotalEarnings"
+                           Text="{Binding TotalEarnings}"
+                           Margin="10, 0, 0, 0"/>
+                
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="2"
@@ -50,6 +70,8 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Last Orders"
+                       FontSize="17"
+                       FontWeight="DemiBold"
                        Padding="10, 0, 0, 0" />
 
             <ListView x:Name="ListOfLastestOrders"
@@ -88,6 +110,8 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Running Out Products"
+                       FontSize="17"
+                       FontWeight="DemiBold"
                        Padding="10, 0, 0, 0" />
 
             <ListView x:Name="ListRunningOutProducts"
@@ -119,6 +143,8 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Best Seller"
+                       FontSize="17"
+                       FontWeight="DemiBold"
                        Padding="10, 0, 0, 0" />
 
             <ListView x:Name="ListBestSellerProducts"
@@ -137,12 +163,6 @@
                 </ListView.View>
             </ListView>
         </Grid>
-
-        <StackPanel Grid.Row="0"
-                    Grid.Column="2"
-                    Grid.RowSpan="3">
-
-        </StackPanel>
 
     </Grid>
 </UserControl>

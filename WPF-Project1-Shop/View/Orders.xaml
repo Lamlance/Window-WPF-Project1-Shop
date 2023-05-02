@@ -51,7 +51,9 @@
             <Fluent:RibbonTabItem Header="Dashboard"
                                   x:Name="DashboardDataTab">
                 <Fluent:RibbonGroupBox Header="GroupBox"
-                                       Visibility="Collapsed" />
+                                       Height="0"
+                                       Width="0"
+                                       Visibility="Collapsed"/>
             </Fluent:RibbonTabItem>
 
 
