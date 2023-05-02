@@ -16,7 +16,7 @@
         <helper:RelativeToAbsoluteConverter x:Key="ImagePathConverter" />
         <helper:DoubleToDecimal x:Key="DoubleToDecimalConverter" />
     </UserControl.Resources>
-    <DockPanel Background="AliceBlue">
+    <DockPanel Background="White">
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />

@@ -22,19 +22,16 @@ namespace WPF_Project1_Shop.View
     public partial class DashboardUserControl : UserControl
     {
 
-        DashboardViewModel dashboardViewModel;
+        DashboardViewModel dashboardViewModel = new DashboardViewModel();
 
         public DashboardUserControl()
         {
             InitializeComponent();
-            dashboardViewModel = new DashboardViewModel();
+            this.DataContext = dashboardViewModel;
 
-            this.ListBestSellerProducts.ItemsSource = dashboardViewModel.TopSellProducts;
-            this.ListOfLastestOrders.ItemsSource = dashboardViewModel.RecentOrders;
-            this.ListRunningOutProducts.ItemsSource = dashboardViewModel.TopRunningOutProducts;
+            this.ListBestSellerProducts.ItemsSource = dashboardViewModel.TopSellProductsCollection;
+            this.ListOfLastestOrders.ItemsSource = dashboardViewModel.RecentOrdersCollection;
+            this.ListRunningOutProducts.ItemsSource = dashboardViewModel.TopRunningOutProductsCollection;
         }
-
-
-
     }
 }

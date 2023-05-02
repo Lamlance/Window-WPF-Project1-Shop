@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -14,10 +15,12 @@ namespace WPF_Project1_Shop.ViewModel
     {
 
         public List<Order>? RecentOrders { get; set; }
+        public ObservableCollection<Order> RecentOrdersCollection { get; set; }
         public List<Product>? TopSellProducts { get; set; }
-
+        public ObservableCollection<Product> TopSellProductsCollection { get; set; }
         public List<Product>? TopRunningOutProducts { get; set; }
-    
+        public ObservableCollection<Product> TopRunningOutProductsCollection { get; set; }
+
         public double TotalEarnings { get; set; }
         public int TotalOrders { get; set; }
         public int TotalProducts { get; set; }
@@ -32,36 +35,29 @@ namespace WPF_Project1_Shop.ViewModel
 
         public DashboardViewModel()
         {
-            RecentOrders = new List<Order>();
-            TopSellProducts = new List<Product>();
-            GetOrdersInformation();
-            GetProductsInformation();
+            Initialize();
         }
 
 
-        private async Task GetRecentSales(int limit = 7)
+        private async Task Initialize()
         {
-            var orders = await Task<List<Order>>.Run(() =>
+            RecentOrdersCollection = new ObservableCollection<Order>();
+            TopSellProductsCollection = new ObservableCollection<Product>();
+            TopRunningOutProductsCollection = new ObservableCollection<Product>();
+            await GetOrdersInformation();
+            await GetProductsInformation();
+            GetData();
+        }
+
+        private void GetData()
+        {
+            if (RecentOrders == null || TopSellProducts == null || TopRunningOutProducts == null) { return; }
+            for (int i = 0; i < RecentOrders.Count; i++)
             {
-                using (OrderRepository repository = new OrderRepository(new RailwayContext()))
-                {
-
-                    return repository.GetManyOrders().GroupBy(o => o.CreatedAt).ToList();
-                }
-            });
-
-            //DateTime endDate = DateTime.Now;
-            //DateTime startDate = endDate.AddDays(-limit);
-
-            //var result = Enumerable.Range(0, limit)
-            //    .Select(i => startDate.AddDays(i))
-            //    .Select(date => orders.Where(g => g.Key == DateOnly.FromDateTime(date))
-            //                           .Select(g => new SaleReport { CreateAt = date, TotalSum = g.Sum(o => o.Subtotal) }));
-
-            //foreach (var saleReport in result) {
-            //    Console.WriteLine($"{saleReport}");
-            //}
-
+                RecentOrdersCollection.Add(RecentOrders.ElementAt(i));
+                TopSellProductsCollection.Add(TopSellProducts.ElementAt(i));
+                TopRunningOutProductsCollection.Add(TopRunningOutProducts.ElementAt(i));
+            }
         }
 
         private async Task GetProductsInformation()
