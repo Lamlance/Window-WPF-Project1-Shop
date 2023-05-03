@@ -12,7 +12,7 @@ namespace WPF_Project1_Shop.Helper
     static readonly string appPath = AppDomain.CurrentDomain.BaseDirectory;
     public static string CopyImageToApp(string absoluteSrcPath)
     {
-      if (!File.Exists(absoluteSrcPath))
+      if (!File.Exists(absoluteSrcPath) && !File.Exists(Helper.RelativeToAbsoluteConverter.ReletiveImagePathToAbsoule(absoluteSrcPath)))
       {
         return string.Empty;
       }

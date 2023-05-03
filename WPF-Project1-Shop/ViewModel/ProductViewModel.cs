@@ -124,6 +124,7 @@ namespace WPF_Project1_Shop.ViewModel
         }
         productsInPage.Insert(0, data);
         OnDataAdd?.Invoke(data);
+        idToPagePos.Add(data.Id, 0);
       }
       catch (Exception e)
       {
@@ -188,12 +189,8 @@ namespace WPF_Project1_Shop.ViewModel
       });
       if(result != null)
       {
-        if (idToPagePos.ContainsKey(p.Id))
-        {
-          int pos = idToPagePos[p.Id];
-          productsInPage.Remove(p);
-          productsSet!.Remove(result);
-        }
+        productsInPage.Remove(p);
+        productsSet!.Remove(result);
       }
     }
 

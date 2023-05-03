@@ -113,6 +113,7 @@ namespace WPF_Project1_Shop.EFCustomRepository
       return orderGrpByYear;
     }
 
+
     public List<OrderItemProductCountGroupByTime>? OrderItemProductCountGroupByDate(DateOnly fromDate, DateOnly toDate)
     {
       var result = dbContext.OrderItems
@@ -187,6 +188,44 @@ namespace WPF_Project1_Shop.EFCustomRepository
           ProductName = oi.Key.ProductName
         }).ToList();
       return result;
+    }
+
+
+    public List<Order>? GetNewestOrder(int takeTop = 5)
+    {
+      var result = dbContext.Orders
+        .Include(o => o.Customer)
+        .OrderByDescending(o => o.CreatedAt)
+        .Take(takeTop);
+      return result?.ToList();
+    }
+    public List<Product>? GetTopSellingProduct(int takeTop = 5)
+    {
+      var result = dbContext.OrderItems
+        .Include(oi => oi.Product)
+        .Select(oi => new
+        {
+          oi.ProductId,
+          oi.Product,
+          oi.Quantity,
+        })
+        .GroupBy(oi => oi.ProductId)
+        .Select(r => new Product
+        {
+          ProductName = r.First().Product.ProductName,
+          Price = r.First().Product.Price,
+          Numbers = r.Select(oi => oi.Quantity).Sum() ?? 0,
+        })
+        .OrderByDescending(r => r.Numbers)
+        .Take(takeTop);
+      return result.ToList();
+    }
+    public List<Product>? GetLowestRemainProduct(int takeTop = 5)
+    {
+      var result = dbContext.Products
+        .OrderBy(p => p.Numbers)
+        .Take(takeTop);
+      return result.ToList();
     }
   }
 }

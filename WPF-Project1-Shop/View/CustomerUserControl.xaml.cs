@@ -57,7 +57,7 @@ namespace WPF_Project1_Shop.View
       {
         Task.Run(() =>
         {
-          MessageBox.Show($"Removed customer {customer.Id}: {customer.LastName} {customer.MiddleName} {customer.FirstName}");
+          MessageBox.Show($"Removed customer {customer?.Id}: {customer?.LastName} {customer?.MiddleName} {customer?.FirstName}");
         });
       };
     }

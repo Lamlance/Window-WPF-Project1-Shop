@@ -43,7 +43,7 @@ namespace WPF_Project1_Shop.View
     {
       User = user;
       InitializeComponent();
-      if(user != null)
+      if (user != null)
       {
         LogoutSuccssed += logout;
         this.txtBlockLog.Visibility = Visibility.Collapsed;
@@ -55,7 +55,7 @@ namespace WPF_Project1_Shop.View
 
 
     private MyAuth0Client? client;
-    
+
     public async Task Login()
     {
       client = new MyAuth0Client(new Auth0ClientOptions
@@ -74,15 +74,15 @@ namespace WPF_Project1_Shop.View
       catch (Exception e)
       {
         var a = e.Message;
+        MessageBox.Show(e.Message);
       }
       btnLogin.Visibility = Visibility.Collapsed;
       btnLogout.Visibility = Visibility.Visible;
-      LoginSuccessed?.Invoke();
     }
 
     public async Task Logout()
     {
-      if(client == null)
+      if (client == null)
       {
         client = new MyAuth0Client(new Auth0ClientOptions
         {
@@ -119,7 +119,8 @@ namespace WPF_Project1_Shop.View
       StringBuilder sb = new StringBuilder();
       foreach (var claim in loginResult.User.Claims)
       {
-        switch (claim.Type){
+        switch (claim.Type)
+        {
           case "nickname":
             {
               user.Nickname = claim.Value;
@@ -135,7 +136,7 @@ namespace WPF_Project1_Shop.View
           case "picture":
             {
               user.PricturePath = claim.Value;
-              break ;
+              break;
             }
           case "email":
             {
@@ -145,7 +146,7 @@ namespace WPF_Project1_Shop.View
             }
           case "email_verified":
             {
-              if(user.IsEmailVerified)
+              if (user.IsEmailVerified)
               {
                 user.IsEmailVerified = user.IsEmailVerified && (claim.Value == "True" || claim.Value == "true");
               }
@@ -160,13 +161,12 @@ namespace WPF_Project1_Shop.View
       }
       this.txtBlockUserInfo.Text = sb.ToString();
       this.imgUserAvatar.Source = new BitmapImage(new Uri(user.PricturePath));
-      if (user.IsEmailVerified)
+      new OrdersWindow(user)
       {
-        new OrdersWindow(user)
-        {
-          User = user
-        }.Show();
-      }
+        User = user
+      }.Show();
+      LoginSuccessed?.Invoke();
+
     }
 
     private void LogOutBtnClicked(object sender, RoutedEventArgs e)
@@ -176,7 +176,7 @@ namespace WPF_Project1_Shop.View
 
     private void DockPanelUserInfoLoaded(object sender, RoutedEventArgs e)
     {
-      if(User == null)
+      if (User == null)
       {
         return;
       }

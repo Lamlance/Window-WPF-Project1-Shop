@@ -21,7 +21,7 @@ namespace WPF_Project1_Shop.View
   /// </summary>
   public partial class ReportUserControl : UserControl
   {
-    ReportViewModel reportViewModel = new ReportViewModel();
+    private static ReportViewModel reportViewModel = new ReportViewModel();
 
     public ReportUserControl()
     {

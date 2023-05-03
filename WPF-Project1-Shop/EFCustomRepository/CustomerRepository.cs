@@ -37,11 +37,20 @@ namespace WPF_Project1_Shop.EFCustomRepository
     public Customer? RemoveCustomer(Customer data)
     {
       var deletingCustomer = dbContext.Customers
-          .SingleOrDefault(c => data.Id == c.Id);
+        .Include(o => o.Orders)
+        .SingleOrDefault(c => data.Id == c.Id);
 
       if (deletingCustomer != null)
       {
-        // TODO: Remove dependency
+        foreach(var o in deletingCustomer.Orders)
+        {
+          using(OrderRepository repository = new OrderRepository(new RailwayContext()))
+          {
+            repository.DeleteOrder(o);
+          }
+        };
+
+
         dbContext.SaveChanges();
 
         dbContext.Customers.Remove(deletingCustomer);

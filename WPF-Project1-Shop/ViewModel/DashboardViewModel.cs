@@ -81,19 +81,28 @@ namespace WPF_Project1_Shop.ViewModel
       RecentOrdersCollection = new ObservableCollection<Order>();
       TopSellProductsCollection = new ObservableCollection<Product>();
       TopRunningOutProductsCollection = new ObservableCollection<Product>();
-      await GetOrdersInformation();
-      await GetProductsInformation();
-      GetData();
+      GetOrdersInformation();
+      GetProductsInformation();
+      GetTopSellingProduct();
     }
 
-    private void GetData()
+
+    private async Task GetTopSellingProduct()
     {
-      if (RecentOrders == null || TopSellProducts == null || TopRunningOutProducts == null) { return; }
-      for (int i = 0; i < RecentOrders.Count; i++)
+      var topSelling = await Task<List<Product>?>.Run(() =>
       {
-        RecentOrdersCollection.Add(RecentOrders.ElementAt(i));
-        TopSellProductsCollection.Add(TopSellProducts.ElementAt(i));
-        TopRunningOutProductsCollection.Add(TopRunningOutProducts.ElementAt(i));
+        using (ReportRepository report = new ReportRepository(new RailwayContext()))
+        {
+          return report.GetTopSellingProduct();
+        }
+      });
+
+      if (topSelling != null)
+      {
+        foreach (var t in topSelling)
+        {
+          TopSellProductsCollection.Add(t);
+        }
       }
     }
 
@@ -108,8 +117,16 @@ namespace WPF_Project1_Shop.ViewModel
       });
 
       TotalProducts = result.Where(o => o.Numbers > 0).Count();
-      TopSellProducts = result.OrderBy(o => o.OrderItems.Count).Take(5).ToList();
+
       TopRunningOutProducts = result.Where(o => o.Numbers > 0).OrderBy(o => o.Numbers).Take(5).ToList();
+      if(TopRunningOutProducts != null)
+      {
+        foreach(var o in TopRunningOutProducts)
+        {
+          TopRunningOutProductsCollection.Add(o);
+        }
+      }
+      
     }
 
     private async Task GetOrdersInformation()
@@ -125,6 +142,12 @@ namespace WPF_Project1_Shop.ViewModel
       TotalOrders = result.Count();
       TotalEarnings = result.Where(o => o.Status == "Shipped").Sum(o => o.Subtotal);
       RecentOrders = result.Take(5).ToList();
+      if(RecentOrders != null)
+      {
+        foreach (var o in RecentOrders)
+          RecentOrdersCollection.Add(o);
+      }
+
     }
   }
 }

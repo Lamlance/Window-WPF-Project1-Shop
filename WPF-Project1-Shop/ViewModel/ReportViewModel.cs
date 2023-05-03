@@ -18,7 +18,8 @@ namespace WPF_Project1_Shop.ViewModel
   {
     public static event DataBaseFinishChanges OnFinishChangesInDB;
 
-
+    public event DataBaseFinishChanges OrderSumFinishGettingData;
+    public event DataBaseFinishChanges ProductCountFinishGettingData;
 
     ObservableCollection<ISeries<double>> orderSumGroupByTime = new ObservableCollection<ISeries<double>>();
     ObservableCollection<Axis> orderSumGroupByTimeLabelAxis = new ObservableCollection<Axis>();
@@ -99,8 +100,6 @@ namespace WPF_Project1_Shop.ViewModel
         Name = "Profit",
         Values = sums.Select(s => s * (0.1)).ToArray()
       });
-
-      StringBuilder sb = new StringBuilder();
       
 
       var timesLabel = orderSumsByTime.Select(o =>
@@ -109,13 +108,10 @@ namespace WPF_Project1_Shop.ViewModel
       }).ToArray();
       orderSumGroupByTimeLabelAxis.Add(new Axis
       {
-        Labels = timesLabel,
-        LabelsRotation = 0,
-        SeparatorsPaint = new SolidColorPaint(new SKColor(200, 200, 200)),
-        SeparatorsAtCenter = false,
-        TicksPaint = new SolidColorPaint(new SKColor(35, 35, 35)),
-        TicksAtCenter = true
+        Labels = timesLabel
       });
+
+      OrderSumFinishGettingData?.Invoke();
     }
 
 
@@ -228,7 +224,7 @@ namespace WPF_Project1_Shop.ViewModel
           Name = item.ElementAt(0).ProductName
         }); 
       }
-      
+      ProductCountFinishGettingData?.Invoke();
     }
   }
 }

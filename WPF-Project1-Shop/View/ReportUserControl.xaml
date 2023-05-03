@@ -27,7 +27,7 @@
         XAxes="{Binding OrderSumGroupByTimeLabelAxis}"
         x:Name="BarChartOrderByTime"
         ZoomMode="None"
-        LegendPosition="Bottom">
+        LegendPosition="Hidden">
       </lvc:CartesianChart>
     </DockPanel>
 
@@ -43,6 +43,7 @@
         <TabItem
           Header="Graph">
           <lvc:CartesianChart
+            x:Name="ProductCountGraph"
             DockPanel.Dock="Bottom"
             XAxes="{Binding OrderCountGroupByTimeLabelAxis}"
             Series="{Binding ProductCountGroupByTime}"

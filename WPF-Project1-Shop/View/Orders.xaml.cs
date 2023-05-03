@@ -204,8 +204,8 @@ namespace WPF_Project1_Shop.View
       string? middlename = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxMiddleNameCustomerFilter.Text : null;
       string? lastname = this.menuApplyCustomerNameFilter.IsChecked ? this.txtBoxLastNameCustomerFilter.Text : null;
 
-      string? phone = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxPhoneCustomer.Text : null;
-      string? email = this.menuApplySumFilterOrder.IsChecked ? this.txtBoxEmailCustomer.Text : null;
+      string? phone = this.menuApplyCustomerInformationFilter.IsChecked ? this.txtBoxPhoneCustomer.Text : null;
+      string? email = this.menuApplyCustomerInformationFilter.IsChecked ? this.txtBoxEmailCustomer.Text : null;
       customerUserControl.SearchCustomer(firstname, middlename, lastname, phone, email);
 
     }

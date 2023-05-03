@@ -22,45 +22,65 @@
           <RowDefinition Height="*" />
           <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView 
+
+        <DataGrid
+          SelectionMode="Single"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
           x:Name="ListCustomer"
           Margin="10, 10, 10, 0"
           PreviewMouseLeftButtonDown="CustomerListClick">
 
-          <ListView.View>
-            <GridView>
-              <GridViewColumn 
-                Header="Id"
-                Width="Auto"
-                DisplayMemberBinding="{Binding Id}" />
-              <GridViewColumn 
-                Header="First Name" 
-                Width="Auto" 
-                DisplayMemberBinding="{Binding FirstName}"/>
-              <GridViewColumn 
-                Header="Middle Name"
-                Width="Auto"
-                DisplayMemberBinding="{Binding MiddleName}" />
-              <GridViewColumn 
-                Header="Last Name"
-                Width="Auto"
-                DisplayMemberBinding="{Binding LastName}" />
-              <GridViewColumn 
-                Header="Phone"
-                Width="Auto"
-                DisplayMemberBinding="{Binding Phone}" />
-              <GridViewColumn 
-                Header="Email"
-                Width="Auto"
-                DisplayMemberBinding="{Binding Email}" />
-              <GridViewColumn 
-                Header="Address"
-                Width="Auto"
-                DisplayMemberBinding="{Binding Address}" />
-            </GridView>
-          </ListView.View>
-        </ListView>
+          <DataGrid.Resources>
+            <Style 
+            x:Key="ColumnElementStyle" 
+            TargetType="TextBlock">
+              <Setter 
+              Property="Margin" 
+              Value="5,5,0,5" />
+            </Style>
+          </DataGrid.Resources>
 
+          <DataGrid.Columns>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Header="Id"
+              Width="0.2*"
+              Binding="{Binding Id}"/>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Header="First Name"
+              Binding="{Binding FirstName}"
+              Width="Auto"/>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Width="Auto"
+              Header="Middle Name"
+              Binding="{Binding MiddleName}"/>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Width="Auto"
+              Header="Last Name"
+              Binding="{Binding LastName}"/>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Header="Phone"
+              Width="1*"
+              Binding="{Binding Phone}"/>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Header="Address"
+              Width="1*"
+              Binding="{Binding Address}"/>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Header="Email"
+              Width="1*"
+              Binding="{Binding Email}"/>
+          </DataGrid.Columns>
+        </DataGrid>
+        
+        
         <WrapPanel 
           HorizontalAlignment="Center"
           Grid.Row="1"
@@ -172,21 +192,27 @@
         <TabItem Header="Customer info">
           <StackPanel>
             <Label 
+              ContentStringFormat="{}Firstname: {0}"
               Content="{Binding FirstName}"
               d:Content="Firstname: Nguyen" />
             <Label 
+              ContentStringFormat="{}Middlename: {0}"
               Content="{Binding MiddleName}"
               d:Content="Middlename: Van" />
             <Label 
+              ContentStringFormat="{}Lastname: {0}"
               Content="{Binding LastName}"
               d:Content="Lastname: Hoang" />
             <Label 
+              ContentStringFormat="{}Phone number: {0}"
               Content="{Binding Phone}"
               d:Content="Phone number: 12345678" />
             <Label 
+              ContentStringFormat="{}Email: {0}"
               Content="{Binding Email}"
               d:Content="Email: Nvhoang@coldmail.com" />
             <Label 
+              ContentStringFormat="{}Address: {0}"
               Content="{Binding Address}"
               d:Content="Address: 420 Huynh Van Banh Q3, P3, HCM" />
           </StackPanel>

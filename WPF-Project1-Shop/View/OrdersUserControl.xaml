@@ -133,141 +133,170 @@
       <DatePicker
         SelectedDate="{Binding CreatedAt,Mode=OneWay,
         Converter={StaticResource StringToDateConverter}}"
-                        x:Name="datePickerCreatedOrderForm"
-                        VerticalAlignment="Center"
-                        Grid.Column="1" />
+        x:Name="datePickerCreatedOrderForm"
+        VerticalAlignment="Center"
+        Grid.Column="1" />
 
-            <Label VerticalAlignment="Center"
-                   Grid.Row="1"
-                   Grid.Column="0"
-                   Content="Date deliverd" />
-            <DatePicker SelectedDate="{Binding UpdatedAt,Mode=OneWay,
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Row="1"
+        Grid.Column="0"
+        Content="Date deliverd" />
+      <DatePicker 
+        SelectedDate="{Binding UpdatedAt,Mode=OneWay,
         Converter={StaticResource StringToDateConverter}}"
-                        x:Name="datePickerDeliveredOrderForm"
-                        Grid.Row="1"
-                        VerticalAlignment="Center"
-                        Grid.Column="1" />
+        x:Name="datePickerDeliveredOrderForm"
+        Grid.Row="1"
+        VerticalAlignment="Center"
+        Grid.Column="1" />
 
-            <Label VerticalAlignment="Center"
-                   Grid.Row="2"
-                   Grid.Column="0"
-                   Content="Ship address" />
-            <TextBox Text="{Binding ShipAddress,Mode=OneWay}"
-                     x:Name="txtBoxAddressOrderForm"
-                     Grid.Row="2"
-                     VerticalAlignment="Center"
-                     Grid.Column="1" />
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Row="2"
+        Grid.Column="0"
+        Content="Ship address" />
+      <TextBox 
+        x:Name="txtBoxAddressOrderForm"
+        Grid.Row="2"
+        VerticalAlignment="Center"
+        Grid.Column="1" />
 
-            <Label VerticalAlignment="Center"
-                   Grid.Row="3"
-                   Grid.Column="0"
-                   Content="Total" />
-            <currency:CurrencyTextBox StringFormat="C0"
-                                      Culture="vi-VN"
-                                      TextAlignment="Left"
-                                      Number="{Binding Subtotal,Mode=OneWay,
-        Converter={StaticResource DoubleToDecimal}}"
-                                      x:Name="txtBoxTotalOrderForm"
-                                      Grid.Row="3"
-                                      VerticalAlignment="Center"
-                                      Grid.Column="1" />
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Row="3"
+        Grid.Column="0"
+        Content="Total" />
+      <currency:CurrencyTextBox 
+        StringFormat="C0"
+        Culture="vi-VN"
+        TextAlignment="Left"
+        x:Name="txtBoxTotalOrderForm"
+        Grid.Row="3"
+        VerticalAlignment="Center"
+        Grid.Column="1" />
 
 
-            <Label VerticalAlignment="Center"
-                   Grid.Row="4"
-                   Grid.Column="0"
-                   Content="Ship Status" />
-            <ComboBox x:Name="comboOrderForm"
-                      Grid.Row="4"
-                      VerticalAlignment="Center"
-                      SelectedIndex="0"
-                      Grid.Column="1">
-                <ComboBoxItem Content="Waiting" />
-                <ComboBoxItem Content="Shipping" />
-                <ComboBoxItem Content="Shipped" />
-                <ComboBoxItem Content="Canceled" />
-            </ComboBox>
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Row="4"
+        Grid.Column="0"
+        Content="Ship Status" />
+      <ComboBox 
+        x:Name="comboOrderForm"
+        Grid.Row="4"
+        VerticalAlignment="Center"
+        SelectedIndex="0"
+        Grid.Column="1">
+        <ComboBoxItem Content="Waiting" />
+        <ComboBoxItem Content="Shipping" />
+        <ComboBoxItem Content="Shipped" />
+        <ComboBoxItem Content="Canceled" />
+      </ComboBox>
 
-            <TabControl SelectedIndex="0"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="5">
-                <TabItem x:Name="tabItemCustomerInfoOrderForm"
-                         Header="Customer info"
-                         VerticalAlignment="Top">
-                    <StackPanel Orientation="Vertical">
-                        <Button Click="CustomerAddOrderBtnClick"
-                                x:Name="btnCustomerAddOrderForm"
-                                Visibility="Collapsed"
-                                Content="Add Customer" />
-                        <TextBlock FontSize="16"
-                                   TextWrapping="Wrap">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="Name: {0} {1} {2}">
-                                    <Binding Path="FirstName" />
-                                    <Binding Path="MiddleName" />
-                                    <Binding Path="LastName" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
+      <TabControl 
+        SelectedIndex="0"
+        Grid.ColumnSpan="2"
+        Grid.Row="5">
+        <TabItem 
+          x:Name="tabItemCustomerInfoOrderForm"
+          Header="Customer info"
+          VerticalAlignment="Top">
+          <StackPanel Orientation="Vertical">
+            <Button 
+              Click="CustomerAddOrderBtnClick"
+              x:Name="btnCustomerAddOrderForm"
+              Visibility="Collapsed"
+              Content="Add Customer" />
+            <TextBlock 
+              FontSize="16"
+              TextWrapping="Wrap">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="Name: {0} {1} {2}">
+                  <Binding Path="FirstName" />
+                  <Binding Path="MiddleName" />
+                  <Binding Path="LastName" />
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
 
-                        <TextBlock FontSize="16"
-                                   TextWrapping="Wrap">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="Phone: {0}">
-                                    <Binding Path="Phone" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
+            <TextBlock 
+              FontSize="16"
+              TextWrapping="Wrap">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="Phone: {0}">
+                  <Binding Path="Phone" />
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
 
-                        <TextBlock FontSize="16"
-                                   TextWrapping="Wrap">
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="Email: {0}">
-                                    <Binding Path="Email" />
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
+            <TextBlock 
+              FontSize="16"
+              TextWrapping="Wrap">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="Email: {0}">
+                  <Binding Path="Email" />
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
 
-                    </StackPanel>
+            <TextBlock 
+              FontSize="16"
+              TextWrapping="Wrap">
+              <TextBlock.Text>
+                <MultiBinding StringFormat="Customer address: {0}">
+                  <Binding Path="Address" />
+                </MultiBinding>
+              </TextBlock.Text>
+            </TextBlock>
+            
+          </StackPanel>
 
-                </TabItem>
+        </TabItem>
 
-                <TabItem Header="Ordered products">
-                    <DockPanel LastChildFill="True">
-                        <StackPanel Margin="0,0,0,0"
-                                    DockPanel.Dock="Top">
-                            <Button Click="EditOrderItemBtnClick"
-                                    Content="Edit order items" />
-                        </StackPanel>
-                        <DataGrid x:Name="SelectedOrderItemDataGrid"
-                                  AutoGenerateColumns="False"
-                                  DockPanel.Dock="Bottom">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn IsReadOnly="True"
-                                                    Binding="{Binding Product.ProductName}"
-                                                    Width="1.25*"
-                                                    Header="ProductName" />
-                                <DataGridTextColumn Binding="{Binding Quantity,Mode=TwoWay}"
-                                                    Width="0.75*"
-                                                    Header="Quantity" />
-                                <DataGridTextColumn Binding="{Binding Price,Mode=TwoWay}"
-                                                    Width="0.75*"
-                                                    Header="Unit price" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </DockPanel>
-                </TabItem>
+        <TabItem Header="Ordered products">
+          <DockPanel LastChildFill="True">
+            <StackPanel 
+              Margin="0,0,0,0"
+              DockPanel.Dock="Top">
+              <Button 
+                Click="EditOrderItemBtnClick"
+                Content="Edit order items" />
+            </StackPanel>
+            <DataGrid 
+              x:Name="SelectedOrderItemDataGrid"
+              AutoGenerateColumns="False"
+              DockPanel.Dock="Bottom">
+              <DataGrid.Columns>
+                <DataGridTextColumn 
+                  IsReadOnly="True"
+                  Binding="{Binding Product.ProductName}"
+                  Width="1.25*"
+                  Header="ProductName" />
+                <DataGridTextColumn 
+                  Binding="{Binding Quantity,Mode=TwoWay}"
+                  Width="0.75*"
+                  Header="Quantity" />
+                <DataGridTextColumn 
+                  Binding="{Binding Price,Mode=TwoWay}"
+                  Width="0.75*"
+                  Header="Unit price" />
+              </DataGrid.Columns>
+            </DataGrid>
+          </DockPanel>
+        </TabItem>
 
-            </TabControl>
+      </TabControl>
 
-            <WrapPanel HorizontalAlignment="Right"
-                       Grid.ColumnSpan="2"
-                       Grid.Row="6">
-                <Button Click="OrderFormBtnClick"
-                        Padding="20,0,20,0"
-                        Margin="10"
-                        Content="Submit" />
-            </WrapPanel>
-        </Grid>
+      <WrapPanel 
+        HorizontalAlignment="Right"
+        Grid.ColumnSpan="2"
+        Grid.Row="6">
+        <Button 
+          Click="OrderFormBtnClick"
+          Padding="20,0,20,0"
+          Margin="10"
+          Content="Submit" />
+      </WrapPanel>
     </Grid>
+  </Grid>
 </UserControl>

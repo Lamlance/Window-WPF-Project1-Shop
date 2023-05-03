@@ -53,9 +53,9 @@ namespace WPF_Project1_Shop.EFCustomRepository
     public Order UpdateOrder(Order order)
     {
       var curOrder = dbContext.Orders.Include(o => o.OrderItems).FirstOrDefault(o => o.Id == order.Id);
-      if (curOrder != null && !curOrder.OrderItems.Equals(order.OrderItems.ToList())) 
+      if (curOrder != null && !curOrder.OrderItems.Equals(order.OrderItems.ToList()))
       {
-        var orderItemOldInOrder =  new HashSet<OrderItem>(dbContext.OrderItems.Include(oi => oi.Product).Where(oi => oi.OrderId == order.Id).ToList());
+        var orderItemOldInOrder = new HashSet<OrderItem>(dbContext.OrderItems.Include(oi => oi.Product).Where(oi => oi.OrderId == order.Id).ToList());
         var orderItemNewInOrder = new List<OrderItem>(order.OrderItems.ToList());
 
         List<OrderItem> updateOrder = orderItemNewInOrder.Intersect(orderItemOldInOrder).ToList();
@@ -74,7 +74,7 @@ namespace WPF_Project1_Shop.EFCustomRepository
             {
               updateOrder.Remove(newOi);
             }
-            else if(newOi != null)
+            else if (newOi != null)
             {
               orderItemOldInOrder.Add(newOi);
             }
@@ -89,11 +89,11 @@ namespace WPF_Project1_Shop.EFCustomRepository
             newOrderItem.Product = null;
             dbContext.OrderItems.Add(newOrderItem);
           }
-          
+
         }
 
         //Edit
-        
+
 
         //Edit
         dbContext.UpdateRange(orderItemOldInOrder);
@@ -101,25 +101,25 @@ namespace WPF_Project1_Shop.EFCustomRepository
         dbContext.SaveChanges();
       }
 
-      if(curOrder != null )
+      if (curOrder != null)
       {
         bool isDif = false;
-        if(curOrder.Status != order.Status)
+        if (curOrder.Status != order.Status)
         {
           isDif = true;
           curOrder.Status = order.Status;
         }
-        if( curOrder.Subtotal != order.Subtotal)
+        if (curOrder.Subtotal != order.Subtotal)
         {
           isDif = true;
-          curOrder.Subtotal = curOrder.Subtotal;
+          curOrder.Subtotal = order.Subtotal;
         }
-        if(curOrder.CreatedAt != order.CreatedAt)
+        if (curOrder.CreatedAt != order.CreatedAt)
         {
           isDif = true;
           curOrder.CreatedAt = order.CreatedAt;
         }
-        if(curOrder.UpdatedAt != order.UpdatedAt)
+        if (curOrder.UpdatedAt != order.UpdatedAt)
         {
           isDif = true;
           curOrder.UpdatedAt = order.UpdatedAt;
@@ -129,39 +129,44 @@ namespace WPF_Project1_Shop.EFCustomRepository
           dbContext.Orders.Update(curOrder);
         }
       }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
       return order;
     }
 
-    public Order DeleteOrder(Order order)
+    public Order? DeleteOrder(Order order)
     {
       var orderItem = dbContext.OrderItems.Where(oi => oi.OrderId == order.Id).ToList();
-      if(orderItem != null && orderItem.Count > 0)
+      if (orderItem != null && orderItem.Count > 0)
       {
         dbContext.OrderItems.RemoveRange(orderItem);
         dbContext.SaveChanges();
       }
-      dbContext.Orders.Remove(order);
-      return order;
+      var newOrder = dbContext.Orders.FirstOrDefault(o => o.Id == order.Id);
+      if(newOrder != null)
+      {
+        dbContext.Orders.Remove(newOrder);
+      }
+      return newOrder;
+
     }
 
-    public IEnumerable<Order>? SearchOrders(DateTime? from, DateTime? to, string? address,string? email,string? phone, double? fromTotal, double? toTotal)
+    public IEnumerable<Order>? SearchOrders(DateTime? from, DateTime? to, string? address, string? email, string? phone, double? fromTotal, double? toTotal)
     {
       var result = dbContext.Orders
-        .Where(o => 
-          (from == null || to == null) ? true : 
-          o.CreatedAt >= DateOnly.FromDateTime((DateTime)from) && ( o.CreatedAt <= DateOnly.FromDateTime((DateTime)to)) ||
-          (o.UpdatedAt != null && o.UpdatedAt >= DateOnly.FromDateTime((DateTime)from) && o.UpdatedAt <= DateOnly.FromDateTime((DateTime)to) )
+        .Where(o =>
+          (from == null || to == null) ? true :
+          o.CreatedAt >= DateOnly.FromDateTime((DateTime)from) && (o.CreatedAt <= DateOnly.FromDateTime((DateTime)to)) ||
+          (o.UpdatedAt != null && o.UpdatedAt >= DateOnly.FromDateTime((DateTime)from) && o.UpdatedAt <= DateOnly.FromDateTime((DateTime)to))
         )
-        .Where( o =>
+        .Where(o =>
           (address == null || email == null || phone == null) ? true :
-          ( 
-            ( !(string.IsNullOrWhiteSpace(address) || o.ShipAddress == null) && EF.Functions.ILike(o.ShipAddress,$"%{address}%") ) ||
-            ( !(string.IsNullOrWhiteSpace(email) || o.Customer == null || o.Customer.Email == null ) && EF.Functions.ILike(o.Customer.Email,email) ) || 
-            ( !(string.IsNullOrEmpty(phone) || o.Customer == null ) && EF.Functions.ILike(o.Customer.Phone,phone) )
+          (
+            (!(string.IsNullOrWhiteSpace(address) || o.ShipAddress == null) && EF.Functions.ILike(o.ShipAddress, $"%{address}%")) ||
+            (!(string.IsNullOrWhiteSpace(email) || o.Customer == null || o.Customer.Email == null) && EF.Functions.ILike(o.Customer.Email, email)) ||
+            (!(string.IsNullOrEmpty(phone) || o.Customer == null) && EF.Functions.ILike(o.Customer.Phone, phone))
           )
         )
-        .Where( o => (fromTotal == null || toTotal == null) ? true : o.Subtotal >= fromTotal && o.Subtotal <= toTotal)
+        .Where(o => (fromTotal == null || toTotal == null) ? true : o.Subtotal >= fromTotal && o.Subtotal <= toTotal)
         .Include(o => o.OrderItems).ThenInclude(oi => oi.Product)
         .Include(o => o.Customer)
         .OrderBy(o => o.CreatedAt)

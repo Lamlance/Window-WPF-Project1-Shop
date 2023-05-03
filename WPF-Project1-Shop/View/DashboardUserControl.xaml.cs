@@ -16,22 +16,22 @@ using WPF_Project1_Shop.ViewModel;
 
 namespace WPF_Project1_Shop.View
 {
-    /// <summary>
-    /// Interaction logic for DashboardUserControl.xaml
-    /// </summary>
-    public partial class DashboardUserControl : UserControl
+  /// <summary>
+  /// Interaction logic for DashboardUserControl.xaml
+  /// </summary>
+  public partial class DashboardUserControl : UserControl
+  {
+
+    DashboardViewModel dashboardViewModel = new DashboardViewModel();
+
+    public DashboardUserControl()
     {
+      InitializeComponent();
+      this.DataContext = dashboardViewModel;
 
-        DashboardViewModel dashboardViewModel = new DashboardViewModel();
-
-        public DashboardUserControl()
-        {
-            InitializeComponent();
-            this.DataContext = dashboardViewModel;
-
-            this.ListBestSellerProducts.ItemsSource = dashboardViewModel.TopSellProductsCollection;
-            this.ListOfLastestOrders.ItemsSource = dashboardViewModel.RecentOrdersCollection;
-            this.ListRunningOutProducts.ItemsSource = dashboardViewModel.TopRunningOutProductsCollection;
-        }
+      this.ListBestSellerProducts.ItemsSource = dashboardViewModel.TopSellProductsCollection;
+      this.ListOfLastestOrders.ItemsSource = dashboardViewModel.RecentOrdersCollection;
+      this.ListRunningOutProducts.ItemsSource = dashboardViewModel.TopRunningOutProductsCollection;
     }
+  }
 }

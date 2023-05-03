@@ -70,7 +70,7 @@ namespace WPF_Project1_Shop.View
         {
           if (p != null)
           {
-            MessageBox.Show($"Added order");
+            MessageBox.Show($"Added update");
           }
           else if (e != null)
           {
@@ -89,7 +89,7 @@ namespace WPF_Project1_Shop.View
         {
           if (p != null)
           {
-            MessageBox.Show($"Added order");
+            MessageBox.Show($"Added deleted");
           }
           else if (e != null)
           {
@@ -138,7 +138,7 @@ namespace WPF_Project1_Shop.View
           CustomerId = _orderViewModel.SelectedOrderCustomer.Id == 0 ? null : _orderViewModel.SelectedOrderCustomer.Id,
           ShipAddress = txtBoxAddressOrderForm.Text,
           Status = ((ComboBoxItem)comboOrderForm.SelectedItem).Content.ToString(),
-          Subtotal = 10000,
+          Subtotal = decimal.ToDouble(txtBoxTotalOrderForm.Number),
           OrderItems = _orderViewModel.SelectedOrderItems.ToList()
         };
         AddOrder(order);
@@ -171,6 +171,7 @@ namespace WPF_Project1_Shop.View
       {
         _orderViewModel.SelectedOrderItems.Add(oi);
       }
+      this.txtBoxTotalOrderForm.Number = (decimal)Math.Round(orderItems.Sum(oi => oi.Quantity * oi.Price) ?? 0, 0);
     }
 
     private void OrderUserControlLoaded(object sender, RoutedEventArgs e)
@@ -188,7 +189,8 @@ namespace WPF_Project1_Shop.View
       {
         Order order = (Order)this.ListOrder.SelectedItem;
         this.OrderModifyForm.DataContext = ListOrder.SelectedItem;
-
+        this.txtBoxTotalOrderForm.Number = (decimal)Math.Round(order.Subtotal, 0);
+        this.txtBoxAddressOrderForm.Text = order.ShipAddress;
         foreach (var oi in order.OrderItems)
         {
           _orderViewModel.SelectedOrderItems.Add(oi);
@@ -209,6 +211,7 @@ namespace WPF_Project1_Shop.View
       _orderViewModel.SelectedOrderCustomer.Email = customer == null ? "NONE" : customer.Email;
       _orderViewModel.SelectedOrderCustomer.Address = customer == null ? "NONE" : customer.Address;
 
+      this.txtBoxAddressOrderForm.Text = customer == null ? "NONE" : customer.Address;
     }
 
     public void ResetComboPageBox(int totalPage)
