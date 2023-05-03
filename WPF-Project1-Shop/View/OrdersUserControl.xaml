@@ -12,104 +12,126 @@
              Background="White"
              xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox"
              Loaded="OrderUserControlLoaded"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
-    <UserControl.Resources>
-        <helper:CustomerFullNameConverter x:Key="CustomerFullNameConverter" />
-        <helper:StringToDateTimerConverter x:Key="StringToDateConverter" />
-        <helper:DoubleToDecimal x:Key="DoubleToDecimal" />
-    </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
+             d:DesignHeight="450" d:DesignWidth="800">
+  <UserControl.Resources>
+    <helper:CustomerFullNameConverter 
+      x:Key="CustomerFullNameConverter" />
+    <helper:StringToDateTimerConverter
+      x:Key="StringToDateConverter" />
+    <helper:DoubleToDecimal
+      x:Key="DoubleToDecimal" />
+  </UserControl.Resources>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+      <ColumnDefinition Width="1*" />
+    </Grid.ColumnDefinitions>
 
-        <Grid Grid.ColumnSpan="3">
-            <Grid.RowDefinitions>
+    <Grid
+      Grid.ColumnSpan="3">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="1*" />
+      </Grid.RowDefinitions>
+      <Label 
+        Name="labelStatusText"
+        HorizontalContentAlignment="Center"
+        Padding="0,2,0,2"
+        FontSize="11"
+        Content="Status"/>
 
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+      <Grid
+        Grid.Row="1">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="1*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid 
+          IsReadOnly="True"
+          SelectionMode="Single"
+          AutoGenerateColumns="False"
+          ItemsSource="{Binding OrdersInPage}"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+          ScrollViewer.VerticalScrollBarVisibility="Visible"
+          ScrollViewer.CanContentScroll="True"
+          x:Name="ListOrder"
+          PreviewMouseLeftButtonDown="OrderListClick"
+          Grid.Row="0">
+          <DataGrid.Columns>
+            <DataGridTextColumn
+              Width="0.5*"
+              Header="Id"
+              Binding="{Binding Id}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Customer"
+              Binding="{Binding Customer,
+              Converter={StaticResource CustomerFullNameConverter}}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Shipping address"
+              Binding="{Binding ShipAddress}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Status"
+              Binding="{Binding Status}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Created at"
+              Binding="{Binding CreatedAt,
+              ConverterCulture='vi-VN'}"/>
+            <DataGridTextColumn
+              Width="1*"
+              Header="Delivered at"
+              Binding="{Binding UpdatedAt,
+              ConverterCulture='vi-VN'}"/>
+          </DataGrid.Columns>
+        </DataGrid>
+        <WrapPanel
+          HorizontalAlignment="Center"
+          Grid.Row="1">
+          <ComboBox
+            SelectionChanged="PageComboBoxChange"
+            x:Name="OrderPageComboBox"
+            Padding="30,0,30,0"/>
+        </WrapPanel>
+      </Grid>
 
-            <Grid Grid.Row="0" Margin="10, 10, 10, 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <DataGrid IsReadOnly="True"
-                          SelectionMode="Single"
-                          AutoGenerateColumns="False"
-                          ItemsSource="{Binding OrdersInPage}"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollBarVisibility="Visible"
-                          ScrollViewer.CanContentScroll="True"
-                          x:Name="ListOrder"
-                          PreviewMouseLeftButtonDown="OrderListClick"
-                          Grid.Row="0">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Width="Auto"
-                                            Header="Id"
-                                            Binding="{Binding Id}" />
-                        <DataGridTextColumn Width="1*"
-                                            Header="Customer"
-                                            Binding="{Binding Customer,
-              Converter={StaticResource CustomerFullNameConverter}}" />
-                        <DataGridTextColumn Width="1*"
-                                            Header="Shipping address"
-                                            Binding="{Binding ShipAddress}" />
-                        <DataGridTextColumn Width="1*"
-                                            Header="Status"
-                                            Binding="{Binding Status}" />
-                        <DataGridTextColumn Width="1*"
-                                            Header="Created at"
-                                            Binding="{Binding CreatedAt}" />
-                        <DataGridTextColumn Width="1*"
-                                            Header="Delivered at"
-                                            Binding="{Binding UpdatedAt}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <WrapPanel HorizontalAlignment="Center"
-                           Grid.Row="1"
-                           Margin="10">
-                    <ComboBox SelectionChanged="PageComboBoxChange"
-                              x:Name="OrderPageComboBox"
-                              Padding="30,0,30,0" />
-                </WrapPanel>
-            </Grid>
+
+
+    </Grid>
 
 
 
-        </Grid>
+    <Grid 
+      x:Name="OrderModifyForm"
+      Grid.Column="3" 
+      Grid.ColumnSpan="2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1.5*" />
+        <ColumnDefinition Width="3*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
 
+        <RowDefinition Height="1*" />
+        <RowDefinition Height="Auto" />
 
+      </Grid.RowDefinitions>
 
-        <Grid x:Name="OrderModifyForm"
-              Grid.Column="3"
-              Grid.ColumnSpan="2"
-              Margin="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="Auto" />
-
-            </Grid.RowDefinitions>
-
-            <Label VerticalAlignment="Center"
-                   Grid.Column="0"
-                   Content="Date created" />
-            <DatePicker SelectedDate="{Binding CreatedAt,Mode=OneWay,
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Column="0" 
+        Content="Date created"/>
+      <DatePicker
+        SelectedDate="{Binding CreatedAt,Mode=OneWay,
         Converter={StaticResource StringToDateConverter}}"
                         x:Name="datePickerCreatedOrderForm"
                         VerticalAlignment="Center"

@@ -138,7 +138,10 @@ namespace WPF_Project1_Shop.View
         var selectedOrderItems = new List<OrderItem>();
         foreach(var oi in selectdItem)
         {
-          selectedOrderItems.Add((OrderItem)oi);
+          if(oi is OrderItem)
+          {
+            selectedOrderItems.Add((OrderItem)oi);
+          }
         }
 
         foreach(var oi in selectedOrderItems)
