@@ -1,16 +1,17 @@
-﻿<UserControl x:Class="WPF_Project1_Shop.View.DashboardUserControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:WPF_Project1_Shop.View"
-             xmlns:helper="clr-namespace:WPF_Project1_Shop.Helper"
-             mc:Ignorable="d"
-             Background="White"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
+﻿<UserControl 
+  x:Class="WPF_Project1_Shop.View.DashboardUserControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:WPF_Project1_Shop.View"
+  xmlns:helper="clr-namespace:WPF_Project1_Shop.Helper"
+  mc:Ignorable="d"
+  d:DesignHeight="450"
+  d:DesignWidth="800">
   <UserControl.Resources>
-    <helper:CustomerFullNameConverter x:Key="CustomerFullNameConverter" />
+    <helper:CustomerFullNameConverter 
+      x:Key="CustomerFullNameConverter" />
   </UserControl.Resources>
   <Grid>
     <Grid.RowDefinitions>
@@ -26,149 +27,269 @@
     </Grid.ColumnDefinitions>
 
 
-    <TextBlock Text="Dashboard"
-                   FontSize="30"
-                   Padding="10, 0, 0, 0" />
+    <TextBlock 
+      Foreground="#27292f"
+      Text="Dashboard"
+      FontSize="30"
+      Padding="10, 0, 0, 0" />
 
-    <Grid Grid.Row="1"
-              Grid.Column="0">
+    <Grid 
+      Grid.Row="1"
+      Grid.Column="0">
 
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
         <RowDefinition Height="7*" />
       </Grid.RowDefinitions>
 
-      <TextBlock Text="General information"
-                       FontSize="17"
-                       FontWeight="DemiBold"
-                       Padding="10, 0, 0, 0" />
+      <TextBlock 
+        Foreground="#27292f"
+        Text="General information"
+        FontSize="17"
+        FontWeight="DemiBold"
+        Padding="10, 0, 0, 0" />
 
-      <StackPanel Grid.Row="1">
-        <Label Content="Total number of Products: " FontSize="15"/>
-        <TextBlock x:Name="TotalProducts" Text="{Binding TotalProducts}"  Margin="10, 0, 0, 0"/>
+      <StackPanel 
+        Margin="10, 0, 0, 0"
+        Grid.Row="1">
+        <Label 
+          Foreground="#27292f"
+          Content="Total number of Products: " 
+          FontSize="15"/>
+        <TextBlock 
+          Foreground="#27292f"
+          FontSize="20"
+          x:Name="TotalProducts" 
+          Text="{Binding TotalProducts}"  
+          Margin="10, 0, 0, 0"/>
 
-        <Label Content="Total number of Orders: "
-                       FontSize="15" />
-        <TextBlock x:Name="TotalOrders"
-                           Text="{Binding TotalOrders}"
-                           Margin="10, 0, 0, 0"/>
+        <Label 
+          Foreground="#27292f"
+          Content="Total number of Orders: "
+          FontSize="15" />
+        <TextBlock 
+          Foreground="#27292f"
+          FontSize="20"
+          x:Name="TotalOrders"
+          Text="{Binding TotalOrders}"
+          Margin="10, 0, 0, 0"/>
 
-        <Label Content="Total Earnings: "
-                       FontSize="15" />
-        <TextBlock x:Name="TotalEarnings"
-                           Text="{Binding TotalEarnings}"
-                           Margin="10, 0, 0, 0"/>
+        <Label 
+          Foreground="#27292f"
+          Content="Total Earnings: "
+          FontSize="15" />
+        <TextBlock 
+          FontSize="20"
+          x:Name="TotalEarnings"
+          Text="{Binding TotalEarnings}"
+          Margin="10, 0, 0, 0"/>
 
       </StackPanel>
     </Grid>
 
-    <Grid Grid.Row="2"
-              Grid.Column="0">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="*" />
-        <RowDefinition Height="7*" />
-      </Grid.RowDefinitions>
+    <DockPanel 
+      LastChildFill="False"
+      Grid.Row="2"
+      Grid.Column="0">
+      <TextBlock 
+        DockPanel.Dock="Top"
+        Text="Last Orders"
+        FontSize="17"
+        FontWeight="DemiBold"
+        Padding="10, 0, 0, 0" />
 
-      <TextBlock Text="Last Orders"
-                       FontSize="17"
-                       FontWeight="DemiBold"
-                       Padding="10, 0, 0, 0" />
-
-      <ListView 
+      <DataGrid 
+        DockPanel.Dock="Top"
+        HorizontalGridLinesBrush="Transparent"
+        VerticalGridLinesBrush="Transparent"
+        Background="White"
+        IsReadOnly="True"
+        AutoGenerateColumns="False"
         x:Name="ListOfLastestOrders"
         Grid.Row="1"
+        VerticalAlignment="Stretch"
+        VerticalContentAlignment="Stretch"
         Margin="10, 0, 10, 10">
 
-        <ListView.View>
-          <GridView>
-            <GridViewColumn 
-              Header="Id"
-              Width="Auto"
-              DisplayMemberBinding="{Binding Id}" />
-            <GridViewColumn 
-              Header="Customer Name"
-              Width="Auto"
-              DisplayMemberBinding="{Binding Customer,
-              Converter={StaticResource CustomerFullNameConverter}}" />
-            <GridViewColumn 
-              Header="Sub Total"
-              Width="Auto"
-              DisplayMemberBinding="{Binding Subtotal}" />
-            <GridViewColumn 
-              Header="Created At"
-              Width="Auto"
-              DisplayMemberBinding="{Binding CreatedAt}" />
-            <GridViewColumn 
-              Header="Status"
-              Width="Auto"
-              DisplayMemberBinding="{Binding Status}" />
-          </GridView>
-        </ListView.View>
-      </ListView>
+        <DataGrid.Resources>
+          <Style 
+            x:Key="ColumnElementStyle" 
+            TargetType="TextBlock">
+            <Setter 
+              Property="Margin" 
+              Value="5,10,0,10" />
+          </Style>
+          <SolidColorBrush 
+            x:Key="{x:Static 
+            SystemColors.HighlightBrushKey}" 
+            Color="#f3f3fb"/>
+          <SolidColorBrush 
+            x:Key="{x:Static 
+            SystemColors.HighlightTextBrushKey}" 
+            Color="#8a64c4"/>
 
-    </Grid>
+        </DataGrid.Resources>
+        <DataGrid.Columns>
+          <DataGridTextColumn
+            FontWeight="Bold"
+            Width="0.3*"
+            Header="Id"
+            Binding="{Binding Id}"
+            ElementStyle="{StaticResource ColumnElementStyle}" />
+          <DataGridTextColumn
+            FontWeight="Bold"
+            Width="*"
+            Header="Customer"
+            Binding="{Binding Customer,
+            Converter={StaticResource 
+            CustomerFullNameConverter}}"
+            ElementStyle="{StaticResource ColumnElementStyle}"/>
+          <DataGridTextColumn 
+            FontWeight="Bold"
+            Width="*"
+            Header="Total"
+            Binding="{Binding Subtotal}"
+            ElementStyle="{StaticResource ColumnElementStyle}"/>
+          <DataGridTextColumn
+            FontWeight="Bold"
+            Width="*"
+            Header="Status"
+            Binding="{Binding Status}"
+            ElementStyle="{StaticResource ColumnElementStyle}"/>
+        </DataGrid.Columns>
+        
+      </DataGrid>
 
-    <Grid Grid.Row="1"
-              Grid.Column="1">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="*" />
-        <RowDefinition Height="7*" />
-      </Grid.RowDefinitions>
+    </DockPanel>
 
-      <TextBlock Text="Running Out Products"
-                       FontSize="17"
-                       FontWeight="DemiBold"
-                       Padding="10, 0, 0, 0" />
+    <DockPanel 
+      LastChildFill="False"
+      Grid.Row="1"
+      Grid.Column="1">
+      
 
-      <ListView x:Name="ListRunningOutProducts"
-                      Grid.Row="1"
-                      Margin="10, 0, 10, 10">
+      <TextBlock 
+        DockPanel.Dock="Top"
+        Text="Running Out Products"
+        FontSize="17"
+        FontWeight="DemiBold"
+        Padding="10, 0, 0, 0" />
 
-        <ListView.View>
-          <GridView>
-            <GridViewColumn Header="Name"
-                                        Width="Auto"
-                                        DisplayMemberBinding="{Binding ProductName}" />
-            <GridViewColumn Header="Price"
-                                        Width="Auto"
-                                        DisplayMemberBinding="{Binding Price}" />
-            <GridViewColumn Header="Amount Left"
-                                        Width="Auto"
-                                        DisplayMemberBinding="{Binding Numbers}" />
-          </GridView>
-        </ListView.View>
-      </ListView>
-    </Grid>
+      <DataGrid 
+        DockPanel.Dock="Top"
+        x:Name="ListRunningOutProducts"
+        HorizontalGridLinesBrush="Transparent"
+        VerticalGridLinesBrush="Transparent"
+        Background="White"
+        IsReadOnly="True"
+        AutoGenerateColumns="False"
+        Grid.Row="1"
+        VerticalAlignment="Stretch"
+        VerticalContentAlignment="Stretch"
+        Margin="10, 0, 10, 10">
+        <DataGrid.Resources>
+          <Style 
+            x:Key="ColumnElementStyle" 
+            TargetType="TextBlock">
+            <Setter 
+              Property="Margin" 
+              Value="5,10,0,10" />
+          </Style>
+          <SolidColorBrush 
+            x:Key="{x:Static 
+            SystemColors.HighlightBrushKey}" 
+            Color="#f3f3fb"/>
+          <SolidColorBrush 
+            x:Key="{x:Static 
+            SystemColors.HighlightTextBrushKey}" 
+            Color="#8a64c4"/>
+        </DataGrid.Resources>
+        <DataGrid.Columns>
+          <DataGridTextColumn
+            Header="Name"
+            Width="1*"
+            FontWeight="Bold"
+            ElementStyle="{StaticResource ColumnElementStyle}"
+            Binding="{Binding ProductName}"/>
+          <DataGridTextColumn
+            Header="Auto"
+            FontWeight="Bold"
+            Width="0.5*"
+            ElementStyle="{StaticResource ColumnElementStyle}"
+            Binding="{Binding Price}"/>
+          <DataGridTextColumn
+            Header="Remaining"
+            FontWeight="Bold"
+            Width="0.75*"
+            ElementStyle="{StaticResource ColumnElementStyle}"
+            Binding="{Binding Numbers}"/>
+        </DataGrid.Columns>
+      </DataGrid>
+      
+
+    </DockPanel>
 
 
-    <Grid Grid.Row="2"
-              Grid.Column="1">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="*" />
-        <RowDefinition Height="7*" />
-      </Grid.RowDefinitions>
+    <DockPanel 
+      LastChildFill="False"
+      Grid.Row="2"
+      Grid.Column="1">
 
-      <TextBlock Text="Best Seller"
-                       FontSize="17"
-                       FontWeight="DemiBold"
-                       Padding="10, 0, 0, 0" />
+      <TextBlock 
+        DockPanel.Dock="Top"
+        Text="Best Seller"
+        FontSize="17"
+        FontWeight="DemiBold"
+        Padding="10, 0, 0, 0" />
 
-      <ListView x:Name="ListBestSellerProducts"
-                      Grid.Row="1"
-                      Margin="10, 0, 10, 10">
+      <DataGrid
+        DockPanel.Dock="Top"
+        x:Name="ListBestSellerProducts"
+        HorizontalGridLinesBrush="Transparent"
+        VerticalGridLinesBrush="Transparent"
+        Background="White"
+        IsReadOnly="True"
+        AutoGenerateColumns="False"
+        Grid.Row="1"
+        VerticalAlignment="Stretch"
+        VerticalContentAlignment="Stretch"
+        Margin="10, 0, 10, 10">
 
-        <ListView.View>
-          <GridView>
-            <GridViewColumn Header="Name"
-                                        Width="Auto"
-                                        DisplayMemberBinding="{Binding ProductName}" />
-            <GridViewColumn Header="Price"
-                                        Width="Auto"
-                                        DisplayMemberBinding="{Binding Price}" />
-          </GridView>
-        </ListView.View>
-      </ListView>
-    </Grid>
+        <DataGrid.Resources>
+          <Style 
+            x:Key="ColumnElementStyle" 
+            TargetType="TextBlock">
+            <Setter 
+              Property="Margin" 
+              Value="5,10,0,10" />
+          </Style>
+          <SolidColorBrush 
+            x:Key="{x:Static 
+            SystemColors.HighlightBrushKey}" 
+            Color="#f3f3fb"/>
+          <SolidColorBrush 
+            x:Key="{x:Static 
+            SystemColors.HighlightTextBrushKey}" 
+            Color="#8a64c4"/>
+        </DataGrid.Resources>
+        
+        <DataGrid.Columns>
+          <DataGridTextColumn
+            FontWeight="Bold"
+            ElementStyle="{StaticResource ColumnElementStyle}"
+            Width="1*"
+            Header="Name"
+            Binding="{Binding ProductName}"/>
+          <DataGridTextColumn
+            FontWeight="Bold"
+            ElementStyle="{StaticResource ColumnElementStyle}"
+            Width="0.5*"
+            Header="Price"
+            Binding="{Binding Price}"/>
+        </DataGrid.Columns>
+      </DataGrid>
+      
+    </DockPanel>
 
   </Grid>
 </UserControl>
