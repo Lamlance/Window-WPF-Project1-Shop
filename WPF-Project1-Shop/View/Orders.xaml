@@ -15,6 +15,8 @@
         Width="1280">
   <DockPanel LastChildFill="True">
     <Fluent:Ribbon
+      CanMinimize="False"
+      SelectedTabChanged="SelectTabChange"
       x:Name="Ribbon"
       DockPanel.Dock="Top"
       d:SelectedTabIndex="3">
@@ -721,7 +723,9 @@
     <Grid 
       DockPanel.Dock="Bottom">
       <TabControl 
-        SelectedIndex="{Binding ElementName=Ribbon,Path=SelectedTabIndex}"
+        Padding="10,10,10,10"
+        SelectedIndex="{Binding ElementName=Ribbon,
+        Path=SelectedTabIndex}"
         x:Name="MainTabControl">
       </TabControl>
     </Grid>

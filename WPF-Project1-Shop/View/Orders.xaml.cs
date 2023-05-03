@@ -249,5 +249,10 @@ namespace WPF_Project1_Shop.View
 
       reportUserControl.GetProductCount(fromDate, toDate, mode);
     }
+
+    private void SelectTabChange(object sender, SelectionChangedEventArgs e)
+    {
+      this.Ribbon.IsMinimized = this.Ribbon.SelectedTabIndex == 0;
+    }
   }
 }
