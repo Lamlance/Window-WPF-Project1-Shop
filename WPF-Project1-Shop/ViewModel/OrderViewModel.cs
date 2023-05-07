@@ -13,7 +13,7 @@ namespace WPF_Project1_Shop.ViewModel
 {
   public class OrderViewModel
   {
-    public delegate void OnOrderDataModify(Order order);
+    public delegate void OnOrderDataModify(Order? order, Exception? e = null);
     public event OnOrderDataModify OrderUpdated;
     public event OnOrderDataModify OrderAdded;
     public event OnOrderDataModify OrderDeleted;
@@ -118,6 +118,11 @@ namespace WPF_Project1_Shop.ViewModel
 
     public async Task AddOrder(Order order)
     {
+      for(int i = 0; i < order.OrderItems.Count; i++)
+      {
+        order.OrderItems.ElementAt(i).Id = 0;
+      }
+      order.Id = 0;
       var result = await Task<Order?>.Run(() =>
       {
         try
@@ -130,6 +135,7 @@ namespace WPF_Project1_Shop.ViewModel
         }
         catch (Exception e)
         {
+          OrderAdded?.Invoke(null, e);
           return null;
         };
       });

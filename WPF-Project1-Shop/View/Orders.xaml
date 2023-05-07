@@ -13,12 +13,13 @@
         Title="Orders"
         Height="720"
         Width="1280">
-
   <DockPanel LastChildFill="True">
     <Fluent:Ribbon
+      CanMinimize="False"
+      SelectedTabChanged="SelectTabChange"
       x:Name="Ribbon"
       DockPanel.Dock="Top"
-      d:SelectedTabIndex="1">
+      d:SelectedTabIndex="3">
 
       <Fluent:Ribbon.Menu>
         <Fluent:Backstage>
@@ -55,7 +56,17 @@
           </Fluent:BackstageTabControl>
         </Fluent:Backstage>
       </Fluent:Ribbon.Menu>
-
+      
+      <Fluent:RibbonTabItem 
+        Header="Dashboard"
+        x:Name="DashboardDataTab">
+        <Fluent:RibbonGroupBox 
+          Header="GroupBox"
+          Height="0"
+          Width="0"
+          Visibility="Collapsed"/>
+        </Fluent:RibbonTabItem>
+      
       <!-- Order tab -->
       <Fluent:RibbonTabItem 
         Header="Orders"
@@ -254,6 +265,7 @@
       </Fluent:RibbonTabItem>
       <!-- /Order ta -->
 
+      
       <!-- Product Tab -->
       <Fluent:RibbonTabItem 
         Header="Products"
@@ -449,8 +461,7 @@
       </Fluent:RibbonTabItem>
       <!-- /Product Tab -->
 
-
-      <!-- Customer tab -->
+      
       <!-- Customer tab -->
       <Fluent:RibbonTabItem 
         Header="Customers">
@@ -598,12 +609,123 @@
       </Fluent:RibbonTabItem>
       <!-- Customer tab -->
 
+      
+      <!-- Report tab -->
+      <Fluent:RibbonTabItem
+        Header="Report">
+        
+        <Fluent:RibbonGroupBox
+          Header="Total income and profits">
+          <Grid 
+            MinWidth="300">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="0.5*" />
+              <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="1*" />
+              <RowDefinition Height="1*" />
+              <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Label
+              Content="From date"/>
+            <DatePicker
+              x:Name="DatePickerFromIncomeProfit"
+              Grid.Column="1"/>
+            <Label
+              Content="To date"
+              Grid.Row="1"/>
+            <DatePicker
+              x:Name="DatePickerToIncomeProfit"
+              Grid.Row="1"
+              Grid.Column="1"/>
+            <ComboBox
+              x:Name="ComboBoxGroupTypeIncomeProfit"
+              SelectedIndex="0"
+              Grid.Row="2"
+              Grid.ColumnSpan="2">
+              <ComboBoxItem
+                Content="Group by dates"/>
+              <ComboBoxItem
+                Content="Group by month"/>
+              <ComboBoxItem
+                Content="Group by year"/>
+            </ComboBox>
+          </Grid>
+          <Fluent:Button
+            x:Name="btnApplyIncomeProfit"
+            Click="ApplyIncomProfitnBtnClick"
+            Header="Apply">
+            <Fluent:Button.Icon>
+              <iconPacks:PackIconUnicons
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Kind="CheckCircle"/>
+            </Fluent:Button.Icon>
+          </Fluent:Button>
+        </Fluent:RibbonGroupBox>
+
+        <Fluent:RibbonGroupBox
+          Header="Product sold">
+          <Grid 
+            MinWidth="300">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="0.5*" />
+              <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="1*" />
+              <RowDefinition Height="1*" />
+              <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Label
+              Content="From date"/>
+            <DatePicker
+              x:Name="DatePickerFromProductCount"
+              Grid.Column="1"/>
+            <Label
+              Content="To date"
+              Grid.Row="1"/>
+            <DatePicker
+              x:Name="DatePickerToProductCount"
+              Grid.Row="1"
+              Grid.Column="1"/>
+            <ComboBox
+              x:Name="ComboBoxGroupTypeProductCount"
+              SelectedIndex="0"
+              Grid.Row="2"
+              Grid.ColumnSpan="2">
+              <ComboBoxItem
+                Content="Group by dates"/>
+              <ComboBoxItem
+                Content="Group by month"/>
+              <ComboBoxItem
+                Content="Group by year"/>
+            </ComboBox>
+          </Grid>
+          <Fluent:Button
+            Click="ApplyProductCountBtnClick"
+            x:Name="btnApplyProductCount"
+            Header="Apply">
+            <Fluent:Button.Icon>
+              <iconPacks:PackIconUnicons
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                Kind="CheckCircle"/>
+            </Fluent:Button.Icon>
+          </Fluent:Button>
+        </Fluent:RibbonGroupBox>
+
+      </Fluent:RibbonTabItem>
+      <!-- /Report tab -->
     </Fluent:Ribbon>
 
     <Grid 
       DockPanel.Dock="Bottom">
       <TabControl 
-        SelectedIndex="{Binding ElementName=Ribbon,Path=SelectedTabIndex}"
+        Padding="10,10,10,10"
+        SelectedIndex="{Binding ElementName=Ribbon,
+        Path=SelectedTabIndex}"
         x:Name="MainTabControl">
       </TabControl>
     </Grid>

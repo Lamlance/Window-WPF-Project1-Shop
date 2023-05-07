@@ -24,4 +24,18 @@ public partial class Order : INotifyPropertyChanged
   public virtual Customer? Customer { get; set; }
 
   public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
+  public override bool Equals(object? obj)
+  {
+    if(obj is Order)
+    {
+      return this.Id == ((Order)obj).Id;
+    }
+    return false;
+  }
+
+  public override int GetHashCode()
+  {
+    return this.Id.GetHashCode();
+  }
 }

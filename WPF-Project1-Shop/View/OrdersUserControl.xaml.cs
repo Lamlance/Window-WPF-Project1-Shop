@@ -29,41 +29,81 @@ namespace WPF_Project1_Shop.View
 
     ObservableCollection<string> pageDisplay = new ObservableCollection<string>();
 
-    public OrderViewModel.MODIFY_MODE ModifyMode { get => _orderViewModel.ModifyMode; 
-      set 
+    public OrderViewModel.MODIFY_MODE ModifyMode
+    {
+      get => _orderViewModel.ModifyMode;
+      set
       {
         _orderViewModel.ModifyMode = value;
         this.btnCustomerAddOrderForm.Visibility = (value == OrderViewModel.MODIFY_MODE.ADD) ? Visibility.Visible : Visibility.Collapsed;
-      }  
+      }
     }
 
     public OrdersUserControl()
     {
       InitializeComponent();
       _orderViewModel.OnDataSetReset += ResetComboPageBox;
-      _orderViewModel.OrderAdded += (p) =>
+
+      _orderViewModel.OrderAdded += (p, e) =>
       {
         Task.Run(() =>
         {
-          MessageBox.Show($"Added order");
+          if (p != null)
+          {
+            MessageBox.Show($"Added order");
+          }
+          else if (e != null)
+          {
+            MessageBox.Show(e.Message);
+          }
+          else
+          {
+            MessageBox.Show("Something happem");
+          }
+
         });
       };
-      _orderViewModel.OrderUpdated += (p) =>
+
+      _orderViewModel.OrderUpdated += (p, e) =>
       {
         Task.Run(() =>
         {
-          MessageBox.Show($"Updated order");
+          if (p != null)
+          {
+            MessageBox.Show($"Added update");
+          }
+          else if (e != null)
+          {
+            MessageBox.Show(e.Message);
+          }
+          else
+          {
+            MessageBox.Show("Something happem");
+          }
         });
       };
-      _orderViewModel.OrderDeleted += (p) =>
+
+      _orderViewModel.OrderDeleted += (p, e) =>
       {
         Task.Run(() =>
         {
-          MessageBox.Show("Deleted order");
+          if (p != null)
+          {
+            MessageBox.Show($"Added deleted");
+          }
+          else if (e != null)
+          {
+            MessageBox.Show(e.Message);
+          }
+          else
+          {
+            MessageBox.Show("Something happem");
+          }
         });
       };
 
     }
+
     public void AddOrder(Order order)
     {
       _orderViewModel.AddOrder(order);
@@ -89,7 +129,7 @@ namespace WPF_Project1_Shop.View
         return;
       }
 
-        if (ModifyMode == OrderViewModel.MODIFY_MODE.ADD)
+      if (ModifyMode == OrderViewModel.MODIFY_MODE.ADD)
       {
         Order order = new Order()
         {
@@ -98,7 +138,7 @@ namespace WPF_Project1_Shop.View
           CustomerId = _orderViewModel.SelectedOrderCustomer.Id == 0 ? null : _orderViewModel.SelectedOrderCustomer.Id,
           ShipAddress = txtBoxAddressOrderForm.Text,
           Status = ((ComboBoxItem)comboOrderForm.SelectedItem).Content.ToString(),
-          Subtotal = 10000,
+          Subtotal = decimal.ToDouble(txtBoxTotalOrderForm.Number),
           OrderItems = _orderViewModel.SelectedOrderItems.ToList()
         };
         AddOrder(order);
@@ -114,7 +154,7 @@ namespace WPF_Project1_Shop.View
         _orderViewModel.UpdateOrder(order);
         return;
       }
-      if(ModifyMode == OrderViewModel.MODIFY_MODE.DELETE && this.ListOrder.SelectedItem is Order)
+      if (ModifyMode == OrderViewModel.MODIFY_MODE.DELETE && this.ListOrder.SelectedItem is Order)
       {
         _orderViewModel.DeleteOrder((Order)this.ListOrder.SelectedItem);
       }
@@ -122,7 +162,7 @@ namespace WPF_Project1_Shop.View
 
     public void ApplyNewOrderItem(List<OrderItem> orderItems)
     {
-      if(this.ListOrder.SelectedItem is Order)
+      if (this.ListOrder.SelectedItem is Order)
       {
         ((Order)this.ListOrder.SelectedItem).OrderItems = orderItems;
       }
@@ -131,12 +171,12 @@ namespace WPF_Project1_Shop.View
       {
         _orderViewModel.SelectedOrderItems.Add(oi);
       }
+      this.txtBoxTotalOrderForm.Number = (decimal)Math.Round(orderItems.Sum(oi => oi.Quantity * oi.Price) ?? 0, 0);
     }
 
     private void OrderUserControlLoaded(object sender, RoutedEventArgs e)
     {
       this.DataContext = _orderViewModel;
-      this.labelStatusText.Content = _orderViewModel.ModifyMode;
       this.OrderPageComboBox.ItemsSource = pageDisplay;
       this.SelectedOrderItemDataGrid.ItemsSource = _orderViewModel.SelectedOrderItems;
       this.tabItemCustomerInfoOrderForm.DataContext = _orderViewModel.SelectedOrderCustomer;
@@ -149,7 +189,8 @@ namespace WPF_Project1_Shop.View
       {
         Order order = (Order)this.ListOrder.SelectedItem;
         this.OrderModifyForm.DataContext = ListOrder.SelectedItem;
-
+        this.txtBoxTotalOrderForm.Number = (decimal)Math.Round(order.Subtotal, 0);
+        this.txtBoxAddressOrderForm.Text = order.ShipAddress;
         foreach (var oi in order.OrderItems)
         {
           _orderViewModel.SelectedOrderItems.Add(oi);
@@ -170,6 +211,7 @@ namespace WPF_Project1_Shop.View
       _orderViewModel.SelectedOrderCustomer.Email = customer == null ? "NONE" : customer.Email;
       _orderViewModel.SelectedOrderCustomer.Address = customer == null ? "NONE" : customer.Address;
 
+      this.txtBoxAddressOrderForm.Text = customer == null ? "NONE" : customer.Address;
     }
 
     public void ResetComboPageBox(int totalPage)
@@ -177,7 +219,7 @@ namespace WPF_Project1_Shop.View
       pageDisplay.Clear();
       for (int i = 0; i < totalPage; i++)
       {
-        pageDisplay.Add($"Page{i + 1} / {totalPage}");
+        pageDisplay.Add($"Page {i + 1} / {totalPage}");
       }
     }
 
@@ -201,7 +243,7 @@ namespace WPF_Project1_Shop.View
       }
       else
       {
-        var qaP = new QuickAddProdct(null,_orderViewModel.SelectedOrderItems.ToList());
+        var qaP = new QuickAddProdct(null, _orderViewModel.SelectedOrderItems.ToList());
         qaP.OnOrderListConfrim += ApplyNewOrderItem;
         new Window()
         {

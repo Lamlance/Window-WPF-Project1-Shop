@@ -24,12 +24,12 @@ namespace WPF_Project1_Shop.EFCustomRepository
       dbContext.Dispose();
     }
 
-    public IEnumerable<Product> GetManyProducts(int page = 1)
+    public IEnumerable<Product> GetManyProducts(int page = 1, int limit = 500)
     {
       var products = dbContext.Products
         .Include(p => p.Categories)
         .Skip(page > 0 ? page - 1 : 0)
-        .Take(500);
+        .Take(limit);
       return products;
     }
 
@@ -38,12 +38,12 @@ namespace WPF_Project1_Shop.EFCustomRepository
       List<Category> needAddingCategories = new List<Category>(product.Categories.ToList());
       product.Categories.Clear();
       dbContext.Products.Add(product);
-      
-      if(needAddingCategories.Count > 0)
+
+      if (needAddingCategories.Count > 0)
       {
         dbContext.SaveChanges();
         var updatedProduct = dbContext.Products.SingleOrDefault(p => p.Id == product.Id);
-        if(updatedProduct != null)
+        if (updatedProduct != null)
         {
           var categories = dbContext.Categories
             .Include(c => c.Products)
@@ -54,9 +54,9 @@ namespace WPF_Project1_Shop.EFCustomRepository
           }
           dbContext.Categories.UpdateRange(categories);
         }
-        
+
       }
-      
+
       return product;
     }
     public List<Product> AddManyProduct(List<Product> products)
@@ -70,21 +70,21 @@ namespace WPF_Project1_Shop.EFCustomRepository
       HashSet<Category> newCategories = new HashSet<Category>(product.Categories.ToList());
       var queryProduct = dbContext.Products.Include(p => p.Categories).SingleOrDefault(p => p.Id == product.Id);
 
-      if(queryProduct != null)
+      if (queryProduct != null)
       {
         HashSet<Category> oldCategories = new HashSet<Category>(queryProduct.Categories.ToList());
 
         if (!oldCategories.Equals(newCategories))
         {
-          foreach (var category in queryProduct.Categories.Where(c => newCategories.Contains(c) == false ).ToList())
+          foreach (var category in queryProduct.Categories.Where(c => newCategories.Contains(c) == false).ToList())
           {
             queryProduct.Categories.Remove(category);
           }
           dbContext.SaveChanges();
         }
-        foreach(var c in newCategories)
+        foreach (var c in newCategories)
         {
-          if(oldCategories.Contains(c) == false)
+          if (oldCategories.Contains(c) == false)
           {
             queryProduct.Categories.Add(c);
           }
@@ -93,6 +93,7 @@ namespace WPF_Project1_Shop.EFCustomRepository
         queryProduct.ImagePath = product.ImagePath;
         queryProduct.CreatedAt = product.CreatedAt;
         queryProduct.Numbers = product.Numbers;
+        queryProduct.Price = product.Price;
 
         dbContext.Products.Update(queryProduct);
       }
