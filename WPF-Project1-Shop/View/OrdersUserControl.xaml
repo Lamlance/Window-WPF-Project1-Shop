@@ -248,7 +248,7 @@
                 </MultiBinding>
               </TextBlock.Text>
             </TextBlock>
-            
+
           </StackPanel>
 
         </TabItem>

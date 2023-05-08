@@ -7,6 +7,7 @@
         xmlns:Fluent="urn:fluent-ribbon"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextbox"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Loaded="MainWindowLoaded"
         WindowState="Maximized"
@@ -718,6 +719,11 @@
 
       </Fluent:RibbonTabItem>
       <!-- /Report tab -->
+
+      <Fluent:RibbonTabItem
+        Header="Category">
+        
+      </Fluent:RibbonTabItem>
     </Fluent:Ribbon>
 
     <Grid 

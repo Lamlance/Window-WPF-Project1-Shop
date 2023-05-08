@@ -1,0 +1,23 @@
+﻿<UserControl 
+  x:Class="WPF_Project1_Shop.View.CategoryUserControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+  xmlns:local="clr-namespace:WPF_Project1_Shop.View"
+  mc:Ignorable="d" 
+  Loaded="UserControlLoaded"
+  d:DesignHeight="450" d:DesignWidth="800">
+  <Grid
+		Background="White">
+    <ListView
+      x:Name="CategoryListView">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <Label
+            Content="{Binding CategoryName}"/>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
+</UserControl>
