@@ -180,10 +180,15 @@
             IsCheckable="True"       
             Header="Appy date">
             <MenuItem.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="CalendarSlash"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/calender_apply.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 
@@ -192,31 +197,46 @@
             IsCheckable="True"
             Header="Appy sum">
             <MenuItem.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="MoneyBillSlash"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/money_bill_add.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 
           <MenuItem 
             x:Name="menuApplyCustomerFilterOrder"
             IsCheckable="True"
-            Header="Appy seaches">
+            Header="Appy searches">
             <MenuItem.Icon>
-              <iconPacks:FontAwesome 
-                Kind="UserSlashSolid" />
+              <!--<iconPacks:FontAwesome 
+                Kind="UserSlashSolid" />-->
+              <Image Source="/Images/Icons/check_circle.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 
           <Fluent:Button 
             Click="SearchOrderBtnClick"                       
-            Header="Search!">
+            Header="Search">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
-                Kind="Search" />
+                Kind="Search" />-->
+              <Image Source="/Images/Icons/search.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
 
@@ -230,10 +250,15 @@
             Header="Edit order"
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons
+              <!--<iconPacks:PackIconUnicons
                 Kind="Edit"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/edit.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
@@ -242,10 +267,15 @@
             Header="Add order"       
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"           
                 HorizontalAlignment="Center"                                       
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/add_order.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
@@ -254,17 +284,22 @@
             Header="Delete order"           
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/delete_order.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
         </Fluent:RibbonGroupBox>
 
       </Fluent:RibbonTabItem>
-      <!-- /Order ta -->
+      <!-- /Order tab -->
 
 
       <!-- Product Tab -->
@@ -277,10 +312,15 @@
           <Fluent:DropDownButton 
             Header="Filter categories">
             <Fluent:DropDownButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="LayerGroup"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch" />
+                HorizontalAlignment="Stretch" />-->
+              <Image Source="/Images/Icons/filter_category.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:DropDownButton.Icon>
             <ListView 
               Loaded="CategoriesListLoaded"
@@ -363,8 +403,13 @@
             IsCheckable="true"
             Header="Apply categories">
             <MenuItem.Icon>
-              <iconPacks:PackIconUnicons 
-                Kind="LayerGroupSlash"/>
+              <!--<iconPacks:PackIconUnicons 
+                Kind="LayerGroupSlash"/>-->
+              <Image Source="/Images/Icons/apply_category.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
           <MenuItem
@@ -372,8 +417,13 @@
             IsCheckable="true"
             Header="Apply price">
             <MenuItem.Icon>
-              <iconPacks:PackIconUnicons 
-                Kind="MoneyBillSlash"/>
+              <!--<iconPacks:PackIconUnicons 
+                Kind="MoneyBillSlash"/>-->
+              <Image Source="/Images/Icons/apply_product.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
           <MenuItem
@@ -381,8 +431,13 @@
             IsCheckable="true"
             Header="Apply name">
             <MenuItem.Icon>
-              <iconPacks:FontAwesome 
-                Kind="UserSlashSolid"/>
+              <!--<iconPacks:FontAwesome 
+                Kind="UserSlashSolid"/>-->
+              <Image Source="/Images/Icons/check_circle.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 
@@ -390,10 +445,15 @@
             Click="SearchProductBtnClick"
             Header="Seach">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                Kind="Search" />
+                Kind="Search" />-->
+              <Image Source="/Images/Icons/search.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
 
@@ -407,10 +467,15 @@
             Header="Edit product"
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="Edit"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/edit_product.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
@@ -421,10 +486,15 @@
                                          
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"         
                 HorizontalAlignment="Center"                            
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/add_product.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
@@ -435,10 +505,15 @@
                                          
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/remove_product.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
@@ -450,10 +525,15 @@
             Click="ImportProductFromAccessBtnClick"
             Header="Access">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                Kind="Database"/>
+                Kind="Database"/>-->
+              <Image Source="/Images/Icons/database.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
 
@@ -539,7 +619,13 @@
             IsCheckable="True"
             Header="Apply name">
             <MenuItem.Icon>
-              <iconPacks:FontAwesome Kind="UserSlashSolid" />
+              <!--<iconPacks:FontAwesome 
+              Kind="UserSlashSolid" />-->
+              <Image Source="/Images/Icons/check_circle.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 
@@ -548,18 +634,29 @@
             IsCheckable="True"
             Header="Apply information">
             <MenuItem.Icon>
-              <iconPacks:FontAwesome Kind="UserSlashSolid" />
+              <!--<iconPacks:FontAwesome 
+              Kind="UserSlashSolid" />-->
+              <Image Source="/Images/Icons/apply_information.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 
           <Fluent:Button 
             Click="SearchCustomerBtnClick"
-            Header="Search!">
+            Header="Search">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
-                Kind="Search" />
+                Kind="Search" />-->
+              <Image Source="/Images/Icons/search.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
 
@@ -573,10 +670,15 @@
             Unchecked="CustomerModeUnchecked"
             Header="Edit customer">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="Edit"          
                 HorizontalAlignment="Center"              
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/user_edit.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
@@ -586,10 +688,15 @@
             Unchecked="CustomerModeUnchecked"
             Header="Add customer">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"           
                 HorizontalAlignment="Center"           
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/user_add.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
@@ -599,10 +706,15 @@
             Unchecked="CustomerModeUnchecked"
             Header="Delete customer">
             <Fluent:ToggleButton.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 Kind="FileExclamationAlt"           
                 HorizontalAlignment="Center"                                               
-                VerticalAlignment="Center" />
+                VerticalAlignment="Center" />-->
+              <Image Source="/Images/Icons/user_slash.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
           </Fluent:ToggleButton>
 
@@ -658,10 +770,15 @@
             Click="ApplyIncomProfitnBtnClick"
             Header="Apply">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons
+              <!--<iconPacks:PackIconUnicons
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                Kind="CheckCircle"/>
+                Kind="CheckCircle"/>-->
+              <Image Source="/Images/Icons/check_circle.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
         </Fluent:RibbonGroupBox>
@@ -709,10 +826,15 @@
             x:Name="btnApplyProductCount"
             Header="Apply">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons
+              <!--<iconPacks:PackIconUnicons
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                Kind="CheckCircle"/>
+                Kind="CheckCircle"/>-->
+              <Image Source="/Images/Icons/check_circle.png" 
+               Width="16" 
+               Height="16" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
         </Fluent:RibbonGroupBox>

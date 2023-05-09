@@ -47,9 +47,9 @@
       <TextBlock 
         Foreground="#da66ec"
         Text="General information"
-        FontSize="17"
+        FontSize="20"
         FontWeight="DemiBold"
-        Padding="10, 0, 0, 0" />
+        Padding="10, 5, 0, 0" />
 
       <StackPanel 
         Margin="10, 0, 0, 0"
@@ -99,9 +99,9 @@
         DockPanel.Dock="Top"
         Text="Last Orders"
         Foreground="#da66ec"
-        FontSize="17"
+        FontSize="20"
         FontWeight="DemiBold"
-        Padding="10, 0, 0, 0" />
+        Padding="10, 5, 0, 0" />
 
       <DataGrid 
         DockPanel.Dock="Top"
@@ -179,9 +179,9 @@
         DockPanel.Dock="Top"
         Text="Running Out Products"
         Foreground="#da66ec"
-        FontSize="17"
+        FontSize="20"
         FontWeight="DemiBold"
-        Padding="10, 0, 0, 0" />
+        Padding="10, 5, 0, 0" />
 
       <DataGrid 
         DockPanel.Dock="Top"
@@ -249,9 +249,9 @@
         DockPanel.Dock="Top"
         Text="Best Seller"
         Foreground="#da66ec"
-        FontSize="17"
+        FontSize="20"
         FontWeight="DemiBold"
-        Padding="10, 0, 0, 0" />
+        Padding="10, 5, 0, 0" />
 
       <DataGrid
         DockPanel.Dock="Top"
