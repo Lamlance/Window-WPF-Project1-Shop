@@ -20,7 +20,7 @@
       SelectedTabChanged="SelectTabChange"
       x:Name="Ribbon"
       DockPanel.Dock="Top"
-      d:SelectedTabIndex="3">
+      d:SelectedTabIndex="1">
 
       <Fluent:Ribbon.Menu>
         <Fluent:Backstage>
