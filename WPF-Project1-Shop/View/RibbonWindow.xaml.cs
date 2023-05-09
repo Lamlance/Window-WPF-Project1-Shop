@@ -16,19 +16,19 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WPF_Project1_Shop.View
 {
-    /// <summary>
-    /// Interaction logic for RibbonWindow.xaml
-    /// </summary>
-    public partial class RibbonWindow : System.Windows.Window
+  /// <summary>
+  /// Interaction logic for RibbonWindow.xaml
+  /// </summary>
+  public partial class RibbonWindow : System.Windows.Window
+  {
+    public RibbonWindow()
     {
-        public RibbonWindow()
-        {
-            InitializeComponent();
-        }
+      InitializeComponent();
+    }
 
-        private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            var screens = new ObservableCollection<TabItem>()
+    private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+      var screens = new ObservableCollection<TabItem>()
             {
                 new TabItem() { Content = new CustomerUserControl()},
                 new TabItem() { Content = new CustomerUserControl()},
@@ -36,10 +36,10 @@ namespace WPF_Project1_Shop.View
                 new TabItem() { Content = new CustomerUserControl()},
                 new TabItem() { Content = new CustomerUserControl()}
             };
-            Tabs.ItemsSource = screens;
-        }
-
-
-
+      Tabs.ItemsSource = screens;
     }
+
+
+
+  }
 }

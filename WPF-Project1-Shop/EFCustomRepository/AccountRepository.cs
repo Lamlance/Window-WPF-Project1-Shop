@@ -7,30 +7,31 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.EFCustomRepository
 {
-    public class AccountRepository
+  public class AccountRepository
+  {
+    private RailwayContext dbContext;
+    public AccountRepository(RailwayContext railwayContext)
     {
-        private RailwayContext dbContext;
-        public AccountRepository(RailwayContext railwayContext)
-        {
-            dbContext = railwayContext;
-        }
-
-        public void Dispose()
-        {
-            dbContext.Dispose();
-        }
-
-        public Account? GetAccount(string userName, string encryptedPassword)
-        {
-            var account = dbContext.Accounts.FirstOrDefault(a => a.UserName == userName && a.Password == encryptedPassword);
-
-            if (account != null)
-            {
-                return account;
-            }
-            else {
-                return null;
-            }
-        }
+      dbContext = railwayContext;
     }
+
+    public void Dispose()
+    {
+      dbContext.Dispose();
+    }
+
+    public Account? GetAccount(string userName, string encryptedPassword)
+    {
+      var account = dbContext.Accounts.FirstOrDefault(a => a.UserName == userName && a.Password == encryptedPassword);
+
+      if (account != null)
+      {
+        return account;
+      }
+      else
+      {
+        return null;
+      }
+    }
+  }
 }

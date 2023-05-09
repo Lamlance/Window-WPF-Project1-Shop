@@ -6,9 +6,9 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
   xmlns:local="clr-namespace:WPF_Project1_Shop.View"
   mc:Ignorable="d" 
-  Loaded="UserControlLoaded"
+  Loaded="CategoryUserControlLoaded"
   d:DesignHeight="450" d:DesignWidth="800">
-  <Grid
+  <!--<Grid
 		Background="White">
     <ListView
       x:Name="CategoryListView">
@@ -19,5 +19,126 @@
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
+  </Grid>-->
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="3*" />
+      <ColumnDefinition Width="2*" />
+    </Grid.ColumnDefinitions>
+    <DockPanel>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DataGrid
+          SelectionMode="Single"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          x:Name="ListCategory"
+          Margin="10, 10, 10, 0"
+          PreviewMouseLeftButtonDown="CategoryListClick" SelectionChanged="ListCategory_SelectionChanged">
+
+          <DataGrid.Resources>
+            <Style 
+            x:Key="ColumnElementStyle" 
+            TargetType="TextBlock">
+              <Setter 
+              Property="Margin" 
+              Value="5,5,0,5" />
+            </Style>
+          </DataGrid.Resources>
+
+          <DataGrid.Columns>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Header="Id"
+              Width="Auto"
+              Binding="{Binding Id}"/>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Header="Name"
+              Binding="{Binding CategoryName}"
+              Width="Auto"/>
+            <DataGridTextColumn
+              ElementStyle="{StaticResource ColumnElementStyle}"
+              Header="Amount"
+              Binding="{Binding totalAmount}"
+              Width="Auto"/>
+          </DataGrid.Columns>
+        </DataGrid>
+
+
+        <WrapPanel 
+          HorizontalAlignment="Center"
+          Grid.Row="1"
+          Margin="0, 5, 0, 5">
+          <ComboBox 
+            SelectionChanged="PageComboBoxChange"
+            x:Name="CategoryPageComboBox"
+            Padding="30,0,30,0" />
+        </WrapPanel>
+      </Grid>
+    </DockPanel>
+
+
+    <Grid 
+      x:Name="CategoryModifyForm"
+      Grid.Column="1"
+      Margin="10, 10, 10, 10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1.5*" />
+        <ColumnDefinition Width="3*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="1*" />
+        <RowDefinition Height="Auto" />
+
+      </Grid.RowDefinitions>
+
+      <Label 
+        VerticalAlignment="Center"
+        Grid.Column="0"
+        Content="Name" />
+      <TextBox 
+        x:Name="txtBoxCategoryName"
+        Grid.Row="0"
+        VerticalAlignment="Center"
+        Grid.Column="1"
+        Text="{Binding Name}"/>
+
+      <TabControl 
+        SelectedIndex="1"
+        Grid.ColumnSpan="2"
+        Grid.Row="1">
+        <TabItem Header="Category Information">
+          <StackPanel>
+            <Label 
+              ContentStringFormat="{}Name: {0}"
+              Content="{Binding Name}"
+              d:Content="Name: Food" />
+            
+          </StackPanel>
+        </TabItem>
+      </TabControl>
+
+      <WrapPanel 
+        HorizontalAlignment="Right"
+        Grid.ColumnSpan="2"
+        Grid.Row="7">
+        <Button 
+          Click="CategoryFormBtnClick"
+          Margin="0,8,0,0"
+          Padding="20,0,20,0"
+          Content="Submit" />
+      </WrapPanel>
+    </Grid>
   </Grid>
 </UserControl>

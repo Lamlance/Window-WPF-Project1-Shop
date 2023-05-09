@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace WPF_Project1_Shop.ViewModel
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+  public abstract class ViewModelBase : INotifyPropertyChanged
+  {
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public void OnPropertyChanged(string propertyName)
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-    
-        public void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+  }
 }

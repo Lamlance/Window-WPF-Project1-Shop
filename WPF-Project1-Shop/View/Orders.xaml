@@ -57,7 +57,7 @@
           </Fluent:BackstageTabControl>
         </Fluent:Backstage>
       </Fluent:Ribbon.Menu>
-      
+
       <Fluent:RibbonTabItem 
         Header="Dashboard"
         x:Name="DashboardDataTab">
@@ -66,8 +66,8 @@
           Height="0"
           Width="0"
           Visibility="Collapsed"/>
-        </Fluent:RibbonTabItem>
-      
+      </Fluent:RibbonTabItem>
+
       <!-- Order tab -->
       <Fluent:RibbonTabItem 
         Header="Orders"
@@ -266,7 +266,7 @@
       </Fluent:RibbonTabItem>
       <!-- /Order ta -->
 
-      
+
       <!-- Product Tab -->
       <Fluent:RibbonTabItem 
         Header="Products"
@@ -462,7 +462,7 @@
       </Fluent:RibbonTabItem>
       <!-- /Product Tab -->
 
-      
+
       <!-- Customer tab -->
       <Fluent:RibbonTabItem 
         Header="Customers">
@@ -610,11 +610,11 @@
       </Fluent:RibbonTabItem>
       <!-- Customer tab -->
 
-      
+
       <!-- Report tab -->
       <Fluent:RibbonTabItem
         Header="Report">
-        
+
         <Fluent:RibbonGroupBox
           Header="Total income and profits">
           <Grid 
@@ -722,7 +722,7 @@
 
       <Fluent:RibbonTabItem
         Header="Category">
-        
+
       </Fluent:RibbonTabItem>
     </Fluent:Ribbon>
 
