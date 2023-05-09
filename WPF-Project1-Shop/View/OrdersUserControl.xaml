@@ -20,6 +20,9 @@
       x:Key="StringToDateConverter" />
     <helper:DoubleToDecimal
       x:Key="DoubleToDecimal" />
+    <helper:OrderStatusTextColorConverter 
+      x:Key="OrderStatusTextColorConverter"/>
+
   </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
@@ -60,7 +63,10 @@
           x:Name="ListOrder"
           PreviewMouseLeftButtonDown="OrderListClick"
           Grid.Row="0">
+          
           <DataGrid.Columns>
+     
+            
             <DataGridTextColumn
               Width="0.5*"
               Header="Id"
@@ -73,22 +79,39 @@
             <DataGridTextColumn
               Width="1*"
               Header="Shipping address"
-              Binding="{Binding ShipAddress}"/>
+              Binding="{Binding ShipAddress}">
+            </DataGridTextColumn>
             <DataGridTextColumn
               Width="1*"
               Header="Status"
-              Binding="{Binding Status}"/>
+              Foreground="{Binding Status, Converter={StaticResource OrderStatusTextColorConverter}}"
+              Binding="{Binding Status}">
+              <!--<DataGridTextColumn.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                  <Style.Triggers>
+                    <DataTrigger 
+                      Binding="{Binding Status, 
+                      Converter={StaticResource OrderStatusTextColorConverter}}" 
+                      Value="true">
+                      <Setter Property="Foreground" Value="Blue" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </DataGridTextColumn.CellStyle>-->
+            </DataGridTextColumn>
             <DataGridTextColumn
               Width="1*"
               Header="Created at"
               Binding="{Binding CreatedAt,
-              ConverterCulture='vi-VN'}"/>
+              ConverterCulture='vi-VN'}">
+            </DataGridTextColumn>
             <DataGridTextColumn
               Width="1*"
               Header="Delivered at"
               Binding="{Binding UpdatedAt,
               ConverterCulture='vi-VN'}"/>
           </DataGrid.Columns>
+          
         </DataGrid>
         <WrapPanel
           HorizontalAlignment="Center"

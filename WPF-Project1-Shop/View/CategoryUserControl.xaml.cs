@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_Project1_Shop.EFModel;
 using WPF_Project1_Shop.ViewModel;
 
 namespace WPF_Project1_Shop.View
@@ -33,7 +34,10 @@ namespace WPF_Project1_Shop.View
 
     private void CategoryListClick(object sender, MouseButtonEventArgs e)
     {
-
+      if (this.ListCategory.SelectedItem is Category)
+      {
+        this.CategoryModifyForm.DataContext = (Category)ListCategory.SelectedItem;
+      }
     }
 
     public void ResetComboPageBox(int totalPage)

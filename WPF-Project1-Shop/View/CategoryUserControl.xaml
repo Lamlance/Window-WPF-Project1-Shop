@@ -38,7 +38,7 @@
           IsReadOnly="True"
           x:Name="ListCategory"
           Margin="10, 10, 10, 0"
-          PreviewMouseLeftButtonDown="CategoryListClick" SelectionChanged="ListCategory_SelectionChanged">
+          PreviewMouseLeftButtonDown="CategoryListClick">
 
           <DataGrid.Resources>
             <Style 
@@ -65,7 +65,7 @@
               ElementStyle="{StaticResource ColumnElementStyle}"
               Header="Amount"
               Binding="{Binding totalAmount}"
-              Width="Auto"/>
+              Width="*"/>
           </DataGrid.Columns>
         </DataGrid>
 
@@ -85,6 +85,7 @@
 
     <Grid 
       x:Name="CategoryModifyForm"
+      DataContext="{Binding Mode=OneWay}"
       Grid.Column="1"
       Margin="10, 10, 10, 10">
       <Grid.ColumnDefinitions>
@@ -112,7 +113,7 @@
         Grid.Row="0"
         VerticalAlignment="Center"
         Grid.Column="1"
-        Text="{Binding Name}"/>
+        Text="{Binding CategoryName}"/>
 
       <TabControl 
         SelectedIndex="1"
@@ -122,8 +123,8 @@
           <StackPanel>
             <Label 
               ContentStringFormat="{}Name: {0}"
-              Content="{Binding Name}"
-              d:Content="Name: Food" />
+              Content="{Binding CategoryName}"
+              d:Content="Name: Sweet" />
             
           </StackPanel>
         </TabItem>

@@ -28,14 +28,16 @@
 
 
     <TextBlock 
-      Foreground="#27292f"
+      Foreground="#a547b9"
       Text="Dashboard"
       FontSize="36"
       Padding="10, 0, 0, 0" />
 
     <Grid 
       Grid.Row="1"
-      Grid.Column="0">
+      Grid.Column="0"
+      Background="white"
+      Margin="10 10 10 10">
 
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
@@ -43,7 +45,7 @@
       </Grid.RowDefinitions>
 
       <TextBlock 
-        Foreground="#27292f"
+        Foreground="#da66ec"
         Text="General information"
         FontSize="17"
         FontWeight="DemiBold"
@@ -88,12 +90,15 @@
     </Grid>
 
     <DockPanel 
+      Background="white"
       LastChildFill="False"
       Grid.Row="2"
-      Grid.Column="0">
+      Grid.Column="0"
+      Margin="10 10 10 10">
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Last Orders"
+        Foreground="#da66ec"
         FontSize="17"
         FontWeight="DemiBold"
         Padding="10, 0, 0, 0" />
@@ -165,12 +170,15 @@
     <DockPanel 
       LastChildFill="False"
       Grid.Row="1"
-      Grid.Column="1">
+      Grid.Column="1"
+      Background="white"
+      Margin="10 10 10 10">
       
 
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Running Out Products"
+        Foreground="#da66ec"
         FontSize="17"
         FontWeight="DemiBold"
         Padding="10, 0, 0, 0" />
@@ -233,11 +241,14 @@
     <DockPanel 
       LastChildFill="False"
       Grid.Row="2"
-      Grid.Column="1">
+      Grid.Column="1"
+      Background="white"
+      Margin="10 10 10 10">
 
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Best Seller"
+        Foreground="#da66ec"
         FontSize="17"
         FontWeight="DemiBold"
         Padding="10, 0, 0, 0" />
