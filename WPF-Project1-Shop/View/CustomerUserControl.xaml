@@ -115,10 +115,14 @@
       </Grid.RowDefinitions>
 
       <Label 
+        FontSize="16"
+        Margin="0 5 0 5"
         VerticalAlignment="Center"
         Grid.Column="0"
         Content="First Name" />
       <TextBox 
+        FontSize="16"
+        Margin="0 5 0 5"
         x:Name="txtBoxFirstNameCustomer"
         Grid.Row="0"
         VerticalAlignment="Center"
@@ -126,11 +130,15 @@
         Text="{Binding FirstName}"/>
 
       <Label 
+        FontSize="16"
+        Margin="0 5 0 5"
         VerticalAlignment="Center"
         Grid.Row="1"
         Grid.Column="0"
         Content="Middle Name" />
       <TextBox 
+        FontSize="16"
+        Margin="0 5 0 5"
         x:Name="txtBoxMiddleNameCustomer"
         Grid.Row="1"
         VerticalAlignment="Center"
@@ -138,11 +146,15 @@
         Text="{Binding MiddleName}"/>
 
       <Label 
+        FontSize="16"
+        Margin="0 5 0 5"
         VerticalAlignment="Center"
         Grid.Row="2"
         Grid.Column="0"
         Content="Last Name" />
       <TextBox 
+        FontSize="16"
+        Margin="0 5 0 5"
         x:Name="txtBoxLastNameCustomer"
         Grid.Row="2"
         VerticalAlignment="Center"
@@ -150,11 +162,15 @@
         Text="{Binding LastName}"/>
 
       <Label 
+        FontSize="16"
+        Margin="0 5 0 5"
         VerticalAlignment="Center"
         Grid.Row="3"
         Grid.Column="0"
         Content="Email" />
-      <TextBox 
+      <TextBox
+        FontSize="16"
+        Margin="0 5 0 5"
         x:Name="txtBoxEmail"
         Grid.Row="3"
         VerticalAlignment="Center"
@@ -162,11 +178,15 @@
         Text="{Binding Email}"/>
 
       <Label 
+        FontSize="16"
+        Margin="0 5 0 5"
         VerticalAlignment="Center"
         Grid.Row="4"
         Grid.Column="0"
         Content="Phone" />
       <TextBox 
+        FontSize="16"
+        Margin="0 5 0 5"
         x:Name="txtBoxPhone"
         Grid.Row="4"
         VerticalAlignment="Center"
@@ -174,11 +194,15 @@
         Text="{Binding Phone}"/>
 
       <Label 
+        FontSize="16"
+        Margin="0 5 0 5"
         VerticalAlignment="Center"
         Grid.Row="5"
         Grid.Column="0"
         Content="Address" />
       <TextBox 
+        FontSize="16"
+        Margin="0 5 0 5"
         x:Name="txtBoxAddress"
         Grid.Row="5"
         VerticalAlignment="Center"
@@ -192,26 +216,38 @@
         <TabItem Header="Customer Information">
           <StackPanel>
             <Label 
+              FontSize="16"
+              Margin="0 5 0 5"
               ContentStringFormat="{}Firstname: {0}"
               Content="{Binding FirstName}"
               d:Content="Firstname: Nguyen" />
             <Label 
+              FontSize="16"
+              Margin="0 5 0 5"
               ContentStringFormat="{}Middlename: {0}"
               Content="{Binding MiddleName}"
               d:Content="Middlename: Van" />
             <Label 
+              FontSize="16"
+              Margin="0 5 0 5"
               ContentStringFormat="{}Lastname: {0}"
               Content="{Binding LastName}"
               d:Content="Lastname: Hoang" />
             <Label 
+              FontSize="16"
+              Margin="0 5 0 5"
               ContentStringFormat="{}Phone number: {0}"
               Content="{Binding Phone}"
               d:Content="Phone number: 12345678" />
             <Label 
+              FontSize="16"
+              Margin="0 5 0 5"
               ContentStringFormat="{}Email: {0}"
               Content="{Binding Email}"
               d:Content="Email: Nvhoang@coldmail.com" />
             <Label 
+              FontSize="16"
+              Margin="0 5 0 5"
               ContentStringFormat="{}Address: {0}"
               Content="{Binding Address}"
               d:Content="Address: 420 Huynh Van Banh Q3, P3, HCM" />
