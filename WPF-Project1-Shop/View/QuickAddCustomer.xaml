@@ -96,7 +96,12 @@
             IsCheckable="True"
             Header="Apply name">
             <MenuItem.Icon>
-              <iconPacks:FontAwesome Kind="UserSlashSolid" />
+              <!--<iconPacks:FontAwesome Kind="UserSlashSolid" />-->
+              <Image Source="/Images/Icons/check_circle.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 
@@ -105,18 +110,28 @@
             IsCheckable="True"
             Header="Apply information">
             <MenuItem.Icon>
-              <iconPacks:FontAwesome Kind="UserSlashSolid" />
+              <!--<iconPacks:FontAwesome Kind="UserSlashSolid" />-->
+              <Image Source="/Images/Icons/apply_information.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 
           <Fluent:Button 
             Click="SearchCustomerBtnClick"
-            Header="Search!">
+            Header="Search">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons 
+              <!--<iconPacks:PackIconUnicons 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
-                Kind="Search" />
+                Kind="Search" />-->
+              <Image Source="/Images/Icons/search.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
         </Fluent:RibbonGroupBox>
@@ -126,10 +141,15 @@
             Click="AddCustomerClick"
             Header="Add customer to order">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons
+              <!--<iconPacks:PackIconUnicons
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                Kind="CheckCircle" />
+                Kind="CheckCircle" />-->
+              <Image Source="/Images/Icons/user_add.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
         </Fluent:RibbonGroupBox>

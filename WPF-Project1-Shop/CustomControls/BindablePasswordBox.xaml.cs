@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 
 namespace WPF_Project1_Shop.CustomControls
 {
-    /// <summary>
-    /// Interaction logic for BindablePasswordBox.xaml
-    /// </summary>
-    public partial class BindablePasswordBox : UserControl
+  /// <summary>
+  /// Interaction logic for BindablePasswordBox.xaml
+  /// </summary>
+  public partial class BindablePasswordBox : UserControl
+  {
+    public BindablePasswordBox()
     {
-        public BindablePasswordBox()
-        {
-            InitializeComponent();
-        }
+      InitializeComponent();
     }
+  }
 }

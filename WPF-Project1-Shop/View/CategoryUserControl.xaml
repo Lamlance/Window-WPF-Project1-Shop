@@ -8,18 +8,6 @@
   mc:Ignorable="d" 
   Loaded="CategoryUserControlLoaded"
   d:DesignHeight="450" d:DesignWidth="800">
-  <!--<Grid
-		Background="White">
-    <ListView
-      x:Name="CategoryListView">
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <Label
-            Content="{Binding CategoryName}"/>
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
-  </Grid>-->
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="3*" />

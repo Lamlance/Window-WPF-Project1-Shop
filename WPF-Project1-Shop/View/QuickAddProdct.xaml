@@ -24,10 +24,15 @@
           <Fluent:DropDownButton
             Header="Filter categories">
             <Fluent:DropDownButton.Icon>
-              <iconPacks:PackIconUnicons
+              <!--<iconPacks:PackIconUnicons
                 Kind="LayerGroup"
                 VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"/>
+                HorizontalAlignment="Stretch"/>-->
+              <Image Source="/Images/Icons/layers.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:DropDownButton.Icon>
             <ListView 
               Loaded="CategoriesListLoaded"
@@ -113,8 +118,13 @@
             IsCheckable="true"
             Header="Apply categories">
             <MenuItem.Icon>
-              <iconPacks:PackIconUnicons 
-                Kind="LayerGroupSlash"/>
+              <!--<iconPacks:PackIconUnicons 
+                Kind="LayerGroupSlash"/>-->
+              <Image Source="/Images/Icons/apply_category.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
           <MenuItem
@@ -122,8 +132,13 @@
             IsCheckable="true"
             Header="Apply price">
             <MenuItem.Icon>
-              <iconPacks:PackIconUnicons 
-                Kind="MoneyBillSlash"/>
+              <!--<iconPacks:PackIconUnicons 
+                Kind="MoneyBillSlash"/>-->
+              <Image Source="/Images/Icons/money_bill_add.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
           <MenuItem
@@ -131,8 +146,13 @@
             IsCheckable="true"
             Header="Apply name">
             <MenuItem.Icon>
-              <iconPacks:FontAwesome 
-                Kind="UserSlashSolid"/>
+              <!--<iconPacks:FontAwesome 
+                Kind="UserSlashSolid"/>-->
+              <Image Source="/Images/Icons/check_circle.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </MenuItem.Icon>
           </MenuItem>
 

@@ -185,8 +185,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/calender_apply.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </MenuItem.Icon>
@@ -202,8 +202,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/money_bill_add.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </MenuItem.Icon>
@@ -217,8 +217,8 @@
               <!--<iconPacks:FontAwesome 
                 Kind="UserSlashSolid" />-->
               <Image Source="/Images/Icons/check_circle.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </MenuItem.Icon>
@@ -233,8 +233,8 @@
                 VerticalAlignment="Stretch"
                 Kind="Search" />-->
               <Image Source="/Images/Icons/search.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
@@ -255,8 +255,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/edit.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -272,8 +272,8 @@
                 HorizontalAlignment="Center"                                       
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/add_order.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -289,8 +289,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/delete_order.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -317,8 +317,8 @@
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch" />-->
               <Image Source="/Images/Icons/filter_category.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:DropDownButton.Icon>
@@ -406,8 +406,8 @@
               <!--<iconPacks:PackIconUnicons 
                 Kind="LayerGroupSlash"/>-->
               <Image Source="/Images/Icons/apply_category.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </MenuItem.Icon>
@@ -420,8 +420,8 @@
               <!--<iconPacks:PackIconUnicons 
                 Kind="MoneyBillSlash"/>-->
               <Image Source="/Images/Icons/apply_product.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </MenuItem.Icon>
@@ -434,8 +434,8 @@
               <!--<iconPacks:FontAwesome 
                 Kind="UserSlashSolid"/>-->
               <Image Source="/Images/Icons/check_circle.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </MenuItem.Icon>
@@ -443,15 +443,15 @@
 
           <Fluent:Button 
             Click="SearchProductBtnClick"
-            Header="Seach">
+            Header="Search">
             <Fluent:Button.Icon>
               <!--<iconPacks:PackIconUnicons 
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Kind="Search" />-->
               <Image Source="/Images/Icons/search.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
@@ -472,8 +472,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/edit_product.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -491,8 +491,8 @@
                 HorizontalAlignment="Center"                            
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/add_product.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -510,8 +510,8 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/remove_product.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -530,8 +530,8 @@
                 HorizontalAlignment="Stretch"
                 Kind="Database"/>-->
               <Image Source="/Images/Icons/database.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
@@ -622,8 +622,8 @@
               <!--<iconPacks:FontAwesome 
               Kind="UserSlashSolid" />-->
               <Image Source="/Images/Icons/check_circle.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </MenuItem.Icon>
@@ -637,8 +637,8 @@
               <!--<iconPacks:FontAwesome 
               Kind="UserSlashSolid" />-->
               <Image Source="/Images/Icons/apply_information.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </MenuItem.Icon>
@@ -652,9 +652,9 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Kind="Search" />-->
-              <Image Source="/Images/Icons/search.png" 
-               Width="16" 
-               Height="16" 
+              <Image Source="/Images/Icons/search.png"
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
@@ -675,8 +675,8 @@
                 HorizontalAlignment="Center"              
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/user_edit.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -693,8 +693,8 @@
                 HorizontalAlignment="Center"           
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/user_add.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -711,8 +711,8 @@
                 HorizontalAlignment="Center"                                               
                 VerticalAlignment="Center" />-->
               <Image Source="/Images/Icons/user_slash.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:ToggleButton.Icon>
@@ -775,8 +775,8 @@
                 HorizontalAlignment="Stretch"
                 Kind="CheckCircle"/>-->
               <Image Source="/Images/Icons/check_circle.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
@@ -831,8 +831,8 @@
                 HorizontalAlignment="Stretch"
                 Kind="CheckCircle"/>-->
               <Image Source="/Images/Icons/check_circle.png" 
-               Width="16" 
-               Height="16" 
+               Width="24" 
+               Height="24"
                VerticalAlignment="Center" 
                HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
