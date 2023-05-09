@@ -20,6 +20,9 @@
       x:Key="StringToDateConverter" />
     <helper:DoubleToDecimal
       x:Key="DoubleToDecimal" />
+    <helper:OrderStatusTextColorConverter 
+      x:Key="OrderStatusTextColorConverter"/>
+
   </UserControl.Resources>
   <Grid>
     <Grid.ColumnDefinitions>
@@ -60,7 +63,10 @@
           x:Name="ListOrder"
           PreviewMouseLeftButtonDown="OrderListClick"
           Grid.Row="0">
+          
           <DataGrid.Columns>
+     
+            
             <DataGridTextColumn
               Width="0.5*"
               Header="Id"
@@ -73,22 +79,39 @@
             <DataGridTextColumn
               Width="1*"
               Header="Shipping address"
-              Binding="{Binding ShipAddress}"/>
+              Binding="{Binding ShipAddress}">
+            </DataGridTextColumn>
             <DataGridTextColumn
               Width="1*"
               Header="Status"
-              Binding="{Binding Status}"/>
+              Foreground="{Binding Status, Converter={StaticResource OrderStatusTextColorConverter}}"
+              Binding="{Binding Status}">
+              <!--<DataGridTextColumn.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}">
+                  <Style.Triggers>
+                    <DataTrigger 
+                      Binding="{Binding Status, 
+                      Converter={StaticResource OrderStatusTextColorConverter}}" 
+                      Value="true">
+                      <Setter Property="Foreground" Value="Blue" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </DataGridTextColumn.CellStyle>-->
+            </DataGridTextColumn>
             <DataGridTextColumn
               Width="1*"
               Header="Created at"
               Binding="{Binding CreatedAt,
-              ConverterCulture='vi-VN'}"/>
+              ConverterCulture='vi-VN'}">
+            </DataGridTextColumn>
             <DataGridTextColumn
               Width="1*"
               Header="Delivered at"
               Binding="{Binding UpdatedAt,
               ConverterCulture='vi-VN'}"/>
           </DataGrid.Columns>
+          
         </DataGrid>
         <WrapPanel
           HorizontalAlignment="Center"
@@ -104,7 +127,7 @@
 
     </Grid>
 
-
+     
 
     <Grid 
       x:Name="OrderModifyForm"
@@ -126,7 +149,9 @@
 
       </Grid.RowDefinitions>
 
-      <Label 
+      <Label
+        Margin="0 5 0 5"
+        FontSize="16"
         VerticalAlignment="Center"
         Grid.Column="0" 
         Content="Date created"/>
@@ -134,15 +159,19 @@
         SelectedDate="{Binding CreatedAt,Mode=OneWay,
         Converter={StaticResource StringToDateConverter}}"
         x:Name="datePickerCreatedOrderForm"
+        FontSize="16"
         VerticalAlignment="Center"
         Grid.Column="1" />
 
       <Label 
+        Margin="0 5 0 5"
+        FontSize="16"
         VerticalAlignment="Center"
         Grid.Row="1"
         Grid.Column="0"
         Content="Date deliverd" />
       <DatePicker 
+        FontSize="16"
         SelectedDate="{Binding UpdatedAt,Mode=OneWay,
         Converter={StaticResource StringToDateConverter}}"
         x:Name="datePickerDeliveredOrderForm"
@@ -151,22 +180,28 @@
         Grid.Column="1" />
 
       <Label 
+        Margin="0 5 0 5"
+        FontSize="16"
         VerticalAlignment="Center"
         Grid.Row="2"
         Grid.Column="0"
         Content="Ship address" />
       <TextBox 
+        FontSize="16"
         x:Name="txtBoxAddressOrderForm"
         Grid.Row="2"
         VerticalAlignment="Center"
         Grid.Column="1" />
 
       <Label 
+        Margin="0 5 0 5"
+        FontSize="16"
         VerticalAlignment="Center"
         Grid.Row="3"
         Grid.Column="0"
         Content="Total" />
       <currency:CurrencyTextBox 
+        FontSize="16"
         StringFormat="C0"
         Culture="vi-VN"
         TextAlignment="Left"
@@ -177,11 +212,14 @@
 
 
       <Label 
+        Margin="0 5 0 5"
+        FontSize="16"
         VerticalAlignment="Center"
         Grid.Row="4"
         Grid.Column="0"
         Content="Ship Status" />
       <ComboBox 
+        FontSize="16"
         x:Name="comboOrderForm"
         Grid.Row="4"
         VerticalAlignment="Center"
@@ -201,7 +239,10 @@
           x:Name="tabItemCustomerInfoOrderForm"
           Header="Customer info"
           VerticalAlignment="Top">
-          <StackPanel Orientation="Vertical">
+          <StackPanel 
+            Orientation="Vertical"
+            Margin="10 10 10 10"
+            >
             <Button 
               Click="CustomerAddOrderBtnClick"
               x:Name="btnCustomerAddOrderForm"
@@ -209,7 +250,8 @@
               Content="Add Customer" />
             <TextBlock 
               FontSize="16"
-              TextWrapping="Wrap">
+              TextWrapping="Wrap"
+              Margin="0 5 0 5">
               <TextBlock.Text>
                 <MultiBinding StringFormat="Name: {0} {1} {2}">
                   <Binding Path="FirstName" />
@@ -221,7 +263,8 @@
 
             <TextBlock 
               FontSize="16"
-              TextWrapping="Wrap">
+              TextWrapping="Wrap"
+              Margin="0 5 0 5">
               <TextBlock.Text>
                 <MultiBinding StringFormat="Phone: {0}">
                   <Binding Path="Phone" />
@@ -231,7 +274,8 @@
 
             <TextBlock 
               FontSize="16"
-              TextWrapping="Wrap">
+              TextWrapping="Wrap"
+              Margin="0 5 0 5">
               <TextBlock.Text>
                 <MultiBinding StringFormat="Email: {0}">
                   <Binding Path="Email" />
@@ -241,14 +285,15 @@
 
             <TextBlock 
               FontSize="16"
-              TextWrapping="Wrap">
+              TextWrapping="Wrap"
+              Margin="0 5 0 5">
               <TextBlock.Text>
                 <MultiBinding StringFormat="Customer address: {0}">
                   <Binding Path="Address" />
                 </MultiBinding>
               </TextBlock.Text>
             </TextBlock>
-            
+
           </StackPanel>
 
         </TabItem>
@@ -256,13 +301,14 @@
         <TabItem Header="Ordered products">
           <DockPanel LastChildFill="True">
             <StackPanel 
-              Margin="0,0,0,0"
+              Margin="0,10,0,10"
               DockPanel.Dock="Top">
               <Button 
                 Click="EditOrderItemBtnClick"
                 Content="Edit order items" />
             </StackPanel>
             <DataGrid 
+              IsReadOnly="True"
               x:Name="SelectedOrderItemDataGrid"
               AutoGenerateColumns="False"
               DockPanel.Dock="Bottom">

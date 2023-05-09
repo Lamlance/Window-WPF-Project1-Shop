@@ -12,8 +12,15 @@ namespace WPF_Project1_Shop.ViewModel
 {
   public class CategoryViewModel
   {
+    public enum MODIFY_MODE
+    {
+      NONE, ADD, EDIT, DELETE
+    }
+    MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
+    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
     public class CheckableCategory : Category, INotifyPropertyChanged
     {
+      public int totalAmount { get; set; } = 0;
       public bool IsChecked { get; set; } = true;
 
       public event PropertyChangedEventHandler? PropertyChanged;
@@ -83,6 +90,7 @@ namespace WPF_Project1_Shop.ViewModel
       {
         categories.Add(new CheckableCategory() { 
           CategoryName = c.CategoryName,
+          totalAmount = c.Products.Count,
           Id = c.Id,
           Products = c.Products,
           IsChecked = false
@@ -114,5 +122,6 @@ namespace WPF_Project1_Shop.ViewModel
       OnNewCategoryAdded?.Invoke(result);
 
     }
+
   }
 }

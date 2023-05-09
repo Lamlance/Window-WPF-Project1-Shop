@@ -31,7 +31,7 @@ namespace WPF_Project1_Shop.View
     private static CustomerUserControl customerUserControl = new CustomerUserControl();
     private static ReportUserControl reportUserControl = new ReportUserControl();
     private static DashboardUserControl dashboardUserControl = new DashboardUserControl();
-
+    private static CategoryUserControl categoryUserControl = new CategoryUserControl();
     CategoryViewModel _categoryViewModel;
     UserInformation? user;
 
@@ -76,7 +76,8 @@ namespace WPF_Project1_Shop.View
             new TabItem(){Content = ordersUserControl },
             new TabItem(){Content = productsUserControl },
             new TabItem(){Content = customerUserControl},
-            new TabItem(){Content = reportUserControl}
+            new TabItem(){Content = reportUserControl},
+            new TabItem(){Content = categoryUserControl}
         };
       this.MainTabControl.ItemsSource = screens;
       this.UserInfoContentControl.Content = new LoginUserControl(this.User, () =>

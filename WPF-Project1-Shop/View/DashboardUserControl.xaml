@@ -21,21 +21,23 @@
     </Grid.RowDefinitions>
 
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="3*" />
       <ColumnDefinition Width="2*" />
-      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="2*" />
+
     </Grid.ColumnDefinitions>
 
 
     <TextBlock 
-      Foreground="#27292f"
+      Foreground="#a547b9"
       Text="Dashboard"
       FontSize="36"
       Padding="10, 0, 0, 0" />
 
     <Grid 
       Grid.Row="1"
-      Grid.Column="0">
+      Grid.Column="0"
+      Background="white"
+      Margin="10 10 10 10">
 
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
@@ -43,11 +45,11 @@
       </Grid.RowDefinitions>
 
       <TextBlock 
-        Foreground="#27292f"
+        Foreground="#da66ec"
         Text="General information"
-        FontSize="17"
+        FontSize="20"
         FontWeight="DemiBold"
-        Padding="10, 0, 0, 0" />
+        Padding="10, 5, 0, 0" />
 
       <StackPanel 
         Margin="10, 0, 0, 0"
@@ -88,15 +90,18 @@
     </Grid>
 
     <DockPanel 
+      Background="white"
       LastChildFill="False"
       Grid.Row="2"
-      Grid.Column="0">
+      Grid.Column="0"
+      Margin="10 10 10 10">
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Last Orders"
-        FontSize="17"
+        Foreground="#da66ec"
+        FontSize="20"
         FontWeight="DemiBold"
-        Padding="10, 0, 0, 0" />
+        Padding="10, 5, 0, 0" />
 
       <DataGrid 
         DockPanel.Dock="Top"
@@ -165,15 +170,18 @@
     <DockPanel 
       LastChildFill="False"
       Grid.Row="1"
-      Grid.Column="1">
+      Grid.Column="1"
+      Background="white"
+      Margin="10 10 10 10">
       
 
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Running Out Products"
-        FontSize="17"
+        Foreground="#da66ec"
+        FontSize="20"
         FontWeight="DemiBold"
-        Padding="10, 0, 0, 0" />
+        Padding="10, 5, 0, 0" />
 
       <DataGrid 
         DockPanel.Dock="Top"
@@ -233,14 +241,17 @@
     <DockPanel 
       LastChildFill="False"
       Grid.Row="2"
-      Grid.Column="1">
+      Grid.Column="1"
+      Background="white"
+      Margin="10 10 10 10">
 
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Best Seller"
-        FontSize="17"
+        Foreground="#da66ec"
+        FontSize="20"
         FontWeight="DemiBold"
-        Padding="10, 0, 0, 0" />
+        Padding="10, 5, 0, 0" />
 
       <DataGrid
         DockPanel.Dock="Top"

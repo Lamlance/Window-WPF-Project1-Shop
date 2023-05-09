@@ -16,9 +16,15 @@
       <ColumnDefinition Width="1*" />
     </Grid.ColumnDefinitions>
     <DockPanel>
+      <StackPanel
+          Background="#efefef"
+          Width="10"
+          DockPanel.Dock="Right"/>
       <TextBlock 
         TextAlignment="Center"
-        FontSize="16"
+        Foreground="#a547b9"
+        Padding="10 5 0 0"
+        FontSize="20"
         Text="Total income and profit"
         DockPanel.Dock="Top"/>
       <lvc:CartesianChart
@@ -29,13 +35,19 @@
         ZoomMode="None"
         LegendPosition="Hidden">
       </lvc:CartesianChart>
+      
+
     </DockPanel>
 
+    
+    
     <DockPanel
       Grid.Column="1">
       <TextBlock 
+        Foreground="#a547b9"
+        Padding="10 5 0 0"
+        FontSize="20"
         TextAlignment="Center"
-        FontSize="16"
         Text="Products sold"
         DockPanel.Dock="Top"/>
       <TabControl

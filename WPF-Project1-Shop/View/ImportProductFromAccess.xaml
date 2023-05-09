@@ -22,14 +22,17 @@
         <Button
           Click="BrowseBtnClick"
           Padding="20,0,20,0"
+          Margin="10"
           Content="Browse" />
         <Button
           Click="ReadBtnClick"
           Padding="20,0,20,0"
+          Margin="10"
           Content="ReadData" />
         <Button          
           Click="AcceptBtnClick"
           Padding="20,0,20,0"
+          Margin="10"
           Content="Accept Data" />
       </StackPanel>
       
