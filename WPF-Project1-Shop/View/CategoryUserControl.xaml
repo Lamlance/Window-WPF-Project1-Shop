@@ -64,7 +64,6 @@
           Margin="0, 5, 0, 5">
           <ComboBox 
             SelectionChanged="PageComboBoxChange"
-            SelectedIndex="0"
             x:Name="CategoryPageComboBox"
             Padding="30,0,30,0" />
         </WrapPanel>

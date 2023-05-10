@@ -36,7 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EFModel\" />
-    <Folder Include="Images\Icons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images/**/*.*">
@@ -44,10 +43,114 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="Images\Icons\add_file.png" />
+    <Content Remove="Images\Icons\add_order.png" />
+    <Content Remove="Images\Icons\add_product.png" />
+    <Content Remove="Images\Icons\apply_category.png" />
+    <Content Remove="Images\Icons\apply_information.png" />
+    <Content Remove="Images\Icons\apply_product.png" />
+    <Content Remove="Images\Icons\calendar_apply.png" />
+    <Content Remove="Images\Icons\calendar_slash.png" />
+    <Content Remove="Images\Icons\check_circle.png" />
+    <Content Remove="Images\Icons\database.png" />
+    <Content Remove="Images\Icons\delete_order.png" />
+    <Content Remove="Images\Icons\edit.png" />
+    <Content Remove="Images\Icons\edit_product.png" />
+    <Content Remove="Images\Icons\file_exclamation.png" />
+    <Content Remove="Images\Icons\filter_category.png" />
+    <Content Remove="Images\Icons\layers.png" />
+    <Content Remove="Images\Icons\layer_slash.png" />
+    <Content Remove="Images\Icons\money_bill_add.png" />
+    <Content Remove="Images\Icons\money_bill_slash.png" />
+    <Content Remove="Images\Icons\remove_file.png" />
+    <Content Remove="Images\Icons\remove_product.png" />
+    <Content Remove="Images\Icons\search.png" />
+    <Content Remove="Images\Icons\user_add.png" />
+    <Content Remove="Images\Icons\user_edit.png" />
+    <Content Remove="Images\Icons\user_slash.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="ViewModel\LoginViewModel.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModel\LoginViewModel.cs.old" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icons\add_file.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\add_order.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\add_product.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\apply_category.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\apply_information.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\apply_product.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\calendar_apply.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\calendar_slash.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\check_circle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\database.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\delete_order.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\edit_product.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\file_exclamation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\filter_category.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\layers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\layer_slash.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\money_bill_add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\money_bill_slash.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\remove_file.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\remove_product.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\user_add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\user_edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Icons\user_slash.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

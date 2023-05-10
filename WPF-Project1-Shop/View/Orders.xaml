@@ -22,6 +22,7 @@
     <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonWindow.TitleBackground">#241F3A</SolidColorBrush>
 
   </Window.Resources>
+  
 
   <DockPanel 
     LastChildFill="True" 
@@ -143,7 +144,8 @@
         </Fluent:RibbonTabItem.Style>
 
         <!-- Filter  Group -->
-        <Fluent:RibbonGroupBox Header="Filter Date">
+        <Fluent:RibbonGroupBox Header="Filter Date"
+                               Foreground="#F0EFF8">
           <Grid MinWidth="200">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="1*" />
@@ -153,24 +155,47 @@
               <RowDefinition Height="1*" />
               <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-            <Label Content="From" />
+            <Label Content="From" 
+                    Margin="5 5 5 5"
+                   Foreground="#F0EFF8"/>
             <DatePicker 
+              Padding="3 3 3 3"
               x:Name="datePickerFromOrderFilter"
+              Background="#F0EFF8"
+              Foreground="Black"
               Grid.Column="1"
-              IsTodayHighlighted="True" />
+              IsTodayHighlighted="True" >
+              <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                  <Setter Property="Foreground" Value="#F0EFF8"/>
+                </Style>
+              </DatePicker.Resources>
+            </DatePicker>
 
-            <Label 
+            <Label
+               Foreground="#F0EFF8"
+               Margin="5 5 5 5"
                 Grid.Row="1"
                 Content="To" />
             <DatePicker 
+               Padding="3 3 3 3"
+              Background="#F0EFF8"
+              Foreground="Black"
                 x:Name="datePickerToOrderFilter"
                 Grid.Row="1"
                 Grid.Column="1"
-                IsTodayHighlighted="True" />
+                IsTodayHighlighted="True" >
+              <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                  <Setter Property="Foreground" Value="#F0EFF8"/>
+                </Style>
+              </DatePicker.Resources>
+            </DatePicker>
           </Grid>
         </Fluent:RibbonGroupBox>
         <Fluent:RibbonGroupBox
-          Header="Filter Sum">
+          Header="Filter Sum"
+          Foreground="#F0EFF8">
           <Grid MinWidth="200">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="1*" />
@@ -181,8 +206,12 @@
               <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Label 
-                Content="From" />
+                Content="From" 
+              Margin="5 5 5 5"
+              Foreground="#F0EFF8"/>
             <currency:CurrencyTextBox
+              Padding="3 3 3 3"
+              Margin="1 1 1 1"
                 x:Name="txtMoneyFromOderFilter"
                 TextAlignment="Left"
                 VerticalContentAlignment="Center"
@@ -190,9 +219,13 @@
                 currency:Culture="vi-VN"
                 Grid.Column="1" />
             <Label 
+              Margin="5 5 5 5"
+              Foreground="#F0EFF8"
                 Grid.Row="1"
                 Content="To" />
             <currency:CurrencyTextBox
+              Margin="1 1 1 1"
+              Padding="3 3 3 3"
                 x:Name="txtMoneyToOrderFilter"
                 Grid.Row="1"
                 TextAlignment="Left"
@@ -206,7 +239,8 @@
         <!-- /Filter Group -->
 
         <!-- Search Customer Group -->
-        <Fluent:RibbonGroupBox Header="Filter Customer">
+        <Fluent:RibbonGroupBox Header="Filter Customer"
+                               Foreground="#F0EFF8">
           <Grid MinWidth="300">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="1*" />
@@ -218,22 +252,31 @@
               <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <Label Content="Address" />
+            <Label Content="Address"
+                   Foreground="#F0EFF8"/>
             <Fluent:TextBox 
+              Foreground="#F0EFF8"
+              Padding="3 3 3 3"
               x:Name="txtBoxAddressOrderFilter"
               Grid.Column="1" />
 
             <Label 
+              Foreground="#F0EFF8"
               Grid.Row="1"
               Content="Email" />
             <Fluent:TextBox 
+              Foreground="#F0EFF8"
+              Padding="3 3 3 3"
               x:Name="txtBoxEmailOrderFilter"
               Grid.Row="1"
               Grid.Column="1" />
             <Label 
+              Foreground="#F0EFF8"
               Grid.Row="2"
               Content="Phone" />
             <Fluent:TextBox 
+              Foreground="#F0EFF8"
+              Padding="3 3 3 3"
               x:Name="txtBoxPhoneOrderFilter"
               PreviewTextInput="PreviewTxtInputNumberOnly"
               Grid.Row="2"
@@ -243,9 +286,11 @@
         <!-- /SearchTab -->
 
         <Fluent:RibbonGroupBox 
-          Header="Apply filter">
+          Header="Apply filter"
+          Foreground="#F0EFF8">
           <MenuItem 
             x:Name="menuApplyDateFilterOrder"
+            Foreground="#F0EFF8"
             IsCheckable="True"       
             Header="Appy date">
             <MenuItem.Icon>
@@ -253,7 +298,7 @@
                 Kind="CalendarSlash"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/calender_apply.png" 
+              <Image Source="/Images/Icons/calendar_apply.png" 
                Width="24" 
                Height="24"
                VerticalAlignment="Center" 
@@ -263,6 +308,7 @@
 
           <MenuItem 
             x:Name="menuApplySumFilterOrder"
+            Foreground="#F0EFF8"
             IsCheckable="True"
             Header="Appy sum">
             <MenuItem.Icon>
@@ -280,6 +326,7 @@
 
           <MenuItem 
             x:Name="menuApplyCustomerFilterOrder"
+            Foreground="#F0EFF8"
             IsCheckable="True"
             Header="Appy searches">
             <MenuItem.Icon>
@@ -295,7 +342,8 @@
 
           <Fluent:Button 
             Click="SearchOrderBtnClick"                       
-            Header="Search">
+            Header="Search"
+            Foreground="#F0EFF8">
             <Fluent:Button.Icon>
               <!--<iconPacks:PackIconUnicons 
                 HorizontalAlignment="Center"
@@ -312,11 +360,13 @@
         </Fluent:RibbonGroupBox>
 
         <Fluent:RibbonGroupBox
-          Header="Manual modify">
+          Header="Manual modify"
+          Foreground="#F0EFF8">
 
           <Fluent:ToggleButton
             Checked="OrderEditModeChecked"
             Header="Edit order"
+            Foreground="#F0EFF8"
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
               <!--<iconPacks:PackIconUnicons
@@ -334,6 +384,7 @@
           <Fluent:ToggleButton 
             Checked="OrderAddModeChecked"           
             Header="Add order"       
+            Foreground="#F0EFF8"
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -350,7 +401,8 @@
 
           <Fluent:ToggleButton 
             Checked="OrderDeleteModeChecked"        
-            Header="Delete order"           
+            Header="Delete order"       
+            Foreground="#F0EFF8"
             GroupName="OderDataMode">
             <Fluent:ToggleButton.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -409,7 +461,8 @@
         <Fluent:RibbonGroupBox 
           Header="Categories">
           <Fluent:DropDownButton 
-            Header="Filter categories">
+            Header="Filter categories"
+            Foreground="#F0EFF8">
             <Fluent:DropDownButton.Icon>
               <!--<iconPacks:PackIconUnicons 
                 Kind="LayerGroup"
@@ -455,8 +508,12 @@
             </Grid.RowDefinitions>
 
             <Label 
-              Content="Start Price" />
-            <currency:CurrencyTextBox 
+              Content="Start Price"
+              Margin="5 5 5 5"
+              Foreground="#F0EFF8"/>
+            <currency:CurrencyTextBox
+              Padding="3 3 3 3"
+              Margin="1 1 1 1"
               x:Name="txtMoneyFromProductFilter"
               VerticalContentAlignment="Center"
               TextAlignment="Left"
@@ -464,9 +521,13 @@
               Culture="vi-VN"
               Grid.Column="1" />
             <Label 
+              Margin="5 5 5 5"
+              Foreground="#F0EFF8"
               Grid.Row="1"
               Content="End Price" />
             <currency:CurrencyTextBox 
+              Padding="3 3 3 3"
+              Margin="1 1 1 1"
               x:Name="txtMoneyToProductFilter"
               VerticalContentAlignment="Center"
               TextAlignment="Left"
@@ -485,9 +546,16 @@
               <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Label 
+              Foreground="#F0EFF8"
               Grid.Column="0"
-              Content="Product name" />
+              Content="Product name"
+              VerticalAlignment="Center"/>
             <TextBox 
+              Background="#F0EFF8"
+              Padding="3 3 3 3"
+              VerticalAlignment="Center"
+              
+              FontSize="14"
               x:Name="txtBoxNameProductFilter"
               VerticalContentAlignment="Center"
               Grid.Column="1" />
@@ -500,7 +568,9 @@
           <MenuItem
             x:Name="menuApplyCategoriesProductFilter"
             IsCheckable="true"
-            Header="Apply categories">
+            Foreground="#F0EFF8"
+            Header="Apply categories"
+            >
             <MenuItem.Icon>
               <!--<iconPacks:PackIconUnicons 
                 Kind="LayerGroupSlash"/>-->
@@ -514,6 +584,7 @@
           <MenuItem
             x:Name="menuApplyPriceProductFilter"
             IsCheckable="true"
+            Foreground="#F0EFF8"
             Header="Apply price">
             <MenuItem.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -528,6 +599,7 @@
           <MenuItem
             x:Name="menuApplyNameProductFilter"
             IsCheckable="true"
+            Foreground="#F0EFF8"
             Header="Apply name">
             <MenuItem.Icon>
               <!--<iconPacks:FontAwesome 
@@ -542,6 +614,7 @@
 
           <Fluent:Button 
             Click="SearchProductBtnClick"
+            Foreground="#F0EFF8"
             Header="Search">
             <Fluent:Button.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -559,11 +632,13 @@
         </Fluent:RibbonGroupBox>
 
         <Fluent:RibbonGroupBox
-          Header="Manual modify">
+          Header="Manual modify"
+          Foreground="#F0EFF8">
 
           <Fluent:ToggleButton 
             Checked="ProductEditModeChecked"
             Header="Edit product"
+            Foreground="#F0EFF8"
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -582,6 +657,7 @@
             Checked="ProductAddModeChecked"
                                          
             Header="Add product"
+            Foreground="#F0EFF8"
                                          
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
@@ -601,6 +677,7 @@
             Checked="ProductDeleteModeChecked"
                                          
             Header="Delete product"
+            Foreground="#F0EFF8"
                                          
             GroupName="ProductDataMode">
             <Fluent:ToggleButton.Icon>
@@ -622,6 +699,7 @@
           Header="Data Import">
           <Fluent:Button
             Click="ImportProductFromAccessBtnClick"
+            Foreground="#F0EFF8"
             Header="Access">
             <Fluent:Button.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -691,18 +769,21 @@
 
 
             <Label 
-              Content="First name" />
+              Content="First name" 
+              Foreground="#F0EFF8"/>
             <Fluent:TextBox 
               x:Name="txtBoxFirstNameCustomerFilter"
               Grid.Column="1" />
             <Label 
               Grid.Row="1"
+              Foreground="#F0EFF8"
               Content="Middle name" />
             <Fluent:TextBox 
               x:Name="txtBoxMiddleNameCustomerFilter"
               Grid.Row="1"
               Grid.Column="1" />
             <Label 
+              Foreground="#F0EFF8"
               Grid.Row="2"
               Content="Last name" />
             <Fluent:TextBox 
@@ -725,14 +806,16 @@
 
             <Label 
               Grid.Row="0"
-              Content="Email" />
+              Content="Email"
+              Foreground="#F0EFF8"/>
             <Fluent:TextBox 
               x:Name="txtBoxEmailCustomer"
               Grid.Row="0"
               Grid.Column="1" />
             <Label 
               Grid.Row="1"
-              Content="Phone" />
+              Content="Phone"
+              Foreground="#F0EFF8"/>
             <Fluent:TextBox 
               x:Name="txtBoxPhoneCustomer"
               PreviewTextInput="PreviewTxtInputNumberOnly"
@@ -746,6 +829,7 @@
           <MenuItem 
             x:Name="menuApplyCustomerNameFilter"
             IsCheckable="True"
+            Foreground="#F0EFF8"
             Header="Apply name">
             <MenuItem.Icon>
               <!--<iconPacks:FontAwesome 
@@ -761,6 +845,7 @@
           <MenuItem 
             x:Name="menuApplyCustomerInformationFilter"
             IsCheckable="True"
+            Foreground="#F0EFF8"
             Header="Apply information">
             <MenuItem.Icon>
               <!--<iconPacks:FontAwesome 
@@ -775,6 +860,7 @@
 
           <Fluent:Button 
             Click="SearchCustomerBtnClick"
+            Foreground="#F0EFF8"
             Header="Search">
             <Fluent:Button.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -791,12 +877,14 @@
 
         </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Manual modify">
+        <Fluent:RibbonGroupBox Header="Manual modify"
+                               Foreground="#F0EFF8">
 
           <Fluent:ToggleButton 
             x:Name="toggleBtnEditCustomer"
             Checked="CustomerEditModeChecked"
             Unchecked="CustomerModeUnchecked"
+            Foreground="#F0EFF8"
             Header="Edit customer">
             <Fluent:ToggleButton.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -813,7 +901,8 @@
 
           <Fluent:ToggleButton 
             x:Name="toggleBtnAddCustomer"
-            Checked="CustomerAddModeChecked"                               
+            Checked="CustomerAddModeChecked"   
+            Foreground="#F0EFF8"
             Unchecked="CustomerModeUnchecked"
             Header="Add customer">
             <Fluent:ToggleButton.Icon>
@@ -833,6 +922,7 @@
             x:Name="toggleBtnDeleteCustomer"
             Checked="CustomerDeleteModeChecked"
             Unchecked="CustomerModeUnchecked"
+            Foreground="#F0EFF8"
             Header="Delete customer">
             <Fluent:ToggleButton.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -901,22 +991,42 @@
               <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Label
-              Content="From date"/>
+              Content="From date"
+              Foreground="#F0EFF8"/>
             <DatePicker
+              Background="#F0EFF8"
+              Foreground="Black"
               x:Name="DatePickerFromIncomeProfit"
-              Grid.Column="1"/>
+              Grid.Column="1">
+              <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                  <Setter Property="Foreground" Value="#F0EFF8"/>
+                </Style>
+              </DatePicker.Resources>
+            </DatePicker>
             <Label
               Content="To date"
+              Foreground="#F0EFF8"
               Grid.Row="1"/>
             <DatePicker
+              Foreground="Black"
+              Background="#F0EFF8"
               x:Name="DatePickerToIncomeProfit"
               Grid.Row="1"
-              Grid.Column="1"/>
+              Grid.Column="1">
+              <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                  <Setter Property="Foreground" Value="#F0EFF8"/>
+                </Style>
+              </DatePicker.Resources>
+            </DatePicker>
+
             <ComboBox
+              Background="#F0EFF8"
               x:Name="ComboBoxGroupTypeIncomeProfit"
               SelectedIndex="0"
               Grid.Row="2"
-              Grid.ColumnSpan="2">
+              Grid.Column="2">
               <ComboBoxItem
                 Content="Group by dates"/>
               <ComboBoxItem
@@ -927,6 +1037,7 @@
           </Grid>
           <Fluent:Button
             x:Name="btnApplyIncomeProfit"
+            Foreground="#F0EFF8"
             Click="ApplyIncomProfitnBtnClick"
             Header="Apply">
             <Fluent:Button.Icon>
@@ -957,22 +1068,39 @@
               <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Label
+              Foreground="#F0EFF8"
               Content="From date"/>
             <DatePicker
+              Background="#F0EFF8"
               x:Name="DatePickerFromProductCount"
-              Grid.Column="1"/>
+              Grid.Column="1">
+              <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                  <Setter Property="Foreground" Value="#F0EFF8"/>
+                </Style>
+              </DatePicker.Resources>
+            </DatePicker>
             <Label
+              Foreground="#F0EFF8"
               Content="To date"
               Grid.Row="1"/>
             <DatePicker
+              Background="#F0EFF8"
               x:Name="DatePickerToProductCount"
               Grid.Row="1"
-              Grid.Column="1"/>
+              Grid.Column="1">
+              <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                  <Setter Property="Foreground" Value="#F0EFF8"/>
+                </Style>
+              </DatePicker.Resources>
+            </DatePicker>
             <ComboBox
               x:Name="ComboBoxGroupTypeProductCount"
+              Background="#F0EFF8"
               SelectedIndex="0"
               Grid.Row="2"
-              Grid.ColumnSpan="2">
+              Grid.Column="2">
               <ComboBoxItem
                 Content="Group by dates"/>
               <ComboBoxItem
@@ -983,6 +1111,7 @@
           </Grid>
           <Fluent:Button
             Click="ApplyProductCountBtnClick"
+            Foreground="#F0EFF8"
             x:Name="btnApplyProductCount"
             Header="Apply">
             <Fluent:Button.Icon>
@@ -1051,7 +1180,8 @@
 
 
             <Label 
-              Content="Name"/>
+              Content="Name"
+              Foreground="#F0EFF8"/>
             <Fluent:TextBox 
               x:Name="txtBoxCategoryNameFilter"
               Grid.Column="1" />
@@ -1065,6 +1195,7 @@
           <MenuItem 
             x:Name="menuApplyCategoryNameFilter"
             IsCheckable="True"
+            Foreground="#F0EFF8"
             Header="Apply name">
             <MenuItem.Icon>
               <!--<iconPacks:FontAwesome 
@@ -1079,6 +1210,7 @@
 
           <Fluent:Button 
             Click="SearchCategotyBtnClick"
+            Foreground="#F0EFF8"
             Header="Search">
             <Fluent:Button.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -1095,12 +1227,14 @@
 
         </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Manual modify">
+        <Fluent:RibbonGroupBox Header="Manual modify"
+                               Foreground="#F0EFF8">
 
           <Fluent:ToggleButton 
             x:Name="toggleBtnEditCategory"
             Checked="CategoryEditModeChecked"
             Unchecked="CategoryModeUnchecked"
+            Foreground="#F0EFF8"
             Header="Edit Category">
             <Fluent:ToggleButton.Icon>
               <!--<iconPacks:PackIconUnicons 
@@ -1117,7 +1251,8 @@
 
           <Fluent:ToggleButton 
             x:Name="toggleBtnAddCategory"
-            Checked="CategoryAddModeChecked"                               
+            Checked="CategoryAddModeChecked"   
+            Foreground="#F0EFF8"
             Unchecked="CategoryModeUnchecked"
             Header="Add Category">
             <Fluent:ToggleButton.Icon>
@@ -1135,6 +1270,7 @@
 
           <Fluent:ToggleButton 
             x:Name="toggleBtnDeleteCategory"
+            Foreground="#F0EFF8"
             Checked="CategoryDeleteModeChecked"
             Unchecked="CategoryModeUnchecked"
             Header="Delete Category">

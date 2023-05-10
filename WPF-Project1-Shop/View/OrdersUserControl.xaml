@@ -118,7 +118,6 @@
           Grid.Row="1">
           <ComboBox
             SelectionChanged="PageComboBoxChange"
-            SelectedIndex="0"
             x:Name="OrderPageComboBox"
             Padding="30,0,30,0"/>
         </WrapPanel>
