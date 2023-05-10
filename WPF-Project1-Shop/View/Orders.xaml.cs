@@ -255,5 +255,31 @@ namespace WPF_Project1_Shop.View
     {
       this.Ribbon.IsMinimized = this.Ribbon.SelectedTabIndex == 0;
     }
+
+    private void SearchCategotyBtnClick(object sender, RoutedEventArgs e)
+    {
+      string? name = this.menuApplyCategoryNameFilter.IsChecked ? this.txtBoxCategoryNameFilter.Text : null;
+      //categoryUserControl.SearchCategory(name);
+    }
+
+    private void CategoryEditModeChecked(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void CategoryModeUnchecked(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void CategoryAddModeChecked(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void CategoryDeleteModeChecked(object sender, RoutedEventArgs e)
+    {
+
+    }
   }
 }

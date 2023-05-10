@@ -28,7 +28,7 @@
 
 
     <TextBlock 
-      Foreground="#a547b9"
+      Foreground="#6358AB"
       Text="Dashboard"
       FontSize="36"
       Padding="10, 0, 0, 0" />
@@ -45,7 +45,7 @@
       </Grid.RowDefinitions>
 
       <TextBlock 
-        Foreground="#da66ec"
+        Foreground="#4A376C"
         Text="General information"
         FontSize="20"
         FontWeight="DemiBold"
@@ -98,7 +98,7 @@
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Last Orders"
-        Foreground="#da66ec"
+        Foreground="#4A376C"
         FontSize="20"
         FontWeight="DemiBold"
         Padding="10, 5, 0, 0" />
@@ -137,7 +137,7 @@
         <DataGrid.Columns>
           <DataGridTextColumn
             FontWeight="Bold"
-            Width="0.3*"
+            Width="Auto"
             Header="Id"
             Binding="{Binding Id}"
             ElementStyle="{StaticResource ColumnElementStyle}" />
@@ -178,7 +178,7 @@
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Running Out Products"
-        Foreground="#da66ec"
+        Foreground="#4A376C"
         FontSize="20"
         FontWeight="DemiBold"
         Padding="10, 5, 0, 0" />
@@ -248,7 +248,7 @@
       <TextBlock 
         DockPanel.Dock="Top"
         Text="Best Seller"
-        Foreground="#da66ec"
+        Foreground="#4A376C"
         FontSize="20"
         FontWeight="DemiBold"
         Padding="10, 5, 0, 0" />

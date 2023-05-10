@@ -41,5 +41,19 @@ namespace WPF_Project1_Shop.EFCustomRepository
       return category;
     }
 
+    public IEnumerable<Category>? SearchCategories(string? name)
+    {
+      var result = dbContext.Categories
+        .Where(o =>
+          (name == null) ? true :
+          (
+            (!(string.IsNullOrEmpty(name) || o.CategoryName == null) && EF.Functions.ILike(o.CategoryName, name))
+          )
+        )
+        .Take(500);
+
+      return result;
+    }
+
   }
 }

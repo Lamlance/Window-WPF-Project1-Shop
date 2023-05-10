@@ -39,12 +39,12 @@
         <RowDefinition Height="Auto" />
         <RowDefinition Height="1*" />
       </Grid.RowDefinitions>
-      <Label 
+      <!--<Label 
         Name="labelStatusText"
         HorizontalContentAlignment="Center"
         Padding="0,2,0,2"
         FontSize="11"
-        Content="Status"/>
+        Content="Status"/>-->
 
       <Grid
         Grid.Row="1">
@@ -118,6 +118,7 @@
           Grid.Row="1">
           <ComboBox
             SelectionChanged="PageComboBoxChange"
+            SelectedIndex="0"
             x:Name="OrderPageComboBox"
             Padding="30,0,30,0"/>
         </WrapPanel>
