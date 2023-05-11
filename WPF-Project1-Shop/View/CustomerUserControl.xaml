@@ -5,266 +5,235 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPF_Project1_Shop.View"
              mc:Ignorable="d"
-             Background="White"
+             Background="#F0EFF8"
              Loaded="CustomerUserControlLoaded"
              d:DesignHeight="450"
              d:DesignWidth="800">
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="3*" />
-      <ColumnDefinition Width="2*" />
-    </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
 
 
-    <DockPanel>
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*" />
-          <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+        <DockPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-        <DataGrid
-          SelectionMode="Single"
-          AutoGenerateColumns="False"
-          IsReadOnly="True"
-          x:Name="ListCustomer"
-          Margin="10, 10, 10, 0"
-          PreviewMouseLeftButtonDown="CustomerListClick">
+                <DataGrid SelectionMode="Single"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          x:Name="ListCustomer"
+                          Margin="10"
+                          HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Hidden"
+                          PreviewMouseLeftButtonDown="CustomerListClick">
 
-          <DataGrid.Resources>
-            <Style 
-            x:Key="ColumnElementStyle" 
-            TargetType="TextBlock">
-              <Setter 
-              Property="Margin" 
-              Value="5,5,0,5" />
-            </Style>
-          </DataGrid.Resources>
+                    <DataGrid.Resources>
+                        <Style x:Key="ColumnElementStyle"
+                               TargetType="TextBlock">
+                            <Setter Property="Margin"
+                                    Value="5,5,0,5" />
+                        </Style>
+                    </DataGrid.Resources>
 
-          <DataGrid.Columns>
-            <DataGridTextColumn
-              ElementStyle="{StaticResource ColumnElementStyle}"
-              Header="Id"
-              Width="0.2*"
-              Binding="{Binding Id}"/>
-            <DataGridTextColumn
-              ElementStyle="{StaticResource ColumnElementStyle}"
-              Header="First Name"
-              Binding="{Binding FirstName}"
-              Width="Auto"/>
-            <DataGridTextColumn
-              ElementStyle="{StaticResource ColumnElementStyle}"
-              Width="Auto"
-              Header="Middle Name"
-              Binding="{Binding MiddleName}"/>
-            <DataGridTextColumn
-              ElementStyle="{StaticResource ColumnElementStyle}"
-              Width="Auto"
-              Header="Last Name"
-              Binding="{Binding LastName}"/>
-            <DataGridTextColumn
-              ElementStyle="{StaticResource ColumnElementStyle}"
-              Header="Phone"
-              Width="1*"
-              Binding="{Binding Phone}"/>
-            <DataGridTextColumn
-              ElementStyle="{StaticResource ColumnElementStyle}"
-              Header="Address"
-              Width="1*"
-              Binding="{Binding Address}"/>
-            <DataGridTextColumn
-              ElementStyle="{StaticResource ColumnElementStyle}"
-              Header="Email"
-              Width="1*"
-              Binding="{Binding Email}"/>
-          </DataGrid.Columns>
-        </DataGrid>
-        
-        
-        <WrapPanel 
-          HorizontalAlignment="Center"
-          Grid.Row="1"
-          Margin="0, 5, 0, 5">
-          <ComboBox 
-            SelectionChanged="PageComboBoxChange"
-            x:Name="CustomerPageComboBox"
-            Padding="30,0,30,0" />
-        </WrapPanel>
-      </Grid>
-    </DockPanel>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}"
+                                            Header="Id"
+                                            Width="0.2*"
+                                            Binding="{Binding Id}" />
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}"
+                                            Header="First Name"
+                                            Binding="{Binding FirstName}"
+                                            Width="Auto" />
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}"
+                                            Width="Auto"
+                                            Header="Middle Name"
+                                            Binding="{Binding MiddleName}" />
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}"
+                                            Width="Auto"
+                                            Header="Last Name"
+                                            Binding="{Binding LastName}" />
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}"
+                                            Header="Phone"
+                                            Width="1*"
+                                            Binding="{Binding Phone}" />
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}"
+                                            Header="Address"
+                                            Width="1*"
+                                            Binding="{Binding Address}" />
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}"
+                                            Header="Email"
+                                            Width="1*"
+                                            Binding="{Binding Email}" />
+                    </DataGrid.Columns>
+                </DataGrid>
 
 
-    <Grid 
-      x:Name="CustomerModifyForm"
-      Grid.Column="1"
-      Margin="10, 10, 10, 10">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="1.5*" />
-        <ColumnDefinition Width="3*" />
-      </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="Auto" />
-        <RowDefinition Height="1*" />
-        <RowDefinition Height="Auto" />
+                <WrapPanel HorizontalAlignment="Center"
+                           Grid.Row="1"
+                           Margin="0, 5, 0, 5">
+                    <ComboBox SelectionChanged="PageComboBoxChange"
+                              SelectedIndex="0"
+                              x:Name="CustomerPageComboBox"
+                              Padding="30,0,30,0" />
+                </WrapPanel>
+            </Grid>
+        </DockPanel>
 
-      </Grid.RowDefinitions>
 
-      <Label 
-        FontSize="16"
-        Margin="0 5 0 5"
-        VerticalAlignment="Center"
-        Grid.Column="0"
-        Content="First Name" />
-      <TextBox 
-        FontSize="16"
-        Margin="0 5 0 5"
-        x:Name="txtBoxFirstNameCustomer"
-        Grid.Row="0"
-        VerticalAlignment="Center"
-        Grid.Column="1"
-        Text="{Binding FirstName}"/>
+        <Grid x:Name="CustomerModifyForm"
+              Grid.Column="1"
+              Margin="10, 10, 10, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto" />
 
-      <Label 
-        FontSize="16"
-        Margin="0 5 0 5"
-        VerticalAlignment="Center"
-        Grid.Row="1"
-        Grid.Column="0"
-        Content="Middle Name" />
-      <TextBox 
-        FontSize="16"
-        Margin="0 5 0 5"
-        x:Name="txtBoxMiddleNameCustomer"
-        Grid.Row="1"
-        VerticalAlignment="Center"
-        Grid.Column="1"
-        Text="{Binding MiddleName}"/>
+            </Grid.RowDefinitions>
 
-      <Label 
-        FontSize="16"
-        Margin="0 5 0 5"
-        VerticalAlignment="Center"
-        Grid.Row="2"
-        Grid.Column="0"
-        Content="Last Name" />
-      <TextBox 
-        FontSize="16"
-        Margin="0 5 0 5"
-        x:Name="txtBoxLastNameCustomer"
-        Grid.Row="2"
-        VerticalAlignment="Center"
-        Grid.Column="1"
-        Text="{Binding LastName}"/>
+            <Label FontSize="16"
+                   Margin="0 5 0 5"
+                   VerticalAlignment="Center"
+                   Grid.Column="0"
+                   Content="First Name" />
+            <TextBox FontSize="16"
+                     Margin="0 5 0 5"
+                     x:Name="txtBoxFirstNameCustomer"
+                     Grid.Row="0"
+                     VerticalAlignment="Center"
+                     Grid.Column="1"
+                     Text="{Binding FirstName}" />
 
-      <Label 
-        FontSize="16"
-        Margin="0 5 0 5"
-        VerticalAlignment="Center"
-        Grid.Row="3"
-        Grid.Column="0"
-        Content="Email" />
-      <TextBox
-        FontSize="16"
-        Margin="0 5 0 5"
-        x:Name="txtBoxEmail"
-        Grid.Row="3"
-        VerticalAlignment="Center"
-        Grid.Column="1"
-        Text="{Binding Email}"/>
+            <Label FontSize="16"
+                   Margin="0 5 0 5"
+                   VerticalAlignment="Center"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Content="Middle Name" />
+            <TextBox FontSize="16"
+                     Margin="0 5 0 5"
+                     x:Name="txtBoxMiddleNameCustomer"
+                     Grid.Row="1"
+                     VerticalAlignment="Center"
+                     Grid.Column="1"
+                     Text="{Binding MiddleName}" />
 
-      <Label 
-        FontSize="16"
-        Margin="0 5 0 5"
-        VerticalAlignment="Center"
-        Grid.Row="4"
-        Grid.Column="0"
-        Content="Phone" />
-      <TextBox 
-        FontSize="16"
-        Margin="0 5 0 5"
-        x:Name="txtBoxPhone"
-        Grid.Row="4"
-        VerticalAlignment="Center"
-        Grid.Column="1"
-        Text="{Binding Phone}"/>
+            <Label FontSize="16"
+                   Margin="0 5 0 5"
+                   VerticalAlignment="Center"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Content="Last Name" />
+            <TextBox FontSize="16"
+                     Margin="0 5 0 5"
+                     x:Name="txtBoxLastNameCustomer"
+                     Grid.Row="2"
+                     VerticalAlignment="Center"
+                     Grid.Column="1"
+                     Text="{Binding LastName}" />
 
-      <Label 
-        FontSize="16"
-        Margin="0 5 0 5"
-        VerticalAlignment="Center"
-        Grid.Row="5"
-        Grid.Column="0"
-        Content="Address" />
-      <TextBox 
-        FontSize="16"
-        Margin="0 5 0 5"
-        x:Name="txtBoxAddress"
-        Grid.Row="5"
-        VerticalAlignment="Center"
-        Grid.Column="1"
-        Text="{Binding Address}"/>
+            <Label FontSize="16"
+                   Margin="0 5 0 5"
+                   VerticalAlignment="Center"
+                   Grid.Row="3"
+                   Grid.Column="0"
+                   Content="Email" />
+            <TextBox FontSize="16"
+                     Margin="0 5 0 5"
+                     x:Name="txtBoxEmail"
+                     Grid.Row="3"
+                     VerticalAlignment="Center"
+                     Grid.Column="1"
+                     Text="{Binding Email}" />
 
-      <TabControl 
-        SelectedIndex="1"
-        Grid.ColumnSpan="2"
-        Grid.Row="6">
-        <TabItem Header="Customer Information">
-          <StackPanel>
-            <Label 
-              FontSize="16"
-              Margin="0 5 0 5"
-              ContentStringFormat="{}Firstname: {0}"
-              Content="{Binding FirstName}"
-              d:Content="Firstname: Nguyen" />
-            <Label 
-              FontSize="16"
-              Margin="0 5 0 5"
-              ContentStringFormat="{}Middlename: {0}"
-              Content="{Binding MiddleName}"
-              d:Content="Middlename: Van" />
-            <Label 
-              FontSize="16"
-              Margin="0 5 0 5"
-              ContentStringFormat="{}Lastname: {0}"
-              Content="{Binding LastName}"
-              d:Content="Lastname: Hoang" />
-            <Label 
-              FontSize="16"
-              Margin="0 5 0 5"
-              ContentStringFormat="{}Phone number: {0}"
-              Content="{Binding Phone}"
-              d:Content="Phone number: 12345678" />
-            <Label 
-              FontSize="16"
-              Margin="0 5 0 5"
-              ContentStringFormat="{}Email: {0}"
-              Content="{Binding Email}"
-              d:Content="Email: Nvhoang@coldmail.com" />
-            <Label 
-              FontSize="16"
-              Margin="0 5 0 5"
-              ContentStringFormat="{}Address: {0}"
-              Content="{Binding Address}"
-              d:Content="Address: 420 Huynh Van Banh Q3, P3, HCM" />
-          </StackPanel>
-        </TabItem>
-      </TabControl>
+            <Label FontSize="16"
+                   Margin="0 5 0 5"
+                   VerticalAlignment="Center"
+                   Grid.Row="4"
+                   Grid.Column="0"
+                   Content="Phone" />
+            <TextBox FontSize="16"
+                     Margin="0 5 0 5"
+                     x:Name="txtBoxPhone"
+                     Grid.Row="4"
+                     VerticalAlignment="Center"
+                     Grid.Column="1"
+                     Text="{Binding Phone}" />
 
-      <WrapPanel 
-        HorizontalAlignment="Right"
-        Grid.ColumnSpan="2"
-        Grid.Row="7">
-        <Button 
-          Click="CustomerFormBtnClick"
-          Margin="0,8,0,0"
-          Padding="20,0,20,0"
-          Content="Submit" />
-      </WrapPanel>
+            <Label FontSize="16"
+                   Margin="0 5 0 5"
+                   VerticalAlignment="Center"
+                   Grid.Row="5"
+                   Grid.Column="0"
+                   Content="Address" />
+            <TextBox FontSize="16"
+                     Margin="0 5 0 5"
+                     x:Name="txtBoxAddress"
+                     Grid.Row="5"
+                     VerticalAlignment="Center"
+                     Grid.Column="1"
+                     Text="{Binding Address}" />
+
+            <TabControl SelectedIndex="1"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="6">
+                <TabItem Header="Customer Information">
+                    <StackPanel>
+                        <Label FontSize="16"
+                               Margin="0 5 0 5"
+                               ContentStringFormat="{}Firstname: {0}"
+                               Content="{Binding FirstName}"
+                               d:Content="Firstname: Nguyen" />
+                        <Label FontSize="16"
+                               Margin="0 5 0 5"
+                               ContentStringFormat="{}Middlename: {0}"
+                               Content="{Binding MiddleName}"
+                               d:Content="Middlename: Van" />
+                        <Label FontSize="16"
+                               Margin="0 5 0 5"
+                               ContentStringFormat="{}Lastname: {0}"
+                               Content="{Binding LastName}"
+                               d:Content="Lastname: Hoang" />
+                        <Label FontSize="16"
+                               Margin="0 5 0 5"
+                               ContentStringFormat="{}Phone number: {0}"
+                               Content="{Binding Phone}"
+                               d:Content="Phone number: 12345678" />
+                        <Label FontSize="16"
+                               Margin="0 5 0 5"
+                               ContentStringFormat="{}Email: {0}"
+                               Content="{Binding Email}"
+                               d:Content="Email: Nvhoang@coldmail.com" />
+                        <Label FontSize="16"
+                               Margin="0 5 0 5"
+                               ContentStringFormat="{}Address: {0}"
+                               Content="{Binding Address}"
+                               d:Content="Address: 420 Huynh Van Banh Q3, P3, HCM" />
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+            <WrapPanel HorizontalAlignment="Right"
+                       Grid.ColumnSpan="2"
+                       Grid.Row="7">
+                <Button Click="CustomerFormBtnClick"
+                        Margin="0,8,0,0"
+                        Padding="20,0,20,0"
+                        Content="Submit" />
+            </WrapPanel>
+        </Grid>
     </Grid>
-  </Grid>
 </UserControl>

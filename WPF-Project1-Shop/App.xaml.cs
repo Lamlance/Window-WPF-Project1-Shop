@@ -40,7 +40,7 @@ namespace WPF_Project1_Shop
     }
     private void OpenMainWindowWithoutLogin()
     {
-      new OrdersWindow(null).Show();
+      new MainWindow(null).Show();
     }
   }
 }
