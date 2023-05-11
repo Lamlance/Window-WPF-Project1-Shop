@@ -255,12 +255,6 @@ namespace WPF_Project1_Shop.View
             this.Ribbon.IsMinimized = this.Ribbon.SelectedTabIndex == 0;
         }
 
-        private void SearchCategotyBtnClick(object sender, RoutedEventArgs e)
-        {
-            string? name = this.menuApplyCategoryNameFilter.IsChecked ? this.txtBoxCategoryNameFilter.Text : null;
-            //categoryUserControl.SearchCategory(name);
-        }
-
         private void CategoryEditModeChecked(object sender, RoutedEventArgs e)
         {
 
@@ -278,6 +272,17 @@ namespace WPF_Project1_Shop.View
 
         private void CategoryDeleteModeChecked(object sender, RoutedEventArgs e)
         {
+
+        }
+        private void SearchCategoryBtnClick(object sender, RoutedEventArgs e)
+        {
+            string? name = this.menuApplyCategoryNameFilter.IsChecked ? this.txtBoxCategoryNameFilter.Text : null;
+            // categoryUserControl.SearchCategory(name);
+
+            //IEnumerable<Category>? categories = this.menuApplyCategoriesProductFilter.IsChecked ? _categoryViewModel.SelectedCategories : null;
+            //string? name = this.menuApplyNameProductFilter.IsChecked ? this.txtBoxNameProductFilter.Text : null;
+            //double? fromPrice = this.menuApplyPriceProductFilter.IsChecked ? decimal.ToDouble(this.txtMoneyFromProductFilter.Number) : null;
+            //double? toPrice = this.menuApplyPriceProductFilter.IsChecked ? decimal.ToDouble(this.txtMoneyToProductFilter.Number) : null;
 
         }
     }

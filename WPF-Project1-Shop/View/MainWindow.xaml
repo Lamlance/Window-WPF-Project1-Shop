@@ -32,7 +32,8 @@
                        d:SelectedTabIndex="1">
 
             <Fluent:Ribbon.Menu>
-                <Fluent:Backstage>
+                <Fluent:Backstage Background="#5E5B6E"
+                                  Height="40">
                     <Fluent:BackstageTabControl>
                         <Fluent:BackstageTabItem Header="User">
                             <DockPanel LastChildFill="True">
@@ -137,8 +138,9 @@
                 </Fluent:RibbonTabItem.Style>
 
                 <!-- Filter  Group -->
-                <Fluent:RibbonGroupBox Header="Filter Date"
-                                       Foreground="#F0EFF8">
+                <Fluent:RibbonGroupBox  Header="Filter Date"
+                                        Foreground="#F0EFF8">
+
                     <Grid MinWidth="200">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
@@ -241,24 +243,21 @@
 
                         <Label Content="Address"
                                Foreground="#F0EFF8" />
-                        <Fluent:TextBox Foreground="#F0EFF8"
-                                        Padding="3 3 3 3"
+                        <Fluent:TextBox Padding="3 3 3 3"
                                         x:Name="txtBoxAddressOrderFilter"
                                         Grid.Column="1" />
 
                         <Label Foreground="#F0EFF8"
                                Grid.Row="1"
                                Content="Email" />
-                        <Fluent:TextBox Foreground="#F0EFF8"
-                                        Padding="3 3 3 3"
+                        <Fluent:TextBox Padding="3 3 3 3"
                                         x:Name="txtBoxEmailOrderFilter"
                                         Grid.Row="1"
                                         Grid.Column="1" />
                         <Label Foreground="#F0EFF8"
                                Grid.Row="2"
                                Content="Phone" />
-                        <Fluent:TextBox Foreground="#F0EFF8"
-                                        Padding="3 3 3 3"
+                        <Fluent:TextBox Padding="3 3 3 3"
                                         x:Name="txtBoxPhoneOrderFilter"
                                         PreviewTextInput="PreviewTxtInputNumberOnly"
                                         Grid.Row="2"
@@ -910,7 +909,8 @@
                     </Style>
                 </Fluent:RibbonTabItem.Style>
 
-                <Fluent:RibbonGroupBox Header="Total income and profits">
+                <Fluent:RibbonGroupBox Height="95"
+                                       Header="Total income and profits">
                     <Grid MinWidth="300">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
@@ -921,9 +921,13 @@
                             <RowDefinition Height="1*" />
                             <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
-                        <Label Content="From date"
+                        <Label Margin="1 1 1 1"
+                               Content="From date"
                                Foreground="#F0EFF8" />
-                        <DatePicker Background="#F0EFF8"
+                        <DatePicker Margin="1 1 1 1"
+                                    Height="31"
+                                    VerticalContentAlignment="Center"
+                                    Background="#F0EFF8"
                                     Foreground="Black"
                                     x:Name="DatePickerFromIncomeProfit"
                                     Grid.Column="1">
@@ -934,10 +938,14 @@
                                 </Style>
                             </DatePicker.Resources>
                         </DatePicker>
-                        <Label Content="To date"
+                        <Label Margin="1 1 1 1"
+                               Content="To date"
                                Foreground="#F0EFF8"
                                Grid.Row="1" />
-                        <DatePicker Foreground="Black"
+                        <DatePicker Margin="1 1 1 1"
+                                    Height="31"
+                                    VerticalContentAlignment="Center"
+                                    Foreground="Black"
                                     Background="#F0EFF8"
                                     x:Name="DatePickerToIncomeProfit"
                                     Grid.Row="1"
@@ -950,7 +958,10 @@
                             </DatePicker.Resources>
                         </DatePicker>
 
-                        <ComboBox Background="#F0EFF8"
+                        <ComboBox Margin="1 1 1 1"
+                                  Height="30"
+                                  VerticalContentAlignment="Center"
+                                  Background="#F0EFF8"
                                   x:Name="ComboBoxGroupTypeIncomeProfit"
                                   SelectedIndex="0"
                                   Grid.Row="2"
@@ -978,7 +989,8 @@
                     </Fluent:Button>
                 </Fluent:RibbonGroupBox>
 
-                <Fluent:RibbonGroupBox Header="Product sold">
+                <Fluent:RibbonGroupBox Height="95"
+                                       Header="Product sold">
                     <Grid MinWidth="300">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
@@ -990,8 +1002,12 @@
                             <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
                         <Label Foreground="#F0EFF8"
+                               Margin="1 1 1 1"
                                Content="From date" />
-                        <DatePicker Background="#F0EFF8"
+                        <DatePicker Height="31"
+                                    VerticalContentAlignment="Center"
+                                    Margin="1 1 1 1"
+                                    Background="#F0EFF8"
                                     x:Name="DatePickerFromProductCount"
                                     Grid.Column="1">
                             <DatePicker.Resources>
@@ -1002,9 +1018,13 @@
                             </DatePicker.Resources>
                         </DatePicker>
                         <Label Foreground="#F0EFF8"
+                               Margin="1 1 1 1"
                                Content="To date"
                                Grid.Row="1" />
-                        <DatePicker Background="#F0EFF8"
+                        <DatePicker Height="31"
+                                    VerticalContentAlignment="Center"
+                                    Margin="1 1 1 1"
+                                    Background="#F0EFF8"
                                     x:Name="DatePickerToProductCount"
                                     Grid.Row="1"
                                     Grid.Column="1">
@@ -1015,9 +1035,12 @@
                                 </Style>
                             </DatePicker.Resources>
                         </DatePicker>
-                        <ComboBox x:Name="ComboBoxGroupTypeProductCount"
+                        <ComboBox Margin="1 1 1 1"
+                                  Height="30"
+                                  x:Name="ComboBoxGroupTypeProductCount"
                                   Background="#F0EFF8"
                                   SelectedIndex="0"
+                                  VerticalContentAlignment="Center"
                                   Grid.Row="2"
                                   Grid.Column="2">
                             <ComboBoxItem Content="Group by dates" />
@@ -1085,19 +1108,23 @@
                 <Fluent:RibbonGroupBox Header="Filter Category Name">
                     <Grid MinWidth="300">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
 
                         <Label Content="Name"
-                               Foreground="#F0EFF8" />
-                        <Fluent:TextBox x:Name="txtBoxCategoryNameFilter"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Foreground="#F0EFF8"
+                               VerticalAlignment="Center" />
+                        <Fluent:TextBox FontSize="14"
+                                        VerticalAlignment="Center"
+                                        x:Name="txtBoxCategoryNameFilter"
+                                        Grid.Row="0"
                                         Grid.Column="1" />
                     </Grid>
                 </Fluent:RibbonGroupBox>
@@ -1120,7 +1147,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
 
-                    <Fluent:Button Click="SearchCategotyBtnClick"
+                    <Fluent:Button Click="SearchCategoryBtnClick"
                                    Foreground="#F0EFF8"
                                    Header="Search">
                         <Fluent:Button.Icon>
