@@ -278,7 +278,7 @@ namespace WPF_Project1_Shop.View
     private void SearchCategoryBtnClick(object sender, RoutedEventArgs e)
     {
       string? name = this.menuApplyCategoryNameFilter.IsChecked ? this.txtBoxCategoryNameFilter.Text : null;
-      // categoryUserControl.SearchCategory(name);
+      categoryUserControl.SearchCategory(name);
 
       //IEnumerable<Category>? categories = this.menuApplyCategoriesProductFilter.IsChecked ? _categoryViewModel.SelectedCategories : null;
       //string? name = this.menuApplyNameProductFilter.IsChecked ? this.txtBoxNameProductFilter.Text : null;
