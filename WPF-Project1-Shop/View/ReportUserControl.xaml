@@ -22,7 +22,7 @@
           DockPanel.Dock="Right"/>
       <TextBlock 
         TextAlignment="Center"
-        Foreground="#a547b9"
+        Foreground="#4A376C"
         Padding="10 5 0 0"
         FontSize="20"
         Text="Total income and profit"
@@ -44,7 +44,7 @@
     <DockPanel
       Grid.Column="1">
       <TextBlock 
-        Foreground="#a547b9"
+        Foreground="#4A376C"
         Padding="10 5 0 0"
         FontSize="20"
         TextAlignment="Center"

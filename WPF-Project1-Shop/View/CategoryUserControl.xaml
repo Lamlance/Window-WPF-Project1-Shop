@@ -77,8 +77,8 @@
       Grid.Column="1"
       Margin="10, 10, 10, 10">
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="1.5*" />
-        <ColumnDefinition Width="3*" />
+        <ColumnDefinition Width="0.8*" />
+        <ColumnDefinition Width="4*" />
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -94,9 +94,11 @@
 
       <Label 
         VerticalAlignment="Center"
+        FontSize="16"
         Grid.Column="0"
         Content="Name" />
       <TextBox 
+        FontSize="16"
         x:Name="txtBoxCategoryName"
         Grid.Row="0"
         VerticalAlignment="Center"
@@ -110,6 +112,7 @@
         <TabItem Header="Category Information">
           <StackPanel>
             <Label 
+              FontSize="16"
               ContentStringFormat="{}Name: {0}"
               Content="{Binding CategoryName}"
               d:Content="Name: Sweet" />

@@ -70,5 +70,10 @@ namespace WPF_Project1_Shop.View
     {
 
     }
+
+    public void SearchCategory(string? name)
+    {
+      categoryViewModel.SearchCategories(name);
+    }
   }
 }

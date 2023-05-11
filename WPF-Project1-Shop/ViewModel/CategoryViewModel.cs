@@ -18,6 +18,14 @@ namespace WPF_Project1_Shop.ViewModel
     }
     MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
     public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+
+    private int _curPage = 1;
+    private int _itemPerPage = 15;
+    private bool _isSearching = false;
+
+    public int ItemPerPage { get => _itemPerPage; set => _itemPerPage = value; }
+    public delegate void CategoryDataSetChanged(int totalPage);
+
     public class CheckableCategory : Category, INotifyPropertyChanged
     {
       public int totalAmount { get; set; } = 0;
@@ -60,12 +68,21 @@ namespace WPF_Project1_Shop.ViewModel
     private ObservableCollection<CheckableCategory> categories;
     private HashSet<Category> selectedCategories;
     private readonly int myId;
+    List<Category>? categorySet;
+    ObservableCollection<Category> categoriesInPage;
+    Dictionary<long, int> idToPagePos;
+    HashSet<Category> skipCategories;
+    public event CategoryDataSetChanged? OnDataSetReset;
 
     private CategoryViewModel(int id)
     {
+      skipCategories = new HashSet<Category>();
       selectedCategories = new HashSet<Category>();
       categories = new ObservableCollection<CheckableCategory>();
       myId = id;
+      categoriesInPage = new ObservableCollection<EFModel.Category>();
+      idToPagePos = new Dictionary<long, int>();
+
       GetManyCategories();
     }
     ~CategoryViewModel()
@@ -121,6 +138,68 @@ namespace WPF_Project1_Shop.ViewModel
       }
       OnNewCategoryAdded?.Invoke(result);
 
+    }
+
+    public async Task SearchCategories(string? name)
+    {
+      var result = await Task<List<Category>?>.Run(() =>
+      {
+        using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+        {
+          var categories = repository.SearchCategories(name);
+          return categories!.ToList();
+        }
+      });
+      //if (categorySet != null)
+      //{
+      //  categorySet.Clear();
+      //}
+      categorySet = result!.ToList();
+      setPage(1);
+      OnDataSetReset?.Invoke((int)Math.Ceiling((double)(categorySet != null ? categorySet.Count() : 0) / _itemPerPage));
+    }
+
+    public void setPage(int page = 1)
+    {
+      if (categorySet == null)
+      {
+        return;
+      }
+      _curPage = page > 0 ? page : 1;
+      int start = (_curPage * _itemPerPage) - _itemPerPage;
+      int end = Math.Min(start + _itemPerPage, categorySet.Count());
+      categoriesInPage.Clear();
+      idToPagePos.Clear();
+      for (int i = start; i < end; i++)
+      {
+        if (!skipCategories.Contains(categorySet.ElementAt(i)))
+        {
+          categoriesInPage.Add(categorySet.ElementAt(i));
+          idToPagePos.Add(categorySet.ElementAt(i).Id, i);
+        }
+        else
+        {
+          end += end < categorySet.Count ? 1 : 0;
+        }
+
+      }
+    }
+
+    public void AddSkipProduct(Category p)
+    {
+      skipCategories.Add(p);
+      categoriesInPage.Remove(p);
+    }
+
+    public void RemoveSkipProduct(Category p)
+    {
+      skipCategories.Remove(p);
+      categoriesInPage.Add(p);
+    }
+    public void ClearSkipProduct()
+    {
+      skipCategories.Clear();
+      setPage(1);
     }
 
   }

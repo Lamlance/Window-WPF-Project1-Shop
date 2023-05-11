@@ -39,12 +39,12 @@
         <RowDefinition Height="Auto" />
         <RowDefinition Height="1*" />
       </Grid.RowDefinitions>
-      <Label 
+      <!--<Label 
         Name="labelStatusText"
         HorizontalContentAlignment="Center"
         Padding="0,2,0,2"
         FontSize="11"
-        Content="Status"/>
+        Content="Status"/>-->
 
       <Grid
         Grid.Row="1">
