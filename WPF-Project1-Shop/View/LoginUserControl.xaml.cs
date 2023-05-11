@@ -161,7 +161,7 @@ namespace WPF_Project1_Shop.View
       }
       this.txtBlockUserInfo.Text = sb.ToString();
       this.imgUserAvatar.Source = new BitmapImage(new Uri(user.PricturePath));
-      new OrdersWindow(user)
+      new MainWindow(user)
       {
         User = user
       }.Show();

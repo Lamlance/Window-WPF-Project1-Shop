@@ -235,6 +235,10 @@ namespace WPF_Project1_Shop.View
 
     }
 
-  }
+        private void ProductListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+    }
 }
 

@@ -20,114 +20,144 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WPF_Project1_Shop.View
 {
-  /// <summary>
-  /// Interaction logic for CustomerUserControl.xaml
-  /// </summary>
-  public partial class CustomerUserControl : UserControl
-  {
-
-    private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
-    private CustomerViewModel _customerViewModel = new CustomerViewModel();
-
-    ObservableCollection<string> pageDisplay = new ObservableCollection<string>();
-
-    public CustomerViewModel.MODIFY_MODE ModifyMode { get => _customerViewModel.ModifyMode; set => _customerViewModel.ModifyMode = value; }
-
-    public CustomerUserControl()
+    /// <summary>
+    /// Interaction logic for CustomerUserControl.xaml
+    /// </summary>
+    public partial class CustomerUserControl : UserControl
     {
-      InitializeComponent();
-      this.ListCustomer.ItemsSource = _customerViewModel.CustomersInPage;
-      _customerViewModel.OnDataSetReset += ResetComboPageBox;
 
-      _customerViewModel.OnDataAdd += (customer) =>
-      {
-        Task.Run(() =>
+        private static readonly Regex _regexNumberOnly = new Regex("[^0-9.-]+");
+        private CustomerViewModel _customerViewModel = new CustomerViewModel();
+
+        ObservableCollection<string> pageDisplay = new ObservableCollection<string>();
+
+        public CustomerViewModel.MODIFY_MODE ModifyMode { get => _customerViewModel.ModifyMode; set => _customerViewModel.ModifyMode = value; }
+
+        public CustomerUserControl()
         {
-          MessageBox.Show($"Added customer {customer.Id}: {customer.LastName} {customer.MiddleName} {customer.FirstName}");
-        });
-      };
-      _customerViewModel.OnDataUpdate += (customer) =>
-      {
-        Task.Run(() =>
+            InitializeComponent();
+            this.ListCustomer.ItemsSource = _customerViewModel.CustomersInPage;
+            _customerViewModel.OnDataSetReset += ResetComboPageBox;
+
+            _customerViewModel.OnDataAdd += (customer) =>
+            {
+                if (customer != null)
+                {
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show($"Added customer {customer.Id}: {customer.LastName} {customer.MiddleName} {customer.FirstName}");
+                    });
+                }
+                else
+                {
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show($"Added customer failed!");
+                    });
+                }
+            };
+            _customerViewModel.OnDataUpdate += (customer) =>
+            {
+                if (customer != null)
+                {
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show($"Updated customer {customer.Id}: {customer.LastName} {customer.MiddleName} {customer.FirstName}");
+                    });
+                }
+                else
+                {
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show($"Updated customer failed!");
+                    });
+                }
+            };
+            _customerViewModel.OnDataRemove += (customer) =>
+            {
+                if (customer != null)
+                {
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show($"Removed customer {customer?.Id}: {customer?.LastName} {customer?.MiddleName} {customer?.FirstName}");
+                    });
+                }
+                else
+                {
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show($"Removed customer failed");
+                    });
+                }
+            };
+        }
+
+        public void SearchCustomer(string? firstname, string? middlename, string? lastname, string? phone, string? email)
         {
-          MessageBox.Show($"Updated customer {customer.Id}: {customer.LastName} {customer.MiddleName} {customer.FirstName}");
-        });
-      };
-      _customerViewModel.OnDataRemove += (customer) =>
-      {
-        Task.Run(() =>
+            _customerViewModel.SearchCustomers(firstname, middlename, lastname, phone, email);
+        }
+
+
+        public void CustomerFormBtnClick(object sender, RoutedEventArgs e)
         {
-          MessageBox.Show($"Removed customer {customer?.Id}: {customer?.LastName} {customer?.MiddleName} {customer?.FirstName}");
-        });
-      };
-    }
+            if (ModifyMode == CustomerViewModel.MODIFY_MODE.NONE)
+            {
+                MessageBox.Show("Select a modify mode");
+                return;
+            }
+            if (ModifyMode == CustomerViewModel.MODIFY_MODE.ADD)
+            {
+                Customer customer = new Customer()
+                {
+                    FirstName = this.txtBoxFirstNameCustomer.Text,
+                    MiddleName = this.txtBoxMiddleNameCustomer.Text,
+                    LastName = this.txtBoxLastNameCustomer.Text,
+                    Phone = this.txtBoxPhone.Text,
+                    Email = this.txtBoxEmail.Text,
+                    Address = this.txtBoxAddress.Text
+                };
+                _customerViewModel.AddCustomer(customer);
+                return;
+            }
+            if (ModifyMode == CustomerViewModel.MODIFY_MODE.EDIT && this.ListCustomer.SelectedItem is Customer)
+            {
+                Customer customer = (Customer)this.ListCustomer.SelectedItem;
+                customer.FirstName = this.txtBoxFirstNameCustomer.Text;
+                customer.MiddleName = this.txtBoxMiddleNameCustomer.Text;
+                customer.LastName = this.txtBoxLastNameCustomer.Text;
+                customer.Phone = this.txtBoxPhone.Text;
+                customer.Email = this.txtBoxEmail.Text;
+                customer.Address = this.txtBoxAddress.Text;
+                _customerViewModel.UpdateCustomer(customer);
+                return;
+            }
+            if (ModifyMode == CustomerViewModel.MODIFY_MODE.DELETE && this.ListCustomer.SelectedItem is Customer)
+            {
+                Customer customer = (Customer)this.ListCustomer.SelectedItem;
+                customer.FirstName = this.txtBoxFirstNameCustomer.Text;
+                customer.MiddleName = this.txtBoxMiddleNameCustomer.Text;
+                customer.LastName = this.txtBoxLastNameCustomer.Text;
+                customer.Phone = this.txtBoxPhone.Text;
+                customer.Email = this.txtBoxEmail.Text;
+                customer.Address = this.txtBoxAddress.Text;
+                _customerViewModel.RemoveCustomer(customer);
+                return;
+            }
+        }
 
-    public void SearchCustomer(string? firstname, string? middlename, string? lastname, string? phone, string? email)
-    {
-      _customerViewModel.SearchCustomers(firstname, middlename, lastname, phone, email);
-    }
-
-
-    public void CustomerFormBtnClick(object sender, RoutedEventArgs e)
-    {
-      if (ModifyMode == CustomerViewModel.MODIFY_MODE.NONE)
-      {
-        MessageBox.Show("Select a modify mode");
-        return;
-      }
-      if (ModifyMode == CustomerViewModel.MODIFY_MODE.ADD)
-      {
-        Customer customer = new Customer()
+        private void CustomerListClick(object sender, MouseButtonEventArgs e)
         {
-          FirstName = this.txtBoxFirstNameCustomer.Text,
-          MiddleName = this.txtBoxMiddleNameCustomer.Text,
-          LastName = this.txtBoxLastNameCustomer.Text,
-          Phone = this.txtBoxPhone.Text,
-          Email = this.txtBoxEmail.Text,
-          Address = this.txtBoxAddress.Text
-        };
-        _customerViewModel.AddCustomer(customer);
-        return;
-      }
-      if (ModifyMode == CustomerViewModel.MODIFY_MODE.EDIT && this.ListCustomer.SelectedItem is Customer)
-      {
-        Customer customer = (Customer)this.ListCustomer.SelectedItem;
-        customer.FirstName = this.txtBoxFirstNameCustomer.Text;
-        customer.MiddleName = this.txtBoxMiddleNameCustomer.Text;
-        customer.LastName = this.txtBoxLastNameCustomer.Text;
-        customer.Phone = this.txtBoxPhone.Text;
-        customer.Email = this.txtBoxEmail.Text;
-        customer.Address = this.txtBoxAddress.Text;
-        _customerViewModel.UpdateCustomer(customer);
-        return;
-      }
-      if (ModifyMode == CustomerViewModel.MODIFY_MODE.DELETE && this.ListCustomer.SelectedItem is Customer)
-      {
-        Customer customer = (Customer)this.ListCustomer.SelectedItem;
-        customer.FirstName = this.txtBoxFirstNameCustomer.Text;
-        customer.MiddleName = this.txtBoxMiddleNameCustomer.Text;
-        customer.LastName = this.txtBoxLastNameCustomer.Text;
-        customer.Phone = this.txtBoxPhone.Text;
-        customer.Email = this.txtBoxEmail.Text;
-        customer.Address = this.txtBoxAddress.Text;
-        _customerViewModel.RemoveCustomer(customer);
-        return;
-      }
-    }
+            if (this.ListCustomer.SelectedItem is Customer)
+            {
+                this.CustomerModifyForm.DataContext = (Customer)ListCustomer.SelectedItem;
+            }
+        }
 
-    private void CustomerListClick(object sender, MouseButtonEventArgs e)
-    {
-      if (this.ListCustomer.SelectedItem is Customer)
-      {
-        this.CustomerModifyForm.DataContext = (Customer)ListCustomer.SelectedItem;
-      }
-    }
-
-    private void CustomerUserControlLoaded(object sender, RoutedEventArgs e)
-    {
-      this.DataContext = _customerViewModel;
-      this.CustomerPageComboBox.ItemsSource = pageDisplay;
-    }
+        private void CustomerUserControlLoaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = _customerViewModel;
+            this.CustomerPageComboBox.ItemsSource = pageDisplay;
+        }
 
     public void ResetComboPageBox(int totalPage)
     {
@@ -139,9 +169,9 @@ namespace WPF_Project1_Shop.View
       this.CustomerPageComboBox.SelectedIndex = 0;
     }
 
-    private void PageComboBoxChange(object sender, SelectionChangedEventArgs e)
-    {
-      _customerViewModel.SetPage(this.CustomerPageComboBox.SelectedIndex);
+        private void PageComboBoxChange(object sender, SelectionChangedEventArgs e)
+        {
+            _customerViewModel.SetPage(this.CustomerPageComboBox.SelectedIndex);
+        }
     }
-  }
 }
