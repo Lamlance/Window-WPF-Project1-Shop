@@ -102,7 +102,8 @@
             </Grid.ColumnDefinitions>
             <Label 
               Grid.Column="0"
-              Content="Product name" />
+              Content="Product name"
+              VerticalAlignment="Center"/>
             <TextBox
               x:Name="txtBoxNameProductFilter"
               VerticalContentAlignment="Center"
@@ -160,10 +161,15 @@
             Click="SearchProductBtnClick"
             Header="Seach">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons
+              <!--<iconPacks:PackIconUnicons
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                Kind="Search" />
+                Kind="Search" />-->
+              <Image Source="/Images/Icons/search.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
         </Fluent:RibbonGroupBox>
@@ -174,10 +180,15 @@
             Click="ConfirmOrderItemClick"
             Header="Confirm order item">
             <Fluent:Button.Icon>
-              <iconPacks:PackIconUnicons
+              <!--<iconPacks:PackIconUnicons
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
-                Kind="CheckCircle"/>
+                Kind="CheckCircle"/>-->
+              <Image Source="/Images/Icons/check_circle.png" 
+               Width="24" 
+               Height="24"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
             </Fluent:Button.Icon>
           </Fluent:Button>
         </Fluent:RibbonGroupBox>
