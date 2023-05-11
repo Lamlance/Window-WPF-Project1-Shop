@@ -136,6 +136,7 @@ namespace WPF_Project1_Shop.View
       {
         pageDisplay.Add($"Page: {i + 1} / {totalPage}");
       }
+      this.CustomerPageComboBox.SelectedIndex = 0;
     }
 
     private void PageComboBoxChange(object sender, SelectionChangedEventArgs e)

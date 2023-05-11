@@ -71,7 +71,7 @@ namespace WPF_Project1_Shop.ViewModel
       customersInPage.Clear();
       idToPos.Clear();
 
-      int start = (page * _itemPerPage) - _itemPerPage;
+      int start = (_curPage * _itemPerPage) - _itemPerPage;
       int end = Math.Min(start + _itemPerPage, customersSet.Count());
       for (int i = start; i < end; i++)
       {
