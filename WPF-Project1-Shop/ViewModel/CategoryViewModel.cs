@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using WPF_Project1_Shop.EFCustomRepository;
 using WPF_Project1_Shop.EFModel;
 
@@ -17,7 +18,12 @@ namespace WPF_Project1_Shop.ViewModel
       NONE, ADD, EDIT, DELETE
     }
     MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
-    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+
+    public delegate void ModifyCategoryCallBackType(Customer? customer);
+
+    public event ModifyCategoryCallBackType OnDataAdd;
+    public event ModifyCategoryCallBackType OnDataRemove;
+    public event ModifyCategoryCallBackType OnDataUpdate;
 
     private int _curPage = 1;
     private int _itemPerPage = 15;
@@ -90,6 +96,12 @@ namespace WPF_Project1_Shop.ViewModel
     public ObservableCollection<CheckableCategory> Categories { get => categories; }
     public HashSet<Category> SelectedCategories { get => selectedCategories; }
 
+    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+    public string GetStatusString()
+    {
+      return $"IS {_modifyMode}";
+    }
+
     public async Task GetManyCategories()
     {
       var result = await Task<List<Category>>.Run(() =>
@@ -154,8 +166,41 @@ namespace WPF_Project1_Shop.ViewModel
         setPage(1);
         OnDataSetReset?.Invoke((int)Math.Ceiling((double)(categorySet != null ? categorySet.Count() : 0) / _itemPerPage));
       }
-      
     }
+
+    //public void AddCategory(Category category)
+    //{
+    //  //try
+    //  //{
+    //  //  using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+    //  //  {
+    //  //    repository.AddCategory(data);
+    //  //  }
+    //  //  categories.Insert(0, (CheckableCategory)data);
+    //  //  OnDataAdd?.Invoke(data);
+    //  //  idToPagePos.Add(data.Id, 0);
+    //  //}
+    //  //catch (Exception e)
+    //  //{
+    //  //  _ = e.Message;
+    //  //  return;
+    //  //}
+    //  try
+    //  {
+    //    using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+    //    {
+    //      repository.AddCategory(category);
+    //    }
+    //    //categories.Insert(0, category);
+    //    //OnDataAdd?.Invoke(category);
+    //    idToPagePos.Add(category.Id, 0);
+    //  }
+    //  catch (Exception e)
+    //  {
+    //    string msg = e.Message;
+    //    return;
+    //  }
+    //}
 
     public void setPage(int page = 1)
     {
