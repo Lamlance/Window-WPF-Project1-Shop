@@ -69,7 +69,6 @@ namespace WPF_Project1_Shop.ViewModel
     private HashSet<Category> selectedCategories;
     private readonly int myId;
     List<Category>? categorySet;
-    ObservableCollection<Category> categoriesInPage;
     Dictionary<long, int> idToPagePos;
     HashSet<Category> skipCategories;
     public event CategoryDataSetChanged? OnDataSetReset;
@@ -80,7 +79,6 @@ namespace WPF_Project1_Shop.ViewModel
       selectedCategories = new HashSet<Category>();
       categories = new ObservableCollection<CheckableCategory>();
       myId = id;
-      categoriesInPage = new ObservableCollection<EFModel.Category>();
       idToPagePos = new Dictionary<long, int>();
 
       GetManyCategories();
@@ -147,16 +145,16 @@ namespace WPF_Project1_Shop.ViewModel
         using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
         {
           var categories = repository.SearchCategories(name);
-          return categories!.ToList();
+          return categories?.ToList();
         }
       });
-      //if (categorySet != null)
-      //{
-      //  categorySet.Clear();
-      //}
-      categorySet = result!.ToList();
-      setPage(1);
-      OnDataSetReset?.Invoke((int)Math.Ceiling((double)(categorySet != null ? categorySet.Count() : 0) / _itemPerPage));
+      if(result != null)
+      {
+        categorySet = result.ToList();
+        setPage(1);
+        OnDataSetReset?.Invoke((int)Math.Ceiling((double)(categorySet != null ? categorySet.Count() : 0) / _itemPerPage));
+      }
+      
     }
 
     public void setPage(int page = 1)
@@ -168,39 +166,54 @@ namespace WPF_Project1_Shop.ViewModel
       _curPage = page > 0 ? page : 1;
       int start = (_curPage * _itemPerPage) - _itemPerPage;
       int end = Math.Min(start + _itemPerPage, categorySet.Count());
-      categoriesInPage.Clear();
+      categories.Clear();
       idToPagePos.Clear();
       for (int i = start; i < end; i++)
       {
+        /*
         if (!skipCategories.Contains(categorySet.ElementAt(i)))
         {
-          categoriesInPage.Add(categorySet.ElementAt(i));
+          Category c = 
+          categories.Add(categorySet.ElementAt(i));
           idToPagePos.Add(categorySet.ElementAt(i).Id, i);
         }
         else
         {
           end += end < categorySet.Count ? 1 : 0;
         }
+        */
+        Category? c = categorySet.ElementAtOrDefault(i);
+        if(c != null)
+        {
+          categories.Add(new CheckableCategory()
+          {
+            Id = c.Id,
+            CategoryName = c.CategoryName,
+            Products = c.Products,
+            totalAmount = c.Products.Count(),
+          });
 
+        }
       }
     }
-
+    /*
     public void AddSkipProduct(Category p)
     {
       skipCategories.Add(p);
-      categoriesInPage.Remove(p);
+      categories.Remove(p);
     }
 
     public void RemoveSkipProduct(Category p)
     {
       skipCategories.Remove(p);
-      categoriesInPage.Add(p);
+      categories.Add(p);
     }
     public void ClearSkipProduct()
     {
       skipCategories.Clear();
       setPage(1);
     }
+    */
 
   }
 }

@@ -43,7 +43,14 @@ namespace WPF_Project1_Shop.EFCustomRepository
 
     public IEnumerable<Category>? SearchCategories(string? name)
     {
-      var result = dbContext.Categories
+      var result = dbContext.Categories.
+        Include(c => c.Products)
+        .Select(c => new Category
+        {
+          Id = c.Id,
+          CategoryName = c.CategoryName,
+          Products = c.Products.Select(p => new Product { Id = p.Id }).ToList()
+        })
         .Where(c =>
           (name == null) ? true :
           (
@@ -51,7 +58,6 @@ namespace WPF_Project1_Shop.EFCustomRepository
           )
         )
         .Take(500);
-      Console.WriteLine(result);
       return result;
     }
 
