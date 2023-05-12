@@ -207,8 +207,7 @@
 
               <DockPanel 
                 DockPanel.Dock="Top"
-                LastChildFill="True"
-                Margin="0 0 0 10">
+                LastChildFill="True">
                 <Button 
                   Click="BrowseImageBtnClick"
                   Content="Browse" />

@@ -19,7 +19,7 @@ namespace WPF_Project1_Shop.ViewModel
     }
     MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
 
-    public delegate void ModifyCategoryCallBackType(Customer? customer);
+    public delegate void ModifyCategoryCallBackType(Category? category);
 
     public event ModifyCategoryCallBackType OnDataAdd;
     public event ModifyCategoryCallBackType OnDataRemove;
@@ -149,6 +149,31 @@ namespace WPF_Project1_Shop.ViewModel
       OnNewCategoryAdded?.Invoke(result);
 
     }
+
+    public async Task UpdateCategory(Category category)
+    {
+      var result = await Task<Category?>.Run(() =>
+      {
+        try
+        {
+          using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+          {
+            return repository.UpdateCategory(category);
+          }
+        }
+        catch (Exception e)
+        {
+          return null;
+        }
+      });
+      if (result != null)
+      {
+        OnDataUpdate?.Invoke(result);
+      }
+
+    }
+
+   
 
     public async Task SearchCategories(string? name)
     {

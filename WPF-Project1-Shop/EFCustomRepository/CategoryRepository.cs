@@ -41,6 +41,12 @@ namespace WPF_Project1_Shop.EFCustomRepository
       return category;
     }
 
+    public Category? UpdateCategory(Category category)
+    {
+      dbContext.Categories.Update(category);
+      return category;
+    }
+
     public IEnumerable<Category>? SearchCategories(string? name)
     {
       var result = dbContext.Categories.

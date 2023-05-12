@@ -70,54 +70,15 @@ namespace WPF_Project1_Shop.View
         categoryViewModel.AddCategory(category);
         return;
       }
+      if (ModifyMode == CategoryViewModel.MODIFY_MODE.EDIT && this.ListCategory.SelectedItem is Category)
+      {
+        Category category = (Category)this.ListCategory.SelectedItem;
+        category.CategoryName = this.txtBoxCategoryName.Text;
+        categoryViewModel.UpdateCategory(category);
+        return;
+      }
+    
     }
-
-    //public void CustomerFormBtnClick(object sender, RoutedEventArgs e)
-    //{
-    //  if (ModifyMode == CustomerViewModel.MODIFY_MODE.NONE)
-    //  {
-    //    MessageBox.Show("Select a modify mode");
-    //    return;
-    //  }
-    //  if (ModifyMode == CustomerViewModel.MODIFY_MODE.ADD)
-    //  {
-    //    Customer customer = new Customer()
-    //    {
-    //      FirstName = this.txtBoxFirstNameCustomer.Text,
-    //      MiddleName = this.txtBoxMiddleNameCustomer.Text,
-    //      LastName = this.txtBoxLastNameCustomer.Text,
-    //      Phone = this.txtBoxPhone.Text,
-    //      Email = this.txtBoxEmail.Text,
-    //      Address = this.txtBoxAddress.Text
-    //    };
-    //    _customerViewModel.AddCustomer(customer);
-    //    return;
-    //  }
-    //  if (ModifyMode == CustomerViewModel.MODIFY_MODE.EDIT && this.ListCustomer.SelectedItem is Customer)
-    //  {
-    //    Customer customer = (Customer)this.ListCustomer.SelectedItem;
-    //    customer.FirstName = this.txtBoxFirstNameCustomer.Text;
-    //    customer.MiddleName = this.txtBoxMiddleNameCustomer.Text;
-    //    customer.LastName = this.txtBoxLastNameCustomer.Text;
-    //    customer.Phone = this.txtBoxPhone.Text;
-    //    customer.Email = this.txtBoxEmail.Text;
-    //    customer.Address = this.txtBoxAddress.Text;
-    //    _customerViewModel.UpdateCustomer(customer);
-    //    return;
-    //  }
-    //  if (ModifyMode == CustomerViewModel.MODIFY_MODE.DELETE && this.ListCustomer.SelectedItem is Customer)
-    //  {
-    //    Customer customer = (Customer)this.ListCustomer.SelectedItem;
-    //    customer.FirstName = this.txtBoxFirstNameCustomer.Text;
-    //    customer.MiddleName = this.txtBoxMiddleNameCustomer.Text;
-    //    customer.LastName = this.txtBoxLastNameCustomer.Text;
-    //    customer.Phone = this.txtBoxPhone.Text;
-    //    customer.Email = this.txtBoxEmail.Text;
-    //    customer.Address = this.txtBoxAddress.Text;
-    //    _customerViewModel.RemoveCustomer(customer);
-    //    return;
-    //  }
-    //}
 
     private void CategoryUserControlLoaded(object sender, RoutedEventArgs e)
     {
