@@ -173,8 +173,6 @@ namespace WPF_Project1_Shop.ViewModel
 
     }
 
-   
-
     public async Task SearchCategories(string? name)
     {
       var result = await Task<List<Category>?>.Run(() =>
@@ -193,40 +191,29 @@ namespace WPF_Project1_Shop.ViewModel
       }
     }
 
-    //public void AddCategory(Category category)
-    //{
-    //  //try
-    //  //{
-    //  //  using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
-    //  //  {
-    //  //    repository.AddCategory(data);
-    //  //  }
-    //  //  categories.Insert(0, (CheckableCategory)data);
-    //  //  OnDataAdd?.Invoke(data);
-    //  //  idToPagePos.Add(data.Id, 0);
-    //  //}
-    //  //catch (Exception e)
-    //  //{
-    //  //  _ = e.Message;
-    //  //  return;
-    //  //}
-    //  try
-    //  {
-    //    using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
-    //    {
-    //      repository.AddCategory(category);
-    //    }
-    //    //categories.Insert(0, category);
-    //    //OnDataAdd?.Invoke(category);
-    //    idToPagePos.Add(category.Id, 0);
-    //  }
-    //  catch (Exception e)
-    //  {
-    //    string msg = e.Message;
-    //    return;
-    //  }
-    //}
+    public async Task RemoveCategory(Category category)
+    {
+      //var result = await Task<Category?>.Run(() =>
+      //{
+      //  try
+      //  {
+      //    using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+      //    {
+      //      return repository.UpdateCategory(category);
+      //    }
+      //  }
+      //  catch (Exception e)
+      //  {
+      //    return null;
+      //  }
+      //});
+      //if (result != null)
+      //{
+      //  OnDataUpdate?.Invoke(result);
+      //}
+    }
 
+    
     public void setPage(int page = 1)
     {
       if (categorySet == null)

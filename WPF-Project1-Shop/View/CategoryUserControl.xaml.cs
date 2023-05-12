@@ -77,7 +77,14 @@ namespace WPF_Project1_Shop.View
         categoryViewModel.UpdateCategory(category);
         return;
       }
-    
+      if (ModifyMode == CategoryViewModel.MODIFY_MODE.DELETE && this.ListCategory.SelectedItem is Category)
+      {
+        Category category = (Category)this.ListCategory.SelectedItem;
+        category.CategoryName = this.txtBoxCategoryName.Text;
+        categoryViewModel.RemoveCategory(category);
+        return;
+      }
+
     }
 
     private void CategoryUserControlLoaded(object sender, RoutedEventArgs e)
