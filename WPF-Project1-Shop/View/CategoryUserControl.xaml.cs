@@ -56,6 +56,34 @@ namespace WPF_Project1_Shop.View
 
     private void CategoryFormBtnClick(object sender, RoutedEventArgs e)
     {
+      if (ModifyMode == CategoryViewModel.MODIFY_MODE.NONE)
+      {
+        MessageBox.Show("Select a modify mode");
+        return;
+      }
+      if (ModifyMode == CategoryViewModel.MODIFY_MODE.ADD)
+      {
+        Category category = new Category()
+        {
+          CategoryName = this.txtBoxCategoryName.Text,
+        };
+        categoryViewModel.AddCategory(category);
+        return;
+      }
+      if (ModifyMode == CategoryViewModel.MODIFY_MODE.EDIT && this.ListCategory.SelectedItem is Category)
+      {
+        Category category = (Category)this.ListCategory.SelectedItem;
+        category.CategoryName = this.txtBoxCategoryName.Text;
+        categoryViewModel.UpdateCategory(category);
+        return;
+      }
+      if (ModifyMode == CategoryViewModel.MODIFY_MODE.DELETE && this.ListCategory.SelectedItem is Category)
+      {
+        Category category = (Category)this.ListCategory.SelectedItem;
+        category.CategoryName = this.txtBoxCategoryName.Text;
+        categoryViewModel.RemoveCategory(category);
+        return;
+      }
 
     }
 

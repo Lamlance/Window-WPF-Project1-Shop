@@ -12,126 +12,127 @@
              xmlns:Fluent="urn:fluent-ribbon"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    <UserControl.Resources>
-        <helper:RelativeToAbsoluteConverter x:Key="ImagePathConverter" />
-        <helper:DoubleToDecimal x:Key="DoubleToDecimalConverter" />
-    </UserControl.Resources>
-    <DockPanel Background="#F0EFF8">
-        <Grid DockPanel.Dock="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+  <UserControl.Resources>
+    <helper:RelativeToAbsoluteConverter x:Key="ImagePathConverter" />
+    <helper:DoubleToDecimal x:Key="DoubleToDecimalConverter" />
+  </UserControl.Resources>
+  <DockPanel Background="#F0EFF8">
+    <Grid DockPanel.Dock="Bottom">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*" />
+        <ColumnDefinition Width="1*" />
+        <ColumnDefinition Width="1*" />
+        <ColumnDefinition Width="1*" />
+        <ColumnDefinition Width="1*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="1*" />
+      </Grid.RowDefinitions>
 
-            <DockPanel x:Name="DockPanelProductList"
+      <DockPanel x:Name="DockPanelProductList"
                        LastChildFill="True"
                        Grid.ColumnSpan="3"
                        Margin="5">
 
-                <Grid DockPanel.Dock="Bottom">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <ListView PreviewMouseLeftButtonDown="ProductListClick"
-                              ItemsSource="{Binding ProductsInPage}"
-                              x:Name="ProductListView"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                              Grid.Row="0"
-                              Margin="10"
-                              SelectionChanged="ProductListView_SelectionChanged">
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid VerticalAlignment="Stretch"
+        <Grid DockPanel.Dock="Bottom">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <ListView 
+            PreviewMouseLeftButtonDown="ProductListClick"
+            ItemsSource="{Binding ProductsInPage}"
+            x:Name="ProductListView"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Hidden"
+            Grid.Row="0"
+            Margin="10"
+            SelectionChanged="ProductListView_SelectionChanged">
+            <ListView.ItemsPanel>
+              <ItemsPanelTemplate>
+                <UniformGrid VerticalAlignment="Stretch"
                                              HorizontalAlignment="Stretch"
                                              Columns="4" />
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <DockPanel MinWidth="300"
+              </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <DockPanel MinWidth="300"
                                            LastChildFill="True"
                                            VerticalAlignment="Stretch"
                                            HorizontalAlignment="Center">
-                                    <TextBlock DockPanel.Dock="Bottom"
+                  <TextBlock DockPanel.Dock="Bottom"
                                                TextWrapping="Wrap"
                                                TextAlignment="Center"
                                                FontSize="16">
-                                        <TextBlock.Text>
-                                            <MultiBinding StringFormat="{}{0}">
-                                                <Binding Path="ProductName" />
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>
+                    <TextBlock.Text>
+                      <MultiBinding StringFormat="{}{0}">
+                        <Binding Path="ProductName" />
+                      </MultiBinding>
+                    </TextBlock.Text>
+                  </TextBlock>
 
-                                    <Image DockPanel.Dock="Top"
+                  <Image DockPanel.Dock="Top"
                                            Width="100"
                                            Height="100"
                                            Stretch="UniformToFill"
                                            Source="{Binding ImagePath, 
                     Converter={StaticResource ImagePathConverter}}" />
 
-                                </DockPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                </DockPanel>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
 
-                    <WrapPanel HorizontalAlignment="Center"
+          <WrapPanel HorizontalAlignment="Center"
                                Grid.Row="1"
                                Margin="0,5,0,5">
-                        <ComboBox SelectionChanged="PageComboBoxChange"
+            <ComboBox SelectionChanged="PageComboBoxChange"
                                   Name="ProductPageComboBox"
                                   SelectedIndex="0"
                                   Padding="30,0,30,0" />
-                    </WrapPanel>
-                </Grid>
+          </WrapPanel>
+        </Grid>
 
-            </DockPanel>
+      </DockPanel>
 
 
 
-            <Grid x:Name="ProductDataForm"
+      <Grid x:Name="ProductDataForm"
                   Grid.Column="3"
                   Grid.RowSpan="3"
                   Grid.ColumnSpan="2"
                   Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*" />
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="1.5*" />
+          <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
 
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+          <RowDefinition Height="1*" />
+          <RowDefinition Height="1*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                <Label VerticalAlignment="Center"
+        <Label VerticalAlignment="Center"
                        Margin="0 5 0 5"
                        Content="Product Name"
                        FontSize="16" />
-                <TextBox x:Name="txtBoxNameProductFrom"
+        <TextBox x:Name="txtBoxNameProductFrom"
                          FontSize="16"
                          VerticalAlignment="Center"
                          Grid.Column="1" />
 
-                <Label Grid.Row="1"
+        <Label Grid.Row="1"
                        Margin="0 5 0 5"
                        FontSize="16"
                        VerticalAlignment="Center"
                        Content="Product Price" />
-                <currency:CurrencyTextBox x:Name="txtCurrencyProductFrom"
+        <currency:CurrencyTextBox x:Name="txtCurrencyProductFrom"
                                           FontSize="16"
                                           VerticalAlignment="Center"
                                           Grid.Row="1"
@@ -141,115 +142,120 @@
                                           currency:StringFormat="C0"
                                           currency:Culture="vi-VN" />
 
-                <Label Grid.Row="2"
+        <Label Grid.Row="2"
                        Margin="0 5 0 5"
                        FontSize="16"
                        VerticalAlignment="Center"
                        Content="Amount" />
-                <TextBox PreviewTextInput="PreviewTxtInputNumberOnly"
+        <TextBox PreviewTextInput="PreviewTxtInputNumberOnly"
                          x:Name="txtBoxAmountProductFrom"
                          FontSize="16"
                          Grid.Row="2"
                          VerticalAlignment="Center"
                          Grid.Column="1" />
 
-                <Label Grid.Row="3"
-                       Margin="0 5 0 5"
-                       FontSize="16"
-                       Content="Categories" />
-                <Fluent:MenuItem Margin="0,0,0,2"
-                                 Header="Categories"
-                                 FontSize="16"
-                                 Grid.Row="3"
-                                 Grid.Column="1">
-                    <Fluent:MenuItem.Icon>
-                        <iconPacks:PackIconUnicons Kind="LayerGroup" />
-                    </Fluent:MenuItem.Icon>
-                    <StackPanel Orientation="Vertical">
-                        <DockPanel LastChildFill="True">
-                            <Button x:Name="btnAddNewCategory"
-                                    Click="AddNewCategoryBtnClick"
-                                    DockPanel.Dock="Right"
-                                    Content="Add new category" />
-                            <TextBox x:Name="txtBoxNewCategoryName"
-                                     DockPanel.Dock="Left" />
-                        </DockPanel>
-                        <ListView Loaded="CategoriesListLoaded"
-                                  x:Name="CategoriesListProductForm"
-                                  MinWidth="300">
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <Fluent:UniformGridWithItemSize />
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Fluent:CheckBox IsChecked="{Binding IsChecked}"
-                                                     Content="{Binding}"
-                                                     Unchecked="CategoryUnchecked"
-                                                     Checked="CategoryChecked"
-                                                     Header="{Binding CategoryName}" />
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackPanel>
+        <TabControl
+          Grid.Row="3"
+          Grid.ColumnSpan="2"
+          Grid.RowSpan="3">
+          <TabItem
+            Header="Categories">
+            <StackPanel 
+              Orientation="Vertical">
+              <DockPanel 
+                Visibility="Collapsed"
+                LastChildFill="True">
+                <Button 
+                x:Name="btnAddNewCategory"
+                Click="AddNewCategoryBtnClick"
+                DockPanel.Dock="Right"
+                Content="Add new category" />
+                <TextBox 
+                x:Name="txtBoxNewCategoryName"
+                DockPanel.Dock="Left" />
+              </DockPanel>
+              <ListView 
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                Loaded="CategoriesListLoaded"
+                x:Name="CategoriesListProductForm">
+                <ListView.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <UniformGrid/>
+                  </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                  <DataTemplate>
+                    <Fluent:CheckBox 
+                    IsChecked="{Binding IsChecked}"
+                    Content="{Binding}"
+                    Unchecked="CategoryUnchecked"
+                    Checked="CategoryChecked"
+                    Header="{Binding CategoryName}" />
+                  </DataTemplate>
+                </ListView.ItemTemplate>
+              </ListView>
+            </StackPanel>
+          </TabItem>
+          <TabItem
+            Header="Image">
+            <DockPanel 
+              VerticalAlignment="Center"
+              LastChildFill="True"
+              Grid.Row="4"
+              Grid.Column="1">
 
-                </Fluent:MenuItem>
-
-                <Label Margin="0,0,0,5"
-                       Grid.Row="4"
-                       FontSize="16"
-                       VerticalAlignment="Top"
-                       Content="Image path" />
-                <DockPanel Margin="0,5,0,0"
-                           VerticalAlignment="Center"
-                           LastChildFill="True"
-                           Grid.Row="4"
-                           Grid.Column="1">
-
-                    <DockPanel DockPanel.Dock="Top"
-                               LastChildFill="True">
-                        <Button Click="BrowseImageBtnClick"
-                                Content="Browse" />
-                        <TextBox x:Name="txtBoxImgPath"
-                                 IsReadOnly="True"
-                                 FontSize="16"
-                                 MaxLength="100"
-                                 d:Text="C://:///://////////////" />
-                    </DockPanel>
-                    <Image DockPanel.Dock="Bottom"
-                           x:Name="imageProductForm"
-                           Source="{Binding
+              <DockPanel 
+                DockPanel.Dock="Top"
+                LastChildFill="True">
+                <Button 
+                  Click="BrowseImageBtnClick"
+                  Content="Browse" />
+                <TextBox 
+                  x:Name="txtBoxImgPath"
+                  IsReadOnly="True"
+                  FontSize="16"
+                  MaxLength="100"
+                  d:Text="C://:///://////////////" />
+              </DockPanel>
+              <Image 
+                
+                Width="300"
+                Height="200"
+                DockPanel.Dock="Bottom"
+                x:Name="imageProductForm"
+                Source="{Binding
             Converter=
             {StaticResource ImagePathConverter}}" />
-                </DockPanel>
+            </DockPanel>
 
-                <Label Grid.Row="5"
-                       Margin="0 5 0 5"
-                       FontSize="16"
-                       VerticalAlignment="Top"
-                       Content="Description" />
-                <TextBox TextWrapping="Wrap"
-                         FontSize="16"
-                         AcceptsReturn="True"
-                         Background="#efefef"
-                         x:Name="txtBoxDescProductFrom"
-                         Margin="0,5,0,10"
-                         Grid.Row="5"
-                         VerticalContentAlignment="Top"
-                         Grid.Column="1" />
+          </TabItem>
+          <TabItem
+            Header="Detail">
+            <TextBox 
+              TextWrapping="Wrap"
+              FontSize="16"
+              AcceptsReturn="True"
+              Background="#efefef"
+              x:Name="txtBoxDescProductFrom"
+              Margin="0,5,0,10"
+              Grid.Row="5"
+              VerticalContentAlignment="Top"
+              Grid.Column="1" />
+          </TabItem>
+        </TabControl>
+        
 
-                <WrapPanel HorizontalAlignment="Right"
+        <WrapPanel HorizontalAlignment="Right"
                            Grid.Row="6"
                            Grid.ColumnSpan="2">
-                    <Button Click="SaveProductBtnClick"
+          <Button Click="SaveProductBtnClick"
                             Padding="20,0,20,0"
                             Content="Submit" />
-                </WrapPanel>
+        </WrapPanel>
 
-            </Grid>
-        </Grid>
+      </Grid>
+    </Grid>
 
 
-    </DockPanel>
+  </DockPanel>
 </UserControl>

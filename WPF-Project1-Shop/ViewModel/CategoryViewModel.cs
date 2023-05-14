@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 using WPF_Project1_Shop.EFCustomRepository;
 using WPF_Project1_Shop.EFModel;
 
@@ -17,7 +18,12 @@ namespace WPF_Project1_Shop.ViewModel
       NONE, ADD, EDIT, DELETE
     }
     MODIFY_MODE _modifyMode = MODIFY_MODE.NONE;
-    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+
+    public delegate void ModifyCategoryCallBackType(Category? category);
+
+    public event ModifyCategoryCallBackType OnDataAdd;
+    public event ModifyCategoryCallBackType OnDataRemove;
+    public event ModifyCategoryCallBackType OnDataUpdate;
 
     private int _curPage = 1;
     private int _itemPerPage = 15;
@@ -90,6 +96,12 @@ namespace WPF_Project1_Shop.ViewModel
     public ObservableCollection<CheckableCategory> Categories { get => categories; }
     public HashSet<Category> SelectedCategories { get => selectedCategories; }
 
+    public MODIFY_MODE ModifyMode { get => _modifyMode; set => _modifyMode = value; }
+    public string GetStatusString()
+    {
+      return $"IS {_modifyMode}";
+    }
+
     public async Task GetManyCategories()
     {
       var result = await Task<List<Category>>.Run(() =>
@@ -138,6 +150,29 @@ namespace WPF_Project1_Shop.ViewModel
 
     }
 
+    public async Task UpdateCategory(Category category)
+    {
+      var result = await Task<Category?>.Run(() =>
+      {
+        try
+        {
+          using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+          {
+            return repository.UpdateCategory(category);
+          }
+        }
+        catch (Exception e)
+        {
+          return null;
+        }
+      });
+      if (result != null)
+      {
+        OnDataUpdate?.Invoke(result);
+      }
+
+    }
+
     public async Task SearchCategories(string? name)
     {
       var result = await Task<List<Category>?>.Run(() =>
@@ -154,9 +189,31 @@ namespace WPF_Project1_Shop.ViewModel
         setPage(1);
         OnDataSetReset?.Invoke((int)Math.Ceiling((double)(categorySet != null ? categorySet.Count() : 0) / _itemPerPage));
       }
-      
     }
 
+    public async Task RemoveCategory(Category category)
+    {
+      //var result = await Task<Category?>.Run(() =>
+      //{
+      //  try
+      //  {
+      //    using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+      //    {
+      //      return repository.UpdateCategory(category);
+      //    }
+      //  }
+      //  catch (Exception e)
+      //  {
+      //    return null;
+      //  }
+      //});
+      //if (result != null)
+      //{
+      //  OnDataUpdate?.Invoke(result);
+      //}
+    }
+
+    
     public void setPage(int page = 1)
     {
       if (categorySet == null)

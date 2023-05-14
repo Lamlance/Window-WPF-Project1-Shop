@@ -44,7 +44,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Foreground="#4A376C"
-                       Text="General information"
+                       Text="General Information"
                        FontSize="20"
                        FontWeight="DemiBold"
                        Padding="10, 5, 0, 0" />
@@ -191,7 +191,7 @@
                                         FontWeight="Bold"
                                         ElementStyle="{StaticResource ColumnElementStyle}"
                                         Binding="{Binding ProductName}" />
-                    <DataGridTextColumn Header="Auto"
+                    <DataGridTextColumn Header="Price"
                                         FontWeight="Bold"
                                         Width="0.5*"
                                         ElementStyle="{StaticResource ColumnElementStyle}"
@@ -261,7 +261,7 @@
                     <DataGridTextColumn FontWeight="Bold"
                                         ElementStyle="{StaticResource ColumnElementStyle}"
                                         Width="0.5*"
-                                        Header="Has sold"
+                                        Header="Sold"
                                         Binding="{Binding Numbers}" />
                 </DataGrid.Columns>
             </DataGrid>
