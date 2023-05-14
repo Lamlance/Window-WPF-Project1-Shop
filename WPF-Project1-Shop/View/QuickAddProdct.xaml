@@ -175,10 +175,12 @@
         </Fluent:RibbonGroupBox>
 
         <Fluent:RibbonGroupBox
+          HorizontalAlignment="Center"
+          Width="70"
           Header="Order items">
           <Fluent:Button
             Click="ConfirmOrderItemClick"
-            Header="Confirm order item">
+            Header="Confirm">
             <Fluent:Button.Icon>
               <!--<iconPacks:PackIconUnicons
                 VerticalAlignment="Stretch"

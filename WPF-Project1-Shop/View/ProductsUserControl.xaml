@@ -199,7 +199,6 @@
           <TabItem
             Header="Image">
             <DockPanel 
-              Margin="0,5,0,0"
               VerticalAlignment="Center"
               LastChildFill="True"
               Grid.Row="4"
