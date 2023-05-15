@@ -10,19 +10,15 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.EFCustomRepository
 {
-  public class ProductRepository : IDisposable
+  public class ProductRepository : BaseCustomRepository
   {
-    private RailwayContext dbContext;
-    public ProductRepository(RailwayContext dbContext)
+    //private RailwayContext dbContext;
+    public ProductRepository(RailwayContext dbContext):base(dbContext)
     {
-      this.dbContext = dbContext;
+      //this.dbContext = dbContext;
     }
 
-    public void Dispose()
-    {
-      dbContext.SaveChanges();
-      dbContext.Dispose();
-    }
+
 
     public IEnumerable<Product> GetManyProducts(int page = 1, int limit = 500)
     {

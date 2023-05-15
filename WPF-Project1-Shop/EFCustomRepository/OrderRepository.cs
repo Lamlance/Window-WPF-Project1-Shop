@@ -8,19 +8,14 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.EFCustomRepository
 {
-  public class OrderRepository : IDisposable
+  public class OrderRepository : BaseCustomRepository
   {
-    private RailwayContext dbContext;
-    public OrderRepository(RailwayContext railwayContext)
+    //private RailwayContext dbContext;
+    public OrderRepository(RailwayContext railwayContext):base(railwayContext)
     {
-      dbContext = railwayContext;
+     //dbContext = railwayContext;
     }
 
-    public void Dispose()
-    {
-      dbContext.SaveChanges();
-      dbContext.Dispose();
-    }
 
     public IEnumerable<Order> GetManyOrders(int page = 1, int limit = 500)
     {
