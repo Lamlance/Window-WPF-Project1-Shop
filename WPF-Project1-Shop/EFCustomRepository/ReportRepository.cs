@@ -8,12 +8,12 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.EFCustomRepository
 {
-  public class ReportRepository : BaseCustomRepository
+  public class ReportRepository : IDisposable
   {
-    //RailwayContext dbContext;
-    public ReportRepository(RailwayContext dbContext):base(dbContext)
+    RailwayContext dbContext;
+    public ReportRepository(RailwayContext dbContext)
     {
-      //this.dbContext = dbContext;
+      this.dbContext = dbContext;
     }
 
     public class OrderSumProfitGroupByTime
@@ -43,6 +43,13 @@ namespace WPF_Project1_Shop.EFCustomRepository
       public string ProductName { get => productName; set => productName = value; }
       public int Count { get => count; set => count = value; }
     }
+
+    public void Dispose()
+    {
+      dbContext.SaveChanges();
+      dbContext.Dispose();
+    }
+
 
     public List<OrderSumProfitGroupByTime>? OrderSubTotalByDate(DateOnly fromDate,DateOnly toDate)
     {

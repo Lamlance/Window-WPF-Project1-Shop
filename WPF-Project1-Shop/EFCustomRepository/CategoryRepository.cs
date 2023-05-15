@@ -8,12 +8,18 @@ using WPF_Project1_Shop.EFModel;
 
 namespace WPF_Project1_Shop.EFCustomRepository
 {
-  public class CategoryRepository: BaseCustomRepository
+  public class CategoryRepository:IDisposable
   {
-    //RailwayContext dbContext;
-    public CategoryRepository(RailwayContext dbContext) : base(dbContext)
+    RailwayContext dbContext;
+    public CategoryRepository(RailwayContext dbContext)
     {
-      //this.dbContext = dbContext;
+      this.dbContext = dbContext;
+    }
+
+    public void Dispose()
+    {
+      dbContext.SaveChanges();
+      dbContext.Dispose();
     }
 
     public IEnumerable<Category> GetAllCategories()
