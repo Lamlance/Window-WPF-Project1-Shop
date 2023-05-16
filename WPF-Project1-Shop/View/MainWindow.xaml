@@ -11,198 +11,197 @@
         mc:Ignorable="d"
         Loaded="MainWindowLoaded"
         WindowState="Maximized"
-        
         Title="Shop Management Application"
         Height="720"
         Width="1280">
-  <Window.Resources>
-    <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonTabControl.Background">#241F3A</SolidColorBrush>
-    <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonTabControl.TabsGrid.Background">#241F3A</SolidColorBrush>
-    <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background">#241F3A</SolidColorBrush>
-    <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonWindow.TitleBackground">#241F3A</SolidColorBrush>
+    <Window.Resources>
+        <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonTabControl.Background">#241F3A</SolidColorBrush>
+        <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonTabControl.TabsGrid.Background">#241F3A</SolidColorBrush>
+        <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background">#241F3A</SolidColorBrush>
+        <SolidColorBrush x:Key="Fluent.Ribbon.Brushes.RibbonWindow.TitleBackground">#241F3A</SolidColorBrush>
 
-  </Window.Resources>
+    </Window.Resources>
 
 
-  <DockPanel LastChildFill="True"
+    <DockPanel LastChildFill="True"
                Background="#efefef">
-    <Fluent:Ribbon CanMinimize="False"
+        <Fluent:Ribbon CanMinimize="False"
                        SelectedTabChanged="SelectTabChange"
                        x:Name="Ribbon"
                        DockPanel.Dock="Top"
-                       d:SelectedTabIndex="1">
+                       d:SelectedTabIndex="4">
 
-      <Fluent:Ribbon.Menu>
-        <Fluent:Backstage Background="#5E5B6E"
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage Background="#5E5B6E"
                                   Height="40">
-          <Fluent:BackstageTabControl>
-            <Fluent:BackstageTabItem Header="User">
-              <DockPanel LastChildFill="True">
-                <ContentControl VerticalAlignment="Center"
+                    <Fluent:BackstageTabControl>
+                        <Fluent:BackstageTabItem Header="User">
+                            <DockPanel LastChildFill="True">
+                                <ContentControl VerticalAlignment="Center"
                                                 DockPanel.Dock="Left"
                                                 x:Name="UserInfoContentControl">
-                </ContentControl>
-                <StackPanel Margin="30,0,0,0"
+                                </ContentControl>
+                                <StackPanel Margin="30,0,0,0"
                                             VerticalAlignment="Center"
                                             Orientation="Vertical"
                                             DockPanel.Dock="Right">
-                  <TextBlock FontSize="26"
+                                    <TextBlock FontSize="26"
                                                Text="Window - WPF Shop Project" />
-                  <TextBlock FontSize="26"
+                                    <TextBlock FontSize="26"
                                                Text="20127047 - Nguyen Xuan Hoang Lam" />
-                  <TextBlock FontSize="26"
+                                    <TextBlock FontSize="26"
                                                Text="20127591 - Han Tho Nhat Phu" />
-                  <TextBlock FontSize="26"
+                                    <TextBlock FontSize="26"
                                                Text="20127435 - Tran Van An" />
-                </StackPanel>
-              </DockPanel>
+                                </StackPanel>
+                            </DockPanel>
 
-            </Fluent:BackstageTabItem>
-          </Fluent:BackstageTabControl>
-        </Fluent:Backstage>
-      </Fluent:Ribbon.Menu>
+                        </Fluent:BackstageTabItem>
+                    </Fluent:BackstageTabControl>
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
 
-      <Fluent:RibbonTabItem Width="100"
+            <Fluent:RibbonTabItem Width="100"
                                   Height="40"
                                   Foreground="#F0EFF8"
                                   Header="Dashboard"
                                   x:Name="DashboardDataTab">
-        <Fluent:RibbonTabItem.Style>
-          <Style TargetType="{x:Type Fluent:RibbonTabItem}">
-            <Setter Property="Template">
-              <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
-                  <Border x:Name="Border"
+                <Fluent:RibbonTabItem.Style>
+                    <Style TargetType="{x:Type Fluent:RibbonTabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
+                                    <Border x:Name="Border"
                                             Background="#241F3A"
                                             BorderBrush="#241F3A"
                                             BorderThickness="0">
-                    <StackPanel Orientation="Vertical"
+                                        <StackPanel Orientation="Vertical"
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center">
-                      <ContentPresenter ContentSource="Header" />
-                      <ContentPresenter />
-                    </StackPanel>
-                  </Border>
-                  <ControlTemplate.Triggers>
-                    <Trigger Property="IsSelected"
+                                            <ContentPresenter ContentSource="Header" />
+                                            <ContentPresenter />
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected"
                                                  Value="True">
-                      <Setter TargetName="Border"
+                                            <Setter TargetName="Border"
                                                     Property="Background"
                                                     Value="#342752" />
-                    </Trigger>
-                  </ControlTemplate.Triggers>
-                </ControlTemplate>
-              </Setter.Value>
-            </Setter>
-          </Style>
-        </Fluent:RibbonTabItem.Style>
-        <Fluent:RibbonGroupBox Header="GroupBox"
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Fluent:RibbonTabItem.Style>
+                <Fluent:RibbonGroupBox Header="GroupBox"
                                        Height="0"
                                        Width="0"
                                        Visibility="Collapsed" />
-      </Fluent:RibbonTabItem>
+            </Fluent:RibbonTabItem>
 
-      <!-- Order tab -->
-      <Fluent:RibbonTabItem Header="Orders"
+            <!-- Order tab -->
+            <Fluent:RibbonTabItem Header="Orders"
                                   Width="100"
                                   Height="40"
                                   Foreground="#F0EFF8"
                                   x:Name="OrderDataTab">
-        <Fluent:RibbonTabItem.Style>
-          <Style TargetType="{x:Type Fluent:RibbonTabItem}">
-            <Setter Property="Template">
-              <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
-                  <Border x:Name="Border"
+                <Fluent:RibbonTabItem.Style>
+                    <Style TargetType="{x:Type Fluent:RibbonTabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
+                                    <Border x:Name="Border"
                                             Background="#241F3A"
                                             BorderBrush="#241F3A"
                                             BorderThickness="0">
-                    <StackPanel Orientation="Vertical"
+                                        <StackPanel Orientation="Vertical"
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center">
-                      <ContentPresenter ContentSource="Header" />
-                      <ContentPresenter />
-                    </StackPanel>
-                  </Border>
-                  <ControlTemplate.Triggers>
-                    <Trigger Property="IsSelected"
+                                            <ContentPresenter ContentSource="Header" />
+                                            <ContentPresenter />
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected"
                                                  Value="True">
-                      <Setter TargetName="Border"
+                                            <Setter TargetName="Border"
                                                     Property="Background"
                                                     Value="#342752" />
-                    </Trigger>
-                  </ControlTemplate.Triggers>
-                </ControlTemplate>
-              </Setter.Value>
-            </Setter>
-          </Style>
-        </Fluent:RibbonTabItem.Style>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Fluent:RibbonTabItem.Style>
 
-        <!-- Filter  Group -->
-        <Fluent:RibbonGroupBox  Header="Filter Date"
+                <!-- Filter  Group -->
+                <Fluent:RibbonGroupBox  Header="Filter Date"
                                         Foreground="#F0EFF8">
 
-          <Grid MinWidth="200">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Label Content="From"
+                    <Grid MinWidth="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="From"
                                Margin="5 5 5 5"
                                Foreground="#F0EFF8" />
-            <DatePicker Padding="3 3 3 3"
+                        <DatePicker Padding="3 3 3 3"
                                     x:Name="datePickerFromOrderFilter"
                                     Background="#F0EFF8"
                                     Foreground="Black"
                                     Grid.Column="1"
                                     IsTodayHighlighted="True">
-              <DatePicker.Resources>
-                <Style TargetType="DatePickerTextBox">
-                  <Setter Property="Foreground"
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Foreground"
                                             Value="#F0EFF8" />
-                </Style>
-              </DatePicker.Resources>
-            </DatePicker>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
 
-            <Label Foreground="#F0EFF8"
+                        <Label Foreground="#F0EFF8"
                                Margin="5 5 5 5"
                                Grid.Row="1"
                                Content="To" />
-            <DatePicker Padding="3 3 3 3"
+                        <DatePicker Padding="3 3 3 3"
                                     Background="#F0EFF8"
                                     Foreground="Black"
                                     x:Name="datePickerToOrderFilter"
                                     Grid.Row="1"
                                     Grid.Column="1"
                                     IsTodayHighlighted="True">
-              <DatePicker.Resources>
-                <Style TargetType="DatePickerTextBox">
-                  <Setter Property="Foreground"
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Foreground"
                                             Value="#F0EFF8" />
-                </Style>
-              </DatePicker.Resources>
-            </DatePicker>
-          </Grid>
-        </Fluent:RibbonGroupBox>
-        <Fluent:RibbonGroupBox Header="Filter Sum"
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                    </Grid>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Filter Sum"
                                        Foreground="#F0EFF8">
-          <Grid MinWidth="200">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Label Content="From"
+                    <Grid MinWidth="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Label Content="From"
                                Margin="5 5 5 5"
                                Foreground="#F0EFF8" />
-            <currency:CurrencyTextBox Padding="3 3 3 3"
+                        <currency:CurrencyTextBox Padding="3 3 3 3"
                                                   Margin="1 1 1 1"
                                                   x:Name="txtMoneyFromOderFilter"
                                                   TextAlignment="Left"
@@ -210,11 +209,11 @@
                                                   currency:StringFormat="C0"
                                                   currency:Culture="vi-VN"
                                                   Grid.Column="1" />
-            <Label Margin="5 5 5 5"
+                        <Label Margin="5 5 5 5"
                                Foreground="#F0EFF8"
                                Grid.Row="1"
                                Content="To" />
-            <currency:CurrencyTextBox Margin="1 1 1 1"
+                        <currency:CurrencyTextBox Margin="1 1 1 1"
                                                   Padding="3 3 3 3"
                                                   x:Name="txtMoneyToOrderFilter"
                                                   Grid.Row="1"
@@ -223,265 +222,265 @@
                                                   currency:StringFormat="C0"
                                                   currency:Culture="vi-VN"
                                                   Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
+                    </Grid>
+                </Fluent:RibbonGroupBox>
 
-        <!-- /Filter Group -->
+                <!-- /Filter Group -->
 
-        <!-- Search Customer Group -->
-        <Fluent:RibbonGroupBox Header="Filter Customer"
+                <!-- Search Customer Group -->
+                <Fluent:RibbonGroupBox Header="Filter Customer"
                                        Foreground="#F0EFF8">
-          <Grid MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
 
-            <Label Content="Address"
+                        <Label Content="Address"
                                Foreground="#F0EFF8" />
-            <Fluent:TextBox Padding="3 3 3 3"
+                        <Fluent:TextBox Padding="3 3 3 3"
                                         x:Name="txtBoxAddressOrderFilter"
                                         Grid.Column="1" />
 
-            <Label Foreground="#F0EFF8"
+                        <Label Foreground="#F0EFF8"
                                Grid.Row="1"
                                Content="Email" />
-            <Fluent:TextBox Padding="3 3 3 3"
+                        <Fluent:TextBox Padding="3 3 3 3"
                                         x:Name="txtBoxEmailOrderFilter"
                                         Grid.Row="1"
                                         Grid.Column="1" />
-            <Label Foreground="#F0EFF8"
+                        <Label Foreground="#F0EFF8"
                                Grid.Row="2"
                                Content="Phone" />
-            <Fluent:TextBox Padding="3 3 3 3"
+                        <Fluent:TextBox Padding="3 3 3 3"
                                         x:Name="txtBoxPhoneOrderFilter"
                                         PreviewTextInput="PreviewTxtInputNumberOnly"
                                         Grid.Row="2"
                                         Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
-        <!-- /SearchTab -->
+                    </Grid>
+                </Fluent:RibbonGroupBox>
+                <!-- /SearchTab -->
 
-        <Fluent:RibbonGroupBox Header="Apply filter"
+                <Fluent:RibbonGroupBox Header="Apply filter"
                                        Foreground="#F0EFF8">
-          <MenuItem x:Name="menuApplyDateFilterOrder"
+                    <MenuItem x:Name="menuApplyDateFilterOrder"
                               Foreground="#F0EFF8"
                               IsCheckable="True"
                               Header="Appy date">
-            <MenuItem.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="CalendarSlash"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/calendar_apply.png"
+                            <Image Source="/Images/Icons/calendar_apply.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <MenuItem x:Name="menuApplySumFilterOrder"
+                    <MenuItem x:Name="menuApplySumFilterOrder"
                               Foreground="#F0EFF8"
                               IsCheckable="True"
                               Header="Appy sum">
-            <MenuItem.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="MoneyBillSlash"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/money_bill_add.png"
+                            <Image Source="/Images/Icons/money_bill_add.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <MenuItem x:Name="menuApplyCustomerFilterOrder"
+                    <MenuItem x:Name="menuApplyCustomerFilterOrder"
                               Foreground="#F0EFF8"
                               IsCheckable="True"
                               Header="Appy searches">
-            <MenuItem.Icon>
-              <!--<iconPacks:FontAwesome 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:FontAwesome 
                 Kind="UserSlashSolid" />-->
-              <Image Source="/Images/Icons/check_circle.png"
+                            <Image Source="/Images/Icons/check_circle.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <Fluent:Button Click="SearchOrderBtnClick"
+                    <Fluent:Button Click="SearchOrderBtnClick"
                                    Header="Search"
                                    Foreground="#F0EFF8">
-            <Fluent:Button.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:Button.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Kind="Search" />-->
-              <Image Source="/Images/Icons/search.png"
+                            <Image Source="/Images/Icons/search.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Manual modify"
+                <Fluent:RibbonGroupBox Header="Manual modify"
                                        Foreground="#F0EFF8">
 
-          <Fluent:ToggleButton Checked="OrderEditModeChecked"
+                    <Fluent:ToggleButton Checked="OrderEditModeChecked"
                                          Header="Edit order"
                                          Foreground="#F0EFF8"
                                          GroupName="OderDataMode">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons
                 Kind="Edit"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/edit.png"
+                            <Image Source="/Images/Icons/edit.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton Checked="OrderAddModeChecked"
+                    <Fluent:ToggleButton Checked="OrderAddModeChecked"
                                          Header="Add order"
                                          Foreground="#F0EFF8"
                                          GroupName="OderDataMode">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"           
                 HorizontalAlignment="Center"                                       
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/add_order.png"
+                            <Image Source="/Images/Icons/add_order.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton Checked="OrderDeleteModeChecked"
+                    <Fluent:ToggleButton Checked="OrderDeleteModeChecked"
                                          Header="Delete order"
                                          Foreground="#F0EFF8"
                                          GroupName="OderDataMode">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/delete_order.png"
+                            <Image Source="/Images/Icons/delete_order.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
-      </Fluent:RibbonTabItem>
-      <!-- /Order tab -->
+            </Fluent:RibbonTabItem>
+            <!-- /Order tab -->
 
 
-      <!-- Product Tab -->
-      <Fluent:RibbonTabItem Header="Products"
+            <!-- Product Tab -->
+            <Fluent:RibbonTabItem Header="Products"
                                   Width="100"
                                   Height="40"
                                   Foreground="#F0EFF8"
                                   x:Name="ProductDataTab">
 
-        <Fluent:RibbonTabItem.Style>
-          <Style TargetType="{x:Type Fluent:RibbonTabItem}">
-            <Setter Property="Template">
-              <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
-                  <Border x:Name="Border"
+                <Fluent:RibbonTabItem.Style>
+                    <Style TargetType="{x:Type Fluent:RibbonTabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
+                                    <Border x:Name="Border"
                                             Background="#241F3A"
                                             BorderBrush="#241F3A"
                                             BorderThickness="0">
-                    <StackPanel Orientation="Vertical"
+                                        <StackPanel Orientation="Vertical"
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center">
-                      <ContentPresenter ContentSource="Header" />
-                      <ContentPresenter />
-                    </StackPanel>
-                  </Border>
-                  <ControlTemplate.Triggers>
-                    <Trigger Property="IsSelected"
+                                            <ContentPresenter ContentSource="Header" />
+                                            <ContentPresenter />
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected"
                                                  Value="True">
-                      <Setter TargetName="Border"
+                                            <Setter TargetName="Border"
                                                     Property="Background"
                                                     Value="#342752" />
-                    </Trigger>
-                  </ControlTemplate.Triggers>
-                </ControlTemplate>
-              </Setter.Value>
-            </Setter>
-          </Style>
-        </Fluent:RibbonTabItem.Style>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Fluent:RibbonTabItem.Style>
 
-        <Fluent:RibbonGroupBox Header="Categories">
-          <Fluent:DropDownButton Header="Filter categories"
+                <Fluent:RibbonGroupBox Header="Categories">
+                    <Fluent:DropDownButton Header="Filter categories"
                                            Foreground="#F0EFF8">
-            <Fluent:DropDownButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:DropDownButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="LayerGroup"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch" />-->
-              <Image Source="/Images/Icons/filter_category.png"
+                            <Image Source="/Images/Icons/filter_category.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:DropDownButton.Icon>
-            <ListView Loaded="CategoriesListLoaded"
+                        </Fluent:DropDownButton.Icon>
+                        <ListView Loaded="CategoriesListLoaded"
                                   x:Name="ListRibbonCategoriesList"
                                   MinWidth="300">
-              <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <Fluent:UniformGridWithItemSize />
-                </ItemsPanelTemplate>
-              </ListView.ItemsPanel>
-              <ListView.ItemTemplate>
-                <DataTemplate>
-                  <Fluent:CheckBox Content="{Binding}"
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Fluent:UniformGridWithItemSize />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Fluent:CheckBox Content="{Binding}"
                                                      Unchecked="CategoryUnchecked"
                                                      Checked="CategoryChecked"
                                                      Header="{Binding CategoryName}" />
-                </DataTemplate>
-              </ListView.ItemTemplate>
-            </ListView>
-          </Fluent:DropDownButton>
-        </Fluent:RibbonGroupBox>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Fluent:DropDownButton>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Price search">
-          <Grid MinWidth="200">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+                <Fluent:RibbonGroupBox Header="Price search">
+                    <Grid MinWidth="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
 
-            <Label Content="Start Price"
+                        <Label Content="Start Price"
                                Margin="5 5 5 5"
                                Foreground="#F0EFF8" />
-            <currency:CurrencyTextBox Padding="3 3 3 3"
+                        <currency:CurrencyTextBox Padding="3 3 3 3"
                                                   Margin="1 1 1 1"
                                                   x:Name="txtMoneyFromProductFilter"
                                                   VerticalContentAlignment="Center"
@@ -489,11 +488,11 @@
                                                   StringFormat="C0"
                                                   Culture="vi-VN"
                                                   Grid.Column="1" />
-            <Label Margin="5 5 5 5"
+                        <Label Margin="5 5 5 5"
                                Foreground="#F0EFF8"
                                Grid.Row="1"
                                Content="End Price" />
-            <currency:CurrencyTextBox Padding="3 3 3 3"
+                        <currency:CurrencyTextBox Padding="3 3 3 3"
                                                   Margin="1 1 1 1"
                                                   x:Name="txtMoneyToProductFilter"
                                                   VerticalContentAlignment="Center"
@@ -502,448 +501,448 @@
                                                   StringFormat="C0"
                                                   Culture="vi-VN"
                                                   Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
+                    </Grid>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Name search">
-          <Grid MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Label Foreground="#F0EFF8"
+                <Fluent:RibbonGroupBox Header="Name search">
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Foreground="#F0EFF8"
                                Grid.Column="0"
                                Content="Product name"
                                VerticalAlignment="Center" />
-            <TextBox Background="#F0EFF8"
+                        <TextBox Background="#F0EFF8"
                                  Padding="3 3 3 3"
                                  VerticalAlignment="Center"
                                  FontSize="14"
                                  x:Name="txtBoxNameProductFilter"
                                  VerticalContentAlignment="Center"
                                  Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
+                    </Grid>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Apply search">
+                <Fluent:RibbonGroupBox Header="Apply search">
 
-          <MenuItem x:Name="menuApplyCategoriesProductFilter"
+                    <MenuItem x:Name="menuApplyCategoriesProductFilter"
                               IsCheckable="true"
                               Foreground="#F0EFF8"
                               Header="Apply categories">
-            <MenuItem.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="LayerGroupSlash"/>-->
-              <Image Source="/Images/Icons/apply_category.png"
+                            <Image Source="/Images/Icons/apply_category.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem x:Name="menuApplyPriceProductFilter"
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="menuApplyPriceProductFilter"
                               IsCheckable="true"
                               Foreground="#F0EFF8"
                               Header="Apply price">
-            <MenuItem.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="MoneyBillSlash"/>-->
-              <Image Source="/Images/Icons/apply_product.png"
+                            <Image Source="/Images/Icons/apply_product.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem x:Name="menuApplyNameProductFilter"
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem x:Name="menuApplyNameProductFilter"
                               IsCheckable="true"
                               Foreground="#F0EFF8"
                               Header="Apply name">
-            <MenuItem.Icon>
-              <!--<iconPacks:FontAwesome 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:FontAwesome 
                 Kind="UserSlashSolid"/>-->
-              <Image Source="/Images/Icons/check_circle.png"
+                            <Image Source="/Images/Icons/check_circle.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <Fluent:Button Click="SearchProductBtnClick"
+                    <Fluent:Button Click="SearchProductBtnClick"
                                    Foreground="#F0EFF8"
                                    Header="Search">
-            <Fluent:Button.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:Button.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Kind="Search" />-->
-              <Image Source="/Images/Icons/search.png"
+                            <Image Source="/Images/Icons/search.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Manual modify"
+                <Fluent:RibbonGroupBox Header="Manual modify"
                                        Foreground="#F0EFF8">
 
-          <Fluent:ToggleButton Checked="ProductEditModeChecked"
+                    <Fluent:ToggleButton Checked="ProductEditModeChecked"
                                          Header="Edit product"
                                          Foreground="#F0EFF8"
                                          GroupName="ProductDataMode">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="Edit"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/edit_product.png"
+                            <Image Source="/Images/Icons/edit_product.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton Checked="ProductAddModeChecked"
+                    <Fluent:ToggleButton Checked="ProductAddModeChecked"
                                          Header="Add product"
                                          Foreground="#F0EFF8"
                                          GroupName="ProductDataMode">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"         
                 HorizontalAlignment="Center"                            
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/add_product.png"
+                            <Image Source="/Images/Icons/add_product.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton Checked="ProductDeleteModeChecked"
+                    <Fluent:ToggleButton Checked="ProductDeleteModeChecked"
                                          Header="Delete product"
                                          Foreground="#F0EFF8"
                                          GroupName="ProductDataMode">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/remove_product.png"
+                            <Image Source="/Images/Icons/remove_product.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Data Import">
-          <Fluent:Button Click="ImportProductFromAccessBtnClick"
+                <Fluent:RibbonGroupBox Header="Data Import">
+                    <Fluent:Button Click="ImportProductFromAccessBtnClick"
                                    Foreground="#F0EFF8"
                                    Header="Access">
-            <Fluent:Button.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:Button.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Kind="Database"/>-->
-              <Image Source="/Images/Icons/database.png"
+                            <Image Source="/Images/Icons/database.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
-      </Fluent:RibbonTabItem>
-      <!-- /Product Tab -->
+            </Fluent:RibbonTabItem>
+            <!-- /Product Tab -->
 
 
-      <!-- Customer tab -->
-      <Fluent:RibbonTabItem Header="Customers"
+            <!-- Customer tab -->
+            <Fluent:RibbonTabItem Header="Customers"
                                   Width="100"
                                   Foreground="#F0EFF8"
                                   Height="40">
 
-        <Fluent:RibbonTabItem.Style>
-          <Style TargetType="{x:Type Fluent:RibbonTabItem}">
-            <Setter Property="Template">
-              <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
-                  <Border x:Name="Border"
+                <Fluent:RibbonTabItem.Style>
+                    <Style TargetType="{x:Type Fluent:RibbonTabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
+                                    <Border x:Name="Border"
                                             Background="#241F3A"
                                             BorderBrush="#241F3A"
                                             BorderThickness="0">
-                    <StackPanel Orientation="Vertical"
+                                        <StackPanel Orientation="Vertical"
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center">
-                      <ContentPresenter ContentSource="Header" />
-                      <ContentPresenter />
-                    </StackPanel>
-                  </Border>
-                  <ControlTemplate.Triggers>
-                    <Trigger Property="IsSelected"
+                                            <ContentPresenter ContentSource="Header" />
+                                            <ContentPresenter />
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected"
                                                  Value="True">
-                      <Setter TargetName="Border"
+                                            <Setter TargetName="Border"
                                                     Property="Background"
                                                     Value="#342752" />
-                    </Trigger>
-                  </ControlTemplate.Triggers>
-                </ControlTemplate>
-              </Setter.Value>
-            </Setter>
-          </Style>
-        </Fluent:RibbonTabItem.Style>
-        <!-- Search Customer Group -->
-        <Fluent:RibbonGroupBox Header="Filter Customer Name">
-          <Grid MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Fluent:RibbonTabItem.Style>
+                <!-- Search Customer Group -->
+                <Fluent:RibbonGroupBox Header="Filter Customer Name">
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
 
 
-            <Label Content="First name"
+                        <Label Content="First name"
                                Foreground="#F0EFF8" />
-            <Fluent:TextBox x:Name="txtBoxFirstNameCustomerFilter"
+                        <Fluent:TextBox x:Name="txtBoxFirstNameCustomerFilter"
                                         Grid.Column="1" />
-            <Label Grid.Row="1"
+                        <Label Grid.Row="1"
                                Foreground="#F0EFF8"
                                Content="Middle name" />
-            <Fluent:TextBox x:Name="txtBoxMiddleNameCustomerFilter"
+                        <Fluent:TextBox x:Name="txtBoxMiddleNameCustomerFilter"
                                         Grid.Row="1"
                                         Grid.Column="1" />
-            <Label Foreground="#F0EFF8"
+                        <Label Foreground="#F0EFF8"
                                Grid.Row="2"
                                Content="Last name" />
-            <Fluent:TextBox x:Name="txtBoxLastNameCustomerFilter"
+                        <Fluent:TextBox x:Name="txtBoxLastNameCustomerFilter"
                                         Grid.Row="2"
                                         Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
+                    </Grid>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Filter Customer Information">
-          <Grid MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+                <Fluent:RibbonGroupBox Header="Filter Customer Information">
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
 
-            <Label Grid.Row="0"
+                        <Label Grid.Row="0"
                                Content="Email"
                                Foreground="#F0EFF8" />
-            <Fluent:TextBox x:Name="txtBoxEmailCustomer"
+                        <Fluent:TextBox x:Name="txtBoxEmailCustomer"
                                         Grid.Row="0"
                                         Grid.Column="1" />
-            <Label Grid.Row="1"
+                        <Label Grid.Row="1"
                                Content="Phone"
                                Foreground="#F0EFF8" />
-            <Fluent:TextBox x:Name="txtBoxPhoneCustomer"
+                        <Fluent:TextBox x:Name="txtBoxPhoneCustomer"
                                         PreviewTextInput="PreviewTxtInputNumberOnly"
                                         Grid.Row="1"
                                         Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
-        <Fluent:RibbonGroupBox Header="Apply filter"
+                    </Grid>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Apply filter"
                                        VerticalContentAlignment="Center">
-          <MenuItem x:Name="menuApplyCustomerNameFilter"
+                    <MenuItem x:Name="menuApplyCustomerNameFilter"
                               IsCheckable="True"
                               Foreground="#F0EFF8"
                               Header="Apply name">
-            <MenuItem.Icon>
-              <!--<iconPacks:FontAwesome 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:FontAwesome 
               Kind="UserSlashSolid" />-->
-              <Image Source="/Images/Icons/check_circle.png"
+                            <Image Source="/Images/Icons/check_circle.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <MenuItem x:Name="menuApplyCustomerInformationFilter"
+                    <MenuItem x:Name="menuApplyCustomerInformationFilter"
                               IsCheckable="True"
                               Foreground="#F0EFF8"
                               Header="Apply information">
-            <MenuItem.Icon>
-              <!--<iconPacks:FontAwesome 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:FontAwesome 
               Kind="UserSlashSolid" />-->
-              <Image Source="/Images/Icons/apply_information.png"
+                            <Image Source="/Images/Icons/apply_information.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <Fluent:Button Click="SearchCustomerBtnClick"
+                    <Fluent:Button Click="SearchCustomerBtnClick"
                                    Foreground="#F0EFF8"
                                    Header="Search">
-            <Fluent:Button.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:Button.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Kind="Search" />-->
-              <Image Source="/Images/Icons/search.png"
+                            <Image Source="/Images/Icons/search.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Manual modify"
+                <Fluent:RibbonGroupBox Header="Manual modify"
                                        Foreground="#F0EFF8">
 
-          <Fluent:ToggleButton x:Name="toggleBtnEditCustomer"
+                    <Fluent:ToggleButton x:Name="toggleBtnEditCustomer"
                                          Checked="CustomerEditModeChecked"
                                          Unchecked="CustomerModeUnchecked"
                                          Foreground="#F0EFF8"
                                          Header="Edit customer">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="Edit"          
                 HorizontalAlignment="Center"              
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/user_edit.png"
+                            <Image Source="/Images/Icons/user_edit.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton x:Name="toggleBtnAddCustomer"
+                    <Fluent:ToggleButton x:Name="toggleBtnAddCustomer"
                                          Checked="CustomerAddModeChecked"
                                          Foreground="#F0EFF8"
                                          Unchecked="CustomerModeUnchecked"
                                          Header="Add customer">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"           
                 HorizontalAlignment="Center"           
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/user_add.png"
+                            <Image Source="/Images/Icons/user_add.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton x:Name="toggleBtnDeleteCustomer"
+                    <Fluent:ToggleButton x:Name="toggleBtnDeleteCustomer"
                                          Checked="CustomerDeleteModeChecked"
                                          Unchecked="CustomerModeUnchecked"
                                          Foreground="#F0EFF8"
                                          Header="Delete customer">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="FileExclamationAlt"           
                 HorizontalAlignment="Center"                                               
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/user_slash.png"
+                            <Image Source="/Images/Icons/user_slash.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-        </Fluent:RibbonGroupBox>
-      </Fluent:RibbonTabItem>
-      <!-- Customer tab -->
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <!-- Customer tab -->
 
 
 
-      <!-- Report tab -->
-      <Fluent:RibbonTabItem Header="Report"
+            <!-- Report tab -->
+            <Fluent:RibbonTabItem Header="Report"
                                   Width="100"
                                   Foreground="#F0EFF8"
                                   Height="40">
 
-        <Fluent:RibbonTabItem.Style>
-          <Style TargetType="{x:Type Fluent:RibbonTabItem}">
-            <Setter Property="Template">
-              <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
-                  <Border x:Name="Border"
+                <Fluent:RibbonTabItem.Style>
+                    <Style TargetType="{x:Type Fluent:RibbonTabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
+                                    <Border x:Name="Border"
                                             Background="#241F3A"
                                             BorderBrush="#241F3A"
                                             BorderThickness="0">
-                    <StackPanel Orientation="Vertical"
+                                        <StackPanel Orientation="Vertical"
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center">
-                      <ContentPresenter ContentSource="Header" />
-                      <ContentPresenter />
-                    </StackPanel>
-                  </Border>
-                  <ControlTemplate.Triggers>
-                    <Trigger Property="IsSelected"
+                                            <ContentPresenter ContentSource="Header" />
+                                            <ContentPresenter />
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected"
                                                  Value="True">
-                      <Setter TargetName="Border"
+                                            <Setter TargetName="Border"
                                                     Property="Background"
                                                     Value="#342752" />
-                    </Trigger>
-                  </ControlTemplate.Triggers>
-                </ControlTemplate>
-              </Setter.Value>
-            </Setter>
-          </Style>
-        </Fluent:RibbonTabItem.Style>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Fluent:RibbonTabItem.Style>
 
-        <Fluent:RibbonGroupBox Height="95"
+                <Fluent:RibbonGroupBox Height="95"
                                        Header="Total income and profits">
-          <Grid MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="0.5*" />
-              <ColumnDefinition Width="1.5*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Label Margin="1 1 1 1"
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Label Margin="1 1 1 1"
                                Content="From date"
                                Foreground="#F0EFF8" />
-            <DatePicker Margin="1 1 1 1"
+                        <DatePicker Margin="1 1 1 1"
                                     Height="31"
                                     VerticalContentAlignment="Center"
                                     Background="#F0EFF8"
                                     Foreground="Black"
                                     x:Name="DatePickerFromIncomeProfit"
                                     Grid.Column="1">
-              <DatePicker.Resources>
-                <Style TargetType="DatePickerTextBox">
-                  <Setter Property="Foreground"
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Foreground"
                                             Value="#F0EFF8" />
-                </Style>
-              </DatePicker.Resources>
-            </DatePicker>
-            <Label Margin="1 1 1 1"
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                        <Label Margin="1 1 1 1"
                                Content="To date"
                                Foreground="#F0EFF8"
                                Grid.Row="1" />
-            <DatePicker Margin="1 1 1 1"
+                        <DatePicker Margin="1 1 1 1"
                                     Height="31"
                                     VerticalContentAlignment="Center"
                                     Foreground="Black"
@@ -951,15 +950,15 @@
                                     x:Name="DatePickerToIncomeProfit"
                                     Grid.Row="1"
                                     Grid.Column="1">
-              <DatePicker.Resources>
-                <Style TargetType="DatePickerTextBox">
-                  <Setter Property="Foreground"
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Foreground"
                                             Value="#F0EFF8" />
-                </Style>
-              </DatePicker.Resources>
-            </DatePicker>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
 
-            <ComboBox Margin="1 1 1 1"
+                        <ComboBox Margin="1 1 1 1"
                                   Height="30"
                                   VerticalContentAlignment="Center"
                                   Background="#F0EFF8"
@@ -967,76 +966,76 @@
                                   SelectedIndex="0"
                                   Grid.Row="2"
                                   Grid.Column="2">
-              <ComboBoxItem Content="Group by dates" />
-              <ComboBoxItem Content="Group by month" />
-              <ComboBoxItem Content="Group by year" />
-            </ComboBox>
-          </Grid>
-          <Fluent:Button x:Name="btnApplyIncomeProfit"
+                            <ComboBoxItem Content="Group by dates" />
+                            <ComboBoxItem Content="Group by month" />
+                            <ComboBoxItem Content="Group by year" />
+                        </ComboBox>
+                    </Grid>
+                    <Fluent:Button x:Name="btnApplyIncomeProfit"
                                    Foreground="#F0EFF8"
                                    Click="ApplyIncomProfitnBtnClick"
                                    Header="Apply">
-            <Fluent:Button.Icon>
-              <!--<iconPacks:PackIconUnicons
+                        <Fluent:Button.Icon>
+                            <!--<iconPacks:PackIconUnicons
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Kind="CheckCircle"/>-->
-              <Image Source="/Images/Icons/check_circle.png"
+                            <Image Source="/Images/Icons/check_circle.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
-        </Fluent:RibbonGroupBox>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Height="95"
+                <Fluent:RibbonGroupBox Height="95"
                                        Header="Product sold">
-          <Grid MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="0.5*" />
-              <ColumnDefinition Width="1.5*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-              <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <Label Foreground="#F0EFF8"
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="1.5*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Label Foreground="#F0EFF8"
                                Margin="1 1 1 1"
                                Content="From date" />
-            <DatePicker Height="31"
+                        <DatePicker Height="31"
                                     VerticalContentAlignment="Center"
                                     Margin="1 1 1 1"
                                     Background="#F0EFF8"
                                     x:Name="DatePickerFromProductCount"
                                     Grid.Column="1">
-              <DatePicker.Resources>
-                <Style TargetType="DatePickerTextBox">
-                  <Setter Property="Foreground"
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Foreground"
                                             Value="#F0EFF8" />
-                </Style>
-              </DatePicker.Resources>
-            </DatePicker>
-            <Label Foreground="#F0EFF8"
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                        <Label Foreground="#F0EFF8"
                                Margin="1 1 1 1"
                                Content="To date"
                                Grid.Row="1" />
-            <DatePicker Height="31"
+                        <DatePicker Height="31"
                                     VerticalContentAlignment="Center"
                                     Margin="1 1 1 1"
                                     Background="#F0EFF8"
                                     x:Name="DatePickerToProductCount"
                                     Grid.Row="1"
                                     Grid.Column="1">
-              <DatePicker.Resources>
-                <Style TargetType="DatePickerTextBox">
-                  <Setter Property="Foreground"
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="Foreground"
                                             Value="#F0EFF8" />
-                </Style>
-              </DatePicker.Resources>
-            </DatePicker>
-            <ComboBox Margin="1 1 1 1"
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                        <ComboBox Margin="1 1 1 1"
                                   Height="30"
                                   x:Name="ComboBoxGroupTypeProductCount"
                                   Background="#F0EFF8"
@@ -1044,206 +1043,221 @@
                                   VerticalContentAlignment="Center"
                                   Grid.Row="2"
                                   Grid.Column="2">
-              <ComboBoxItem Content="Group by dates" />
-              <ComboBoxItem Content="Group by month" />
-              <ComboBoxItem Content="Group by year" />
-            </ComboBox>
-          </Grid>
-          <Fluent:Button Click="ApplyProductCountBtnClick"
+                            <ComboBoxItem Content="Group by dates" />
+                            <ComboBoxItem Content="Group by month" />
+                            <ComboBoxItem Content="Group by year" />
+                        </ComboBox>
+                    </Grid>
+                    <Fluent:Button Click="ApplyProductCountBtnClick"
                                    Foreground="#F0EFF8"
                                    x:Name="btnApplyProductCount"
                                    Header="Apply">
-            <Fluent:Button.Icon>
-              <!--<iconPacks:PackIconUnicons
+                        <Fluent:Button.Icon>
+                            <!--<iconPacks:PackIconUnicons
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch"
                 Kind="CheckCircle"/>-->
-              <Image Source="/Images/Icons/check_circle.png"
+                            <Image Source="/Images/Icons/check_circle.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
-        </Fluent:RibbonGroupBox>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
 
-      </Fluent:RibbonTabItem>
-      <!-- /Report tab -->
 
-      <!--Category Tab-->
-      <Fluent:RibbonTabItem Header="Category"
+
+                <Fluent:RibbonGroupBox Header="Data">
+                    <Fluent:Button Click="ExportReportDataToPDF"
+                                   Foreground="#F0EFF8"
+                                   Header="Export data">
+                        <Fluent:Button.Icon>
+                            <Image Source="/Images/Icons/database.png"
+                                   Width="24"
+                                   Height="24"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" />
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <!-- /Report tab -->
+
+            <!--Category Tab-->
+            <Fluent:RibbonTabItem Header="Category"
                                   Width="100"
                                   Foreground="#F0EFF8"
                                   Height="40">
 
-        <Fluent:RibbonTabItem.Style>
-          <Style TargetType="{x:Type Fluent:RibbonTabItem}">
-            <Setter Property="Template">
-              <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
-                  <Border x:Name="Border"
+                <Fluent:RibbonTabItem.Style>
+                    <Style TargetType="{x:Type Fluent:RibbonTabItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Fluent:RibbonTabItem}">
+                                    <Border x:Name="Border"
                                             Background="#241F3A"
                                             BorderBrush="#241F3A"
                                             BorderThickness="0">
-                    <StackPanel Orientation="Vertical"
+                                        <StackPanel Orientation="Vertical"
                                                     VerticalAlignment="Center"
                                                     HorizontalAlignment="Center">
-                      <ContentPresenter ContentSource="Header" />
-                      <ContentPresenter />
-                    </StackPanel>
-                  </Border>
-                  <ControlTemplate.Triggers>
-                    <Trigger Property="IsSelected"
+                                            <ContentPresenter ContentSource="Header" />
+                                            <ContentPresenter />
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected"
                                                  Value="True">
-                      <Setter TargetName="Border"
+                                            <Setter TargetName="Border"
                                                     Property="Background"
                                                     Value="#342752" />
-                    </Trigger>
-                  </ControlTemplate.Triggers>
-                </ControlTemplate>
-              </Setter.Value>
-            </Setter>
-          </Style>
-        </Fluent:RibbonTabItem.Style>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Fluent:RibbonTabItem.Style>
 
-        <Fluent:RibbonGroupBox Header="Filter Category Name">
-          <Grid MinWidth="300">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="0.5*" />
-              <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+                <Fluent:RibbonGroupBox Header="Filter Category Name">
+                    <Grid MinWidth="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
 
-            <Label Content="Name"
+                        <Label Content="Name"
                                Grid.Row="0"
                                Grid.Column="0"
                                Foreground="#F0EFF8"
                                VerticalAlignment="Center" />
-            <Fluent:TextBox FontSize="14"
+                        <Fluent:TextBox FontSize="14"
                                         VerticalAlignment="Center"
                                         x:Name="txtBoxCategoryNameFilter"
                                         Grid.Row="0"
                                         Grid.Column="1" />
-          </Grid>
-        </Fluent:RibbonGroupBox>
+                    </Grid>
+                </Fluent:RibbonGroupBox>
 
 
-        <Fluent:RibbonGroupBox Header="Apply filter"
+                <Fluent:RibbonGroupBox Header="Apply filter"
                                        VerticalContentAlignment="Center">
-          <MenuItem x:Name="menuApplyCategoryNameFilter"
+                    <MenuItem x:Name="menuApplyCategoryNameFilter"
                               IsCheckable="True"
                               Foreground="#F0EFF8"
                               Header="Apply name">
-            <MenuItem.Icon>
-              <!--<iconPacks:FontAwesome 
+                        <MenuItem.Icon>
+                            <!--<iconPacks:FontAwesome 
               Kind="UserSlashSolid" />-->
-              <Image Source="/Images/Icons/check_circle.png"
+                            <Image Source="/Images/Icons/check_circle.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </MenuItem.Icon>
-          </MenuItem>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-          <Fluent:Button Click="SearchCategoryBtnClick"
+                    <Fluent:Button Click="SearchCategoryBtnClick"
                                    Foreground="#F0EFF8"
                                    Header="Search">
-            <Fluent:Button.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:Button.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Stretch"
                 Kind="Search" />-->
-              <Image Source="/Images/Icons/search.png"
+                            <Image Source="/Images/Icons/search.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:Button.Icon>
-          </Fluent:Button>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
 
-        </Fluent:RibbonGroupBox>
+                </Fluent:RibbonGroupBox>
 
-        <Fluent:RibbonGroupBox Header="Manual modify"
+                <Fluent:RibbonGroupBox Header="Manual modify"
                                        Foreground="#F0EFF8">
 
-          <Fluent:ToggleButton x:Name="toggleBtnEditCategory"
+                    <Fluent:ToggleButton x:Name="toggleBtnEditCategory"
                                          Checked="CategoryEditModeChecked"
                                          Unchecked="CategoryModeUnchecked"
                                          Foreground="#F0EFF8"
                                          Header="Edit Category">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="Edit"          
                 HorizontalAlignment="Center"              
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/edit.png"
+                            <Image Source="/Images/Icons/edit.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton x:Name="toggleBtnAddCategory"
+                    <Fluent:ToggleButton x:Name="toggleBtnAddCategory"
                                          Checked="CategoryAddModeChecked"
                                          Foreground="#F0EFF8"
                                          Unchecked="CategoryModeUnchecked"
                                          Header="Add Category">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="FilePlusAlt"           
                 HorizontalAlignment="Center"           
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/add_order.png"
+                            <Image Source="/Images/Icons/add_order.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-          <Fluent:ToggleButton x:Name="toggleBtnDeleteCategory"
+                    <Fluent:ToggleButton x:Name="toggleBtnDeleteCategory"
                                          Foreground="#F0EFF8"
                                          Checked="CategoryDeleteModeChecked"
                                          Unchecked="CategoryModeUnchecked"
                                          Header="Delete Category">
-            <Fluent:ToggleButton.Icon>
-              <!--<iconPacks:PackIconUnicons 
+                        <Fluent:ToggleButton.Icon>
+                            <!--<iconPacks:PackIconUnicons 
                 Kind="FileExclamationAlt"           
                 HorizontalAlignment="Center"                                               
                 VerticalAlignment="Center" />-->
-              <Image Source="/Images/Icons/delete_order.png"
+                            <Image Source="/Images/Icons/delete_order.png"
                                    Width="24"
                                    Height="24"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
-            </Fluent:ToggleButton.Icon>
-          </Fluent:ToggleButton>
+                        </Fluent:ToggleButton.Icon>
+                    </Fluent:ToggleButton>
 
-        </Fluent:RibbonGroupBox>
-      </Fluent:RibbonTabItem>
-      <!--Category-->
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <!--Category-->
 
 
-    </Fluent:Ribbon>
+        </Fluent:Ribbon>
 
-    <Grid DockPanel.Dock="Bottom"
+        <Grid DockPanel.Dock="Bottom"
               Background="#F0EFF8">
-      <TabControl Padding="10,10,10,10"
+            <TabControl Padding="10,10,10,10"
                         SelectedIndex="{Binding ElementName=Ribbon,
         Path=SelectedTabIndex}"
                         x:Name="MainTabControl">
-        <TabControl.ItemContainerStyle>
-          <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Visibility"
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="Visibility"
                                 Value="Collapsed" />
-          </Style>
-        </TabControl.ItemContainerStyle>
-      </TabControl>
-    </Grid>
+                    </Style>
+                </TabControl.ItemContainerStyle>
+            </TabControl>
+        </Grid>
 
-  </DockPanel>
+    </DockPanel>
 </Window>
