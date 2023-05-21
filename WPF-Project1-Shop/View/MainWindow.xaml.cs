@@ -260,11 +260,6 @@ namespace WPF_Project1_Shop.View
             categoryUserControl.ModifyMode = CategoryViewModel.MODIFY_MODE.EDIT;
         }
 
-        private void CategoryModeUnchecked(object sender, RoutedEventArgs e)
-        {
-            categoryUserControl.ModifyMode = CategoryViewModel.MODIFY_MODE.NONE;
-        }
-
         private void CategoryAddModeChecked(object sender, RoutedEventArgs e)
         {
             categoryUserControl.ModifyMode = CategoryViewModel.MODIFY_MODE.ADD;

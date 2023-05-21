@@ -193,27 +193,24 @@ namespace WPF_Project1_Shop.ViewModel
 
     public async Task RemoveCategory(Category category)
     {
-      //var result = await Task<Category?>.Run(() =>
-      //{
-      //  try
-      //  {
-      //    using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
-      //    {
-      //      return repository.UpdateCategory(category);
-      //    }
-      //  }
-      //  catch (Exception e)
-      //  {
-      //    return null;
-      //  }
-      //});
-      //if (result != null)
-      //{
-      //  OnDataUpdate?.Invoke(result);
-      //}
+      var result = await Task.Run(() =>
+      {
+        using (CategoryRepository repository = new CategoryRepository(new RailwayContext()))
+        {
+          return repository.DeleteCategory(category);
+        }
+      });
+      if(result != null)
+      {
+        categories.Remove(new CheckableCategory
+        {
+          Id = category.Id,
+        });
+      }
+      OnDataRemove?.Invoke(result);
     }
 
-    
+
     public void setPage(int page = 1)
     {
       if (categorySet == null)

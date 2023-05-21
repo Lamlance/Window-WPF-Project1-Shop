@@ -67,5 +67,22 @@ namespace WPF_Project1_Shop.EFCustomRepository
       return result;
     }
 
+    public Category? DeleteCategory(Category category)
+    {
+      var products = dbContext.Products
+        .Include(p => p.Categories)
+        .Where(p => p.Categories.Any(c => c.Id == category.Id)).ToList();
+      if(products.Count() > 0)
+      {
+        for(int i = 0; i < products.Count(); i++)
+        {
+          products[i].Categories.Remove(category);
+        }
+        dbContext.UpdateRange(products);
+        dbContext.Categories.Remove(category);
+        dbContext.SaveChanges();
+      }
+      return category;
+    }
   }
 }

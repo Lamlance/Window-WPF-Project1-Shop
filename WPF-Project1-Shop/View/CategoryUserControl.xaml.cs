@@ -30,6 +30,28 @@ namespace WPF_Project1_Shop.View
     public CategoryUserControl()
     {
       InitializeComponent();
+      categoryViewModel.OnDataAdd += (c) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show(c == null ? "Add failed" : "Add success");
+        });
+      };
+      categoryViewModel.OnDataRemove += (c) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show(c == null ? "Remove failed" : "Remove success");
+        });
+      };
+      categoryViewModel.OnDataUpdate += (c) =>
+      {
+        Task.Run(() =>
+        {
+          MessageBox.Show(c == null ? "Update failed" : "Update success");
+        });
+      };
+
     }
 
     private void CategoryListClick(object sender, MouseButtonEventArgs e)

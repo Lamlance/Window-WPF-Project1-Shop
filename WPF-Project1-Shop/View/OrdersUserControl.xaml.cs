@@ -70,7 +70,7 @@ namespace WPF_Project1_Shop.View
         {
           if (p != null)
           {
-            MessageBox.Show($"Added update");
+            MessageBox.Show($"Update");
           }
           else if (e != null)
           {
@@ -89,7 +89,7 @@ namespace WPF_Project1_Shop.View
         {
           if (p != null)
           {
-            MessageBox.Show($"Added deleted");
+            MessageBox.Show($"Deleted");
           }
           else if (e != null)
           {
@@ -225,7 +225,7 @@ namespace WPF_Project1_Shop.View
 
     private void PageComboBoxChange(object sender, SelectionChangedEventArgs e)
     {
-      _orderViewModel.SetPage(this.OrderPageComboBox.SelectedIndex);
+      _orderViewModel.SetPage(this.OrderPageComboBox.SelectedIndex + 1);
     }
 
     private void EditOrderItemBtnClick(object sender, RoutedEventArgs e)
