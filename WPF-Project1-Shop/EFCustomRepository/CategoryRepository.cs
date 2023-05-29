@@ -79,10 +79,17 @@ namespace WPF_Project1_Shop.EFCustomRepository
           products[i].Categories.Remove(category);
         }
         dbContext.UpdateRange(products);
-        dbContext.Categories.Remove(category);
         dbContext.SaveChanges();
       }
-      return category;
+
+      var deleteCategory = dbContext.Categories.FirstOrDefault(c => c.Id == category.Id);
+      if(deleteCategory != null)
+      {
+        dbContext.Categories.Remove(deleteCategory);
+        return deleteCategory;
+      }
+
+      return null;
     }
   }
 }

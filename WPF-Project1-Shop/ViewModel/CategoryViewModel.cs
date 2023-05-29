@@ -70,7 +70,19 @@ namespace WPF_Project1_Shop.ViewModel
         });
       }
     }
-    
+
+    private static void NotifyNewCateogryDeleted(Category deleteCategory)
+    {
+      foreach (var key in createdInstance.Keys)
+      {
+        createdInstance[key].Categories.Remove(new CheckableCategory
+        {
+          Id = deleteCategory.Id
+        });
+      }
+    }
+
+
     private ObservableCollection<CheckableCategory> categories;
     private HashSet<Category> selectedCategories;
     private readonly int myId;
@@ -206,6 +218,7 @@ namespace WPF_Project1_Shop.ViewModel
         {
           Id = category.Id,
         });
+        NotifyNewCateogryDeleted(result);
       }
       OnDataRemove?.Invoke(result);
     }
@@ -224,18 +237,7 @@ namespace WPF_Project1_Shop.ViewModel
       idToPagePos.Clear();
       for (int i = start; i < end; i++)
       {
-        /*
-        if (!skipCategories.Contains(categorySet.ElementAt(i)))
-        {
-          Category c = 
-          categories.Add(categorySet.ElementAt(i));
-          idToPagePos.Add(categorySet.ElementAt(i).Id, i);
-        }
-        else
-        {
-          end += end < categorySet.Count ? 1 : 0;
-        }
-        */
+
         Category? c = categorySet.ElementAtOrDefault(i);
         if(c != null)
         {
@@ -250,24 +252,7 @@ namespace WPF_Project1_Shop.ViewModel
         }
       }
     }
-    /*
-    public void AddSkipProduct(Category p)
-    {
-      skipCategories.Add(p);
-      categories.Remove(p);
-    }
 
-    public void RemoveSkipProduct(Category p)
-    {
-      skipCategories.Remove(p);
-      categories.Add(p);
-    }
-    public void ClearSkipProduct()
-    {
-      skipCategories.Clear();
-      setPage(1);
-    }
-    */
 
   }
 }
